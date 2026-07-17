@@ -21,9 +21,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# projektinterna instruktioner — ska inte publiceras
-CLAUDE.md
-
 # referensbilder på andra sajter (inspiration, ej egna verk)
 DesignPictures/
 
