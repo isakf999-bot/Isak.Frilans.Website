@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   DESIGN TOKENS — enda källan till färg, typografi och djup i hela projektet.
+
+   OBS: `inline` är nödvändigt. Utan det kan ett tema-värde inte referera en
+   variabel som sätts någon annanstans (next/font sätter sina font-variabler på
+   <body>), och hela kedjan tystnar till en tom sträng.
+   --------------------------------------------------------------------------- */
+@theme inline {
+  /* Ytor — tre ljusa nivåer. Sektioner skiljs åt med ljus, inte med mörker. */
+  --color-canvas: #f6f4f0; /* varm papper-bakgrund, aldrig ren vit */
+  --color-surface: #ffffff; /* kort som lyfter från bakgrunden */
+  --color-mist: #eef0fb; /* svalt blåtonat fält — kontaktsektionen */
+
+  /* Text */
+  --color-ink: #16171d;
+  --color-muted: #5e6270;
+
+  /* Linjer */
+  --color-line: #e5e0d8;
+  --color-line-cool: #d8ddf4; /* linjer mot det blåtonade fältet */
+
+  /* EN varumärkesfärg. Används på allt som går att klicka eller välja —
+     så att färg alltid betyder "här händer något". */
+  --color-brand: #2b3ed4;
+  --color-brand-dark: #2131ab;
+  --color-brand-tint: #e9ecfb;
+  --color-brand-glow: #b9c2f5;
+
+  --color-danger: #b42318;
+  --color-danger-tint: #fdeceb;
+
+  /* Typografi — en enda familj. Hierarkin bärs av vikt, storlek och tracking,
+     inte av att blanda in ett andra typsnitt. */
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.1em;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.65;
+  --text-lead: 1.1875rem;
+  --text-lead--line-height: 1.6;
+  --text-h3: 1.625rem;
+  --text-h3--line-height: 1.25;
+  --text-h2: 2.5rem;
+  --text-h2--line-height: 1.1;
+  --text-h1: 3rem;
+  --text-h1--line-height: 1.05;
+  --text-display: 4.75rem;
+  --text-display--line-height: 1;
+
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* Mjuka skuggor, låg opacitet — djup, inte Photoshop-kanter. */
+  --shadow-card: 0 1px 2px rgb(22 23 29 / 0.04), 0 8px 24px rgb(22 23 29 / 0.05);
+  --shadow-lift: 0 2px 4px rgb(22 23 29 / 0.05), 0 16px 40px rgb(22 23 29 / 0.1);
+  --shadow-brand: 0 8px 24px rgb(43 62 212 / 0.28);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    /* Font-kedjan skrivs ut rakt av, utan omväg via ett tema-alias — en
+       trasig variabel här får hela sidan att falla tillbaka på systemfonten. */
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
+    font-size: var(--text-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  /* Ju större rubrik, desto tätare tracking — annars ser stora grotesk-rubriker
+     luftiga och slappa ut. Det är det som ger dem tyngd. */
+  h1 {
+    letter-spacing: -0.035em;
+  }
+
+  h2 {
+    letter-spacing: -0.03em;
+  }
+
+  h3 {
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background-color: var(--color-brand);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   ENTRÉ-ANIMATION
+   Körs EN gång vid sidladdning och slutar på opacity 1. Ingen scroll-styrd
+   animation någonstans i projektet: innehåll får aldrig vara osynligt i
+   väntan på att användaren gör något.
+   --------------------------------------------------------------------------- */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  }
+  .rise-2 {
+    animation-delay: 0.08s;
+  }
+  .rise-3 {
+    animation-delay: 0.16s;
+  }
+  .rise-4 {
+    animation-delay: 0.24s;
+  }
+}
