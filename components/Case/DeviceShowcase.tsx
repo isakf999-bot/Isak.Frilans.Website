@@ -1,104 +1,106 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useState } from "react";
 import type { CaseStudy } from "@/lib/cases";
 
 /**
- * Enhets-showcase: sajten inramad i en laptop + en mobil bredvid varandra
- * (kommunicerar "modern och responsiv" på en gång), en liten "före"-thumbnail
- * i hörnet och en knapp till den live-satta sajten.
+ * Enhets-showcase: den nya sajten i en laptop + en mobil bredvid varandra, och
+ * den gamla sajten som liten "före"-thumbnail i hörnet.
  *
- * Finns riktiga skärmdumpar i case.images visas de i ramarna — annars visas
- * snygga stand-in-mockuper så layouten är komplett direkt.
+ * Skärmdumparna är fullsides-bilder som GÅR ATT SCROLLA inuti ramarna — man kan
+ * alltså bläddra igenom hela sajten direkt i laptopen och mobilen. Klick på
+ * "före"-bilden öppnar den i större format som också går att scrolla.
  */
 export function DeviceShowcase({ study }: { study: CaseStudy }) {
-  const { images, liveUrl } = study;
-  const hasLive = liveUrl && liveUrl !== "#";
+  const { images } = study;
+  const [beforeOpen, setBeforeOpen] = useState(false);
 
   return (
     <div>
       <div className="relative mx-auto max-w-4xl px-2 pt-10 sm:pt-6">
-        {/* Laptop */}
+        {/* Laptop — scrollbar */}
         <div className="mx-auto w-[86%] sm:w-[82%]">
           <Laptop>
-            {images.afterDesktop ? (
-              <Image
-                src={images.afterDesktop}
-                alt={`${study.client} — ny sajt, desktop`}
-                fill
-                sizes="(max-width: 1024px) 90vw, 640px"
-                className="object-cover object-top"
-              />
-            ) : (
-              <AdvisorMock />
-            )}
+            <ScrollShot
+              src={images.afterDesktop}
+              alt={`${study.client} — nya sajten`}
+            />
           </Laptop>
         </div>
 
-        {/* Mobil — överlappar nedre högra hörnet */}
-        <div className="absolute -bottom-4 right-1 w-[24%] max-w-[140px] sm:right-6 sm:-bottom-2">
+        {/* Mobil — scrollbar, överlappar nedre högra hörnet */}
+        <div className="absolute right-1 -bottom-4 w-[24%] max-w-[140px] sm:-bottom-2 sm:right-6">
           <Phone>
-            {images.afterMobile ? (
-              <Image
-                src={images.afterMobile}
-                alt={`${study.client} — ny sajt, mobil`}
-                fill
-                sizes="140px"
-                className="object-cover object-top"
-              />
-            ) : (
-              <AdvisorMock compact />
-            )}
+            <ScrollShot
+              src={images.afterMobile}
+              alt={`${study.client} — nya sajten i mobil`}
+            />
           </Phone>
         </div>
 
-        {/* "Före"-thumbnail — liten, lätt lutad, uppe till vänster */}
-        <figure className="absolute -top-1 left-0 w-[26%] max-w-[150px] -rotate-3 sm:left-2">
-          <div className="overflow-hidden rounded-md border border-line bg-surface shadow-lift">
+        {/* "Före"-thumbnail — klickbar, öppnas större */}
+        <figure className="absolute -top-1 left-0 w-[27%] max-w-[160px] -rotate-3 sm:left-2">
+          <button
+            type="button"
+            onClick={() => setBeforeOpen(true)}
+            className="group block w-full overflow-hidden rounded-md border border-line bg-surface text-left shadow-lift transition-transform duration-200 ease-out hover:-rotate-1 hover:scale-[1.03] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
+          >
             <div className="flex items-center justify-between bg-ink px-2 py-1">
               <span className="text-[9px] font-semibold tracking-wide text-white/80 uppercase">
                 Före
               </span>
+              <span className="text-[9px] text-white/60 transition-colors group-hover:text-white">
+                förstora ⤢
+              </span>
             </div>
-            <div className="aspect-[4/3]">
+            <div className="relative aspect-[4/3] overflow-hidden">
               {images.before ? (
-                <div className="relative h-full w-full">
-                  <Image
-                    src={images.before}
-                    alt={`${study.client} — gamla sajten`}
-                    fill
-                    sizes="150px"
-                    className="object-cover object-top"
-                  />
-                </div>
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={images.before}
+                  alt={`${study.client} — gamla sajten`}
+                  className="block w-full"
+                />
               ) : (
-                <BeforeMock />
+                <div className="grid h-full place-items-center bg-canvas text-[9px] text-muted">
+                  före
+                </div>
               )}
+              <span className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-black/20 to-transparent" />
             </div>
-          </div>
+          </button>
         </figure>
       </div>
 
-      {/* Live-knapp */}
-      <div className="mt-10 flex justify-center">
-        <a
-          href={hasLive ? liveUrl : undefined}
-          {...(hasLive
-            ? { target: "_blank", rel: "noopener noreferrer" }
-            : { "aria-disabled": true })}
-          className={`shine group inline-flex items-center gap-2.5 rounded-pill bg-brand px-7 py-4 font-medium text-white shadow-brand transition-all duration-200 ease-out ${
-            hasLive
-              ? "hover:-translate-y-0.5 hover:bg-brand-dark hover:shadow-lift active:translate-y-0"
-              : "cursor-not-allowed opacity-60"
-          }`}
-        >
-          {hasLive ? "Besök sajten live" : "Live-länk läggs till"}
-          <span
-            aria-hidden="true"
-            className="transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-          >
-            ↗
-          </span>
-        </a>
+      <p className="mt-9 text-center text-sm text-muted">
+        <span aria-hidden="true">↕</span> Skärmdumparna går att scrolla — bläddra
+        igenom hela sajten
+      </p>
+
+      {beforeOpen && images.before && (
+        <BeforeModal
+          src={images.before}
+          client={study.client}
+          onClose={() => setBeforeOpen(false)}
+        />
+      )}
+    </div>
+  );
+}
+
+/** Fullsides-skärmdump i en scrollbar behållare som fyller ramens skärm. */
+function ScrollShot({ src, alt }: { src?: string; alt: string }) {
+  if (!src) {
+    return (
+      <div className="grid h-full w-full place-items-center bg-canvas text-xs text-muted">
+        Skärmdump saknas
       </div>
+    );
+  }
+  return (
+    <div className="scroll-shot absolute inset-0 overflow-y-auto overscroll-contain">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={src} alt={alt} className="block w-full" />
     </div>
   );
 }
@@ -111,7 +113,6 @@ function Laptop({ children }: { children: React.ReactNode }) {
           {children}
         </div>
       </div>
-      {/* Bas / gångjärn */}
       <div className="relative mx-auto h-2.5 w-[110%] -translate-x-[4.5%] rounded-b-[10px] bg-gradient-to-b from-[#cbcdd4] to-[#a6a8b1] sm:h-3.5">
         <div className="absolute top-0 left-1/2 h-1.5 w-16 -translate-x-1/2 rounded-b-lg bg-black/15 sm:w-24" />
       </div>
@@ -130,71 +131,63 @@ function Phone({ children }: { children: React.ReactNode }) {
   );
 }
 
-/** Stand-in för en modern rådgivar-sajt. Byts mot riktig skärmdump. */
-function AdvisorMock({ compact = false }: { compact?: boolean }) {
+/** Förstorad, scrollbar vy av den gamla sajten. */
+function BeforeModal({
+  src,
+  client,
+  onClose,
+}: {
+  src: string;
+  client: string;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
   return (
-    <div className="flex h-full w-full flex-col bg-gradient-to-b from-white to-canvas p-3 sm:p-5">
-      <div className="flex items-center justify-between">
-        <span className="text-[9px] font-semibold tracking-tight sm:text-sm">
-          Rådgivning
-        </span>
-        <span className="rounded-pill bg-ink px-2 py-0.5 text-[7px] text-white sm:text-[10px]">
-          Boka möte
-        </span>
-      </div>
-
-      <div className="mt-auto">
-        <p className="text-[7px] font-medium tracking-wide text-brand uppercase sm:text-[10px]">
-          PPM · ISK
-        </p>
-        <h4 className="mt-1 text-[13px] leading-[1.1] font-semibold tracking-tight text-ink sm:text-2xl">
-          Trygg rådgivning
-          <br />
-          för ditt sparande.
-        </h4>
-        {!compact && (
-          <p className="mt-2 hidden text-[10px] text-muted sm:block">
-            Oberoende vägledning för PPM och ISK — långsiktigt och tydligt.
-          </p>
-        )}
-      </div>
-
-      <div className="mt-3 flex items-end justify-between gap-2">
-        <span className="rounded-pill bg-brand px-2.5 py-1 text-[8px] font-medium text-white sm:px-3 sm:py-1.5 sm:text-xs">
-          Kom igång →
-        </span>
-        <svg
-          viewBox="0 0 120 40"
-          aria-hidden="true"
-          className={`h-8 w-20 text-brand sm:h-10 sm:w-28 ${compact ? "hidden" : ""}`}
-        >
-          <polyline
-            points="0,34 20,27 40,30 60,17 80,21 100,8 118,11"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Gamla sajten för ${client}`}
+      onClick={onClose}
+      className="fixed inset-0 z-[120] flex items-center justify-center bg-ink/70 p-4 backdrop-blur-sm sm:p-8"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="flex max-h-[85vh] w-full max-w-3xl flex-col overflow-hidden rounded-xl border border-line bg-surface shadow-lift"
+      >
+        <div className="flex items-center justify-between border-b border-line bg-canvas px-4 py-3">
+          <span className="text-sm font-semibold">
+            Före
+            <span className="ml-2 font-normal text-muted">
+              gamla sajten — scrolla igenom
+            </span>
+          </span>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Stäng"
+            className="flex h-8 w-8 items-center justify-center rounded-lg border border-line text-muted transition-colors duration-200 ease-out hover:border-ink hover:text-ink"
+          >
+            ✕
+          </button>
+        </div>
+        <div className="overflow-y-auto overscroll-contain">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={src}
+            alt={`${client} — gamla sajten, hela sidan`}
+            className="block w-full"
           />
-        </svg>
+        </div>
       </div>
-    </div>
-  );
-}
-
-/** Stand-in för den gamla WordPress-sajten. Byts mot riktig "före"-skärmdump. */
-function BeforeMock() {
-  return (
-    <div className="h-full w-full bg-[#d9d7cd] p-1.5 font-['Times_New_Roman',_serif] text-[#222]">
-      <div className="bg-[#2e3a86] px-1 py-0.5 text-[6px] font-bold text-white">
-        RÅDGIVNING AB
-      </div>
-      <p className="mt-1 text-center text-[7px] font-bold text-[#aa0000] underline">
-        Välkommen!
-      </p>
-      <p className="mt-1 text-center text-[5px] text-[#555]">
-        Senast uppdaterad 2013
-      </p>
     </div>
   );
 }

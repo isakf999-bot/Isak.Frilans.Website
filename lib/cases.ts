@@ -28,13 +28,13 @@ export type CaseStudy = {
 
 export const cases: CaseStudy[] = [
   {
-    slug: "ppm-isk-radgivare",
-    client: "[Kundens namn]",
+    slug: "mats-svensson-ppm",
+    client: "Mats Svensson",
     industry: "Trading & rådgivning · PPM & ISK",
     title: "En sajt som känns lika seriös som rådgivningen bakom.",
     intro:
-      "En rådgivare inom PPM och ISK med tung expertis — men en hemsida som inte visade det. Vi byggde om allt från grunden.",
-    liveUrl: "#", // [Länk till den live-satta sajten]
+      "Mats Svensson — expert på aktivt fondsparande inom PPM och ISK. Tung erfarenhet, men en hemsida som inte visade det. Vi byggde om allt från grunden.",
+    liveUrl: "", // Live-länk hoppas över tills vidare.
     challenge:
       "Kunden hade en föråldrad WordPress-sida som inte speglade hans expertis. Långsam, svår att uppdatera och byggd på en mall som tusen andra sajter också använde — långt ifrån det förtroende en rådgivare inom privatekonomi behöver inge.",
     work: [
@@ -66,9 +66,9 @@ export const cases: CaseStudy[] = [
       author: "[Kundens namn, titel]",
     },
     images: {
-      afterDesktop: undefined, // "/case/ppm-after-desktop.png"
-      afterMobile: undefined, // "/case/ppm-after-mobile.png"
-      before: undefined, // "/case/ppm-before.png"
+      afterDesktop: "/case/after-desktop.jpg",
+      afterMobile: "/case/after-mobile.jpg",
+      before: "/case/before-desktop.jpg",
     },
   },
 ];

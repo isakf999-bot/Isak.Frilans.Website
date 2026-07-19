@@ -131,6 +131,22 @@
   }
 }
 
+/* Tunn, diskret scrollbar för de scrollbara skärmdumparna i case-ramarna. */
+.scroll-shot {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(43 62 212 / 0.35) transparent;
+}
+.scroll-shot::-webkit-scrollbar {
+  width: 6px;
+}
+.scroll-shot::-webkit-scrollbar-thumb {
+  background: rgb(43 62 212 / 0.32);
+  border-radius: 999px;
+}
+.scroll-shot::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 /* ---------------------------------------------------------------------------
    ENTRÉ-ANIMATION
    Körs EN gång vid sidladdning och slutar på opacity 1. Ingen scroll-styrd
