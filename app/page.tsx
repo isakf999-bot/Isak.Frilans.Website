@@ -1,10 +1,12 @@
 import { About } from "@/components/About/About";
-import { BeforeAfter } from "@/components/BeforeAfter/BeforeAfter";
 import { Contact } from "@/components/Contact/Contact";
 import { Footer } from "@/components/Footer/Footer";
 import { Hero } from "@/components/Hero/Hero";
 import { Nav } from "@/components/Nav/Nav";
 import { Services } from "@/components/Services/Services";
+
+// <BeforeAfter /> är byggd och sparad i components/BeforeAfter/ men dold tills
+// det finns riktiga case att visa. Lägg tillbaka den i <main> för att aktivera.
 
 export default function Home() {
   return (
@@ -14,7 +16,6 @@ export default function Home() {
         <Hero />
         <About />
         <Services />
-        <BeforeAfter />
         <Contact />
       </main>
       <Footer />

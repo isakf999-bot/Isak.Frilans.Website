@@ -66,13 +66,18 @@ export function Hero() {
               </a>
             </div>
 
-            <dl className="rise rise-4 mt-12 flex flex-wrap gap-x-10 gap-y-6 border-t border-line pt-8">
-              {PROOF.map((item) => (
-                <div key={item.label}>
-                  <dt className="text-h3 font-semibold tracking-tight text-ink">
+            <dl className="rise rise-4 mt-12 grid max-w-md grid-cols-3 border-t border-line pt-8">
+              {PROOF.map((item, i) => (
+                <div
+                  key={item.label}
+                  className={i > 0 ? "border-l border-line pl-5" : "pr-5"}
+                >
+                  <dt className="text-2xl font-semibold tracking-tight text-ink sm:text-[1.75rem]">
                     {item.value}
                   </dt>
-                  <dd className="mt-1 text-sm text-muted">{item.label}</dd>
+                  <dd className="mt-1 text-xs leading-snug text-muted sm:text-sm">
+                    {item.label}
+                  </dd>
                 </div>
               ))}
             </dl>

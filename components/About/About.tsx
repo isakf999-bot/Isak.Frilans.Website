@@ -84,7 +84,7 @@ export function About() {
                 {STACK.map((tool) => (
                   <li
                     key={tool}
-                    className="rounded-pill border border-line bg-surface px-3 py-1.5 text-sm text-ink"
+                    className="cursor-default rounded-pill border border-line bg-surface px-3 py-1.5 text-sm text-ink shadow-card transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-brand-glow hover:text-brand hover:shadow-lift"
                   >
                     {tool}
                   </li>

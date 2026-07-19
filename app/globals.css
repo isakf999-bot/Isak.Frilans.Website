@@ -57,10 +57,15 @@
   --radius-xl: 24px;
   --radius-pill: 999px;
 
-  /* Mjuka skuggor, låg opacitet — djup, inte Photoshop-kanter. */
-  --shadow-card: 0 1px 2px rgb(22 23 29 / 0.04), 0 8px 24px rgb(22 23 29 / 0.05);
-  --shadow-lift: 0 2px 4px rgb(22 23 29 / 0.05), 0 16px 40px rgb(22 23 29 / 0.1);
-  --shadow-brand: 0 8px 24px rgb(43 62 212 / 0.28);
+  /* Mjuka skuggor i flera lager — ger djup som känns dyrt, inte Photoshop-kanter. */
+  --shadow-card:
+    0 1px 2px rgb(22 23 29 / 0.04), 0 4px 10px rgb(22 23 29 / 0.04),
+    0 12px 26px rgb(22 23 29 / 0.05);
+  --shadow-lift:
+    0 2px 6px rgb(22 23 29 / 0.06), 0 12px 26px rgb(22 23 29 / 0.08),
+    0 24px 48px rgb(22 23 29 / 0.1);
+  --shadow-brand:
+    0 4px 12px rgb(43 62 212 / 0.22), 0 12px 30px rgb(43 62 212 / 0.22);
 }
 
 @layer base {

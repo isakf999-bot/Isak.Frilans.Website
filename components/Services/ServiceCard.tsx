@@ -41,6 +41,12 @@ export function ServiceCard({ service }: { service: Service }) {
       onMouseMove={handleMove}
       className="card-glow group relative isolate flex h-full flex-col rounded-xl border border-line bg-surface p-7 shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:border-brand-glow hover:shadow-lift has-[a:focus-visible]:outline has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-brand"
     >
+      {/* Fin accentlinje som ritas ut i toppen vid hover. Insatt från kanterna
+          så den respekterar de rundade hörnen utan overflow-hidden. */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-6 top-0 h-0.5 origin-center scale-x-0 rounded-full bg-gradient-to-r from-transparent via-brand to-transparent opacity-0 transition-all duration-300 ease-out group-hover:scale-x-100 group-hover:opacity-100"
+      />
       <div className="flex items-start justify-between gap-4">
         {/* Egendesignat ikon-emblem — ger varje kort en egen identitet. */}
         <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-brand-glow/60 bg-brand-tint text-brand transition-all duration-300 ease-out group-hover:-rotate-6 group-hover:scale-105 group-hover:bg-brand group-hover:text-white">

@@ -297,10 +297,10 @@ export function Contact() {
                             return (
                               <label
                                 key={id}
-                                className={`flex cursor-pointer items-center justify-center rounded-lg border px-2 py-2.5 text-sm transition-all duration-200 ease-out active:scale-[0.97] ${
+                                className={`flex cursor-pointer items-center justify-center rounded-lg border px-2 py-2.5 text-sm transition-all duration-200 ease-out active:scale-[0.96] ${
                                   isChecked
-                                    ? "border-brand bg-brand font-medium text-white"
-                                    : "border-line bg-canvas text-muted hover:border-brand hover:text-brand"
+                                    ? "border-brand bg-brand font-medium text-white shadow-brand"
+                                    : "border-line bg-canvas text-muted hover:-translate-y-px hover:border-brand hover:text-brand hover:shadow-card"
                                 }`}
                               >
                                 <input
@@ -407,10 +407,10 @@ function Field({
   inputRef,
 }: FieldProps) {
   const errorId = `${id}-error`;
-  const shared = `mt-2 w-full rounded-lg border bg-canvas px-4 py-3 text-ink placeholder:text-muted/50 transition-colors duration-200 ease-out focus:bg-surface focus:outline-none ${
+  const shared = `mt-2 w-full rounded-lg border bg-canvas px-4 py-3 text-ink placeholder:text-muted/50 transition-all duration-200 ease-out focus:bg-surface focus:outline-none ${
     error
-      ? "border-danger focus:border-danger"
-      : "border-line hover:border-muted focus:border-brand"
+      ? "border-danger focus:border-danger focus:shadow-[0_0_0_3px_rgba(180,35,24,0.12)]"
+      : "border-line hover:border-muted focus:border-brand focus:shadow-[0_0_0_3px_rgba(43,62,212,0.12)]"
   }`;
 
   return (
