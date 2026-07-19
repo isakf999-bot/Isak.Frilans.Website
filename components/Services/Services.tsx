@@ -16,10 +16,14 @@ export function Services() {
   return (
     <section
       id="vad-jag-bygger"
-      className="scroll-mt-24 border-t border-line bg-canvas"
+      className="relative overflow-hidden scroll-mt-24 border-t border-line bg-canvas"
       aria-labelledby="tjanster-rubrik"
     >
-      <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-32 top-24 h-[460px] w-[460px] rounded-full bg-brand-glow opacity-40 blur-[140px]"
+      />
+      <div className="relative z-10 mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
         <Reveal className="max-w-2xl">
           <SectionLabel>Vad jag bygger</SectionLabel>
           <h2 id="tjanster-rubrik" className="mt-6 text-h2">

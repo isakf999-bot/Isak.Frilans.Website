@@ -54,9 +54,15 @@ export function Hero() {
               </a>
               <a
                 href="#vad-jag-bygger"
-                className="rounded-pill border border-line bg-surface px-7 py-4 font-medium text-ink shadow-card transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-ink hover:shadow-lift active:translate-y-0"
+                className="group inline-flex items-center gap-2.5 rounded-pill border border-line bg-surface px-7 py-4 font-medium text-ink shadow-card transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-brand hover:bg-brand-tint hover:text-brand hover:shadow-lift active:translate-y-0"
               >
                 Se vad jag bygger
+                <span
+                  aria-hidden="true"
+                  className="text-muted transition-all duration-200 ease-out group-hover:translate-x-0.5 group-hover:text-brand"
+                >
+                  →
+                </span>
               </a>
             </div>
 

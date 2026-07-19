@@ -1,6 +1,7 @@
 "use client";
 
 import type { Service } from "@/lib/services";
+import { serviceIcons } from "@/components/Services/serviceIcons";
 
 /**
  * Ett klickbart tjänstekort.
@@ -40,24 +41,29 @@ export function ServiceCard({ service }: { service: Service }) {
       onMouseMove={handleMove}
       className="card-glow group relative isolate flex h-full flex-col rounded-xl border border-line bg-surface p-7 shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:border-brand-glow hover:shadow-lift has-[a:focus-visible]:outline has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-brand"
     >
-      <div className="flex items-center justify-between gap-4">
-        <h3 className="text-h3">
-          <a
-            href="#kontakt"
-            onClick={handleClick}
-            aria-label={`${service.title} — hör av dig om det här`}
-            className="after:absolute after:inset-0 after:content-[''] focus:outline-none"
-          >
-            {service.title}
-          </a>
-        </h3>
+      <div className="flex items-start justify-between gap-4">
+        {/* Egendesignat ikon-emblem — ger varje kort en egen identitet. */}
+        <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-brand-glow/60 bg-brand-tint text-brand transition-all duration-300 ease-out group-hover:-rotate-6 group-hover:scale-105 group-hover:bg-brand group-hover:text-white">
+          {serviceIcons[service.slug]}
+        </span>
         <span
           aria-hidden="true"
-          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-canvas text-muted transition-all duration-200 ease-out group-hover:bg-brand group-hover:text-white"
+          className="mt-1 flex h-8 w-8 shrink-0 -translate-x-1 items-center justify-center rounded-full bg-canvas text-muted opacity-0 transition-all duration-300 ease-out group-hover:translate-x-0 group-hover:bg-brand group-hover:text-white group-hover:opacity-100"
         >
           →
         </span>
       </div>
+
+      <h3 className="mt-5 text-h3">
+        <a
+          href="#kontakt"
+          onClick={handleClick}
+          aria-label={`${service.title} — hör av dig om det här`}
+          className="after:absolute after:inset-0 after:content-[''] focus:outline-none"
+        >
+          {service.title}
+        </a>
+      </h3>
 
       <p className="mt-3 grow text-muted">{service.description}</p>
 
@@ -65,8 +71,12 @@ export function ServiceCard({ service }: { service: Service }) {
         {service.deliverables.map((item) => (
           <li
             key={item}
-            className="rounded-pill bg-canvas px-3 py-1 text-sm text-muted"
+            className="inline-flex items-center gap-1.5 rounded-pill border border-line bg-canvas px-3 py-1 text-sm text-muted transition-colors duration-200 ease-out group-hover:border-brand-glow"
           >
+            <span
+              aria-hidden="true"
+              className="h-1 w-1 rounded-full bg-brand-glow"
+            />
             {item}
           </li>
         ))}

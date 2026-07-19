@@ -39,10 +39,15 @@ export function About() {
   return (
     <section
       id="om-mig"
-      className="scroll-mt-24 border-t border-line"
+      className="relative overflow-hidden scroll-mt-24 border-t border-line"
       aria-labelledby="om-mig-rubrik"
     >
-      <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
+      {/* Mjuk ambient-glow så ytan får djup i stället för platt off-white. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -left-24 top-1/3 h-[420px] w-[420px] rounded-full bg-brand-glow opacity-40 blur-[130px]"
+      />
+      <div className="relative z-10 mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
         <Reveal className="grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-20">
           <div>
             <SectionLabel>Om mig</SectionLabel>
@@ -112,18 +117,18 @@ export function About() {
             {PRINCIPLES.map((item) => (
               <li
                 key={item.title}
-                className="rounded-lg border border-line bg-surface p-6 shadow-card transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-lift"
+                className="card-glow group isolate rounded-xl border border-line bg-surface p-6 shadow-card transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-brand-glow hover:shadow-lift"
               >
                 <h3 className="flex items-start gap-3 font-sans text-base font-semibold tracking-normal text-ink">
                   <span
                     aria-hidden="true"
-                    className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand text-[11px] text-white"
+                    className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-brand-glow/60 bg-brand-tint text-xs text-brand transition-all duration-300 ease-out group-hover:scale-105 group-hover:bg-brand group-hover:text-white"
                   >
                     ✓
                   </span>
                   {item.title}
                 </h3>
-                <p className="mt-2.5 pl-8 text-muted">{item.body}</p>
+                <p className="mt-2.5 pl-10 text-muted">{item.body}</p>
               </li>
             ))}
           </ul>
