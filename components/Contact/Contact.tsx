@@ -154,14 +154,10 @@ export function Contact() {
   return (
     <section
       id="kontakt"
-      className="relative overflow-hidden scroll-mt-24 border-t border-line-cool bg-mist"
+      className="scroll-mt-24 border-t border-line-cool bg-mist"
       aria-labelledby="kontakt-rubrik"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -left-28 -bottom-16 h-[440px] w-[440px] rounded-full bg-brand-glow opacity-50 blur-[140px]"
-      />
-      <div className="relative z-10 mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
+      <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
         <Reveal className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <div>
             <SectionLabel>Kontakt</SectionLabel>

@@ -39,15 +39,10 @@ export function About() {
   return (
     <section
       id="om-mig"
-      className="relative overflow-hidden scroll-mt-24 border-t border-line"
+      className="scroll-mt-24 border-t border-line"
       aria-labelledby="om-mig-rubrik"
     >
-      {/* Mjuk ambient-glow så ytan får djup i stället för platt off-white. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -left-24 top-1/3 h-[420px] w-[420px] rounded-full bg-brand-glow opacity-40 blur-[130px]"
-      />
-      <div className="relative z-10 mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
+      <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
         <Reveal className="grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-20">
           <div>
             <SectionLabel>Om mig</SectionLabel>
