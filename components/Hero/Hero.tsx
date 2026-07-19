@@ -9,14 +9,15 @@ const PROOF = [
 export function Hero() {
   return (
     <section id="top" className="relative overflow-hidden">
-      {/* Mjuk ljusgloria bakom rubriken — enda gradienten på sidan, och den
-          ligger som atmosfär snarare än som en färgad yta. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-brand-glow opacity-25 blur-[130px]"
-      />
+      {/* Aurora — det lugna, drivande centrumelementet bakom hero:n. Tre mjuka
+          färgfält som rör sig sakta. Ren atmosfär, aldrig i vägen för innehåll. */}
+      <div className="aurora" aria-hidden="true">
+        <span className="aurora__blob aurora__blob--1" />
+        <span className="aurora__blob aurora__blob--2" />
+        <span className="aurora__blob aurora__blob--3" />
+      </div>
 
-      <div className="relative mx-auto max-w-6xl px-6 pt-16 pb-20 lg:px-8 lg:pt-24 lg:pb-28">
+      <div className="relative z-10 mx-auto max-w-6xl px-6 pt-16 pb-20 lg:px-8 lg:pt-24 lg:pb-28">
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-16">
           <div>
             <p className="rise inline-flex items-center gap-2 rounded-pill border border-brand-glow bg-brand-tint px-3.5 py-1.5 text-eyebrow font-medium text-brand uppercase">
@@ -29,7 +30,7 @@ export function Hero() {
 
             <h1 className="rise rise-2 mt-6 text-h1 lg:text-display">
               Hemsidor som gör{" "}
-              <em className="text-brand not-italic">mer</em> än att se bra ut.
+              <em className="shimmer not-italic">mer</em> än att se bra ut.
             </h1>
 
             <p className="rise rise-3 mt-6 max-w-lg text-lead text-muted">

@@ -59,6 +59,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        {/* Hårfin film-grain över hela sidan — tar bort den platta digitala
+            känslan. Statisk, låg opacitet, fångar aldrig klick. */}
+        <div className="grain" aria-hidden="true" />
       </body>
     </html>
   );
