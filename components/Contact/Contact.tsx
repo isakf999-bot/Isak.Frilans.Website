@@ -144,7 +144,7 @@ export function Contact() {
     } catch {
       setStatus("error");
       setFormError(
-        "Något gick fel när förfrågan skulle skickas. Försök igen, eller mejla mig direkt på isakf999@gmail.com.",
+        "Något gick fel när förfrågan skulle skickas. Försök igen, eller mejla mig direkt på info@isakweb.se.",
       );
       alertRef.current?.focus();
     }
@@ -187,10 +187,10 @@ export function Contact() {
             <p className="mt-10 border-t border-line-cool pt-6 text-sm text-muted">
               Hellre mejl?{" "}
               <a
-                href="mailto:isakf999@gmail.com"
+                href="mailto:info@isakweb.se"
                 className="font-medium text-brand underline underline-offset-4 transition-opacity duration-200 hover:opacity-70"
               >
-                isakf999@gmail.com
+                info@isakweb.se
               </a>
             </p>
           </div>

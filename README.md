@@ -30,7 +30,7 @@ läsa något, bara skicka mejl till adressen den är kopplad till. Skräppost-sk
 finns hos Web3Forms, plus en honeypot i formuläret. Domänen kan låsas i deras
 dashboard.
 
-1. Gå till [web3forms.com](https://web3forms.com), skriv in `isakf999@gmail.com`
+1. Gå till [web3forms.com](https://web3forms.com), skriv in `info@isakweb.se`
    och tryck på "Create Access Key". Nyckeln mejlas till dig direkt — inget konto,
    inget lösenord.
 2. Kopiera `.env.example` till `.env.local` och klistra in nyckeln:

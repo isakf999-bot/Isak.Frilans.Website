@@ -5,7 +5,7 @@ const YEAR = new Date().getFullYear();
 
 const LINKS = [
   { label: "Portfolio", href: "https://isakforsberg.se/", external: true },
-  { label: "isakf999@gmail.com", href: "mailto:isakf999@gmail.com", external: false },
+  { label: "info@isakweb.se", href: "mailto:info@isakweb.se", external: false },
 ];
 
 /**
