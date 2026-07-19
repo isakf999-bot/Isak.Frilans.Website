@@ -54,10 +54,17 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="sv">
+    <html lang="sv" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* Markerar att JS körs innan sidan målas, så scroll-reveal aldrig kan
+            lämna innehåll dolt för en besökare utan JavaScript. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js')",
+          }}
+        />
         {children}
         {/* Hårfin film-grain över hela sidan — tar bort den platta digitala
             känslan. Statisk, låg opacitet, fångar aldrig klick. */}

@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/Reveal/Reveal";
 import { SectionLabel } from "@/components/SectionLabel/SectionLabel";
 
 const PORTFOLIO_URL = "https://isakforsberg.se/";
@@ -42,7 +43,7 @@ export function About() {
       aria-labelledby="om-mig-rubrik"
     >
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-20">
+        <Reveal className="grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-20">
           <div>
             <SectionLabel>Om mig</SectionLabel>
             <h2 id="om-mig-rubrik" className="mt-6 text-h2">
@@ -126,7 +127,7 @@ export function About() {
               </li>
             ))}
           </ul>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

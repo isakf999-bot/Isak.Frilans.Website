@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import { Reveal } from "@/components/Reveal/Reveal";
 import { SectionLabel } from "@/components/SectionLabel/SectionLabel";
 import {
   DAYS,
@@ -157,7 +158,7 @@ export function Contact() {
       aria-labelledby="kontakt-rubrik"
     >
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
-        <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+        <Reveal className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <div>
             <SectionLabel>Kontakt</SectionLabel>
 
@@ -348,7 +349,7 @@ export function Contact() {
                   <button
                     type="submit"
                     disabled={status === "submitting"}
-                    className="group inline-flex items-center gap-2.5 rounded-pill bg-brand px-7 py-4 font-medium text-white shadow-brand transition-all duration-200 ease-out hover:bg-brand-dark active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-60 disabled:active:scale-100"
+                    className="shine group inline-flex items-center gap-2.5 rounded-pill bg-brand px-7 py-4 font-medium text-white shadow-brand transition-all duration-200 ease-out hover:bg-brand-dark active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-60 disabled:active:scale-100"
                   >
                     {status === "submitting" ? "Skickar…" : "Skicka förfrågan"}
                     <span
@@ -368,7 +369,7 @@ export function Contact() {
               </form>
             )}
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

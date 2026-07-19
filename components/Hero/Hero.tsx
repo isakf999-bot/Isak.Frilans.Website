@@ -42,7 +42,7 @@ export function Hero() {
             <div className="rise rise-3 mt-9 flex flex-wrap items-center gap-4">
               <a
                 href="#kontakt"
-                className="group inline-flex items-center gap-2.5 rounded-pill bg-brand px-7 py-4 font-medium text-white shadow-brand transition-all duration-200 ease-out hover:bg-brand-dark hover:shadow-lift active:scale-[0.97]"
+                className="shine group inline-flex items-center gap-2.5 rounded-pill bg-brand px-7 py-4 font-medium text-white shadow-brand transition-all duration-200 ease-out hover:bg-brand-dark hover:shadow-lift active:scale-[0.97]"
               >
                 Boka ett samtal
                 <span

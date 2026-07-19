@@ -57,7 +57,7 @@ export function Nav() {
           ))}
           <a
             href="#kontakt"
-            className="ml-3 rounded-pill bg-brand px-5 py-2.5 text-sm font-medium text-white shadow-brand transition-all duration-200 ease-out hover:scale-105 hover:bg-brand-dark hover:shadow-lift active:scale-100"
+            className="shine ml-3 rounded-pill bg-brand px-5 py-2.5 text-sm font-medium text-white shadow-brand transition-all duration-200 ease-out hover:scale-105 hover:bg-brand-dark hover:shadow-lift active:scale-100"
           >
             Starta ett projekt
           </a>

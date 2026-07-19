@@ -22,8 +22,24 @@ export function ServiceCard({ service }: { service: Service }) {
     window.dispatchEvent(new CustomEvent("prefill-contact", { detail: prefill }));
   };
 
+  // Flytta skenet dit muspekaren är. Rent dekorativt — sätter bara CSS-variabler.
+  const handleMove = (event: React.MouseEvent<HTMLElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    event.currentTarget.style.setProperty(
+      "--mx",
+      `${event.clientX - rect.left}px`,
+    );
+    event.currentTarget.style.setProperty(
+      "--my",
+      `${event.clientY - rect.top}px`,
+    );
+  };
+
   return (
-    <article className="group relative flex h-full flex-col rounded-xl border border-line bg-surface p-7 shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:border-brand-glow hover:shadow-lift has-[a:focus-visible]:outline has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-brand">
+    <article
+      onMouseMove={handleMove}
+      className="card-glow group relative isolate flex h-full flex-col rounded-xl border border-line bg-surface p-7 shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:border-brand-glow hover:shadow-lift has-[a:focus-visible]:outline has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-brand"
+    >
       <div className="flex items-center justify-between gap-4">
         <h3 className="text-h3">
           <a
