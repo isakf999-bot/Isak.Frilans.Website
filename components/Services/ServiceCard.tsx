@@ -39,17 +39,22 @@ export function ServiceCard({ service }: { service: Service }) {
   return (
     <article
       onMouseMove={handleMove}
-      className="card-glow group relative isolate flex h-full flex-col rounded-xl border border-line bg-surface p-7 shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:border-brand-glow hover:shadow-lift has-[a:focus-visible]:outline has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-brand"
+      className="card-glow group relative isolate flex h-full flex-col overflow-hidden rounded-xl border border-line bg-gradient-to-b from-white to-[#f5f6fc] p-7 shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:border-brand-glow hover:shadow-lift has-[a:focus-visible]:outline has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-brand"
     >
-      {/* Fin accentlinje som ritas ut i toppen vid hover. Insatt från kanterna
-          så den respekterar de rundade hörnen utan overflow-hidden. */}
+      {/* Permanent accentlinje i toppen (svag i vila, tänds vid hover). */}
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-6 top-0 h-0.5 origin-center scale-x-0 rounded-full bg-gradient-to-r from-transparent via-brand to-transparent opacity-0 transition-all duration-300 ease-out group-hover:scale-x-100 group-hover:opacity-100"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-brand to-transparent opacity-40 transition-opacity duration-300 ease-out group-hover:opacity-100"
+      />
+      {/* Mjukt statiskt sken bakom ikonen — syns utan hover. -z-10 håller det
+          bakom texten (kortet är en isolate-kontext). */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-6 -left-6 -z-10 h-28 w-28 rounded-full bg-brand-glow opacity-40 blur-2xl"
       />
       <div className="flex items-start justify-between gap-4">
         {/* Egendesignat ikon-emblem — ger varje kort en egen identitet. */}
-        <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-brand-glow/60 bg-brand-tint text-brand transition-all duration-300 ease-out group-hover:-rotate-6 group-hover:scale-105 group-hover:bg-brand group-hover:text-white">
+        <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-brand-glow/60 bg-brand-tint text-brand shadow-sm transition-all duration-300 ease-out group-hover:-rotate-6 group-hover:scale-105 group-hover:bg-brand group-hover:text-white">
           {serviceIcons[service.slug]}
         </span>
         <span

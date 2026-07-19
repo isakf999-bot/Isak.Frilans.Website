@@ -40,7 +40,12 @@ const SOCIALS: Social[] = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-line-cool bg-mist">
+    <footer className="relative border-t border-line-cool bg-mist">
+      {/* Synlig accentlinje längs överkanten. */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand/50 to-transparent"
+      />
       <div className="mx-auto max-w-6xl px-6 py-14 lg:px-8">
         <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between">
           <div>

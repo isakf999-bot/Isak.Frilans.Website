@@ -112,12 +112,16 @@ export function About() {
             {PRINCIPLES.map((item) => (
               <li
                 key={item.title}
-                className="card-glow group isolate rounded-xl border border-line bg-surface p-6 shadow-card transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-brand-glow hover:shadow-lift"
+                className="card-glow group relative isolate overflow-hidden rounded-xl border border-line bg-gradient-to-b from-white to-[#f5f6fc] p-6 shadow-card transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-brand-glow hover:shadow-lift"
               >
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -top-6 -left-6 -z-10 h-24 w-24 rounded-full bg-brand-glow opacity-40 blur-2xl"
+                />
                 <h3 className="flex items-start gap-3 font-sans text-base font-semibold tracking-normal text-ink">
                   <span
                     aria-hidden="true"
-                    className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-brand-glow/60 bg-brand-tint text-xs text-brand transition-all duration-300 ease-out group-hover:scale-105 group-hover:bg-brand group-hover:text-white"
+                    className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-brand-glow/60 bg-brand-tint text-xs text-brand shadow-sm transition-all duration-300 ease-out group-hover:scale-105 group-hover:bg-brand group-hover:text-white"
                   >
                     ✓
                   </span>

@@ -171,18 +171,32 @@ export function Contact() {
               förslag på en av dem. Ingen kalender som låser dig i förväg.
             </p>
 
-            <ol className="mt-10 space-y-5">
-              {STEPS.map((step, i) => (
-                <li key={step} className="flex gap-4">
-                  <span
-                    aria-hidden="true"
-                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand text-sm font-medium text-white"
-                  >
-                    {i + 1}
-                  </span>
-                  <span className="pt-0.5 text-muted">{step}</span>
-                </li>
-              ))}
+            <ol className="mt-10">
+              {STEPS.map((step, i) => {
+                const isLast = i === STEPS.length - 1;
+                return (
+                  <li key={step} className="flex gap-4">
+                    <div className="flex flex-col items-center">
+                      <span
+                        aria-hidden="true"
+                        className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand text-sm font-medium text-white shadow-brand"
+                      >
+                        {i + 1}
+                      </span>
+                      {/* Synlig kopplingslinje ner till nästa steg. */}
+                      {!isLast && (
+                        <span
+                          aria-hidden="true"
+                          className="my-1.5 w-px grow bg-gradient-to-b from-brand/45 to-brand/10"
+                        />
+                      )}
+                    </div>
+                    <span className={`pt-1 text-muted ${isLast ? "" : "pb-7"}`}>
+                      {step}
+                    </span>
+                  </li>
+                );
+              })}
             </ol>
 
             <p className="mt-10 border-t border-line-cool pt-6 text-sm text-muted">
@@ -196,7 +210,7 @@ export function Contact() {
             </p>
           </div>
 
-          <div className="rounded-xl border border-line-cool bg-surface p-6 shadow-card sm:p-9">
+          <div className="rounded-xl border border-line-cool bg-gradient-to-b from-white to-[#f4f6fd] p-6 shadow-lift sm:p-9">
             {status === "success" ? (
               <div role="status" className="py-10 text-center">
                 <span
