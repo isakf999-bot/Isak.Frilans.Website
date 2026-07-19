@@ -28,12 +28,13 @@ export function DeviceShowcase({ study }: { study: CaseStudy }) {
           </Laptop>
         </div>
 
-        {/* Mobil — scrollbar, överlappar nedre högra hörnet */}
+        {/* Mobil — scrollbar dold så bilden fyller full bredd (ingen vit rad) */}
         <div className="absolute right-1 -bottom-4 w-[24%] max-w-[140px] sm:-bottom-2 sm:right-6">
           <Phone>
             <ScrollShot
               src={images.afterMobile}
               alt={`${study.client} — nya sajten i mobil`}
+              bare
             />
           </Phone>
         </div>
@@ -88,8 +89,20 @@ export function DeviceShowcase({ study }: { study: CaseStudy }) {
   );
 }
 
-/** Fullsides-skärmdump i en scrollbar behållare som fyller ramens skärm. */
-function ScrollShot({ src, alt }: { src?: string; alt: string }) {
+/**
+ * Fullsides-skärmdump i en scrollbar behållare som fyller ramens skärm.
+ * `bare` döljer scrollbaren helt (för mobilen — så bilden fyller full bredd och
+ * det inte blir en vit rad längs kanten).
+ */
+function ScrollShot({
+  src,
+  alt,
+  bare = false,
+}: {
+  src?: string;
+  alt: string;
+  bare?: boolean;
+}) {
   if (!src) {
     return (
       <div className="grid h-full w-full place-items-center bg-canvas text-xs text-muted">
@@ -98,7 +111,13 @@ function ScrollShot({ src, alt }: { src?: string; alt: string }) {
     );
   }
   return (
-    <div className="scroll-shot absolute inset-0 overflow-y-auto overscroll-contain">
+    <div
+      className={`absolute inset-0 overflow-y-auto overscroll-contain ${
+        bare
+          ? "[&::-webkit-scrollbar]:hidden [scrollbar-width:none]"
+          : "scroll-shot"
+      }`}
+    >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={src} alt={alt} className="block w-full" />
     </div>
