@@ -17,7 +17,36 @@ export function DeviceShowcase({ study }: { study: CaseStudy }) {
 
   return (
     <div>
-      <div className="relative mx-auto max-w-4xl px-2 pt-10 sm:pt-6">
+      <div className="relative mx-auto max-w-4xl px-2 pt-14 sm:pt-12">
+        {/* "EFTER"-etikett med pil ner mot laptopskärmen — gör direkt tydligt
+            att laptopen/mobilen är den nya sajten (speglar FÖRE-etiketten). */}
+        <div className="pointer-events-none absolute top-0 right-3 z-20 flex flex-col items-center sm:right-10">
+          <span className="rounded-pill bg-brand px-3 py-1 text-[10px] font-semibold tracking-wide text-white uppercase shadow-brand sm:text-[11px]">
+            Efter
+            <span className="hidden sm:inline"> — nya sajten</span>
+          </span>
+          <svg
+            viewBox="0 0 48 48"
+            fill="none"
+            aria-hidden="true"
+            className="-mt-0.5 h-9 w-9 text-brand sm:h-11 sm:w-11"
+          >
+            <path
+              d="M38 7C36 20 28 30 13 37"
+              stroke="currentColor"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
+            <path
+              d="M13 37l10-1M13 37l1-10"
+              stroke="currentColor"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+
         {/* Laptop — scrollbar */}
         <div className="mx-auto w-[86%] sm:w-[82%]">
           <Laptop>
