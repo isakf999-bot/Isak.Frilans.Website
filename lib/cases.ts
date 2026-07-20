@@ -67,7 +67,7 @@ export const cases: CaseStudy[] = [
     },
     images: {
       afterDesktop: "/case/after-desktop.jpg",
-      afterMobile: "/case/after-mobile.jpg",
+      afterMobile: "/case/mobile.jpg",
       before: "/case/before.jpg",
     },
   },
