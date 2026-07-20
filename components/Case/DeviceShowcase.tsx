@@ -29,21 +29,28 @@ export function DeviceShowcase({ study }: { study: CaseStudy }) {
             viewBox="0 0 48 48"
             fill="none"
             aria-hidden="true"
-            className="-mt-0.5 h-9 w-9 text-brand sm:h-11 sm:w-11"
+            className="-mt-0.5 h-10 w-10 text-brand drop-shadow-[0_1px_2px_rgba(22,23,29,0.25)] sm:h-12 sm:w-12"
           >
-            <path
-              d="M38 7C36 20 28 30 13 37"
-              stroke="currentColor"
-              strokeWidth="3"
-              strokeLinecap="round"
-            />
-            <path
-              d="M13 37l10-1M13 37l1-10"
-              stroke="currentColor"
-              strokeWidth="3"
+            {/* Vit kontur underst — gör pilen läsbar mot både ljus yta och
+                den svarta laptopskärmen. */}
+            <g
+              stroke="#ffffff"
+              strokeWidth="7.5"
               strokeLinecap="round"
               strokeLinejoin="round"
-            />
+            >
+              <path d="M38 7C36 20 28 30 13 37" />
+              <path d="M13 37l10-1M13 37l1-10" />
+            </g>
+            <g
+              stroke="currentColor"
+              strokeWidth="3.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M38 7C36 20 28 30 13 37" />
+              <path d="M13 37l10-1M13 37l1-10" />
+            </g>
           </svg>
         </div>
 
