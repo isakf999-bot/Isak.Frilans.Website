@@ -97,7 +97,12 @@ export function Footer() {
               Frilansande webbutvecklare i Helsingborg. Landningssidor, e-handel
               och företagssajter åt små företag.
             </p>
-            <p className="mt-5 inline-flex items-center gap-2 rounded-pill border border-line-cool bg-surface px-3.5 py-2 text-sm font-medium text-ink shadow-card">
+            {/* Enskild firma — org.nr är personnumret, så de sista fyra
+                siffrorna visas medvetet inte. */}
+            <p className="mt-5 text-sm text-muted">
+              Org.nr <span className="font-medium text-ink">050704-XXXX</span>
+            </p>
+            <p className="mt-3 inline-flex items-center gap-2 rounded-pill border border-line-cool bg-surface px-3.5 py-2 text-sm font-medium text-ink shadow-card">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
