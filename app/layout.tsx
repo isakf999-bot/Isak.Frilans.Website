@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -69,6 +70,9 @@ export default function RootLayout({
         {/* Hårfin film-grain över hela sidan — tar bort den platta digitala
             känslan. Statisk, låg opacitet, fångar aldrig klick. */}
         <div className="grain" aria-hidden="true" />
+        {/* Vercel Web Analytics — anonym besöksstatistik, laddas efter
+            innehållet och påverkar inte layouten. */}
+        <Analytics />
       </body>
     </html>
   );
