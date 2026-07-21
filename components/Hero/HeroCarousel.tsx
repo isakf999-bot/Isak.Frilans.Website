@@ -19,37 +19,22 @@ type Slide = {
 /** Lägg till nya projekt här, i vilken ordning som helst. */
 const PROJECTS: Slide[] = [
   {
-    src: "/work/netflix.png",
-    title: "Netflix-inspirerad trailer-sajt",
-    tag: "Streaming-UI",
-    liveSite: "https://netflix-inspired-website.vercel.app/",
-  },
-  {
     src: "/work/ecommerce.png",
     title: "E-handel för kläder",
     tag: "E-handel",
     liveSite: "https://e-commerce-clothing-sable.vercel.app/",
   },
   {
+    src: "/work/landingpage.png",
+    title: "Nebula",
+    tag: "Landningssida",
+    liveSite: "https://landingpage-portfolio-orpin.vercel.app/",
+  },
+  {
     src: "/work/genesis.png",
     title: "Genesis — företagssajt",
     tag: "Landningssida",
     liveSite: "https://genesiswebsiteisak.netlify.app/",
-  },
-  {
-    src: "/work/landingpage.png",
-    title: "Landing Page",
-    // "SaaS" och inte "Landningssida" — Genesis har redan den taggen, och
-    // taggarna ska skilja projekten åt, inte upprepa varandra.
-    tag: "SaaS",
-    liveSite: "https://landingpage-portfolio-orpin.vercel.app/",
-  },
-  {
-    src: "/work/planner-editor.png",
-    title: "Project Planner-app",
-    tag: "Webbapp",
-    liveSite: "https://project-planner-app-gamma.vercel.app/",
-    pinLast: true,
   },
 ];
 

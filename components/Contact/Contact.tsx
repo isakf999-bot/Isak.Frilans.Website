@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { Reveal } from "@/components/Reveal/Reveal";
 import { SectionLabel } from "@/components/SectionLabel/SectionLabel";
 import {
@@ -24,34 +24,16 @@ const STEPS = [
   "Vi pratar 20–30 minuter. Kostar ingenting, förpliktar ingenting.",
 ];
 
-export function Contact() {
+export function Contact({ initialMessage }: { initialMessage?: string }) {
   const formId = useId();
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<FieldErrors>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [selected, setSelected] = useState<Set<AvailabilityId>>(new Set());
-  // Meddelandet är kontrollerat så att ett tjänstekort kan förifylla det.
-  const [message, setMessage] = useState("");
+  // Kontrollerat så att ett tjänstekort kan länka hit med ett förifyllt
+  // meddelande (?meddelande=... i URL:en, se ServiceCard).
+  const [message, setMessage] = useState(initialMessage ?? "");
   const alertRef = useRef<HTMLParagraphElement>(null);
-  const messageRef = useRef<HTMLTextAreaElement>(null);
-
-  // Lyssna på klick från tjänstekorten ("Jag är intresserad av e-handel").
-  useEffect(() => {
-    const onPrefill = (event: Event) => {
-      const detail = (event as CustomEvent<string>).detail;
-      if (typeof detail !== "string") return;
-      setMessage(detail);
-      // Ta tillbaka formuläret om tack-vyn råkade visas, och flytta fokus till
-      // meddelandet — preventScroll så den mjuka scrollen till #kontakt inte
-      // hoppar. rAF ger formuläret en render att monteras först.
-      setStatus("idle");
-      requestAnimationFrame(() =>
-        messageRef.current?.focus({ preventScroll: true }),
-      );
-    };
-    window.addEventListener("prefill-contact", onPrefill);
-    return () => window.removeEventListener("prefill-contact", onPrefill);
-  }, []);
 
   const toggleSlot = (id: AvailabilityId) => {
     setSelected((prev) => {
@@ -279,7 +261,6 @@ export function Contact() {
                     error={errors.message}
                     value={message}
                     onChange={setMessage}
-                    inputRef={messageRef}
                   />
                 </div>
 
@@ -402,7 +383,6 @@ type FieldProps = {
   /** Sätt value + onChange tillsammans för att göra fältet kontrollerat. */
   value?: string;
   onChange?: (value: string) => void;
-  inputRef?: React.Ref<HTMLTextAreaElement>;
 };
 
 /** Fel visas alltid som text, aldrig bara som en röd kant. */
@@ -418,7 +398,6 @@ function Field({
   autoComplete,
   value,
   onChange,
-  inputRef,
 }: FieldProps) {
   const errorId = `${id}-error`;
   const shared = `mt-2 w-full rounded-lg border bg-canvas px-4 py-3 text-ink placeholder:text-muted/50 transition-all duration-200 ease-out focus:bg-surface focus:outline-none ${
@@ -442,7 +421,6 @@ function Field({
           id={id}
           name={name}
           rows={4}
-          ref={inputRef}
           placeholder={placeholder}
           aria-invalid={Boolean(error)}
           aria-describedby={error ? errorId : undefined}

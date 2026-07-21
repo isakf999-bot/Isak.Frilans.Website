@@ -131,6 +131,22 @@
   }
 }
 
+/* Tunn, diskret scrollbar för de scrollbara skärmdumparna i case-ramarna. */
+.scroll-shot {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(43 62 212 / 0.35) transparent;
+}
+.scroll-shot::-webkit-scrollbar {
+  width: 6px;
+}
+.scroll-shot::-webkit-scrollbar-thumb {
+  background: rgb(43 62 212 / 0.32);
+  border-radius: 999px;
+}
+.scroll-shot::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 /* ---------------------------------------------------------------------------
    ENTRÉ-ANIMATION
    Körs EN gång vid sidladdning och slutar på opacity 1. Ingen scroll-styrd
@@ -401,5 +417,39 @@
   }
   to {
     left: 140%;
+  }
+}
+
+/* Liten studsande pil-notis som pekar i sidled på en knapp som inte ska missas. */
+@media (prefers-reduced-motion: no-preference) {
+  .point-bounce {
+    animation: point-bounce 1.8s ease-in-out infinite;
+  }
+}
+
+@keyframes point-bounce {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-6px);
+  }
+}
+
+/* Diskret nedåtpil i hero:n — vinkar om att det finns mer under vecket. */
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-hint {
+    animation: scroll-hint 2.2s ease-in-out infinite;
+  }
+}
+
+@keyframes scroll-hint {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
   }
 }

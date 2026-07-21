@@ -1,12 +1,21 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Logo } from "@/components/Logo/Logo";
+import { Logo, logoLinkClass } from "@/components/Logo/Logo";
 
+/**
+ * "Om mig" är en sektion på startsidan ("/#om-mig") — fungerar från vilken
+ * sida som helst. "Vad jag bygger" och "Tidigare kunder" är egna sidor.
+ */
 const LINKS = [
-  { href: "#om-mig", label: "Om mig" },
-  { href: "#vad-jag-bygger", label: "Vad jag bygger" },
+  { href: "/#om-mig", label: "Om mig" },
+  { href: "/tjanster", label: "Vad jag bygger" },
 ];
+
+/** Renderas som blå knappar (samma stil), inte vanliga textlänkar. */
+const CASE_LINK = { href: "/case", label: "Tidigare kunder" };
+const CONTACT_LINK = { href: "/kontakt", label: "Starta ett projekt" };
 
 export function Nav() {
   const [open, setOpen] = useState(false);
@@ -35,32 +44,36 @@ export function Nav() {
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 lg:px-8">
-        {/* Loggan växer från vänsterkanten, inte från mitten — annars knuffas
-            den inåt och ser ut att glida i sidled när man hovrar. */}
-        <a
-          href="#top"
+        <Link
+          href="/#top"
           aria-label="Isak Web — till toppen"
-          className="origin-left transition-transform duration-200 ease-out hover:scale-105 active:scale-100"
+          className={logoLinkClass}
         >
           <Logo />
-        </a>
+        </Link>
 
         <nav aria-label="Huvudmeny" className="hidden items-center gap-1 md:flex">
           {LINKS.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="rounded-pill px-4 py-2 text-sm text-muted transition-all duration-200 ease-out hover:scale-105 hover:bg-brand-tint hover:text-brand active:scale-100"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
-          <a
-            href="#kontakt"
+          <Link
+            href={CASE_LINK.href}
             className="shine ml-3 rounded-pill bg-brand px-5 py-2.5 text-sm font-medium text-white shadow-brand transition-all duration-200 ease-out hover:scale-105 hover:bg-brand-dark hover:shadow-lift active:scale-100"
           >
-            Starta ett projekt
-          </a>
+            {CASE_LINK.label}
+          </Link>
+          <Link
+            href={CONTACT_LINK.href}
+            className="shine ml-2 rounded-pill bg-brand px-5 py-2.5 text-sm font-medium text-white shadow-brand transition-all duration-200 ease-out hover:scale-105 hover:bg-brand-dark hover:shadow-lift active:scale-100"
+          >
+            {CONTACT_LINK.label}
+          </Link>
         </nav>
 
         <button
@@ -94,16 +107,20 @@ export function Nav() {
       >
         <nav aria-label="Mobilmeny" className="min-h-0">
           <ul className="flex flex-col gap-1 px-6 py-4">
-            {[...LINKS, { href: "#kontakt", label: "Kontakt" }].map((link) => (
+            {[
+              ...LINKS,
+              CASE_LINK,
+              { href: "/kontakt", label: "Kontakt" },
+            ].map((link) => (
               <li key={link.href}>
-                <a
+                <Link
                   href={link.href}
                   onClick={() => setOpen(false)}
                   tabIndex={open ? 0 : -1}
                   className="block rounded-lg px-3 py-3 text-lg transition-colors duration-200 ease-out hover:bg-brand-tint hover:text-brand"
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

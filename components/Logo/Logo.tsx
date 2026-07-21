@@ -12,6 +12,17 @@ type Props = {
   className?: string;
 };
 
+/**
+ * Delad stil för länken som loggan ligger i (navbar + footer): vid hover lyfts
+ * den lite och lutar till en snedställd position.
+ *
+ * inline-flex krävs för att transformen ska slå igenom — en vanlig inline-länk
+ * ignorerar både scale och rotate. origin-bottom-left gör att den vippar upp
+ * från sitt nedre vänstra hörn i stället för att glida i sidled.
+ */
+export const logoLinkClass =
+  "inline-flex origin-bottom-left transition-transform duration-300 ease-out hover:-rotate-[3.5deg] hover:scale-105 active:rotate-0 active:scale-100";
+
 export function Logo({ className = "" }: Props) {
   return (
     <span className={`flex items-center gap-2.5 ${className}`}>
