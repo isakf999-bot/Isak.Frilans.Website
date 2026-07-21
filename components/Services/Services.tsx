@@ -1,9 +1,8 @@
+import Link from "next/link";
 import { Reveal } from "@/components/Reveal/Reveal";
 import { SectionLabel } from "@/components/SectionLabel/SectionLabel";
 import { ServiceCard } from "@/components/Services/ServiceCard";
 import { services } from "@/lib/services";
-
-const PORTFOLIO_URL = "https://isakforsberg.se/";
 
 /**
  * Tjänsterna som kort i ett 2×2-rutnät.
@@ -42,36 +41,35 @@ export function Services() {
         </Reveal>
 
         {/* Proof-band: orden ovanför blir trovärdiga först när de går att
-            kontrollera. Här är den kontrollen — en knapp rakt till riktiga,
-            live-byggda projekt. */}
+            kontrollera. Här är den kontrollen — en knapp rakt till riktiga
+            kunder och vad de faktiskt fick ut av jobbet. */}
         <Reveal
           className="mt-12 overflow-hidden rounded-xl border border-brand-glow bg-brand-tint"
           delay={80}
         >
           <div className="flex flex-col gap-6 p-8 sm:flex-row sm:items-center sm:justify-between lg:p-10">
             <div className="max-w-xl">
-              <h3 className="text-h3">Inte bara ord — se det på riktigt.</h3>
+              <h3 className="text-h3">Inte bara ord — se vad kunderna fick.</h3>
               <p className="mt-3 text-muted">
-                Varje sajt du ser här är byggd av mig, från grunden. Hoppa in i
-                min portfolio och titta på riktiga projekt, live i webbläsaren —
-                så vet du precis vilken nivå du får innan du hör av dig.
+                Riktiga företag som hade en sajt som drog ner intrycket. Se hur
+                den såg ut före, vad de fick i stället och vad de själva säger om
+                resultatet — så vet du precis vilken nivå du får innan du hör av
+                dig.
               </p>
             </div>
 
-            <a
-              href={PORTFOLIO_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="shine group inline-flex shrink-0 items-center gap-2.5 rounded-pill bg-brand px-7 py-4 font-medium text-white shadow-brand transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-brand-dark hover:shadow-lift active:translate-y-0"
+            <Link
+              href="/case"
+              className="shine group inline-flex shrink-0 items-center gap-2.5 rounded-pill bg-brand px-6 py-3.5 font-medium whitespace-nowrap text-white shadow-brand transition-all duration-200 ease-out hover:bg-brand-dark hover:shadow-lift active:scale-[0.97]"
             >
-              Se min portfolio
+              Se mina tidigare kunders resultat
               <span
                 aria-hidden="true"
-                className="transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                className="transition-transform duration-200 ease-out group-hover:translate-x-1"
               >
-                ↗
+                →
               </span>
-            </a>
+            </Link>
           </div>
         </Reveal>
       </div>

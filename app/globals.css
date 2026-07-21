@@ -419,3 +419,37 @@
     left: 140%;
   }
 }
+
+/* Liten studsande pil-notis som pekar i sidled på en knapp som inte ska missas. */
+@media (prefers-reduced-motion: no-preference) {
+  .point-bounce {
+    animation: point-bounce 1.8s ease-in-out infinite;
+  }
+}
+
+@keyframes point-bounce {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-6px);
+  }
+}
+
+/* Diskret nedåtpil i hero:n — vinkar om att det finns mer under vecket. */
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-hint {
+    animation: scroll-hint 2.2s ease-in-out infinite;
+  }
+}
+
+@keyframes scroll-hint {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}

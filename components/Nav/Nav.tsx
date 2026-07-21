@@ -2,17 +2,20 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Logo } from "@/components/Logo/Logo";
+import { Logo, logoLinkClass } from "@/components/Logo/Logo";
 
 /**
- * Länkarna pekar på "/#..." så de fungerar från vilken sida som helst — från
- * case-sidan tar de dig hem till rätt sektion, på startsidan skrollar de dit.
+ * "Om mig" är en sektion på startsidan ("/#om-mig") — fungerar från vilken
+ * sida som helst. "Vad jag bygger" och "Tidigare kunder" är egna sidor.
  */
 const LINKS = [
   { href: "/#om-mig", label: "Om mig" },
-  { href: "/#vad-jag-bygger", label: "Vad jag bygger" },
-  { href: "/case", label: "Case" },
+  { href: "/tjanster", label: "Vad jag bygger" },
 ];
+
+/** Renderas som blå knappar (samma stil), inte vanliga textlänkar. */
+const CASE_LINK = { href: "/case", label: "Tidigare kunder" };
+const CONTACT_LINK = { href: "/kontakt", label: "Starta ett projekt" };
 
 export function Nav() {
   const [open, setOpen] = useState(false);
@@ -44,7 +47,7 @@ export function Nav() {
         <Link
           href="/#top"
           aria-label="Isak Web — till toppen"
-          className="origin-left transition-transform duration-200 ease-out hover:scale-105 active:scale-100"
+          className={logoLinkClass}
         >
           <Logo />
         </Link>
@@ -60,10 +63,16 @@ export function Nav() {
             </Link>
           ))}
           <Link
-            href="/#kontakt"
+            href={CASE_LINK.href}
             className="shine ml-3 rounded-pill bg-brand px-5 py-2.5 text-sm font-medium text-white shadow-brand transition-all duration-200 ease-out hover:scale-105 hover:bg-brand-dark hover:shadow-lift active:scale-100"
           >
-            Starta ett projekt
+            {CASE_LINK.label}
+          </Link>
+          <Link
+            href={CONTACT_LINK.href}
+            className="shine ml-2 rounded-pill bg-brand px-5 py-2.5 text-sm font-medium text-white shadow-brand transition-all duration-200 ease-out hover:scale-105 hover:bg-brand-dark hover:shadow-lift active:scale-100"
+          >
+            {CONTACT_LINK.label}
           </Link>
         </nav>
 
@@ -98,7 +107,11 @@ export function Nav() {
       >
         <nav aria-label="Mobilmeny" className="min-h-0">
           <ul className="flex flex-col gap-1 px-6 py-4">
-            {[...LINKS, { href: "/#kontakt", label: "Kontakt" }].map((link) => (
+            {[
+              ...LINKS,
+              CASE_LINK,
+              { href: "/kontakt", label: "Kontakt" },
+            ].map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}

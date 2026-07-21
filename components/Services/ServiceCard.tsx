@@ -1,27 +1,20 @@
 "use client";
 
+import Link from "next/link";
 import type { Service } from "@/lib/services";
 import { serviceIcons } from "@/components/Services/serviceIcons";
 
 /**
  * Ett klickbart tjänstekort.
  *
- * Hela kortet leder till kontaktformuläret och förifyller meddelandet med
- * "Jag är intresserad av …". Det byggs med "stretched link"-mönstret: en riktig
- * <a href="#kontakt"> vars ::after täcker hela kortet. Fördelar:
- *  - Fungerar UTAN javascript — klicket scrollar ändå till formuläret via hashen,
- *    prefill:en är bara en förbättring ovanpå.
- *  - Bryter inte HTML-semantiken. Ett pris eller en case-länk kan läggas i kortet
- *    senare och ligga ovanpå (z-10) utan att bli en olaglig nästlad länk.
+ * Hela kortet leder till kontaktsidan (/kontakt) med meddelandet förifyllt
+ * via en query-parameter ("Jag är intresserad av …"). Byggs med "stretched
+ * link"-mönstret: en riktig länk vars ::after täcker hela kortet — det
+ * bryter inte HTML-semantiken, så ett pris eller en case-länk kan ligga i
+ * kortet ovanpå (z-10) utan att bli en olaglig nästlad länk.
  */
 export function ServiceCard({ service }: { service: Service }) {
   const prefill = `Jag är intresserad av ${service.title.toLowerCase()}`;
-
-  const handleClick = () => {
-    // Berätta för kontaktformuläret vad som ska stå i meddelandet. Själva
-    // scrollningen sköts av länkens vanliga hash-navigering (#kontakt).
-    window.dispatchEvent(new CustomEvent("prefill-contact", { detail: prefill }));
-  };
 
   // Flytta skenet dit muspekaren är. Rent dekorativt — sätter bara CSS-variabler.
   const handleMove = (event: React.MouseEvent<HTMLElement>) => {
@@ -66,14 +59,13 @@ export function ServiceCard({ service }: { service: Service }) {
       </div>
 
       <h3 className="mt-5 text-h3">
-        <a
-          href="#kontakt"
-          onClick={handleClick}
+        <Link
+          href={`/kontakt?meddelande=${encodeURIComponent(prefill)}`}
           aria-label={`${service.title} — hör av dig om det här`}
           className="after:absolute after:inset-0 after:content-[''] focus:outline-none"
         >
           {service.title}
-        </a>
+        </Link>
       </h3>
 
       <p className="mt-3 grow text-muted">{service.description}</p>
@@ -95,7 +87,9 @@ export function ServiceCard({ service }: { service: Service }) {
 
       {service.price && (
         <p className="relative z-10 mt-5 font-medium text-ink">
-          Från {service.price.from.toLocaleString("sv-SE")} kr
+          {service.price.from.toLocaleString("sv-SE")}–
+          {service.price.to.toLocaleString("sv-SE")}
+          {service.price.open ? "+" : ""} kr
           {service.price.note && (
             <span className="font-normal text-muted"> · {service.price.note}</span>
           )}

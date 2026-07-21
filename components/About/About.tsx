@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Reveal } from "@/components/Reveal/Reveal";
 import { SectionLabel } from "@/components/SectionLabel/SectionLabel";
 
@@ -92,20 +93,44 @@ export function About() {
               </ul>
             </div>
 
-            <a
-              href={PORTFOLIO_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group mt-8 inline-flex items-center gap-2.5 rounded-pill border border-ink px-6 py-3.5 font-medium text-ink transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-brand hover:bg-brand hover:text-white hover:shadow-lift active:translate-y-0"
-            >
-              Se mina projekt
-              <span
-                aria-hidden="true"
-                className="transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            <div className="mt-8 flex items-center gap-3">
+              <Link
+                href="/case"
+                className="shine group inline-flex items-center gap-2.5 rounded-pill bg-brand px-6 py-3.5 font-medium whitespace-nowrap text-white shadow-brand transition-all duration-200 ease-out hover:bg-brand-dark hover:shadow-lift active:scale-[0.97]"
               >
-                ↗
-              </span>
-            </a>
+                Se mina tidigare kunders resultat
+                <span
+                  aria-hidden="true"
+                  className="transition-transform duration-200 ease-out group-hover:translate-x-1"
+                >
+                  →
+                </span>
+              </Link>
+
+              {/* Handtecknad pil som pekar tillbaka på knappen. Ligger till
+                  höger om den — inte ovanför, där stack-taggarna redan bor.
+                  Döljs på små skärmar där raden ändå blir för trång. */}
+              <div
+                aria-hidden="true"
+                className="point-bounce pointer-events-none hidden shrink-0 items-center gap-1.5 lg:flex"
+              >
+                <svg
+                  viewBox="0 0 48 24"
+                  fill="none"
+                  className="h-6 w-12 text-brand"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M44 6Q22 6 6 18" />
+                  <path d="M6 18l11-2M6 18l5-10" />
+                </svg>
+                <span className="text-sm font-semibold whitespace-nowrap text-brand">
+                  Klicka här
+                </span>
+              </div>
+            </div>
           </div>
 
           <ul className="space-y-4">

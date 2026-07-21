@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Logo } from "@/components/Logo/Logo";
+import { Logo, logoLinkClass } from "@/components/Logo/Logo";
 
 const YEAR = new Date().getFullYear();
 
@@ -49,13 +49,12 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-6 py-14 lg:px-8">
         <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            {/* Klickbar logga till toppen, växer 5% vid hover — som i navbaren.
-                inline-flex gör att transform slår igenom (en inline-länk
-                ignorerar scale). origin-left så den inte glider i sidled. */}
+            {/* Klickbar logga till toppen — samma hover som i navbaren
+                (se logoLinkClass i Logo.tsx). */}
             <a
-              href="#top"
+              href="/#top"
               aria-label="Isak Web — till toppen"
-              className="inline-flex origin-left transition-transform duration-200 ease-out hover:scale-105 active:scale-100"
+              className={logoLinkClass}
             >
               <Logo />
             </a>
