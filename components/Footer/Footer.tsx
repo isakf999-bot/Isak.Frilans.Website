@@ -1,11 +1,17 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { Logo, logoLinkClass } from "@/components/Logo/Logo";
 
 const YEAR = new Date().getFullYear();
 
+const EMAIL = "info@isakweb.se";
+/** Visas läsbart, men tel:-länken måste vara i internationellt format för att
+ *  ringa rätt direkt från mobilen. */
+const PHONE_DISPLAY = "076-251 41 21";
+const PHONE_HREF = "tel:+46762514121";
+
 const LINKS = [
   { label: "Portfolio", href: "https://isakforsberg.se/", external: true },
-  { label: "info@isakweb.se", href: "mailto:info@isakweb.se", external: false },
 ];
 
 /**
@@ -38,6 +44,10 @@ const SOCIALS: Social[] = [
   },
 ];
 
+/** Ikon-emblem framför mejl/telefon — samma språk som de sociala ikonerna. */
+const ICON_BOX =
+  "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-line-cool bg-surface text-brand shadow-card transition-all duration-200 ease-out group-hover:-translate-y-0.5 group-hover:border-brand group-hover:bg-brand group-hover:text-white group-hover:shadow-lift";
+
 export function Footer() {
   return (
     <footer className="relative border-t border-line-cool bg-mist">
@@ -47,7 +57,32 @@ export function Footer() {
         className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand/50 to-transparent"
       />
       <div className="mx-auto max-w-6xl px-6 py-14 lg:px-8">
-        <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between">
+        {/* CTA överst: här landar den som skrollat klart och är redo att agera,
+            så kontaktvägen ska vara en tydlig knapp — inte en textlänk. */}
+        <div className="flex flex-col gap-6 border-b border-line-cool pb-12 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h2 className="text-h3">Redo att sätta igång?</h2>
+            <p className="mt-2 max-w-md text-muted">
+              Berätta var du står, så säger jag rakt vad jag hade gjort — även om
+              svaret är att du inte behöver mig.
+            </p>
+          </div>
+          <Link
+            href="/kontakt"
+            className="shine group inline-flex shrink-0 items-center gap-2.5 rounded-pill bg-brand px-6 py-3.5 font-medium whitespace-nowrap text-white shadow-brand transition-all duration-200 ease-out hover:bg-brand-dark hover:shadow-lift active:scale-[0.97]"
+          >
+            Starta ditt projekt
+            <span
+              aria-hidden="true"
+              className="transition-transform duration-200 ease-out group-hover:translate-x-1"
+            >
+              →
+            </span>
+          </Link>
+        </div>
+
+        <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr]">
+          {/* Varumärke + lokal förankring */}
           <div>
             {/* Klickbar logga till toppen — samma hover som i navbaren
                 (se logoLinkClass i Logo.tsx). */}
@@ -59,11 +94,81 @@ export function Footer() {
               <Logo />
             </a>
             <p className="mt-4 max-w-xs text-sm text-muted">
-              Frilansande webbutvecklare. Landningssidor, e-handel och
-              företagssajter åt små företag.
+              Frilansande webbutvecklare i Helsingborg. Landningssidor, e-handel
+              och företagssajter åt små företag.
+            </p>
+            <p className="mt-5 inline-flex items-center gap-2 rounded-pill border border-line-cool bg-surface px-3.5 py-2 text-sm font-medium text-ink shadow-card">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                className="h-4 w-4 shrink-0 text-brand"
+              >
+                <path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11Z" />
+                <circle cx="12" cy="10" r="2.5" />
+              </svg>
+              Helsingborg — jobbar i hela Sverige
             </p>
           </div>
 
+          {/* Kontakta mig */}
+          <div>
+            <h2 className="text-eyebrow font-medium text-muted uppercase">
+              Kontakta mig
+            </h2>
+            <address className="mt-4 space-y-3 not-italic">
+              <a
+                href={`mailto:${EMAIL}`}
+                className="group flex items-center gap-3"
+              >
+                <span aria-hidden="true" className={ICON_BOX}>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-[18px] w-[18px]"
+                  >
+                    <rect x="2.5" y="5" width="19" height="14" rx="2.5" />
+                    <path d="m3.5 7.5 8.5 5.5 8.5-5.5" />
+                  </svg>
+                </span>
+                <span className="font-medium text-ink transition-colors duration-200 ease-out group-hover:text-brand">
+                  {EMAIL}
+                </span>
+              </a>
+              <a href={PHONE_HREF} className="group flex items-center gap-3">
+                <span aria-hidden="true" className={ICON_BOX}>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-[18px] w-[18px]"
+                  >
+                    <path d="M6.5 3h3l1.5 4-2 1.5a12 12 0 0 0 5.5 5.5L16 12l4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.2 2 2 0 0 1 6.5 3Z" />
+                  </svg>
+                </span>
+                <span className="font-medium text-ink transition-colors duration-200 ease-out group-hover:text-brand">
+                  {PHONE_DISPLAY}
+                </span>
+              </a>
+            </address>
+            <div className="mt-4 space-y-1 text-sm text-muted">
+              <p>Svarar inom två arbetsdagar.</p>
+              <p>Telefontid alla dagar 10–22.</p>
+            </div>
+          </div>
+
+          {/* Hittar mig även här */}
           <nav aria-label="Länkar">
             <h2 className="text-eyebrow font-medium text-muted uppercase">
               Hittar mig även här
@@ -92,7 +197,6 @@ export function Footer() {
               ))}
             </ul>
 
-            {/* Sociala ikoner under mejlen. */}
             <ul className="mt-5 flex items-center gap-2.5">
               {SOCIALS.map((social) => (
                 <li key={social.name}>
@@ -119,7 +223,7 @@ export function Footer() {
         </div>
 
         <p className="mt-12 border-t border-line-cool pt-6 text-sm text-muted">
-          © {YEAR} Isak Web · Isak Forsberg
+          © {YEAR} Isak Web · Isak Forsberg · Webbutvecklare i Helsingborg
         </p>
       </div>
     </footer>
