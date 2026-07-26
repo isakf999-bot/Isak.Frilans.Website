@@ -1,0 +1,455 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   DESIGN TOKENS — enda källan till färg, typografi och djup i hela projektet.
+
+   OBS: `inline` är nödvändigt. Utan det kan ett tema-värde inte referera en
+   variabel som sätts någon annanstans (next/font sätter sina font-variabler på
+   <body>), och hela kedjan tystnar till en tom sträng.
+   --------------------------------------------------------------------------- */
+@theme inline {
+  /* Ytor — tre ljusa nivåer. Sektioner skiljs åt med ljus, inte med mörker. */
+  --color-canvas: #f6f4f0; /* varm papper-bakgrund, aldrig ren vit */
+  --color-surface: #ffffff; /* kort som lyfter från bakgrunden */
+  --color-mist: #eef0fb; /* svalt blåtonat fält — kontaktsektionen */
+
+  /* Text */
+  --color-ink: #16171d;
+  --color-muted: #5e6270;
+
+  /* Linjer */
+  --color-line: #e5e0d8;
+  --color-line-cool: #d8ddf4; /* linjer mot det blåtonade fältet */
+
+  /* EN varumärkesfärg. Används på allt som går att klicka eller välja —
+     så att färg alltid betyder "här händer något". */
+  --color-brand: #2b3ed4;
+  --color-brand-dark: #2131ab;
+  --color-brand-tint: #e9ecfb;
+  --color-brand-glow: #b9c2f5;
+
+  --color-danger: #b42318;
+  --color-danger-tint: #fdeceb;
+
+  /* Typografi — en enda familj. Hierarkin bärs av vikt, storlek och tracking,
+     inte av att blanda in ett andra typsnitt. */
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.1em;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.65;
+  --text-lead: 1.1875rem;
+  --text-lead--line-height: 1.6;
+  --text-h3: 1.625rem;
+  --text-h3--line-height: 1.25;
+  --text-h2: 2.5rem;
+  --text-h2--line-height: 1.1;
+  --text-h1: 3rem;
+  --text-h1--line-height: 1.05;
+  --text-display: 4.75rem;
+  --text-display--line-height: 1;
+
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* Mjuka skuggor i flera lager — ger djup som känns dyrt, inte Photoshop-kanter. */
+  --shadow-card:
+    0 1px 2px rgb(22 23 29 / 0.04), 0 4px 10px rgb(22 23 29 / 0.04),
+    0 12px 26px rgb(22 23 29 / 0.05);
+  --shadow-lift:
+    0 2px 6px rgb(22 23 29 / 0.06), 0 12px 26px rgb(22 23 29 / 0.08),
+    0 24px 48px rgb(22 23 29 / 0.1);
+  --shadow-brand:
+    0 4px 12px rgb(43 62 212 / 0.22), 0 12px 30px rgb(43 62 212 / 0.22);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    /* Font-kedjan skrivs ut rakt av, utan omväg via ett tema-alias — en
+       trasig variabel här får hela sidan att falla tillbaka på systemfonten. */
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
+    font-size: var(--text-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
+  /* Ju större rubrik, desto tätare tracking — annars ser stora grotesk-rubriker
+     luftiga och slappa ut. Det är det som ger dem tyngd. */
+  h1 {
+    letter-spacing: -0.035em;
+  }
+
+  h2 {
+    letter-spacing: -0.03em;
+  }
+
+  h3 {
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background-color: var(--color-brand);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Tunn, diskret scrollbar för de scrollbara skärmdumparna i case-ramarna. */
+.scroll-shot {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(43 62 212 / 0.35) transparent;
+}
+.scroll-shot::-webkit-scrollbar {
+  width: 6px;
+}
+.scroll-shot::-webkit-scrollbar-thumb {
+  background: rgb(43 62 212 / 0.32);
+  border-radius: 999px;
+}
+.scroll-shot::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---------------------------------------------------------------------------
+   ENTRÉ-ANIMATION
+   Körs EN gång vid sidladdning och slutar på opacity 1. Ingen scroll-styrd
+   animation någonstans i projektet: innehåll får aldrig vara osynligt i
+   väntan på att användaren gör något.
+   --------------------------------------------------------------------------- */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  }
+  .rise-2 {
+    animation-delay: 0.08s;
+  }
+  .rise-3 {
+    animation-delay: 0.16s;
+  }
+  .rise-4 {
+    animation-delay: 0.24s;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   AURORA — det stora, lugna centrumelementet bakom hero:n.
+   Tre mjuka färgfält i blå/violett som driver sakta. Långsamt och atmosfäriskt,
+   aldrig blinkande — meningen är att kännas coolt utan att stressa besökaren.
+   Fryser helt vid prefers-reduced-motion (blobbarna står stilla men syns).
+   --------------------------------------------------------------------------- */
+.aurora {
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 720px;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  filter: blur(72px);
+  opacity: 0.55;
+  -webkit-mask-image: radial-gradient(120% 100% at 50% 0%, #000 55%, transparent 100%);
+  mask-image: radial-gradient(120% 100% at 50% 0%, #000 55%, transparent 100%);
+}
+
+.aurora__blob {
+  position: absolute;
+  border-radius: 999px;
+  will-change: transform;
+}
+
+.aurora__blob--1 {
+  top: -6%;
+  left: 8%;
+  width: 46%;
+  height: 70%;
+  background: radial-gradient(circle at 50% 50%, var(--color-brand), transparent 68%);
+  opacity: 0.5;
+}
+
+.aurora__blob--2 {
+  top: -12%;
+  right: 4%;
+  width: 42%;
+  height: 78%;
+  background: radial-gradient(circle at 50% 50%, #7c5cff, transparent 66%);
+  opacity: 0.42;
+}
+
+.aurora__blob--3 {
+  top: 14%;
+  left: 40%;
+  width: 40%;
+  height: 60%;
+  background: radial-gradient(circle at 50% 50%, var(--color-brand-glow), transparent 70%);
+  opacity: 0.6;
+}
+
+@keyframes drift-1 {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(6%, 4%, 0) scale(1.12);
+  }
+}
+@keyframes drift-2 {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.05);
+  }
+  50% {
+    transform: translate3d(-7%, 3%, 0) scale(0.95);
+  }
+}
+@keyframes drift-3 {
+  0%,
+  100% {
+    transform: translate3d(-50%, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-44%, -5%, 0) scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .aurora__blob--1 {
+    animation: drift-1 22s ease-in-out infinite;
+  }
+  .aurora__blob--2 {
+    animation: drift-2 27s ease-in-out infinite;
+  }
+  .aurora__blob--3 {
+    animation: drift-3 19s ease-in-out infinite;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   FILM-GRAIN — en hårfin textur över hela sidan. Statisk, låg opacitet.
+   Tar bort den platta "digitala" känslan och ger ytorna liv. pointer-events
+   är av så den aldrig fångar klick.
+   --------------------------------------------------------------------------- */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------------------------------------------------------------------------
+   SHIMMER — den blå accenten i rubriken (ordet "mer") får en långsam
+   gradient-vandring i stället för platt färg. Vid reduced-motion blir den en
+   stilla gradient.
+   --------------------------------------------------------------------------- */
+.shimmer {
+  background: linear-gradient(
+    100deg,
+    var(--color-brand) 0%,
+    #7c5cff 35%,
+    var(--color-brand-glow) 50%,
+    #7c5cff 65%,
+    var(--color-brand) 100%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .shimmer {
+    animation: shimmer 6s ease-in-out infinite;
+  }
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   SCROLL-REVEAL — sektioner glider upp när de kommer in i vy.
+   Säker uppsättning: standard är SYNLIG (opacity 1). Det dolda läget aktiveras
+   bara när JavaScript körs (klassen .js på <html>) OCH rörelse är tillåten.
+   Utan JS eller vid reduced-motion syns allt innehåll direkt.
+   --------------------------------------------------------------------------- */
+.reveal {
+  opacity: 1;
+}
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.js .reveal.reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   CARD-GLOW — ett mjukt sken i varumärkesblått som följer muspekaren över
+   ett kort. Bara vid hover, så det stör aldrig. Positionen sätts via --mx/--my
+   från en liten muslyssnare.
+   --------------------------------------------------------------------------- */
+.card-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    240px circle at var(--mx, 50%) var(--my, 0%),
+    rgba(43, 62, 212, 0.1),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  /* Bakom innehållet (kortet är en egen stacking-context via isolate), så
+     skenet aldrig lägger sig över och tvättar ur texten. */
+  z-index: -1;
+}
+
+.card-glow:hover::before {
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------------------------
+   SHINE — ett ljus-svep som glider över en knapp vid hover.
+   --------------------------------------------------------------------------- */
+.shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.shine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -70%;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.28),
+    transparent
+  );
+  transform: skewX(-18deg);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .shine:hover::after {
+    animation: shine-sweep 0.75s ease;
+  }
+}
+
+@keyframes shine-sweep {
+  from {
+    left: -70%;
+  }
+  to {
+    left: 140%;
+  }
+}
+
+/* Liten studsande pil-notis som pekar i sidled på en knapp som inte ska missas. */
+@media (prefers-reduced-motion: no-preference) {
+  .point-bounce {
+    animation: point-bounce 1.8s ease-in-out infinite;
+  }
+}
+
+@keyframes point-bounce {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-6px);
+  }
+}
+
+/* Diskret nedåtpil i hero:n — vinkar om att det finns mer under vecket. */
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-hint {
+    animation: scroll-hint 2.2s ease-in-out infinite;
+  }
+}
+
+@keyframes scroll-hint {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}

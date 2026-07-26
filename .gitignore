@@ -1,0 +1,29 @@
+# dependencies & build
+node_modules/
+.next/
+out/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# secrets & env — nyckeln hör hemma i Vercels env vars, aldrig i git
+.env
+.env.local
+.env*.local
+
+# deploy
+.vercel
+
+# os / logg
+.DS_Store
+*.pem
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# referensbilder på andra sajter (inspiration, ej egna verk)
+DesignPictures/
+
+# strökvarv från portfolio-sajten, hör inte hemma i det här projektet
+bundle.js
+page.html
