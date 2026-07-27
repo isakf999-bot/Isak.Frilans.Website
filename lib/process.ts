@@ -91,15 +91,27 @@ export const practicalTerms: Principle[] = [
 
 /** Kort om vad priset brukar täcka. */
 export const priceIncludes = [
-  "Design och utveckling av sajten",
-  "Mobilanpassning och grundläggande SEO",
-  "Publicering och överlämning (inlogg + kort genomgång)",
-  "En omgång justeringar efter första utkastet",
-  "14 dagar gratis buggfix efter lansering",
+  "Modern och responsiv webbdesign",
+  "Anpassad design efter ert varumärke",
+  "Mobil-, surfplatta- och datoranpassning",
+  "Grundläggande SEO",
+  "Kontaktformulär",
+  "Snabb och optimerad prestanda",
+  "Hjälp med domänkoppling",
+  "Publicering av hemsidan",
+  "14 dagars support efter lansering",
+  "Säkerhets- och prestandaoptimering",
 ];
 
 export const priceExtras = [
-  "Extra undersidor utöver det vi avtalat",
-  "Fotografering eller stor copywriting",
-  "Löpande förvaltning efter lansering (kan avtalas separat)",
+  "Fler undersidor",
+  "Webbshop / e-handel",
+  "Bokningssystem",
+  "Blogg eller nyhetssektion",
+  "Flerspråkig hemsida",
+  "Professionell copywriting",
+  "Logotyp och grafisk profil",
+  "Google Analytics och Search Console",
+  "Avancerad SEO",
+  "Integrationer (Instagram, nyhetsbrev)",
 ];
