@@ -27,3 +27,6 @@ DesignPictures/
 # strökvarv från portfolio-sajten, hör inte hemma i det här projektet
 bundle.js
 page.html
+
+# lokal editor-konfiguration, inte projektkod
+.claude/skills/
