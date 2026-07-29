@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BrowserFrame } from "@/components/Case/BrowserFrame";
 import type { CaseStudy } from "@/lib/cases";
 
 /**
- * Kundcase-kort i Generation-stil: stor hero-bild, domän som rubrik,
+ * Kundcase-kort i Generation-stil: webbläsarram med domän, hero-bild,
  * kort teaser och "Utforska caset".
  */
 export function CaseCard({
@@ -19,26 +20,30 @@ export function CaseCard({
         href={`/case/${study.slug}`}
         className="flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-card transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-brand/25 hover:shadow-lift"
       >
-        <div className="relative aspect-[16/10] overflow-hidden bg-mist">
-          <Image
-            src={study.heroImage}
-            alt={study.heroAlt}
-            fill
-            priority={priority}
-            sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-          />
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/25 via-transparent to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-80"
-          />
-          <span className="absolute top-3 left-3 rounded-pill border border-white/20 bg-ink/55 px-2.5 py-1 text-[11px] font-medium tracking-wide text-white backdrop-blur-sm">
-            {study.industry}
-          </span>
+        <div
+          className="relative p-4 sm:p-5"
+          style={{ background: study.accentColor ?? "#eef0fb" }}
+        >
+          <BrowserFrame url={study.domain}>
+            <div className="relative aspect-[16/10] overflow-hidden">
+              <Image
+                src={study.heroImage}
+                alt={study.heroAlt}
+                fill
+                priority={priority}
+                quality={90}
+                sizes="(max-width: 768px) 100vw, 800px"
+                className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+              />
+            </div>
+          </BrowserFrame>
         </div>
 
         <div className="flex flex-1 flex-col px-6 py-6 sm:px-7 sm:py-7">
-          <h2 className="text-h3 tracking-tight text-ink transition-colors duration-200 group-hover:text-brand">
+          <p className="text-[11px] font-medium tracking-wide text-muted uppercase">
+            {study.industry}
+          </p>
+          <h2 className="mt-2 text-h3 tracking-tight text-ink transition-colors duration-200 group-hover:text-brand">
             {study.domain}
           </h2>
           <p className="mt-3 flex-1 text-muted">{study.teaser}</p>

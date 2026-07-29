@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BrowserFrame } from "@/components/Case/BrowserFrame";
 import { CaseCard } from "@/components/Case/CaseCard";
 import { Footer } from "@/components/Footer/Footer";
 import { Nav } from "@/components/Nav/Nav";
@@ -106,20 +107,26 @@ export default async function CaseDetailPage({ params }: Props) {
           </div>
         </section>
 
-        {/* Full-bleed hero image */}
-        <section className="bg-canvas">
+        {/* Hero i webbläsarram (Generation/Chrome-stil) */}
+        <section
+          className="border-b border-line"
+          style={{ background: study.accentColor ?? "#eef0fb" }}
+        >
           <div className="mx-auto max-w-6xl px-6 py-10 lg:px-8 lg:py-14">
             <Reveal>
-              <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-line bg-mist shadow-lift">
-                <Image
-                  src={study.heroImage}
-                  alt={study.heroAlt}
-                  fill
-                  priority
-                  sizes="(max-width: 1200px) 100vw, 1120px"
-                  className="object-cover object-top"
-                />
-              </div>
+              <BrowserFrame url={study.domain}>
+                <div className="relative aspect-[16/10]">
+                  <Image
+                    src={study.heroImage}
+                    alt={study.heroAlt}
+                    fill
+                    priority
+                    quality={95}
+                    sizes="(max-width: 1200px) 100vw, 1920px"
+                    className="object-cover object-top"
+                  />
+                </div>
+              </BrowserFrame>
             </Reveal>
           </div>
         </section>

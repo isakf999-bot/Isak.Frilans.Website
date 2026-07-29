@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 /**
  * Kundcase-listan — inspirerad av thegeneration.se/kundcase:
- * stor rubrik, branschfilter, stora hero-kort med "Utforska caset".
+ * stor rubrik, sök, branschfilter, stora hero-kort med "Utforska caset".
  */
 export default function CasePage() {
   return (
