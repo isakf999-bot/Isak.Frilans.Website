@@ -41,7 +41,9 @@ export type CaseStudy = {
 export const cases: CaseStudy[] = [
   {
     slug: "mats-svensson",
-    published: true,
+    // Dolt tills projektet är klart. All data nedan är orörd — sätt tillbaka
+    // till true så syns caset igen i listan och på sin detaljsida.
+    published: false,
     domain: "mats-svensson.se",
     client: "Mats Svensson",
     industry: "Finans & sparande",
@@ -89,7 +91,9 @@ export const cases: CaseStudy[] = [
   },
   {
     slug: "jopas-honung",
-    published: true,
+    // Dolt tills projektet är klart. All data nedan är orörd — sätt tillbaka
+    // till true så syns caset igen i listan och på sin detaljsida.
+    published: false,
     domain: "jopashonung.se",
     client: "Jopas Bisyssla",
     industry: "Livsmedel & lokal produktion",
