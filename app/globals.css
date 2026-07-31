@@ -1,35 +1,116 @@
 @import "tailwindcss";
 
+/* Class-baserad dark mode (html.dark) — inte prefers-color-scheme. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ---------------------------------------------------------------------------
    DESIGN TOKENS — enda källan till färg, typografi och djup i hela projektet.
+
+   Färgerna bor i --palette-* så light/dark kan bytas utan att bryta Tailwind-
+   utilities. Light = hur sajten ser ut idag. Dark speglar samma roller med
+   läsbar kontrast på text, knappar, nav och ytor.
 
    OBS: `inline` är nödvändigt. Utan det kan ett tema-värde inte referera en
    variabel som sätts någon annanstans (next/font sätter sina font-variabler på
    <body>), och hela kedjan tystnar till en tom sträng.
    --------------------------------------------------------------------------- */
-@theme inline {
+
+:root {
+  color-scheme: light;
+
   /* Ytor — tre ljusa nivåer. Sektioner skiljs åt med ljus, inte med mörker. */
-  --color-canvas: #f6f4f0; /* varm papper-bakgrund, aldrig ren vit */
-  --color-surface: #ffffff; /* kort som lyfter från bakgrunden */
-  --color-mist: #eef0fb; /* svalt blåtonat fält — kontaktsektionen */
+  --palette-canvas: #f6f4f0; /* varm papper-bakgrund, aldrig ren vit */
+  --palette-surface: #ffffff; /* kort som lyfter från bakgrunden */
+  --palette-mist: #eef0fb; /* svalt blåtonat fält — kontaktsektionen */
+  --palette-surface-soft: #f5f6fc; /* diskret kort-gradient */
 
   /* Text */
-  --color-ink: #16171d;
-  --color-muted: #5e6270;
+  --palette-ink: #16171d;
+  --palette-muted: #5e6270;
 
   /* Linjer */
-  --color-line: #e5e0d8;
-  --color-line-cool: #d8ddf4; /* linjer mot det blåtonade fältet */
+  --palette-line: #e5e0d8;
+  --palette-line-cool: #d8ddf4;
 
-  /* EN varumärkesfärg. Används på allt som går att klicka eller välja —
-     så att färg alltid betyder "här händer något". */
-  --color-brand: #2b3ed4;
-  --color-brand-dark: #2131ab;
-  --color-brand-tint: #e9ecfb;
-  --color-brand-glow: #b9c2f5;
+  /* EN varumärkesfärg. Används på allt som går att klicka eller välja. */
+  --palette-brand: #2b3ed4;
+  --palette-brand-dark: #2131ab;
+  --palette-brand-tint: #e9ecfb;
+  --palette-brand-glow: #b9c2f5;
 
-  --color-danger: #b42318;
-  --color-danger-tint: #fdeceb;
+  --palette-danger: #b42318;
+  --palette-danger-tint: #fdeceb;
+
+  --palette-shadow-card:
+    0 1px 2px rgb(22 23 29 / 0.04), 0 4px 10px rgb(22 23 29 / 0.04),
+    0 12px 26px rgb(22 23 29 / 0.05);
+  --palette-shadow-lift:
+    0 2px 6px rgb(22 23 29 / 0.06), 0 12px 26px rgb(22 23 29 / 0.08),
+    0 24px 48px rgb(22 23 29 / 0.1);
+  --palette-shadow-brand:
+    0 4px 12px rgb(43 62 212 / 0.22), 0 12px 30px rgb(43 62 212 / 0.22);
+
+  --grain-opacity: 0.04;
+  --grain-blend: multiply;
+  --aurora-opacity: 0.55;
+}
+
+html.dark {
+  color-scheme: dark;
+
+  --palette-canvas: #0f1016;
+  --palette-surface: #1a1c26;
+  --palette-mist: #14162a;
+  --palette-surface-soft: #171a2a;
+
+  --palette-ink: #eeebe4;
+  --palette-muted: #a0a4b3;
+
+  --palette-line: #2c2f3c;
+  --palette-line-cool: #2a3050;
+
+  /* Lite ljusare brand på mörk botten så knappar/länkar syns tydligt. */
+  --palette-brand: #6b7aef;
+  --palette-brand-dark: #8a96f5;
+  --palette-brand-tint: #1c2248;
+  --palette-brand-glow: #3d4db8;
+
+  --palette-danger: #f97066;
+  --palette-danger-tint: #3a1a18;
+
+  --palette-shadow-card:
+    0 1px 2px rgb(0 0 0 / 0.35), 0 4px 12px rgb(0 0 0 / 0.28),
+    0 14px 32px rgb(0 0 0 / 0.32);
+  --palette-shadow-lift:
+    0 2px 8px rgb(0 0 0 / 0.4), 0 14px 32px rgb(0 0 0 / 0.38),
+    0 28px 56px rgb(0 0 0 / 0.42);
+  --palette-shadow-brand:
+    0 4px 14px rgb(107 122 239 / 0.28), 0 14px 34px rgb(107 122 239 / 0.24);
+
+  --grain-opacity: 0.07;
+  --grain-blend: soft-light;
+  --aurora-opacity: 0.4;
+}
+
+@theme inline {
+  --color-canvas: var(--palette-canvas);
+  --color-surface: var(--palette-surface);
+  --color-mist: var(--palette-mist);
+  --color-surface-soft: var(--palette-surface-soft);
+
+  --color-ink: var(--palette-ink);
+  --color-muted: var(--palette-muted);
+
+  --color-line: var(--palette-line);
+  --color-line-cool: var(--palette-line-cool);
+
+  --color-brand: var(--palette-brand);
+  --color-brand-dark: var(--palette-brand-dark);
+  --color-brand-tint: var(--palette-brand-tint);
+  --color-brand-glow: var(--palette-brand-glow);
+
+  --color-danger: var(--palette-danger);
+  --color-danger-tint: var(--palette-danger-tint);
 
   /* Typografi — en enda familj. Hierarkin bärs av vikt, storlek och tracking,
      inte av att blanda in ett andra typsnitt. */
@@ -57,15 +138,9 @@
   --radius-xl: 24px;
   --radius-pill: 999px;
 
-  /* Mjuka skuggor i flera lager — ger djup som känns dyrt, inte Photoshop-kanter. */
-  --shadow-card:
-    0 1px 2px rgb(22 23 29 / 0.04), 0 4px 10px rgb(22 23 29 / 0.04),
-    0 12px 26px rgb(22 23 29 / 0.05);
-  --shadow-lift:
-    0 2px 6px rgb(22 23 29 / 0.06), 0 12px 26px rgb(22 23 29 / 0.08),
-    0 24px 48px rgb(22 23 29 / 0.1);
-  --shadow-brand:
-    0 4px 12px rgb(43 62 212 / 0.22), 0 12px 30px rgb(43 62 212 / 0.22);
+  --shadow-card: var(--palette-shadow-card);
+  --shadow-lift: var(--palette-shadow-lift);
+  --shadow-brand: var(--palette-shadow-brand);
 }
 
 @layer base {
@@ -83,6 +158,9 @@
     font-size: var(--text-body);
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
   }
 
   h1,
@@ -193,7 +271,7 @@
   pointer-events: none;
   overflow: hidden;
   filter: blur(72px);
-  opacity: 0.55;
+  opacity: var(--aurora-opacity);
   -webkit-mask-image: radial-gradient(120% 100% at 50% 0%, #000 55%, transparent 100%);
   mask-image: radial-gradient(120% 100% at 50% 0%, #000 55%, transparent 100%);
 }
@@ -281,8 +359,8 @@
   inset: 0;
   z-index: 100;
   pointer-events: none;
-  opacity: 0.04;
-  mix-blend-mode: multiply;
+  opacity: var(--grain-opacity);
+  mix-blend-mode: var(--grain-blend);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -365,7 +443,7 @@
   border-radius: inherit;
   background: radial-gradient(
     240px circle at var(--mx, 50%) var(--my, 0%),
-    rgba(43, 62, 212, 0.1),
+    color-mix(in srgb, var(--palette-brand) 14%, transparent),
     transparent 70%
   );
   opacity: 0;

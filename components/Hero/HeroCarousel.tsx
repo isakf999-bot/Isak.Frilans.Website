@@ -121,7 +121,7 @@ export function HeroCarousel() {
           type="button"
           onClick={() => go(active - 1)}
           aria-label="Föregående projekt"
-          className="group absolute top-1/2 left-3 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 pb-0.5 text-2xl leading-none text-ink shadow-card transition-all duration-200 ease-out hover:bg-brand hover:text-white hover:shadow-lift active:scale-95"
+          className="group absolute top-1/2 left-3 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-surface/95 pb-0.5 text-2xl leading-none text-ink shadow-card transition-all duration-200 ease-out hover:bg-brand hover:text-white hover:shadow-lift active:scale-95"
         >
           <span
             aria-hidden="true"
@@ -134,7 +134,7 @@ export function HeroCarousel() {
           type="button"
           onClick={() => go(active + 1)}
           aria-label="Nästa projekt"
-          className="group absolute top-1/2 right-3 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 pb-0.5 text-2xl leading-none text-ink shadow-card transition-all duration-200 ease-out hover:bg-brand hover:text-white hover:shadow-lift active:scale-95"
+          className="group absolute top-1/2 right-3 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-surface/95 pb-0.5 text-2xl leading-none text-ink shadow-card transition-all duration-200 ease-out hover:bg-brand hover:text-white hover:shadow-lift active:scale-95"
         >
           <span
             aria-hidden="true"
@@ -159,7 +159,7 @@ export function HeroCarousel() {
             href={current.liveSite}
             target="_blank"
             rel="noopener noreferrer"
-            className="pointer-events-auto inline-flex shrink-0 items-center gap-1.5 rounded-pill bg-white/95 px-3.5 py-2 text-sm font-medium text-ink shadow-card transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-white hover:shadow-lift active:translate-y-0"
+            className="pointer-events-auto inline-flex shrink-0 items-center gap-1.5 rounded-pill bg-surface/95 px-3.5 py-2 text-sm font-medium text-ink shadow-card transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-surface hover:shadow-lift active:translate-y-0"
           >
             Besök live
             <span aria-hidden="true">↗</span>

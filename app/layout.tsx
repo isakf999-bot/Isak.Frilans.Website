@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { ThemeProvider } from "@/components/Theme/ThemeProvider";
 import "./globals.css";
+
+/** Körs innan paint så dark mode inte blinkar ljust vid sidladdning. */
+const THEME_BOOT =
+  "(function(){try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');}catch(e){}})();";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -59,17 +64,19 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* Markerar att JS körs innan sidan målas, så scroll-reveal aldrig kan
-            lämna innehåll dolt för en besökare utan JavaScript. */}
+        {/* Tema först (undviker flash), sedan .js för scroll-reveal. */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT }} />
         <script
           dangerouslySetInnerHTML={{
             __html: "document.documentElement.classList.add('js')",
           }}
         />
-        {children}
-        {/* Hårfin film-grain över hela sidan — tar bort den platta digitala
-            känslan. Statisk, låg opacitet, fångar aldrig klick. */}
-        <div className="grain" aria-hidden="true" />
+        <ThemeProvider>
+          {children}
+          {/* Hårfin film-grain över hela sidan — tar bort den platta digitala
+              känslan. Statisk, låg opacitet, fångar aldrig klick. */}
+          <div className="grain" aria-hidden="true" />
+        </ThemeProvider>
         {/* Vercel Web Analytics — anonym besöksstatistik, laddas efter
             innehållet och påverkar inte layouten. */}
         <Analytics />

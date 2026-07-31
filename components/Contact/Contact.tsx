@@ -192,7 +192,7 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
             </p>
           </div>
 
-          <div className="rounded-xl border border-line-cool bg-gradient-to-b from-white to-[#f4f6fd] p-6 shadow-lift sm:p-9">
+          <div className="rounded-xl border border-line-cool bg-gradient-to-b from-surface to-surface-soft p-6 shadow-lift sm:p-9">
             {status === "success" ? (
               <div role="status" className="py-10 text-center">
                 <span
@@ -403,7 +403,7 @@ function Field({
   const shared = `mt-2 w-full rounded-lg border bg-canvas px-4 py-3 text-ink placeholder:text-muted/50 transition-all duration-200 ease-out focus:bg-surface focus:outline-none ${
     error
       ? "border-danger focus:border-danger focus:shadow-[0_0_0_3px_rgba(180,35,24,0.12)]"
-      : "border-line hover:border-muted focus:border-brand focus:shadow-[0_0_0_3px_rgba(43,62,212,0.12)]"
+      : "border-line hover:border-muted focus:border-brand focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--palette-brand)_18%,transparent)]"
   }`;
 
   return (

@@ -46,7 +46,7 @@ export default function CasePage() {
               {publishedCases.length > 0 ? (
                 <CaseGrid cases={publishedCases} industries={industries} />
               ) : (
-                <div className="mx-auto max-w-lg rounded-2xl border border-line bg-gradient-to-b from-white to-[#f5f6fc] px-8 py-14 text-center shadow-card">
+                <div className="mx-auto max-w-lg rounded-2xl border border-line bg-gradient-to-b from-surface to-surface-soft px-8 py-14 text-center shadow-card">
                   <h2 className="text-h3">Casen är på väg.</h2>
                   <p className="mx-auto mt-3 max-w-sm text-muted">
                     Här visar jag snart projekten jag har levererat. Hör av dig

@@ -24,10 +24,12 @@ export const metadata: Metadata = {
 function formatPrice(service: (typeof services)[number]) {
   if (!service.price) return null;
   const { from, to, open, note } = service.price;
-  const range = `${from.toLocaleString("sv-SE")}–${to.toLocaleString("sv-SE")}${
-    open ? "+" : ""
-  } kr`;
-  return note ? `${range} · ${note}` : range;
+  return {
+    range: `${from.toLocaleString("sv-SE")}–${to.toLocaleString("sv-SE")}${
+      open ? "+" : ""
+    } kr`,
+    note: note ?? null,
+  };
 }
 
 /** Gemensam innehållsbredd — texten får mer yta; nav sitter ute till höger. */
@@ -196,9 +198,16 @@ export default function ProcessPage() {
                         </p>
                       </div>
                       {price && (
-                        <p className="shrink-0 font-semibold whitespace-nowrap text-brand sm:text-right">
-                          {price}
-                        </p>
+                        <div className="shrink-0 sm:text-right">
+                          <p className="font-semibold whitespace-nowrap text-brand">
+                            {price.range}
+                          </p>
+                          {price.note && (
+                            <p className="mt-1 text-sm font-medium text-muted sm:max-w-[16rem] sm:ml-auto">
+                              {price.note}
+                            </p>
+                          )}
+                        </div>
                       )}
                     </li>
                   );

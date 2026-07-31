@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Logo, logoLinkClass } from "@/components/Logo/Logo";
+import { ThemeToggle } from "@/components/Theme/ThemeToggle";
 
 /**
  * "Om mig" är en sektion på startsidan ("/#om-mig") — fungerar från vilken
@@ -75,29 +76,33 @@ export function Nav() {
           >
             {CONTACT_LINK.label}
           </Link>
+          <ThemeToggle className="ml-3" />
         </nav>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-controls="mobilmeny"
-          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-lg border border-line bg-surface md:hidden"
-        >
-          <span className="sr-only">{open ? "Stäng meny" : "Öppna meny"}</span>
-          <span
-            aria-hidden="true"
-            className={`h-0.5 w-4 rounded-pill bg-ink transition-transform duration-200 ease-out ${
-              open ? "translate-y-1 rotate-45" : ""
-            }`}
-          />
-          <span
-            aria-hidden="true"
-            className={`h-0.5 w-4 rounded-pill bg-ink transition-transform duration-200 ease-out ${
-              open ? "-translate-y-1 -rotate-45" : ""
-            }`}
-          />
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="mobilmeny"
+            className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-lg border border-line bg-surface text-ink"
+          >
+            <span className="sr-only">{open ? "Stäng meny" : "Öppna meny"}</span>
+            <span
+              aria-hidden="true"
+              className={`h-0.5 w-4 rounded-pill bg-ink transition-transform duration-200 ease-out ${
+                open ? "translate-y-1 rotate-45" : ""
+              }`}
+            />
+            <span
+              aria-hidden="true"
+              className={`h-0.5 w-4 rounded-pill bg-ink transition-transform duration-200 ease-out ${
+                open ? "-translate-y-1 -rotate-45" : ""
+              }`}
+            />
+          </button>
+        </div>
       </div>
 
       <div

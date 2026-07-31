@@ -137,7 +137,7 @@ export function About() {
             {PRINCIPLES.map((item) => (
               <li
                 key={item.title}
-                className="card-glow group relative isolate overflow-hidden rounded-xl border border-line bg-gradient-to-b from-white to-[#f5f6fc] p-6 shadow-card transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-brand-glow hover:shadow-lift"
+                className="card-glow group relative isolate overflow-hidden rounded-xl border border-line bg-gradient-to-b from-surface to-surface-soft p-6 shadow-card transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-brand-glow hover:shadow-lift"
               >
                 <span
                   aria-hidden="true"

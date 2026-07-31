@@ -32,7 +32,7 @@ export function ServiceCard({ service }: { service: Service }) {
   return (
     <article
       onMouseMove={handleMove}
-      className="card-glow group relative isolate flex h-full flex-col overflow-hidden rounded-xl border border-line bg-gradient-to-b from-white to-[#f5f6fc] p-7 shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:border-brand-glow hover:shadow-lift has-[a:focus-visible]:outline has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-brand"
+      className="card-glow group relative isolate flex h-full flex-col overflow-hidden rounded-xl border border-line bg-gradient-to-b from-surface to-surface-soft p-7 shadow-card transition-all duration-200 ease-out hover:-translate-y-1 hover:border-brand-glow hover:shadow-lift has-[a:focus-visible]:outline has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-brand"
     >
       {/* Permanent accentlinje i toppen (svag i vila, tänds vid hover). */}
       <span

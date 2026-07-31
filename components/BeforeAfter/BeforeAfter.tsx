@@ -94,7 +94,7 @@ export function BeforeAfter() {
 
             {/* Delare + handtag */}
             <div
-              className="pointer-events-none absolute inset-y-0 z-10 w-0.5 -translate-x-1/2 bg-white/90 shadow-[0_0_0_1px_rgba(22,23,29,0.12)]"
+              className="pointer-events-none absolute inset-y-0 z-10 w-0.5 -translate-x-1/2 bg-surface/90 shadow-[0_0_0_1px_color-mix(in_srgb,var(--palette-ink)_12%,transparent)]"
               style={{ left: `${pos}%` }}
             >
               <button
@@ -106,7 +106,7 @@ export function BeforeAfter() {
                 aria-valuemax={100}
                 aria-valuenow={Math.round(pos)}
                 onKeyDown={onKeyDown}
-                className="pointer-events-auto absolute top-1/2 left-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize items-center justify-center rounded-full border border-line bg-white text-ink shadow-lift transition-transform duration-200 ease-out hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand active:scale-95"
+                className="pointer-events-auto absolute top-1/2 left-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize items-center justify-center rounded-full border border-line bg-surface text-ink shadow-lift transition-transform duration-200 ease-out hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand active:scale-95"
               >
                 <span aria-hidden="true" className="text-lg leading-none">
                   ⟺
