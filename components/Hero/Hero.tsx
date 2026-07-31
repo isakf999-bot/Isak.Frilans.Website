@@ -2,7 +2,7 @@ import Link from "next/link";
 import { HeroCarousel } from "./HeroCarousel";
 
 const PROOF = [
-  { value: "1–3 v", label: "Från start till live" },
+  { value: "3–5 dagar", label: "Från start till live" },
   { value: "100%", label: "Du pratar med mig" },
   { value: "Fast pris", label: "Innan vi börjar" },
 ];
@@ -86,10 +86,11 @@ export function Hero() {
                     key={item.label}
                     className={i > 0 ? "border-l border-line pl-3" : "pr-3"}
                   >
-                    {/* leading-9 låser radboxen till 2.25rem. Utan den blir
-                        höjden fontstorlek × 1.333, vilket ändras vid sm och
-                        gör att Trustpilot-cellen bredvid hamnar i otakt. */}
-                    <dt className="text-2xl leading-9 font-semibold tracking-tight text-ink sm:text-[1.75rem]">
+                    {/* leading-9 låser radboxen till 2.25rem. whitespace-nowrap
+                        håller längre värden (t.ex. "3–5 dagar") på en rad så
+                        cellen blir värde + label — två rader, i linje med
+                        Trustpilot. */}
+                    <dt className="whitespace-nowrap text-xl leading-9 font-semibold tracking-tight text-ink sm:text-2xl">
                       {item.value}
                     </dt>
                     <dd className="mt-1 text-xs leading-snug text-muted sm:text-sm">
