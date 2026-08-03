@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { Contact } from "@/components/Contact/Contact";
 import { Footer } from "@/components/Footer/Footer";
 import { Nav } from "@/components/Nav/Nav";
+import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Kontakt — IsakWeb",
   description:
     "Berätta vad du behöver hjälp med — jag återkommer inom ett par arbetsdagar.",
+  alternates: { canonical: absoluteUrl("/kontakt") },
 };
 
 export default async function KontaktPage({

@@ -9,6 +9,7 @@ import { Nav } from "@/components/Nav/Nav";
 import { Reveal } from "@/components/Reveal/Reveal";
 import { SectionLabel } from "@/components/SectionLabel/SectionLabel";
 import { getCaseBySlug, publishedCases } from "@/lib/cases";
+import { absoluteUrl } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -23,6 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Kundcase: ${study.domain} — Isak Web`,
     description: study.teaser,
+    alternates: { canonical: absoluteUrl(`/case/${slug}`) },
     openGraph: {
       title: `Kundcase: ${study.domain}`,
       description: study.teaser,

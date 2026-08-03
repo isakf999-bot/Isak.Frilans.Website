@@ -5,11 +5,13 @@ import { Nav } from "@/components/Nav/Nav";
 import { Reveal } from "@/components/Reveal/Reveal";
 import { SectionLabel } from "@/components/SectionLabel/SectionLabel";
 import { industries, publishedCases } from "@/lib/cases";
+import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Kundcase — Isak Web",
   description:
     "Alla företag jag har byggt webbplats åt. Se uppdrag, resultat och hur sajterna blev.",
+  alternates: { canonical: absoluteUrl("/case") },
 };
 
 /**

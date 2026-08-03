@@ -1,0 +1,20 @@
+# IsakWeb
+
+> Webbplatser som växer företag — frilansande webbutvecklare i Helsingborg.
+
+## Site
+- Home: https://www.isakweb.se/
+- Packages: https://www.isakweb.se/paket
+- Services: https://www.isakweb.se/tjanster
+- Process & pricing: https://www.isakweb.se/process
+- Cases: https://www.isakweb.se/case
+- Contact: https://www.isakweb.se/kontakt
+
+## Contact
+- Email: info@isakweb.se
+- Phone: +46 76 251 41 21
+- Location: Helsingborg, Sweden (works nationwide)
+
+## Offer
+Custom websites, landing pages, e-commerce, SEO foundations, hosting help,
+API/AI integrations. Fixed pricing packages from Starter to Premium.

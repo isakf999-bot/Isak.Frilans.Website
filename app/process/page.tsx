@@ -14,11 +14,13 @@ import {
   processSteps,
 } from "@/lib/process";
 import { formatServicePrice, services } from "@/lib/services";
+import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Pris & process — Isak Web",
   description:
     "Så går ett projekt till, hur jag kommunicerar och vad en hemsida brukar kosta — tydliga prisintervall utan dolda tillägg.",
+  alternates: { canonical: absoluteUrl("/process") },
 };
 
 function formatPrice(service: (typeof services)[number]) {

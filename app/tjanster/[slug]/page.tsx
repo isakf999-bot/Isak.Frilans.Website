@@ -11,6 +11,7 @@ import {
   getServiceBySlug,
   services,
 } from "@/lib/services";
+import { absoluteUrl } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -25,6 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${service.title} — IsakWeb`,
     description: service.description,
+    alternates: { canonical: absoluteUrl(`/tjanster/${slug}`) },
   };
 }
 
