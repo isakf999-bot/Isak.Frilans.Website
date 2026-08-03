@@ -13,7 +13,7 @@ import {
   principles,
   processSteps,
 } from "@/lib/process";
-import { services } from "@/lib/services";
+import { formatServicePrice, services } from "@/lib/services";
 
 export const metadata: Metadata = {
   title: "Pris & process — Isak Web",
@@ -23,12 +23,9 @@ export const metadata: Metadata = {
 
 function formatPrice(service: (typeof services)[number]) {
   if (!service.price) return null;
-  const { from, to, open, note } = service.price;
   return {
-    range: `${from.toLocaleString("sv-SE")}–${to.toLocaleString("sv-SE")}${
-      open ? "+" : ""
-    } kr`,
-    note: note ?? null,
+    range: formatServicePrice(service),
+    note: service.price.note ?? null,
   };
 }
 
@@ -192,7 +189,12 @@ export default function ProcessPage() {
                       className="flex flex-col gap-2 px-6 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:px-8"
                     >
                       <div className="min-w-0">
-                        <p className="font-semibold text-ink">{service.title}</p>
+                        <Link
+                          href={`/tjanster/${service.slug}`}
+                          className="font-semibold text-ink transition-colors hover:text-brand"
+                        >
+                          {service.title}
+                        </Link>
                         <p className="mt-1 text-sm text-muted sm:max-w-xl">
                           {service.description}
                         </p>

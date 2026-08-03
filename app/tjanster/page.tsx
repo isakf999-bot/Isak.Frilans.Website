@@ -4,9 +4,9 @@ import { Nav } from "@/components/Nav/Nav";
 import { Services } from "@/components/Services/Services";
 
 export const metadata: Metadata = {
-  title: "Vad jag bygger — Isak Web",
+  title: "Tjänster — IsakWeb",
   description:
-    "Landningssidor, e-handel, företagssajter och redesign av befintliga sajter — se vad som passar dig och vad det brukar kosta.",
+    "Landningssidor, e-handel, SEO, hosting, AI-integrationer och mer — klicka in på varje tjänst för detaljer, tidslinje och pris.",
 };
 
 export default function TjansterPage() {

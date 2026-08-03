@@ -41,10 +41,8 @@ export type CaseStudy = {
 export const cases: CaseStudy[] = [
   {
     slug: "mats-svensson",
-    // Dolt tills projektet är klart. All data nedan är orörd — sätt tillbaka
-    // till true så syns caset igen i listan och på sin detaljsida.
     published: false,
-    domain: "mats-svensson.se",
+    domain: "matsppm.se",
     client: "Mats Svensson",
     industry: "Finans & sparande",
     teaser:
@@ -91,8 +89,6 @@ export const cases: CaseStudy[] = [
   },
   {
     slug: "jopas-honung",
-    // Dolt tills projektet är klart. All data nedan är orörd — sätt tillbaka
-    // till true så syns caset igen i listan och på sin detaljsida.
     published: false,
     domain: "jopashonung.se",
     client: "Jopas Bisyssla",
@@ -128,7 +124,7 @@ export const cases: CaseStudy[] = [
       { value: "100%", label: "mobilanpassad" },
       { value: "Snabb", label: "laddningstid" },
     ],
-    heroImage: "/case/jopas/hero.png",
+    heroImage: "/case/jopas/hero-photo-v3.png",
     heroAlt: "Startsida för Jopas Honung — småskalig svensk honung från Söderåsen",
     accentColor: "#F3E6C8",
   },

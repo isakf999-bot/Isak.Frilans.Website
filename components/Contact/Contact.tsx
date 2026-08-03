@@ -3,14 +3,7 @@
 import { useId, useRef, useState } from "react";
 import { Reveal } from "@/components/Reveal/Reveal";
 import { SectionLabel } from "@/components/SectionLabel/SectionLabel";
-import {
-  DAYS,
-  RESPONSE_TIME_DAYS,
-  SLOTS,
-  availabilityId,
-  type AvailabilityId,
-} from "@/lib/availability";
-import { buildEmailBody } from "@/lib/contactEmail";
+import { buildEmailBody, RESPONSE_TIME_DAYS } from "@/lib/contactEmail";
 
 type FieldErrors = Partial<Record<"name" | "email" | "message", string>>;
 type Status = "idle" | "submitting" | "success" | "error";
@@ -19,9 +12,9 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
 
 const STEPS = [
-  "Du skickar formuläret med några tider som passar.",
-  `Jag hör av mig inom ${RESPONSE_TIME_DAYS} arbetsdagar med en bekräftad tid.`,
-  "Vi pratar 20–30 minuter. Kostar ingenting, förpliktar ingenting.",
+  "Du skickar formuläret och berättar kort vad du behöver.",
+  `Jag hör av mig inom ${RESPONSE_TIME_DAYS} arbetsdagar.`,
+  "Vi tar ett samtal om det behövs — kostar ingenting, förpliktar ingenting.",
 ];
 
 export function Contact({ initialMessage }: { initialMessage?: string }) {
@@ -29,20 +22,8 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<FieldErrors>({});
   const [formError, setFormError] = useState<string | null>(null);
-  const [selected, setSelected] = useState<Set<AvailabilityId>>(new Set());
-  // Kontrollerat så att ett tjänstekort kan länka hit med ett förifyllt
-  // meddelande (?meddelande=... i URL:en, se ServiceCard).
   const [message, setMessage] = useState(initialMessage ?? "");
   const alertRef = useRef<HTMLParagraphElement>(null);
-
-  const toggleSlot = (id: AvailabilityId) => {
-    setSelected((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
-      return next;
-    });
-  };
 
   const validate = (data: FormData): FieldErrors => {
     const next: FieldErrors = {};
@@ -75,8 +56,6 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
       return;
     }
 
-    // Honeypot: fältet är gömt för människor, så innehåll här är en bott.
-    // Låtsas att det gick bra så botten inte försöker igen.
     if (String(data.get("company") ?? "").trim()) {
       setStatus("success");
       return;
@@ -90,17 +69,16 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
       const name = String(data.get("name") ?? "").trim();
       const emailAddress = String(data.get("email") ?? "").trim();
 
-      // Postas direkt till Web3Forms från webbläsaren. Deras API ligger bakom
-      // Cloudflare som blockerar server-till-server-anrop (403), så en API-route
-      // i Next fungerar inte — varken lokalt eller på Vercel.
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
         body: JSON.stringify({
           access_key: ACCESS_KEY,
           subject: `Ny förfrågan från ${name}`,
           from_name: "Isak Web",
-          // Så att "Svara" i mejlklienten går direkt till besökaren.
           replyto: emailAddress,
           name,
           email: emailAddress,
@@ -108,8 +86,6 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
             name,
             email: emailAddress,
             message: String(data.get("message") ?? "").trim(),
-            availability: Array.from(selected),
-            availabilityNote: String(data.get("availabilityNote") ?? "").trim(),
           }),
         }),
       });
@@ -121,8 +97,6 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
 
       setStatus("success");
       form.reset();
-      setSelected(new Set());
-      // form.reset() rör inte React-state — nolla det kontrollerade fältet med.
       setMessage("");
     } catch {
       setStatus("error");
@@ -149,8 +123,8 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
             </h2>
 
             <p className="mt-5 text-lead text-muted">
-              Markera de tider som funkar för dig — jag återkommer med ett
-              förslag på en av dem. Ingen kalender som låser dig i förväg.
+              Skicka en kort beskrivning — jag återkommer med nästa steg. Inget
+              säljsnack, inga förpliktelser.
             </p>
 
             <ol className="mt-10">
@@ -165,7 +139,6 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
                       >
                         {i + 1}
                       </span>
-                      {/* Synlig kopplingslinje ner till nästa steg. */}
                       {!isLast && (
                         <span
                           aria-hidden="true"
@@ -206,8 +179,8 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
                   Jag läser igenom den och återkommer inom{" "}
                   <strong className="font-medium text-ink">
                     {RESPONSE_TIME_DAYS} arbetsdagar
-                  </strong>{" "}
-                  med en bekräftad tid — inte bara ett &rdquo;vi hörs&rdquo;.
+                  </strong>
+                  .
                 </p>
                 <button
                   type="button"
@@ -219,7 +192,6 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
               </div>
             ) : (
               <form onSubmit={handleSubmit} noValidate>
-                {/* Honeypot — gömd för människor, ifylld av bottar. */}
                 <div aria-hidden="true" className="absolute -left-[9999px]">
                   <label htmlFor={`${formId}-company`}>Företag</label>
                   <input
@@ -264,71 +236,6 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
                   />
                 </div>
 
-                <fieldset className="mt-8 border-0 p-0">
-                  <legend className="text-sm font-medium text-ink">
-                    Vilka tider passar dig?
-                  </legend>
-                  <p className="mt-1.5 text-sm text-muted">
-                    Kryssa i så många du vill — ju fler, desto snabbare hittar vi
-                    en tid.
-                  </p>
-
-                  <div className="mt-5 space-y-2.5">
-                    {DAYS.map((day) => (
-                      <div
-                        key={day.id}
-                        className="flex flex-col gap-2 sm:flex-row sm:items-center"
-                      >
-                        <span
-                          aria-hidden="true"
-                          className="w-24 shrink-0 text-sm text-muted"
-                        >
-                          {day.label}
-                        </span>
-                        <div className="grid grow grid-cols-3 gap-2">
-                          {SLOTS.map((slot) => {
-                            const id = availabilityId(day.id, slot.id);
-                            const isChecked = selected.has(id);
-                            return (
-                              <label
-                                key={id}
-                                className={`flex cursor-pointer items-center justify-center rounded-lg border px-2 py-2.5 text-sm transition-all duration-200 ease-out active:scale-[0.96] ${
-                                  isChecked
-                                    ? "border-brand bg-brand font-medium text-white shadow-brand"
-                                    : "border-line bg-canvas text-muted hover:-translate-y-px hover:border-brand hover:text-brand hover:shadow-card"
-                                }`}
-                              >
-                                <input
-                                  type="checkbox"
-                                  name="availability"
-                                  value={id}
-                                  checked={isChecked}
-                                  onChange={() => toggleSlot(id)}
-                                  className="sr-only"
-                                />
-                                <span className="sr-only">
-                                  {day.label} {slot.label.toLowerCase()}
-                                </span>
-                                <span aria-hidden="true">{slot.label}</span>
-                              </label>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="mt-6">
-                    <Field
-                      id={`${formId}-note`}
-                      name="availabilityNote"
-                      label="Övrigt om din tillgänglighet"
-                      optional
-                      placeholder="T.ex. exakta klockslag, eller veckor du är bortrest."
-                    />
-                  </div>
-                </fieldset>
-
                 {formError && (
                   <p
                     ref={alertRef}
@@ -340,7 +247,7 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
                   </p>
                 )}
 
-                <div className="mt-8 flex flex-wrap items-center gap-4">
+                <div className="mt-8">
                   <button
                     type="submit"
                     disabled={status === "submitting"}
@@ -354,12 +261,6 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
                       →
                     </span>
                   </button>
-
-                  <p className="text-sm text-muted">
-                    {selected.size === 0
-                      ? "Inga tider valda ännu"
-                      : `${selected.size} ${selected.size === 1 ? "tid vald" : "tider valda"}`}
-                  </p>
                 </div>
               </form>
             )}
@@ -380,12 +281,10 @@ type FieldProps = {
   optional?: boolean;
   placeholder?: string;
   autoComplete?: string;
-  /** Sätt value + onChange tillsammans för att göra fältet kontrollerat. */
   value?: string;
   onChange?: (value: string) => void;
 };
 
-/** Fel visas alltid som text, aldrig bara som en röd kant. */
 function Field({
   id,
   name,

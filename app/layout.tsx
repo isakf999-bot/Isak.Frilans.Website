@@ -1,15 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
-import { ThemeProvider } from "@/components/Theme/ThemeProvider";
 import "./globals.css";
 
-/** Körs innan paint så dark mode inte blinkar ljust vid sidladdning. */
-const THEME_BOOT =
-  "(function(){try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark');else document.documentElement.classList.remove('dark');}catch(e){}})();";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
   display: "swap",
 });
@@ -22,12 +17,17 @@ const geistMono = Geist_Mono({
 
 const SITE_URL = "https://isak-frilans.vercel.app";
 
+/** Rensa ev. kvarvarande dark-klass från äldre besök. */
+const CLEAR_DARK =
+  "(function(){try{document.documentElement.classList.remove('dark');localStorage.removeItem('theme');}catch(e){}})();";
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Isak Web — Frilansande webbutvecklare",
+  title: "IsakWeb — Webbplatser som växer företag",
   description:
-    "Jag bygger landningssidor, e-handel och företagssajter åt små företag. Enskild firma, direktkontakt, inga mellanhänder. Hör av dig så tar vi ett samtal.",
+    "Frilansande fullstack-utvecklare i Helsingborg. Jag bygger snabba, moderna hemsidor, e-handel och system åt svenska företag — med fast pris och direktkontakt.",
   keywords: [
+    "IsakWeb",
     "Isak Web",
     "webbutvecklare",
     "frilans",
@@ -35,6 +35,7 @@ export const metadata: Metadata = {
     "e-handel",
     "landningssida",
     "företagssajt",
+    "Helsingborg",
     "Sverige",
   ],
   authors: [{ name: "Isak Forsberg", url: "https://isakforsberg.se/" }],
@@ -42,16 +43,16 @@ export const metadata: Metadata = {
     type: "website",
     locale: "sv_SE",
     url: SITE_URL,
-    siteName: "Isak Web",
-    title: "Isak Web — Frilansande webbutvecklare",
+    siteName: "IsakWeb",
+    title: "IsakWeb — Webbplatser som växer företag",
     description:
-      "Landningssidor, e-handel och företagssajter åt små företag. Du pratar med den som bygger sajten — inte en projektledare.",
+      "Snabba, moderna sajter åt svenska företag. Du pratar med den som bygger — inte en projektledare.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Isak Web — Frilansande webbutvecklare",
+    title: "IsakWeb — Webbplatser som växer företag",
     description:
-      "Landningssidor, e-handel och företagssajter åt små företag. Du pratar med den som bygger sajten.",
+      "Snabba, moderna sajter åt svenska företag. Du pratar med den som bygger.",
   },
   robots: { index: true, follow: true },
 };
@@ -62,23 +63,16 @@ export default function RootLayout({
   return (
     <html lang="sv" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${jakarta.variable} ${geistMono.variable} antialiased`}
       >
-        {/* Tema först (undviker flash), sedan .js för scroll-reveal. */}
-        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT }} />
+        <script dangerouslySetInnerHTML={{ __html: CLEAR_DARK }} />
         <script
           dangerouslySetInnerHTML={{
             __html: "document.documentElement.classList.add('js')",
           }}
         />
-        <ThemeProvider>
-          {children}
-          {/* Hårfin film-grain över hela sidan — tar bort den platta digitala
-              känslan. Statisk, låg opacitet, fångar aldrig klick. */}
-          <div className="grain" aria-hidden="true" />
-        </ThemeProvider>
-        {/* Vercel Web Analytics — anonym besöksstatistik, laddas efter
-            innehållet och påverkar inte layouten. */}
+        {children}
+        <div className="grain" aria-hidden="true" />
         <Analytics />
       </body>
     </html>

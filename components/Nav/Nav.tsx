@@ -1,30 +1,33 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Logo, logoLinkClass } from "@/components/Logo/Logo";
-import { ThemeToggle } from "@/components/Theme/ThemeToggle";
 
-/**
- * "Om mig" är en sektion på startsidan ("/#om-mig") — fungerar från vilken
- * sida som helst. "Vad jag bygger", "Pris & process" och "Kundcase" är egna sidor.
- */
 const LINKS = [
-  { href: "/#om-mig", label: "Om mig" },
-  { href: "/tjanster", label: "Vad jag bygger" },
-  { href: "/process", label: "Pris & process" },
+  { href: "/paket", label: "Paket" },
+  { href: "/tjanster", label: "Tjänster" },
+  { href: "/process", label: "Process" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/case", label: "Kundcase" },
+  { href: "/kontakt", label: "Starta ett projekt" },
 ];
 
-/** Renderas som blå knappar (samma stil), inte vanliga textlänkar. */
-const CASE_LINK = { href: "/case", label: "Kundcase" };
-const CONTACT_LINK = { href: "/kontakt", label: "Starta ett projekt" };
-
 export function Nav() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const onHome = pathname === "/";
+  /** Transparent över ocean-hero; vit så fort man scrollar (eller på andra sidor). */
+  const overHero = onHome && !scrolled && !open;
+
+  const linkClass = overHero
+    ? "rounded-pill px-4 py-2 text-sm text-white/85 transition-all duration-200 ease-out hover:text-white active:scale-100"
+    : "rounded-pill px-4 py-2 text-sm text-muted transition-all duration-200 ease-out hover:text-brand active:scale-100";
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -39,10 +42,10 @@ export function Nav() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-200 ease-out ${
-        scrolled
-          ? "border-b border-line bg-canvas/80 backdrop-blur-lg"
-          : "border-b border-transparent"
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ease-out ${
+        overHero
+          ? "border-b border-transparent bg-transparent"
+          : "border-b border-line bg-white shadow-sm"
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 lg:px-8">
@@ -51,55 +54,41 @@ export function Nav() {
           aria-label="Isak Web — till toppen"
           className={logoLinkClass}
         >
-          <Logo />
+          <Logo onDark={overHero} />
         </Link>
 
         <nav aria-label="Huvudmeny" className="hidden items-center gap-1 md:flex">
           {LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="rounded-pill px-4 py-2 text-sm text-muted transition-all duration-200 ease-out hover:scale-105 hover:bg-brand-tint hover:text-brand active:scale-100"
-            >
+            <Link key={link.href} href={link.href} className={linkClass}>
               {link.label}
             </Link>
           ))}
-          <Link
-            href={CASE_LINK.href}
-            className="shine ml-3 rounded-pill bg-brand px-5 py-2.5 text-sm font-medium text-white shadow-brand transition-all duration-200 ease-out hover:scale-105 hover:bg-brand-dark hover:shadow-lift active:scale-100"
-          >
-            {CASE_LINK.label}
-          </Link>
-          <Link
-            href={CONTACT_LINK.href}
-            className="shine ml-2 rounded-pill bg-brand px-5 py-2.5 text-sm font-medium text-white shadow-brand transition-all duration-200 ease-out hover:scale-105 hover:bg-brand-dark hover:shadow-lift active:scale-100"
-          >
-            {CONTACT_LINK.label}
-          </Link>
-          <ThemeToggle className="ml-3" />
         </nav>
 
         <div className="flex items-center gap-2 md:hidden">
-          <ThemeToggle />
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-controls="mobilmeny"
-            className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-lg border border-line bg-surface text-ink"
+            className={`flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-lg border transition-colors duration-200 ${
+              overHero
+                ? "border-white/40 text-white"
+                : "border-line text-ink"
+            }`}
           >
             <span className="sr-only">{open ? "Stäng meny" : "Öppna meny"}</span>
             <span
               aria-hidden="true"
-              className={`h-0.5 w-4 rounded-pill bg-ink transition-transform duration-200 ease-out ${
-                open ? "translate-y-1 rotate-45" : ""
-              }`}
+              className={`h-0.5 w-4 rounded-pill transition-transform duration-200 ease-out ${
+                overHero ? "bg-white" : "bg-ink"
+              } ${open ? "translate-y-1 rotate-45" : ""}`}
             />
             <span
               aria-hidden="true"
-              className={`h-0.5 w-4 rounded-pill bg-ink transition-transform duration-200 ease-out ${
-                open ? "-translate-y-1 -rotate-45" : ""
-              }`}
+              className={`h-0.5 w-4 rounded-pill transition-transform duration-200 ease-out ${
+                overHero ? "bg-white" : "bg-ink"
+              } ${open ? "-translate-y-1 -rotate-45" : ""}`}
             />
           </button>
         </div>
@@ -107,23 +96,21 @@ export function Nav() {
 
       <div
         id="mobilmeny"
-        className={`grid overflow-hidden bg-canvas transition-all duration-300 ease-out md:hidden ${
-          open ? "grid-rows-[1fr] border-t border-line" : "grid-rows-[0fr]"
+        className={`grid overflow-hidden transition-all duration-300 ease-out md:hidden ${
+          open
+            ? "grid-rows-[1fr] border-t border-line bg-white"
+            : "grid-rows-[0fr]"
         }`}
       >
         <nav aria-label="Mobilmeny" className="min-h-0">
           <ul className="flex flex-col gap-1 px-6 py-4">
-            {[
-              ...LINKS,
-              CASE_LINK,
-              { href: "/kontakt", label: "Kontakt" },
-            ].map((link) => (
+            {LINKS.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
                   onClick={() => setOpen(false)}
                   tabIndex={open ? 0 : -1}
-                  className="block rounded-lg px-3 py-3 text-lg transition-colors duration-200 ease-out hover:bg-brand-tint hover:text-brand"
+                  className="block rounded-lg px-3 py-3 text-lg text-ink transition-colors duration-200 ease-out hover:text-brand"
                 >
                   {link.label}
                 </Link>

@@ -4,9 +4,9 @@ import { Footer } from "@/components/Footer/Footer";
 import { Nav } from "@/components/Nav/Nav";
 
 export const metadata: Metadata = {
-  title: "Kontakt — Isak Web",
+  title: "Kontakt — IsakWeb",
   description:
-    "Berätta vad du behöver hjälp med, så återkommer jag med en bekräftad tid inom ett par arbetsdagar.",
+    "Berätta vad du behöver hjälp med — jag återkommer inom ett par arbetsdagar.",
 };
 
 export default async function KontaktPage({

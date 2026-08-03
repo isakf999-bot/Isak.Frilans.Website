@@ -1,14 +1,8 @@
 @import "tailwindcss";
 
-/* Class-baserad dark mode (html.dark) — inte prefers-color-scheme. */
-@custom-variant dark (&:where(.dark, .dark *));
-
 /* ---------------------------------------------------------------------------
    DESIGN TOKENS — enda källan till färg, typografi och djup i hela projektet.
-
-   Färgerna bor i --palette-* så light/dark kan bytas utan att bryta Tailwind-
-   utilities. Light = hur sajten ser ut idag. Dark speglar samma roller med
-   läsbar kontrast på text, knappar, nav och ytor.
+   Sajten är alltid light mode (vit/blå).
 
    OBS: `inline` är nödvändigt. Utan det kan ett tema-värde inte referera en
    variabel som sätts någon annanstans (next/font sätter sina font-variabler på
@@ -18,25 +12,25 @@
 :root {
   color-scheme: light;
 
-  /* Ytor — tre ljusa nivåer. Sektioner skiljs åt med ljus, inte med mörker. */
-  --palette-canvas: #f6f4f0; /* varm papper-bakgrund, aldrig ren vit */
-  --palette-surface: #ffffff; /* kort som lyfter från bakgrunden */
-  --palette-mist: #eef0fb; /* svalt blåtonat fält — kontaktsektionen */
-  --palette-surface-soft: #f5f6fc; /* diskret kort-gradient */
+  /* Cool Scandinavian white + electric blue — ingen beige/cream. */
+  --palette-canvas: #f5f7fc;
+  --palette-surface: #ffffff;
+  --palette-mist: #e8eefc;
+  --palette-surface-soft: #eef2fb;
 
   /* Text */
-  --palette-ink: #16171d;
-  --palette-muted: #5e6270;
+  --palette-ink: #0b1220;
+  --palette-muted: #5a6a85;
 
   /* Linjer */
-  --palette-line: #e5e0d8;
-  --palette-line-cool: #d8ddf4;
+  --palette-line: #d9e0f0;
+  --palette-line-cool: #c8d4f0;
 
-  /* EN varumärkesfärg. Används på allt som går att klicka eller välja. */
-  --palette-brand: #2b3ed4;
-  --palette-brand-dark: #2131ab;
-  --palette-brand-tint: #e9ecfb;
-  --palette-brand-glow: #b9c2f5;
+  /* Brand — modern electric blue */
+  --palette-brand: #1d4ed8;
+  --palette-brand-dark: #1e3a8a;
+  --palette-brand-tint: #e8effe;
+  --palette-brand-glow: #93b4f8;
 
   --palette-danger: #b42318;
   --palette-danger-tint: #fdeceb;
@@ -53,43 +47,6 @@
   --grain-opacity: 0.04;
   --grain-blend: multiply;
   --aurora-opacity: 0.55;
-}
-
-html.dark {
-  color-scheme: dark;
-
-  --palette-canvas: #0f1016;
-  --palette-surface: #1a1c26;
-  --palette-mist: #14162a;
-  --palette-surface-soft: #171a2a;
-
-  --palette-ink: #eeebe4;
-  --palette-muted: #a0a4b3;
-
-  --palette-line: #2c2f3c;
-  --palette-line-cool: #2a3050;
-
-  /* Lite ljusare brand på mörk botten så knappar/länkar syns tydligt. */
-  --palette-brand: #6b7aef;
-  --palette-brand-dark: #8a96f5;
-  --palette-brand-tint: #1c2248;
-  --palette-brand-glow: #3d4db8;
-
-  --palette-danger: #f97066;
-  --palette-danger-tint: #3a1a18;
-
-  --palette-shadow-card:
-    0 1px 2px rgb(0 0 0 / 0.35), 0 4px 12px rgb(0 0 0 / 0.28),
-    0 14px 32px rgb(0 0 0 / 0.32);
-  --palette-shadow-lift:
-    0 2px 8px rgb(0 0 0 / 0.4), 0 14px 32px rgb(0 0 0 / 0.38),
-    0 28px 56px rgb(0 0 0 / 0.42);
-  --palette-shadow-brand:
-    0 4px 14px rgb(107 122 239 / 0.28), 0 14px 34px rgb(107 122 239 / 0.24);
-
-  --grain-opacity: 0.07;
-  --grain-blend: soft-light;
-  --aurora-opacity: 0.4;
 }
 
 @theme inline {
@@ -112,9 +69,8 @@ html.dark {
   --color-danger: var(--palette-danger);
   --color-danger-tint: var(--palette-danger-tint);
 
-  /* Typografi — en enda familj. Hierarkin bärs av vikt, storlek och tracking,
-     inte av att blanda in ett andra typsnitt. */
-  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-sans: var(--font-jakarta), system-ui, sans-serif;
+  --font-display: var(--font-jakarta), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
   --text-eyebrow: 0.75rem;
@@ -152,9 +108,7 @@ html.dark {
   body {
     background-color: var(--color-canvas);
     color: var(--color-ink);
-    /* Font-kedjan skrivs ut rakt av, utan omväg via ett tema-alias — en
-       trasig variabel här får hela sidan att falla tillbaka på systemfonten. */
-    font-family: var(--font-geist-sans), system-ui, sans-serif;
+    font-family: var(--font-jakarta), system-ui, sans-serif;
     font-size: var(--text-body);
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
@@ -166,8 +120,8 @@ html.dark {
   h1,
   h2,
   h3 {
-    font-family: var(--font-geist-sans), system-ui, sans-serif;
-    font-weight: 600;
+    font-family: var(--font-jakarta), system-ui, sans-serif;
+    font-weight: 700;
     text-wrap: balance;
   }
 
@@ -296,7 +250,7 @@ html.dark {
   right: 4%;
   width: 42%;
   height: 78%;
-  background: radial-gradient(circle at 50% 50%, #7c5cff, transparent 66%);
+  background: radial-gradient(circle at 50% 50%, #60a5fa, transparent 66%);
   opacity: 0.42;
 }
 
@@ -346,6 +300,26 @@ html.dark {
   }
   .aurora__blob--3 {
     animation: drift-3 19s ease-in-out infinite;
+  }
+}
+
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-float {
+    animation: hero-float 7s ease-in-out infinite;
+  }
+  .hero-float-delayed {
+    animation: hero-float 9s ease-in-out infinite;
+    animation-delay: 1.2s;
   }
 }
 

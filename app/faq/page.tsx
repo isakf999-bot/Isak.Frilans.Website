@@ -1,0 +1,22 @@
+import type { Metadata } from "next";
+import { Footer } from "@/components/Footer/Footer";
+import { HomeFaq } from "@/components/Home/HomeFaq";
+import { Nav } from "@/components/Nav/Nav";
+
+export const metadata: Metadata = {
+  title: "FAQ — IsakWeb",
+  description:
+    "Vanliga frågor om priser, leveranstid, process och vad som ingår när jag bygger webbplats.",
+};
+
+export default function FaqPage() {
+  return (
+    <>
+      <Nav />
+      <main>
+        <HomeFaq />
+      </main>
+      <Footer />
+    </>
+  );
+}

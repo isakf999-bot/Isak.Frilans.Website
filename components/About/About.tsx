@@ -40,10 +40,10 @@ export function About() {
   return (
     <section
       id="om-mig"
-      className="scroll-mt-24 border-t border-line"
+      className="scroll-mt-24"
       aria-labelledby="om-mig-rubrik"
     >
-      <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
+      <div className="mx-auto max-w-6xl px-6 pt-28 pb-20 lg:px-8 lg:pt-32 lg:pb-28">
         <Reveal className="grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-20">
           <div>
             <SectionLabel>Om mig</SectionLabel>
