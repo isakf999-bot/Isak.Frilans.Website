@@ -238,17 +238,40 @@ export default function ProcessPage() {
             <Reveal delay={80}>
               <div className="rounded-2xl border border-line bg-surface p-6 shadow-card sm:p-7">
                 <h3 className="text-h3 text-[1.25rem]">Kan tillkomma separat</h3>
-                <ul className="mt-5 space-y-3">
+                <ul className="mt-5 space-y-3.5">
                   {priceExtras.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-muted">
-                      <span
-                        aria-hidden="true"
-                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-muted/50"
-                      />
-                      {item}
+                    <li
+                      key={item.id}
+                      className="flex items-start justify-between gap-4 text-muted"
+                    >
+                      <span className="flex items-start gap-3">
+                        <span
+                          aria-hidden="true"
+                          className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-muted/50"
+                        />
+                        <span>
+                          <span className="block text-ink">{item.name}</span>
+                          <span className="mt-0.5 block text-sm">
+                            {item.description}
+                          </span>
+                        </span>
+                      </span>
+                      <span className="shrink-0 text-sm font-semibold whitespace-nowrap text-brand">
+                        {item.priceLabel}
+                      </span>
                     </li>
                   ))}
                 </ul>
+                <p className="mt-5 text-sm text-muted">
+                  Se alla paket och tillägg på{" "}
+                  <Link
+                    href="/paket"
+                    className="font-medium text-brand underline-offset-2 hover:underline"
+                  >
+                    paket-sidan
+                  </Link>
+                  .
+                </p>
               </div>
             </Reveal>
           </div>

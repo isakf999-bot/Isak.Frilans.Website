@@ -2,7 +2,8 @@
  * Innehåll för sidan "Pris & process" — hur samarbetet går till,
  * hur jag kommunicerar, och vad som ingår.
  *
- * Priserna själva bor i lib/services.ts så de bara behöver uppdateras på ett ställe.
+ * Tjänstepriser och tilläggspriser bor i lib/pricing.ts
+ * (paket/tillägg via lib/packages.ts, tjänster via lib/services.ts).
  */
 
 export type ProcessStep = {
@@ -103,15 +104,8 @@ export const priceIncludes = [
   "Säkerhets- och prestandaoptimering",
 ];
 
-export const priceExtras = [
-  "Fler undersidor",
-  "Webbshop / e-handel",
-  "Bokningssystem",
-  "Blogg eller nyhetssektion",
-  "Flerspråkig hemsida",
-  "Professionell copywriting",
-  "Logotyp och grafisk profil",
-  "Google Analytics och Search Console",
-  "Avancerad SEO",
-  "Integrationer (Instagram, nyhetsbrev)",
-];
+/**
+ * Tillägg med priser — samma lista som på /paket (lib/packages.ts).
+ * Ändra priser där, så process-sidan följer med.
+ */
+export { packageAddons as priceExtras } from "@/lib/packages";

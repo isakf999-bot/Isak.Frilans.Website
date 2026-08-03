@@ -1,6 +1,14 @@
 /**
  * Tjänster — listkort + detaljsidor under /tjanster/[slug].
+ *
+ * Priser kommer från lib/pricing.ts så de stämmer med paket och tillägg.
  */
+
+import {
+  fromPriceLabel,
+  monthlyPriceLabel,
+  PRICES,
+} from "@/lib/pricing";
 
 export type Service = {
   slug: string;
@@ -28,12 +36,12 @@ export type Service = {
   caseStudy?: { label: string; href: string };
 };
 
-/** Samma prisintervall för webbpaket. */
+/** Samma prisintervall som Starter–Premium. */
 export const SITE_PRICE = {
-  from: 5000,
-  to: 9599,
+  from: PRICES.services.siteFrom,
+  to: PRICES.services.siteTo,
   currency: "SEK" as const,
-  note: "Tillägg: 999 kr/månaden för månadsvis uppdatering · 3 månaders bindningstid",
+  note: `Tillägg: ${monthlyPriceLabel(PRICES.addons.maintenanceMonthly)} för månadsvis uppdatering · 3 månaders bindningstid`,
 };
 
 export const services: Service[] = [
@@ -107,7 +115,11 @@ export const services: Service[] = [
     ],
     who: "Bolag som vill lyfta känslan innan eller tillsammans med utveckling.",
     timeline: "Oftast 3–10 arbetsdagar för ett designpass.",
-    price: { from: 4500, to: 12000, currency: "SEK" },
+    price: {
+      from: PRICES.services.designFrom,
+      to: PRICES.services.designTo,
+      currency: "SEK",
+    },
   },
   {
     slug: "redesign",
@@ -125,7 +137,11 @@ export const services: Service[] = [
     ],
     who: "Företag med en befintlig sajt som inte längre matchar verksamheten.",
     timeline: "Oftast 1–3 veckor.",
-    price: SITE_PRICE,
+    price: {
+      from: PRICES.services.redesignFrom,
+      to: PRICES.services.redesignTo,
+      currency: "SEK",
+    },
   },
   {
     slug: "seo",
@@ -143,7 +159,12 @@ export const services: Service[] = [
     ],
     who: "Bolag som vill synas lokalt eller inom sin nisch utan att köpa en 'SEO-byrå'-överdrift.",
     timeline: "Grundsetup 2–5 dagar; löpande innehåll efter behov.",
-    price: { from: 2500, to: 8000, currency: "SEK", note: "Löpande paket enligt överenskommelse." },
+    price: {
+      from: PRICES.services.seoFrom,
+      to: PRICES.services.seoTo,
+      currency: "SEK",
+      note: "Löpande paket enligt överenskommelse.",
+    },
   },
   {
     slug: "prestanda",
@@ -161,7 +182,11 @@ export const services: Service[] = [
     ],
     who: "Sajter som redan finns men känns tröga eller får dåliga scores.",
     timeline: "Oftast 2–7 arbetsdagar.",
-    price: { from: 3000, to: 9000, currency: "SEK" },
+    price: {
+      from: PRICES.services.performanceFrom,
+      to: PRICES.services.performanceTo,
+      currency: "SEK",
+    },
   },
   {
     slug: "hosting",
@@ -179,7 +204,12 @@ export const services: Service[] = [
     ],
     who: "Bolag som vill att någon tar hand om det sista tekniska steget.",
     timeline: "Oftast 1–3 dagar när sajten är klar.",
-    price: { from: 1500, to: 4500, currency: "SEK", note: "Hostingavgift till leverantör tillkommer." },
+    price: {
+      from: PRICES.services.hostingFrom,
+      to: PRICES.services.hostingTo,
+      currency: "SEK",
+      note: "Hostingavgift till leverantör tillkommer.",
+    },
   },
   {
     slug: "underhall",
@@ -198,9 +228,9 @@ export const services: Service[] = [
     who: "Företag som vill att sajten ska fortsätta kännas aktuell.",
     timeline: "Löpande, månadsvis.",
     price: {
-      from: 999,
+      from: PRICES.services.maintenanceMonthly,
       currency: "SEK",
-      label: "999 kr/mån",
+      label: monthlyPriceLabel(PRICES.services.maintenanceMonthly),
       note: "3 månaders bindningstid.",
     },
   },
@@ -220,7 +250,12 @@ export const services: Service[] = [
     ],
     who: "Bolag som växer ur manuella processer och behöver system som pratar med varandra.",
     timeline: "Oftast 3–14 dagar beroende på API och komplexitet.",
-    price: { from: 4000, currency: "SEK", open: true, note: "Offert efter genomgång av system." },
+    price: {
+      from: PRICES.services.apiFrom,
+      currency: "SEK",
+      open: true,
+      note: `T.ex. formulär ${fromPriceLabel(PRICES.addons.forms)}, bokning ${fromPriceLabel(PRICES.addons.booking)}.`,
+    },
   },
   {
     slug: "ai-integrationer",
@@ -238,7 +273,12 @@ export const services: Service[] = [
     ],
     who: "Företag med återkommande frågor eller processer som kan automatiseras försiktigt.",
     timeline: "Oftast 1–3 veckor för en första version.",
-    price: { from: 5000, currency: "SEK", open: true, note: "Offert efter use-case." },
+    price: {
+      from: PRICES.services.aiFrom,
+      currency: "SEK",
+      open: true,
+      note: `AI-chattbot ${fromPriceLabel(PRICES.addons.chatbot)} — större lösningar enligt offert.`,
+    },
   },
   {
     slug: "skradarsydda-system",
@@ -256,7 +296,13 @@ export const services: Service[] = [
     ],
     who: "Bolag med behov som inte ryms i färdiga plattformar.",
     timeline: "Efter scope — milstolpar och demos längs vägen.",
-    price: { from: 15000, currency: "SEK", open: true, label: "Offert", note: "Pris efter discovery." },
+    price: {
+      from: PRICES.services.customFrom,
+      currency: "SEK",
+      open: true,
+      label: "Offert",
+      note: "Pris efter discovery.",
+    },
   },
 ];
 
