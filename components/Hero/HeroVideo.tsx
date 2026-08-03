@@ -5,55 +5,101 @@ import { useEffect, useRef, useState } from "react";
 
 /**
  * Full-bleed ocean hero.
- * LCP = lightweight poster (next/image priority). Video loads only after idle
- * so it never blocks Largest Contentful Paint.
+ *
+ * LCP = lightweight poster. Video starts shortly after so LCP stays good.
+ * If autoplay is blocked (common on work PCs / Low Power Mode), we keep a
+ * subtle Ken Burns on the poster so the hero never looks completely frozen —
+ * unless the user has prefers-reduced-motion.
  */
 export function HeroVideo() {
   const ref = useRef<HTMLVideoElement>(null);
   const [loadVideo, setLoadVideo] = useState(false);
   const [showVideo, setShowVideo] = useState(false);
+  const [reduceMotion, setReduceMotion] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (mq.matches) return;
+    const syncMotion = () => setReduceMotion(mq.matches);
+    syncMotion();
+    mq.addEventListener("change", syncMotion);
+
+    if (mq.matches) {
+      return () => mq.removeEventListener("change", syncMotion);
+    }
 
     let cancelled = false;
     const start = () => {
       if (!cancelled) setLoadVideo(true);
     };
 
-    // Wait until the page is quiet so poster can paint as LCP first.
-    const fallback = window.setTimeout(start, 1800);
+    // Short delay so poster can win LCP, then start video for real users.
+    const fallback = window.setTimeout(start, 600);
     const idle =
       "requestIdleCallback" in window
-        ? window.requestIdleCallback(start, { timeout: 2500 })
+        ? window.requestIdleCallback(start, { timeout: 1000 })
         : undefined;
 
     return () => {
       cancelled = true;
       if (idle != null) window.cancelIdleCallback(idle);
       window.clearTimeout(fallback);
+      mq.removeEventListener("change", syncMotion);
     };
   }, []);
 
   useEffect(() => {
     const video = ref.current;
-    if (!video || !loadVideo) return;
+    if (!video || !loadVideo || reduceMotion) return;
 
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const apply = () => {
-      if (mq.matches) {
-        video.pause();
-        setShowVideo(false);
-      } else {
-        void video.play().then(() => setShowVideo(true)).catch(() => {});
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+
+    const tryPlay = () => {
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => setShowVideo(true))
+          .catch(() => setShowVideo(false));
       }
     };
 
-    apply();
-    mq.addEventListener("change", apply);
-    return () => mq.removeEventListener("change", apply);
-  }, [loadVideo]);
+    const onCanPlay = () => tryPlay();
+    const onPlaying = () => setShowVideo(true);
+    const onInteract = () => tryPlay();
+    const onVisible = () => {
+      if (document.visibilityState === "visible") tryPlay();
+    };
+
+    video.addEventListener("canplay", onCanPlay);
+    video.addEventListener("playing", onPlaying);
+    window.addEventListener("touchstart", onInteract, {
+      once: true,
+      passive: true,
+    });
+    window.addEventListener("click", onInteract, { once: true });
+    window.addEventListener("keydown", onInteract, { once: true });
+    document.addEventListener("visibilitychange", onVisible);
+
+    video.load();
+    tryPlay();
+
+    // Work browsers sometimes need a second attempt after network settles.
+    const retry = window.setTimeout(tryPlay, 2000);
+
+    return () => {
+      window.clearTimeout(retry);
+      video.removeEventListener("canplay", onCanPlay);
+      video.removeEventListener("playing", onPlaying);
+      window.removeEventListener("touchstart", onInteract);
+      window.removeEventListener("click", onInteract);
+      window.removeEventListener("keydown", onInteract);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
+  }, [loadVideo, reduceMotion]);
 
   return (
     <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
@@ -63,20 +109,23 @@ export function HeroVideo() {
         fill
         priority
         sizes="100vw"
-        className="object-cover"
+        className={`object-cover ${
+          showVideo || reduceMotion ? "" : "hero-poster-motion"
+        }`}
         quality={70}
       />
 
-      {loadVideo ? (
+      {loadVideo && !reduceMotion ? (
         <video
           ref={ref}
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
             showVideo ? "opacity-100" : "opacity-0"
           }`}
+          autoPlay
           muted
           loop
           playsInline
-          preload="none"
+          preload="auto"
           poster="/media/hero-ocean-poster-sm.jpg"
         >
           <source src="/media/hero-ocean.mp4" type="video/mp4" />

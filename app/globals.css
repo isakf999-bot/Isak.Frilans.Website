@@ -505,3 +505,20 @@
     transform: translateY(5px);
   }
 }
+
+/* Fallback when hero video can't autoplay (work PCs, blocked media, etc.). */
+@keyframes hero-poster-kenburns {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.08) translate3d(-1.5%, -1%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-poster-motion {
+    animation: hero-poster-kenburns 22s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+}
