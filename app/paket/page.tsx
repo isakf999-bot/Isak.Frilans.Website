@@ -7,7 +7,7 @@ import { absoluteUrl } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Paket — IsakWeb",
   description:
-    "Tydliga paket utan byråpåslag — från Starter till Enterprise, med tillägg du kan välja efter behov.",
+    "Tydliga paket utan byråpåslag — Bas, Premium och Full Service, plus Enterprise vid behov.",
   alternates: { canonical: absoluteUrl("/paket") },
 };
 

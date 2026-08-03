@@ -20,14 +20,14 @@ export function Hero() {
           <p className="rise inline-flex items-center gap-2 rounded-pill border border-white/25 bg-white/10 px-3.5 py-1.5 text-eyebrow font-medium tracking-[0.14em] text-white/90 uppercase backdrop-blur-md">
             <span
               aria-hidden="true"
-              className="h-1.5 w-1.5 rounded-full bg-sky-300"
+              className="h-1.5 w-1.5 rounded-full bg-brand"
             />
             IsakWeb · Helsingborg
           </p>
 
           <h1 className="rise rise-2 mt-6 max-w-[14ch] text-h1 text-white lg:text-display">
             Webbplatser som{" "}
-            <span className="text-sky-300">växer</span> företag.
+            <span className="text-brand">växer</span> företag.
           </h1>
 
           <p className="rise rise-3 mt-6 max-w-lg text-lead text-white/80">
@@ -39,7 +39,7 @@ export function Hero() {
           <div className="rise rise-3 mt-9 flex flex-wrap items-center gap-3">
             <Link
               href="/kontakt"
-              className="shine group inline-flex items-center gap-2.5 rounded-pill bg-sky-300 px-7 py-4 font-semibold text-white shadow-lift transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-sky-400 active:scale-[0.97]"
+              className="shine group inline-flex items-center gap-2.5 rounded-pill bg-brand px-7 py-4 font-semibold text-white shadow-brand transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-brand-dark active:scale-[0.97]"
             >
               Boka ett samtal
               <span

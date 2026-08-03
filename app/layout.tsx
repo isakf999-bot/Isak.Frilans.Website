@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { Chatbot } from "@/components/Chatbot/Chatbot";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -131,6 +132,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}
+        <Chatbot />
         <div className="grain" aria-hidden="true" />
         <Analytics />
       </body>

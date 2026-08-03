@@ -34,8 +34,7 @@ export function Logo({ className = "", onDark = false }: Props) {
           onDark ? "text-white" : "text-ink"
         }`}
       >
-        Isak{" "}
-        <span className={onDark ? "text-sky-300" : "text-brand"}>Web</span>
+        Isak <span className="text-brand">Web</span>
       </span>
     </span>
   );
@@ -46,7 +45,7 @@ function GlobeMark({ onDark }: { onDark: boolean }) {
   return (
     <svg
       viewBox="0 0 48 48"
-      className={`h-8 w-8 shrink-0 ${onDark ? "text-sky-300" : "text-brand"}`}
+      className="h-8 w-8 shrink-0 text-brand"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
@@ -62,19 +61,19 @@ function GlobeMark({ onDark }: { onDark: boolean }) {
         cx="6.9"
         cy="24"
         r="3"
-        className={onDark ? "fill-[#0b3a6e]" : "fill-canvas"}
+        className={onDark ? "fill-[#0b1220]" : "fill-canvas"}
       />
       <circle
         cx="30.5"
         cy="14"
         r="3"
-        className={onDark ? "fill-[#0b3a6e]" : "fill-canvas"}
+        className={onDark ? "fill-[#0b1220]" : "fill-canvas"}
       />
       <circle
         cx="33"
         cy="34"
         r="3"
-        className={onDark ? "fill-[#0b3a6e]" : "fill-canvas"}
+        className={onDark ? "fill-[#0b1220]" : "fill-canvas"}
       />
     </svg>
   );

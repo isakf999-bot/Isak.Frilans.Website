@@ -36,7 +36,7 @@ export type Service = {
   caseStudy?: { label: string; href: string };
 };
 
-/** Samma prisintervall som Starter–Premium. */
+/** Samma prisintervall som Bas–Full Service. */
 export const SITE_PRICE = {
   from: PRICES.services.siteFrom,
   to: PRICES.services.siteTo,
