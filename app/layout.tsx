@@ -93,23 +93,24 @@ export const metadata: Metadata = {
     locale: "sv_SE",
     url: SITE_URL,
     siteName: "IsakWeb",
-    title: "IsakWeb — Webbplatser som får företag att växa",
+    title: "IsakWeb — Webbutvecklare i Helsingborg | Från 2 000 kr",
     description:
-      "Snabba, moderna sajter åt svenska företag. Du pratar med den som bygger — inte en projektledare.",
+      "Hemsidor som får fler kunder att hitta dig. Moderna, snabba sajter till rimligt pris — du pratar alltid med den som skriver koden.",
     images: [
       {
         url: "/og.jpg",
         width: 1200,
         height: 630,
-        alt: "IsakWeb — webbplatser som får företag att växa",
+        type: "image/jpeg",
+        alt: "IsakWeb — hemsidor som får fler kunder att hitta dig",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "IsakWeb — Webbplatser som får företag att växa",
+    title: "IsakWeb — Webbutvecklare i Helsingborg | Från 2 000 kr",
     description:
-      "Snabba, moderna sajter åt svenska företag. Du pratar med den som bygger.",
+      "Hemsidor som får fler kunder att hitta dig. Moderna, snabba sajter till rimligt pris.",
     images: ["/og.jpg"],
   },
   robots: { index: true, follow: true },
