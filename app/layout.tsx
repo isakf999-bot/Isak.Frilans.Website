@@ -70,7 +70,7 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "IsakWeb — Webbplatser som växer företag",
+    default: "IsakWeb — Webbplatser som får företag att växa",
     template: "%s | IsakWeb",
   },
   description:
@@ -93,7 +93,7 @@ export const metadata: Metadata = {
     locale: "sv_SE",
     url: SITE_URL,
     siteName: "IsakWeb",
-    title: "IsakWeb — Webbplatser som växer företag",
+    title: "IsakWeb — Webbplatser som får företag att växa",
     description:
       "Snabba, moderna sajter åt svenska företag. Du pratar med den som bygger — inte en projektledare.",
     images: [
@@ -101,13 +101,13 @@ export const metadata: Metadata = {
         url: "/og.jpg",
         width: 1200,
         height: 630,
-        alt: "IsakWeb — webbplatser som växer företag",
+        alt: "IsakWeb — webbplatser som får företag att växa",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "IsakWeb — Webbplatser som växer företag",
+    title: "IsakWeb — Webbplatser som får företag att växa",
     description:
       "Snabba, moderna sajter åt svenska företag. Du pratar med den som bygger.",
     images: ["/og.jpg"],

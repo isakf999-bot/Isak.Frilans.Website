@@ -1,6 +1,6 @@
 # IsakWeb
 
-> Webbplatser som växer företag — frilansande webbutvecklare i Helsingborg.
+> Webbplatser som får företag att växa. Frilansande webbutvecklare i Helsingborg.
 
 ## Site
 - Home: https://www.isakweb.se/

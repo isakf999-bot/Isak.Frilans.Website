@@ -10,6 +10,7 @@ const LINKS = [
   { href: "/tjanster", label: "Tjänster" },
   { href: "/process", label: "Process" },
   { href: "/faq", label: "FAQ" },
+  { href: "/om", label: "Om mig" },
   { href: "/case", label: "Kundcase" },
   { href: "/kontakt", label: "Starta ett projekt" },
 ];

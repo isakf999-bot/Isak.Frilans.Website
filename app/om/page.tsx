@@ -7,7 +7,7 @@ import { absoluteUrl } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Om mig — IsakWeb",
   description:
-    "Frilansande webbutvecklare i Helsingborg. Du pratar alltid med den som skriver koden.",
+    "Isak Forsberg, 21, fullstackutvecklare i Helsingborg. Jag bygger hemsidor från grunden till ett rimligt pris.",
   alternates: { canonical: absoluteUrl("/om") },
 };
 

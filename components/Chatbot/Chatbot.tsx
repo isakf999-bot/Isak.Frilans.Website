@@ -10,7 +10,7 @@ const WELCOME: UiMessage = {
   id: "welcome",
   role: "assistant",
   content:
-    "Hej! Jag är IsakWebs assistent. Fråga om priser, paket, om Isak kan modernisera din gamla sajt — eller vad som ingår. Jag svarar utifrån innehållet på hemsidan.",
+    "Hej! Jag är Isak. Fråga om priser, vad som ingår i paketen, redesign eller något annat — jag svarar utifrån det som står på hemsidan.",
 };
 
 export function Chatbot() {
@@ -35,6 +35,15 @@ export function Chatbot() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
   }, [open]);
 
   const send = async (text: string) => {
@@ -85,19 +94,19 @@ export function Chatbot() {
   };
 
   return (
-    <div className="pointer-events-none fixed right-4 bottom-4 z-[60] flex flex-col items-end gap-3 sm:right-6 sm:bottom-6">
+    <>
       {open ? (
         <section
           id={panelId}
           role="dialog"
-          aria-label="IsakWeb-assistenten"
-          aria-modal="false"
-          className="pointer-events-auto flex h-[min(34rem,calc(100svh-6.5rem))] w-[min(24rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-line bg-canvas shadow-lift"
+          aria-label="Chatta med Isak"
+          aria-modal="true"
+          className="pointer-events-auto fixed inset-0 z-[60] flex flex-col overflow-hidden border-0 bg-canvas sm:inset-auto sm:right-6 sm:bottom-[5.5rem] sm:h-[min(34rem,calc(100svh-7.5rem))] sm:w-[24rem] sm:rounded-2xl sm:border sm:border-line sm:shadow-lift"
         >
-          <header className="flex items-start justify-between gap-3 border-b border-line bg-brand px-4 py-3.5 text-white">
+          <header className="flex shrink-0 items-start justify-between gap-3 border-b border-line bg-brand px-4 py-3.5 text-white pt-[max(0.875rem,env(safe-area-inset-top))] sm:pt-3.5">
             <div>
               <p className="text-sm font-semibold tracking-tight">
-                IsakWeb-assistenten
+                Chatta med Isak
               </p>
               <p className="mt-0.5 text-xs text-white/75">
                 Svar utifrån hemsidans innehåll
@@ -106,7 +115,7 @@ export function Chatbot() {
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="rounded-lg px-2 py-1 text-lg leading-none text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-2xl leading-none text-white/80 transition-colors hover:bg-white/10 hover:text-white"
               aria-label="Stäng chatten"
             >
               ×
@@ -115,7 +124,7 @@ export function Chatbot() {
 
           <div
             ref={listRef}
-            className="flex-1 space-y-3 overflow-y-auto bg-mist/40 px-3 py-4"
+            className="min-h-0 flex-1 space-y-3 overflow-y-auto overscroll-contain bg-mist/40 px-3 py-4"
           >
             {messages.map((msg) => (
               <div
@@ -123,7 +132,7 @@ export function Chatbot() {
                 className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap ${
+                  className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap break-words ${
                     msg.role === "user"
                       ? "rounded-br-md bg-brand text-white"
                       : "rounded-bl-md border border-line bg-canvas text-ink shadow-card"
@@ -134,19 +143,19 @@ export function Chatbot() {
               </div>
             ))}
             {pending ? (
-              <p className="text-xs text-muted">Assistenten skriver…</p>
+              <p className="text-xs text-muted">Skriver…</p>
             ) : null}
           </div>
 
           {messages.length <= 2 ? (
-            <div className="flex flex-wrap gap-2 border-t border-line bg-canvas px-3 py-3">
+            <div className="flex shrink-0 flex-wrap gap-2 border-t border-line bg-canvas px-3 py-3">
               {CHAT_STARTERS.map((starter) => (
                 <button
                   key={starter}
                   type="button"
                   disabled={pending}
                   onClick={() => void send(starter)}
-                  className="rounded-pill border border-line bg-surface px-3 py-1.5 text-left text-xs font-medium text-ink transition-colors hover:border-brand hover:text-brand disabled:opacity-50"
+                  className="rounded-pill border border-line bg-surface px-3 py-2 text-left text-xs font-medium text-ink transition-colors hover:border-brand hover:text-brand disabled:opacity-50"
                 >
                   {starter}
                 </button>
@@ -155,7 +164,7 @@ export function Chatbot() {
           ) : null}
 
           <form
-            className="border-t border-line bg-canvas p-3"
+            className="shrink-0 border-t border-line bg-canvas p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:pb-3"
             onSubmit={(e) => {
               e.preventDefault();
               void send(input);
@@ -178,12 +187,12 @@ export function Chatbot() {
                   }
                 }}
                 placeholder="Fråga om pris, paket, gammal sajt…"
-                className="min-h-[2.75rem] flex-1 resize-none rounded-xl border border-line bg-surface px-3 py-2 text-sm text-ink outline-none transition-colors focus:border-brand"
+                className="min-h-[2.75rem] max-h-28 flex-1 resize-none rounded-xl border border-line bg-surface px-3 py-2.5 text-base text-ink outline-none transition-colors focus:border-brand sm:text-sm"
               />
               <button
                 type="submit"
                 disabled={pending || !input.trim()}
-                className="rounded-xl bg-brand px-3.5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-brand-dark disabled:opacity-40"
+                className="min-h-[2.75rem] shrink-0 rounded-xl bg-brand px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-brand-dark disabled:opacity-40"
               >
                 Skicka
               </button>
@@ -203,12 +212,14 @@ export function Chatbot() {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls={panelId}
-        className="pointer-events-auto inline-flex items-center gap-2 rounded-pill bg-brand px-4 py-3 text-sm font-semibold text-white shadow-brand transition-all duration-200 ease-out hover:bg-brand-dark hover:shadow-lift active:scale-[0.98]"
+        aria-label={open ? "Stäng assistenten" : "Öppna assistenten"}
+        className={`pointer-events-auto fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-[61] flex h-14 w-14 items-center justify-center rounded-full bg-brand text-white shadow-brand transition-all duration-200 ease-out hover:bg-brand-dark hover:shadow-lift active:scale-[0.96] sm:right-6 sm:bottom-6 sm:h-16 sm:w-16 ${
+          open ? "max-sm:hidden" : ""
+        }`}
       >
-        <ChatIcon />
-        {open ? "Stäng" : "Fråga assistenten"}
+        {open ? <CloseIcon /> : <ChatIcon />}
       </button>
-    </div>
+    </>
   );
 }
 
@@ -222,9 +233,25 @@ function ChatIcon() {
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden
-      className="h-[18px] w-[18px]"
+      className="h-7 w-7 sm:h-8 sm:w-8"
     >
       <path d="M21 12a8 8 0 0 1-11.7 7.1L3 21l1.9-6.3A8 8 0 1 1 21 12Z" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      aria-hidden
+      className="h-7 w-7 sm:h-8 sm:w-8"
+    >
+      <path d="M6 6l12 12M18 6L6 18" />
     </svg>
   );
 }

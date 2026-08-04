@@ -4,13 +4,12 @@ import { SectionLabel } from "@/components/SectionLabel/SectionLabel";
 
 const PORTFOLIO_URL = "https://isakforsberg.se/";
 
-/** Verklig stack — samma skills som visas på portfolion. Konkret och
- *  kontrollerbart, vilket är själva poängen: det går att verifiera.
- *  Ordnad språk → ramverk → verktyg. */
+/** Byt till "/media/isak.jpg" när ditt foto ligger i public/media/. */
+const PORTRAIT_SRC = "/media/isak.svg";
+
 const STACK = [
   "HTML5",
   "CSS3",
-  "Sass",
   "JavaScript",
   "TypeScript",
   "React",
@@ -18,22 +17,6 @@ const STACK = [
   "Tailwind CSS",
   "Figma",
   "GitHub",
-  "VS Code",
-];
-
-const PRINCIPLES = [
-  {
-    title: "Du pratar med den som bygger",
-    body: "Ingen säljare som lovar, ingen projektledare som tolkar. Du beskriver problemet för mig, och jag är den som sedan sitter i koden.",
-  },
-  {
-    title: "Fast pris, satt i förväg",
-    body: "Du får en summa innan vi börjar, inte en räkning efteråt. Ändras omfattningen säger jag till — du blir aldrig överraskad.",
-  },
-  {
-    title: "Jag säger till om du inte behöver det",
-    body: "Om du är på väg att betala för något som inte kommer ge dig något tillbaka, är det min uppgift att säga det. Även när det kostar mig jobbet.",
-  },
 ];
 
 export function About() {
@@ -43,120 +26,117 @@ export function About() {
       className="scroll-mt-24"
       aria-labelledby="om-mig-rubrik"
     >
-      <div className="mx-auto max-w-6xl px-6 pt-28 pb-20 lg:px-8 lg:pt-32 lg:pb-28">
-        <Reveal className="grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-20">
-          <div>
-            <SectionLabel>Om mig</SectionLabel>
-            <h2 id="om-mig-rubrik" className="mt-6 text-h2">
-              En person, inte en byrå.
-            </h2>
-            <div className="mt-6 space-y-5 text-lead text-muted">
-              <p>
-                Jag är Frontend och Backend-Utvecklare från Sverige och bygger
-                hemsidor på frilansbasis. Det jag gillar mest är det som händer
-                precis innan koden, att förstå vad ett företag faktiskt lever på,
-                och sedan bygga sajten runt det.
-              </p>
-              <p>
-                Tyngdpunkten ligger i Frontend det som syns och känns. Men jag
-                bygger även det som ligger bakom ytan formulär som landar rätt,
-                bokning och betalning som hänger ihop, data som hamnar där den
-                ska. Du behöver alltså inte ta in någon annan för att få en komplett sajt.
-              </p>
-              <p>
-                Jag jobbar mesta dels i React, Next.js och TypeScript. Allt jag har byggt ligger öppet på{" "}
-                <a
-                  href={PORTFOLIO_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium text-brand underline decoration-brand-glow decoration-2 underline-offset-4 transition-colors duration-200 hover:decoration-brand"
-                >
-                  min portfolio
-                </a>
-                , så du kan se hur det ser ut och känns innan vi ens har pratat.
-              </p>
-            </div>
+      <div className="relative overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgb(29_78_216_/_0.08),transparent_55%),radial-gradient(ellipse_at_bottom_left,rgb(147_180_248_/_0.14),transparent_50%)]"
+        />
 
-            <div className="mt-8">
-              <p className="text-eyebrow font-medium text-muted uppercase">
-                Bygger med
-              </p>
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {STACK.map((tool) => (
-                  <li
-                    key={tool}
-                    className="cursor-default rounded-pill border border-line bg-surface px-3 py-1.5 text-sm text-ink shadow-card transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-brand-glow hover:text-brand hover:shadow-lift"
-                  >
-                    {tool}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="mt-8 flex items-center gap-3">
-              <Link
-                href="/case"
-                className="shine group inline-flex items-center gap-2.5 rounded-pill bg-brand px-6 py-3.5 font-medium whitespace-nowrap text-white shadow-brand transition-all duration-200 ease-out hover:bg-brand-dark hover:shadow-lift active:scale-[0.97]"
-              >
-                Se mina kundcase
-                <span
-                  aria-hidden="true"
-                  className="transition-transform duration-200 ease-out group-hover:translate-x-1"
-                >
-                  →
-                </span>
-              </Link>
-
-              {/* Handtecknad pil som pekar tillbaka på knappen. Ligger till
-                  höger om den — inte ovanför, där stack-taggarna redan bor.
-                  Döljs på små skärmar där raden ändå blir för trång. */}
-              <div
-                aria-hidden="true"
-                className="point-bounce pointer-events-none hidden shrink-0 items-center gap-1.5 lg:flex"
-              >
-                <svg
-                  viewBox="0 0 48 24"
-                  fill="none"
-                  className="h-6 w-12 text-brand"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M44 6Q22 6 6 18" />
-                  <path d="M6 18l11-2M6 18l5-10" />
-                </svg>
-                <span className="text-sm font-semibold whitespace-nowrap text-brand">
-                  Klicka här
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <ul className="space-y-4">
-            {PRINCIPLES.map((item) => (
-              <li
-                key={item.title}
-                className="card-glow group relative isolate overflow-hidden rounded-xl border border-line bg-gradient-to-b from-surface to-surface-soft p-6 shadow-card transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-brand-glow hover:shadow-lift"
-              >
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -top-6 -left-6 -z-10 h-24 w-24 rounded-full bg-brand-glow opacity-40 blur-2xl"
+        <div className="relative mx-auto max-w-6xl px-6 pt-28 pb-20 lg:px-8 lg:pt-32 lg:pb-28">
+          <Reveal className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
+            <figure className="relative mx-auto w-full max-w-md lg:mx-0 lg:max-w-none">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-line bg-mist shadow-lift">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={PORTRAIT_SRC}
+                  alt="Isak Forsberg"
+                  width={800}
+                  height={1000}
+                  className="absolute inset-0 h-full w-full object-cover object-top"
                 />
-                <h3 className="flex items-start gap-3 font-sans text-base font-semibold tracking-normal text-ink">
+              </div>
+              <figcaption className="mt-4 text-sm text-muted">
+                Isak Forsberg, Helsingborg
+              </figcaption>
+            </figure>
+
+            <div>
+              <SectionLabel>Om mig</SectionLabel>
+              <h1 id="om-mig-rubrik" className="mt-6 text-h2">
+                Hej, jag heter Isak Forsberg.
+              </h1>
+              <p className="mt-3 text-lead text-muted">
+                21 år · Fullstackutvecklare · Helsingborg
+              </p>
+
+              <div className="mt-8 space-y-5 text-lead text-muted">
+                <p>
+                  Jag älskar att bygga hemsidor. Inte bara sätta ihop något som
+                  ser okej ut, utan designa och bygga från grunden. Responsiva
+                  sidor, tydlig struktur och SEO som faktiskt hjälper dig att
+                  synas.
+                </p>
+                <p>
+                  Jag har länge velat starta något där man slipper webbyråpriser
+                  för en helt vanlig hemsida. Alla ska kunna få en riktig sajt
+                  till ett rimligt pris, utan att behöva gå via en stor byrå.
+                  Därför jobbar jag som frilansare. Du pratar med mig, och jag
+                  är den som skriver koden.
+                </p>
+                <p>
+                  Jag har utbildat mig till fullstackutvecklare. Det som driver
+                  mig mest är att hjälpa andra, både i projekten och i hur jag
+                  vill jobba. Rakt, enkelt och utan krångel.
+                </p>
+                <p>
+                  Vid sidan av koden har jag spelat hockey i 14 år. Jag är en
+                  glad och ödmjuk kille som älskar att träna. Det syns nog i hur
+                  jag tar mig an jobb också. Jag gillar att göra klart saker
+                  ordentligt, och jag bygger alltid från grunden. Inga mallar.
+                </p>
+                <p>
+                  Vill du se mer av vad jag byggt finns det på{" "}
+                  <a
+                    href={PORTFOLIO_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-brand underline decoration-brand-glow decoration-2 underline-offset-4 transition-colors duration-200 hover:decoration-brand"
+                  >
+                    min portfolio
+                  </a>
+                  .
+                </p>
+              </div>
+
+              <div className="mt-10">
+                <p className="text-eyebrow font-medium text-muted uppercase">
+                  Bygger med
+                </p>
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {STACK.map((tool) => (
+                    <li
+                      key={tool}
+                      className="rounded-pill border border-line bg-surface px-3 py-1.5 text-sm text-ink shadow-card"
+                    >
+                      {tool}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mt-10 flex flex-wrap gap-3">
+                <Link
+                  href="/kontakt"
+                  className="shine group inline-flex items-center gap-2.5 rounded-pill bg-brand px-6 py-3.5 font-medium whitespace-nowrap text-white shadow-brand transition-all duration-200 ease-out hover:bg-brand-dark hover:shadow-lift active:scale-[0.97]"
+                >
+                  Hör av dig
                   <span
                     aria-hidden="true"
-                    className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-brand-glow/60 bg-brand-tint text-xs text-brand shadow-sm transition-all duration-300 ease-out group-hover:scale-105 group-hover:bg-brand group-hover:text-white"
+                    className="transition-transform duration-200 ease-out group-hover:translate-x-1"
                   >
-                    ✓
+                    →
                   </span>
-                  {item.title}
-                </h3>
-                <p className="mt-2.5 pl-10 text-muted">{item.body}</p>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
+                </Link>
+                <Link
+                  href="/paket"
+                  className="inline-flex items-center gap-2 rounded-pill border border-line bg-surface px-6 py-3.5 font-medium text-ink shadow-card transition-all duration-200 ease-out hover:border-brand hover:text-brand"
+                >
+                  Se paket och priser
+                </Link>
+              </div>
+            </div>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

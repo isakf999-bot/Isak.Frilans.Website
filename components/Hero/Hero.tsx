@@ -25,9 +25,9 @@ export function Hero() {
             IsakWeb · Helsingborg
           </p>
 
-          <h1 className="rise rise-2 mt-6 max-w-[14ch] text-h1 text-white lg:text-display">
-            Webbplatser som{" "}
-            <span className="text-brand">växer</span> företag.
+          <h1 className="rise rise-2 mt-6 max-w-[16ch] text-h1 text-white lg:text-display">
+            Webbplatser som får företag att{" "}
+            <span className="text-brand">växa</span>.
           </h1>
 
           <p className="rise rise-3 mt-6 max-w-lg text-lead text-white/80">

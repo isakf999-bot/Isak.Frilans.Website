@@ -48,10 +48,10 @@ export async function POST(req: Request) {
       },
       body: JSON.stringify({
         model: process.env.OPENAI_CHAT_MODEL || "gpt-4o-mini",
-        temperature: 0.7,
-        presence_penalty: 0.3,
-        frequency_penalty: 0.4,
-        max_tokens: 450,
+        temperature: 0.35,
+        presence_penalty: 0.2,
+        frequency_penalty: 0.2,
+        max_tokens: 550,
         messages: [
           { role: "system", content: knowledge },
           ...trimmed,
