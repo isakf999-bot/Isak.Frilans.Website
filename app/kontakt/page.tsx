@@ -5,9 +5,9 @@ import { Nav } from "@/components/Nav/Nav";
 import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Kontakt — IsakWeb",
+  title: "Starta ett projekt — IsakWeb",
   description:
-    "Berätta vad du behöver hjälp med — jag återkommer inom ett par arbetsdagar.",
+    "Berätta vad du vill bygga — jag återkommer inom ett par arbetsdagar med nästa steg.",
   alternates: { canonical: absoluteUrl("/kontakt") },
 };
 

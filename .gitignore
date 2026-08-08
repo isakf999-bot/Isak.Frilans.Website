@@ -28,5 +28,7 @@ DesignPictures/
 bundle.js
 page.html
 
-# lokal editor-konfiguration, inte projektkod
+# lokal editor-konfiguration och bygg-skills — aldrig i repo
 .claude/skills/
+.cursor/
+skills/
