@@ -199,7 +199,7 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
 
             <div className="lg:col-span-3">
               <h2 className="text-eyebrow font-semibold tracking-[0.12em] text-ink uppercase">
-                Följ med
+                Följ mig
               </h2>
               <p className="mt-5 text-sm leading-relaxed text-muted">
                 Projekt, processer och det jag bygger — på webben och i sociala
