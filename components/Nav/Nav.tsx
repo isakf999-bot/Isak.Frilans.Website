@@ -24,8 +24,8 @@ export function Nav() {
   const overHero = onHome && !scrolled && !open;
 
   const linkClass = overHero
-    ? "rounded-pill px-4 py-2 text-sm text-white/85 transition-all duration-200 ease-out hover:text-white active:scale-100"
-    : "rounded-pill px-4 py-2 text-sm text-muted transition-all duration-200 ease-out hover:text-brand active:scale-100";
+    ? "rounded-md px-3 py-2 text-sm text-white/85 transition-colors duration-150 hover:text-white"
+    : "rounded-md px-3 py-2 text-sm text-muted transition-colors duration-150 hover:text-brand";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);

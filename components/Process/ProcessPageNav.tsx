@@ -53,10 +53,10 @@ export function ProcessPageNav() {
             <li key={section.id}>
               <a
                 href={`#${section.id}`}
-                className={`inline-flex items-center gap-2 rounded-pill px-3.5 py-2 text-sm transition-all duration-200 ease-out lg:w-full ${
+                className={`inline-flex items-center gap-2 rounded-md px-3.5 py-2 text-sm transition-colors duration-150 lg:w-full ${
                   isActive
-                    ? "bg-brand text-white shadow-brand"
-                    : "border border-line bg-surface text-muted hover:border-brand/30 hover:bg-brand-tint hover:text-brand"
+                    ? "bg-brand text-white"
+                    : "border border-line bg-surface text-muted hover:border-ink/20 hover:text-ink"
                 }`}
               >
                 <span

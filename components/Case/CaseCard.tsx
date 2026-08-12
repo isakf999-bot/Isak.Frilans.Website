@@ -18,7 +18,7 @@ export function CaseCard({
     <article className="group flex h-full flex-col">
       <Link
         href={`/case/${study.slug}`}
-        className="flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-card transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-brand/25 hover:shadow-lift"
+        className="flex h-full flex-col overflow-hidden rounded-lg border border-line bg-surface transition-[border-color] duration-150 hover:border-ink/20"
       >
         <div
           className="relative p-4 sm:p-5"
@@ -33,7 +33,7 @@ export function CaseCard({
                 priority={priority}
                 quality={90}
                 sizes="(max-width: 768px) 100vw, 800px"
-                className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                className="object-cover object-top transition-opacity duration-300 group-hover:opacity-95"
               />
             </div>
           </BrowserFrame>
@@ -49,12 +49,7 @@ export function CaseCard({
           <p className="mt-3 flex-1 text-muted">{study.teaser}</p>
           <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand">
             Utforska caset
-            <span
-              aria-hidden="true"
-              className="transition-transform duration-200 ease-out group-hover:translate-x-1"
-            >
-              →
-            </span>
+            <span aria-hidden="true">→</span>
           </span>
         </div>
       </Link>

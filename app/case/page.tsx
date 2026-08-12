@@ -23,12 +23,8 @@ export default function CasePage() {
     <>
       <Nav />
       <main>
-        <section className="relative overflow-hidden">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-brand-glow opacity-25 blur-[130px]"
-          />
-          <div className="relative z-10 mx-auto max-w-6xl px-6 pt-16 pb-12 lg:px-8 lg:pt-20 lg:pb-14">
+        <section>
+          <div className="mx-auto max-w-6xl px-6 pt-16 pb-12 lg:px-8 lg:pt-20 lg:pb-14">
             <Reveal>
               <SectionLabel>Kundcase</SectionLabel>
               <h1 className="mt-6 max-w-3xl text-h1">
@@ -48,7 +44,7 @@ export default function CasePage() {
               {publishedCases.length > 0 ? (
                 <CaseGrid cases={publishedCases} industries={industries} />
               ) : (
-                <div className="mx-auto max-w-lg rounded-2xl border border-line bg-gradient-to-b from-surface to-surface-soft px-8 py-14 text-center shadow-card">
+                <div className="mx-auto max-w-lg rounded-lg border border-line bg-surface px-8 py-14 text-center">
                   <h2 className="text-h3">Casen är på väg.</h2>
                   <p className="mx-auto mt-3 max-w-sm text-muted">
                     Här visar jag snart projekten jag har levererat. Hör av dig

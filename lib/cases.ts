@@ -14,7 +14,7 @@ export type CaseStudy = {
   slug: string;
   /** false = dolt från listan och detaljsidan, men all data finns kvar */
   published: boolean;
-  /** Visningsnamn i stil med Generation: "jopashonung.se" */
+  /** Visningsnamn i stil med Generation: "jopasbisyssla.se" */
   domain: string;
   client: string;
   industry: string;
@@ -60,13 +60,13 @@ export const cases: CaseStudy[] = [
     launched: "2026",
     platform: "Next.js",
     challenge:
-      "Den gamla sajten bar innehållet men saknade modern känsla, tydlig hierarki och en övertygande väg till abonnemang. Mats ville behålla kärnan i erbjudandet — PPM, ISK och community — men få en webbplats som ser professionell ut, känns premium och konverterar bättre.",
+      "Den gamla sajten bar innehållet men saknade tydlig hierarki och en övertygande väg till abonnemang. Mats ville behålla kärnan i erbjudandet — PPM, ISK och community — men få en webbplats som ser professionell ut och gör det enklare att ta nästa steg.",
     outcome:
-      "En helt omgjord startsida med mörk premiumkänsla, stark personlig närvaro och tydlig paketering av erbjudandena. Besökaren förstår snabbt vad tjänsten är, vad den kostar och hur man kommer igång — utan att något känns malligt eller generiskt.",
+      "En helt omgjord startsida med mörkare uttryck, skarp typografi och tydlig paketering av erbjudandena. Besökaren förstår snabbt vad tjänsten är, vad den kostar och hur man kommer igång.",
     work: [
       {
         title: "Omdesign & uttryck",
-        body: "Vi bytte ut det gamla uttrycket mot en modern, mörk design med skarp typografi och en varm accentfärg. Porträttet av Mats får stå i centrum, så att besökaren direkt känner personen bakom tjänsten.",
+        body: "Vi bytte ut det gamla uttrycket mot en mörkare design med skarp typografi och en varm accentfärg. Porträttet av Mats får stå i centrum, så att besökaren direkt känner personen bakom tjänsten.",
       },
       {
         title: "Struktur & budskap",
@@ -74,37 +74,37 @@ export const cases: CaseStudy[] = [
       },
       {
         title: "Teknik & leverans",
-        body: "Ombyggd som en snabb, modern sajt med fokus på mobilupplevelse, tydlig hierarki och enkel vidareutveckling när erbjudandet växer.",
+        body: "Ombyggd som en snabb sajt med fokus på mobilupplevelse, tydlig hierarki och enkel vidareutveckling när erbjudandet växer.",
       },
     ],
     results: [
-      { value: "Ny", label: "modern design från grunden" },
+      { value: "Ny", label: "design från grunden" },
       { value: "100%", label: "mobilanpassad" },
       { value: "Tydlig", label: "väg till abonnemang" },
     ],
     heroImage: "/case/mats/hero.png",
     heroAlt:
-      "Moderniserad startsida för Mats Svensson — fondbytesinformation för PPM och ISK",
+      "Ombyggd startsida för Mats Svensson — fondbytesinformation för PPM och ISK",
     accentColor: "#1C1917",
   },
   {
     slug: "jopas-honung",
-    published: false,
-    domain: "jopashonung.se",
+    published: true,
+    domain: "jopasbisyssla.se",
     client: "Jopas Bisyssla",
     industry: "Livsmedel & lokal produktion",
     teaser:
       "Småskalig svensk honung från Söderåsen — en sajt som känns lika handgjord som produkten.",
     intro:
-      "Jopas Honung är en småskalig biodling på Söderåsens sluttningar mot Hallandsåsen. De behövde en webbplats som speglar hantverket: lokal, varm och tydlig — utan att kännas som en generisk mall.",
-    liveUrl: "https://jopas-bisyssla.vercel.app/",
+      "Jopas Bisyssla är en småskalig biodling på Söderåsens sluttningar mot Hallandsåsen. De behövde en webbplats som speglar hantverket: lokal, varm och tydlig — utan att kännas som en generisk mall.",
+    liveUrl: "https://www.jopasbisyssla.se/",
     services: ["Webbdesign", "UX/UI", "Frontend-utveckling", "Landningssida"],
     launched: "2026",
     platform: "Next.js",
     challenge:
-      "En lokal biodling utan tydlig digital närvaro behövde en sajt som både berättar historien bakom honungen och gör det enkelt att förstå erbjudandet. Tonen skulle kännas äkta och hantverksmässig — inte corporate, inte mallig.",
+      "En lokal biodling utan tydlig webbplats behövde en sajt som både berättar historien bakom honungen och gör det enkelt att förstå erbjudandet. Tonen skulle kännas äkta och hantverksmässig — inte corporate, inte mallig.",
     outcome:
-      "En modern landningssida med starkt visuellt fokus, tydlig hierarki och en varm känsla som matchar produkten. Sajten laddar snabbt, fungerar lika bra i mobilen och gör det enkelt att gå vidare till kontakt eller köp.",
+      "En landningssida med starkt visuellt fokus, tydlig hierarki och en varm känsla som matchar produkten. Sajten laddar snabbt, fungerar lika bra i mobilen och gör det enkelt att gå vidare till kontakt eller köp.",
     work: [
       {
         title: "Design & uttryck",
@@ -124,8 +124,9 @@ export const cases: CaseStudy[] = [
       { value: "100%", label: "mobilanpassad" },
       { value: "Snabb", label: "laddningstid" },
     ],
-    heroImage: "/case/jopas/hero-photo-v3.png",
-    heroAlt: "Startsida för Jopas Honung — småskalig svensk honung från Söderåsen",
+    heroImage: "/case/jopas/hero-photo-v4.png",
+    heroAlt:
+      "Startsida för Jopas Bisyssla — småskalig svensk honung från Söderåsen",
     accentColor: "#F3E6C8",
   },
 ];

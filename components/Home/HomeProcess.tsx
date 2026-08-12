@@ -19,7 +19,7 @@ export function HomeProcess() {
         <ol className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {processSteps.map((step, i) => (
             <Reveal key={step.title} delay={i * 70}>
-              <li className="relative rounded-2xl border border-line bg-surface p-6 shadow-card transition-all duration-300 ease-out hover:-translate-y-1 hover:border-brand/30 hover:shadow-lift">
+              <li className="relative rounded-lg border border-line bg-surface p-6 transition-[border-color] duration-150 hover:border-ink/20">
                 <span className="font-mono text-sm font-semibold text-brand">
                   {step.number}
                 </span>

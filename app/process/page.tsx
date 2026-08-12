@@ -68,13 +68,8 @@ export default function ProcessPage() {
           </div>
         </div>
 
-        {/* Hero */}
-        <section className="relative overflow-hidden">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-brand-glow opacity-25 blur-[130px]"
-          />
-          <div className="relative z-10 mx-auto max-w-6xl px-6 pt-16 pb-12 lg:px-8 lg:pt-20 lg:pb-14 lg:pr-72 xl:pr-80">
+        <section>
+          <div className="mx-auto max-w-6xl px-6 pt-16 pb-12 lg:px-8 lg:pt-20 lg:pb-14 lg:pr-72 xl:pr-80">
             <Reveal>
               <SectionLabel>Pris & process</SectionLabel>
               <h1 className="mt-6 max-w-3xl text-h1">

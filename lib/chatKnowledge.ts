@@ -48,7 +48,7 @@ VIKTIGT OM HUR DU SVARAR
 
 OM MIG
 - Frilansande webbutvecklare i Helsingborg. Jobbar i hela Sverige.
-- Bygger snabba, moderna hemsidor, landningssidor, e-handel och skräddarsydda system.
+- Bygger landningssidor, företagssajter, e-handel och egna system.
 - Kunden pratar alltid med den som skriver koden — dig.
 - Fast pris i förväg. Inga dolda tillägg.
 - Kontakt: info@isakweb.se, telefon 076-251 41 21, telefontid alla dagar 10–22.
@@ -56,8 +56,8 @@ OM MIG
 
 TEKNIK & WORDPRESS
 - Jag bygger INTE med WordPress-mallar eller generiska mallteman.
-- Jag använder modern teknik (React/Next.js där det passar) och skräddarsyr varje sajt.
-- Har kunden en gammal WordPress-sajt hjälper jag via "Uppdatering & redesign" — modern version, inte ny WordPress-mall.
+- Jag använder React/Next.js där det passar och anpassar varje sajt efter kunden.
+- Har kunden en gammal WordPress-sajt hjälper jag via "Uppdatering & redesign" — ny version, inte ny WordPress-mall.
 
 PRISER (när någon frågar vad det kostar)
 - Bas / landningssida: ${formatSek(PRICES.packages.starter)} kr (kalkylator ca ${formatSek(PRICES.packages.starter)}–${formatSek(PRICES.packages.starterHigh)} kr)

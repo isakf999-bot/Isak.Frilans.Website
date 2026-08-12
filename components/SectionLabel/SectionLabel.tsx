@@ -1,11 +1,13 @@
 /**
- * Sektionsetikett. En liten färgad markör + versal text, så att man direkt
- * ser var en ny sektion börjar — det var precis det som saknades tidigare.
+ * Diskret sektionsmarkör — punkt + uppercase, utan tint-pill.
  */
-export function SectionLabel({ children }: { children: string }) {
+export function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="inline-flex items-center gap-2 rounded-pill bg-brand-tint px-3 py-1.5 text-eyebrow font-medium text-brand uppercase">
-      <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-brand" />
+    <p className="inline-flex items-center gap-2 text-eyebrow font-medium tracking-[0.14em] text-brand uppercase">
+      <span
+        aria-hidden="true"
+        className="h-1.5 w-1.5 shrink-0 rounded-full bg-brand"
+      />
       {children}
     </p>
   );

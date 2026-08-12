@@ -92,8 +92,8 @@ export const practicalTerms: Principle[] = [
 
 /** Kort om vad priset brukar täcka. */
 export const priceIncludes = [
-  "Modern och responsiv webbdesign",
-  "Anpassad design efter ert varumärke",
+  "Responsiv webbdesign",
+  "Design efter ert varumärke",
   "Mobil-, surfplatta- och datoranpassning",
   "Grundläggande SEO",
   "Kontaktformulär",
@@ -101,7 +101,7 @@ export const priceIncludes = [
   "Hjälp med domänkoppling",
   "Publicering av hemsidan",
   "14 dagars support efter lansering",
-  "Säkerhets- och prestandaoptimering",
+  "Säkerhets- och prestandagenomgång",
 ];
 
 /**

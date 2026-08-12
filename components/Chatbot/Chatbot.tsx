@@ -213,7 +213,7 @@ export function Chatbot() {
         aria-expanded={open}
         aria-controls={panelId}
         aria-label={open ? "Stäng assistenten" : "Öppna assistenten"}
-        className={`pointer-events-auto fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-[61] flex h-14 w-14 items-center justify-center rounded-full bg-brand text-white shadow-brand transition-all duration-200 ease-out hover:bg-brand-dark hover:shadow-lift active:scale-[0.96] sm:right-6 sm:bottom-6 sm:h-16 sm:w-16 ${
+        className={`pointer-events-auto fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-[61] flex h-14 w-14 items-center justify-center rounded-md bg-brand text-white transition-colors duration-150 hover:bg-brand-dark sm:right-6 sm:bottom-6 sm:h-16 sm:w-16 ${
           open ? "max-sm:hidden" : ""
         }`}
       >

@@ -165,7 +165,9 @@ export function HomePackages() {
       <div className="mx-auto max-w-6xl px-6 pt-28 pb-20 lg:px-8 lg:pt-32 lg:pb-28">
         <Reveal>
           <SectionLabel>Paket</SectionLabel>
-          <h2 className="mt-4 max-w-2xl text-h2">Fast pris. Inga överraskningar.</h2>
+          <h2 className="mt-4 max-w-2xl text-h2">
+            Fast pris innan vi börjar.
+          </h2>
           <p className="mt-4 max-w-2xl text-lead text-muted">
             Välj paket nedan — eller använd kalkylatorn för att se hur sidor och
             tillägg påverkar priset.
@@ -179,17 +181,17 @@ export function HomePackages() {
             return (
               <Reveal key={pkg.id} delay={i * 60}>
                 <article
-                  className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-canvas p-6 shadow-card transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lift ${
+                  className={`group relative flex h-full flex-col overflow-hidden rounded-lg border bg-canvas p-6 transition-[border-color] duration-150 ${
                     selected
-                      ? "border-brand ring-2 ring-brand/25"
+                      ? "border-brand"
                       : pkg.recommended
-                        ? "border-brand/50"
-                        : "border-line hover:border-brand/40"
+                        ? "border-brand/40"
+                        : "border-line hover:border-ink/20"
                   }`}
                 >
                   {pkg.recommended ? (
-                    <span className="absolute top-4 right-4 rounded-pill bg-brand px-2.5 py-1 text-[10px] font-semibold tracking-wide text-white uppercase">
-                      Mest vald
+                    <span className="absolute top-4 right-4 rounded-md bg-brand px-2.5 py-1 text-[10px] font-semibold tracking-wide text-white uppercase">
+                      Vanligast
                     </span>
                   ) : null}
                   <p className="text-eyebrow font-medium tracking-[0.12em] text-brand uppercase">
@@ -233,10 +235,10 @@ export function HomePackages() {
                     type="button"
                     onClick={() => selectPackage(pkg.id)}
                     aria-pressed={selected}
-                    className={`mt-auto inline-flex items-center justify-center gap-2 rounded-pill px-5 py-3 text-sm font-medium transition-all duration-200 ease-out active:scale-[0.98] ${
+                    className={`mt-auto inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold transition-colors duration-150 ${
                       selected
-                        ? "bg-brand text-white shadow-brand hover:bg-brand-dark"
-                        : "border border-line bg-surface text-ink hover:border-brand hover:text-brand"
+                        ? "bg-brand text-white hover:bg-brand-dark"
+                        : "border border-line bg-surface font-medium text-ink hover:border-ink/25"
                     }`}
                   >
                     {selected ? (
@@ -362,10 +364,10 @@ export function HomePackages() {
                           type="button"
                           onClick={() => toggleAddon(addon.id)}
                           aria-pressed={on}
-                          className={`inline-flex items-center gap-1.5 rounded-pill border px-4 py-2.5 text-sm font-medium transition-all duration-200 ease-out ${
+                          className={`inline-flex items-center gap-1.5 rounded-md border px-3.5 py-2 text-sm font-medium transition-colors duration-150 ${
                             on
-                              ? "border-brand bg-brand text-white shadow-brand"
-                              : "border-line bg-surface text-ink hover:border-brand hover:text-brand"
+                              ? "border-brand bg-brand text-white"
+                              : "border-line bg-surface text-ink hover:border-ink/20"
                           }`}
                         >
                           <span aria-hidden="true">{on ? "✓" : "+"}</span>
@@ -432,7 +434,7 @@ export function HomePackages() {
                 <div className="mt-8">
                   <Link
                     href={contactHref}
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-pill bg-brand px-5 py-3.5 text-sm font-medium text-white shadow-brand transition-all duration-200 ease-out hover:bg-brand-dark active:scale-[0.98]"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-brand px-5 py-3.5 text-sm font-semibold text-white transition-colors duration-150 hover:bg-brand-dark"
                   >
                     Få exakt offert
                     <span aria-hidden="true">→</span>

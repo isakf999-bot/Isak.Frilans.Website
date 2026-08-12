@@ -42,12 +42,8 @@ export default async function ServiceDetailPage({ params }: Props) {
     <>
       <Nav />
       <main>
-        <section className="relative overflow-hidden border-b border-line bg-canvas">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -top-24 right-0 h-80 w-80 rounded-full bg-brand-glow/30 blur-3xl"
-          />
-          <div className="relative z-10 mx-auto max-w-6xl px-6 pt-28 pb-16 lg:px-8 lg:pt-32 lg:pb-20">
+        <section className="border-b border-line bg-canvas">
+          <div className="mx-auto max-w-6xl px-6 pt-28 pb-16 lg:px-8 lg:pt-32 lg:pb-20">
             <Reveal>
               <Link
                 href="/tjanster"
@@ -57,7 +53,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                 Alla tjänster
               </Link>
 
-              <div className="mt-8 flex h-14 w-14 items-center justify-center rounded-2xl border border-brand-glow/60 bg-brand-tint text-brand">
+              <div className="mt-8 flex h-12 w-12 items-center justify-center rounded-md border border-line bg-surface text-brand">
                 {serviceIcons[service.slug]}
               </div>
 
@@ -79,14 +75,14 @@ export default async function ServiceDetailPage({ params }: Props) {
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href={`/kontakt?meddelande=${encodeURIComponent(prefill)}`}
-                  className="inline-flex items-center gap-2 rounded-pill bg-brand px-7 py-3.5 font-medium text-white shadow-brand transition-all duration-200 hover:bg-brand-dark"
+                  className="inline-flex items-center gap-2 rounded-md bg-brand px-6 py-3.5 font-semibold text-white transition-colors duration-150 hover:bg-brand-dark"
                 >
                   Hör av dig om {service.title.toLowerCase()}
                   <span aria-hidden="true">→</span>
                 </Link>
                 <Link
                   href="/paket"
-                  className="inline-flex items-center gap-2 rounded-pill border border-line bg-surface px-7 py-3.5 font-medium text-ink transition-all duration-200 hover:border-brand hover:text-brand"
+                  className="inline-flex items-center gap-2 rounded-md border border-line bg-surface px-6 py-3.5 font-medium text-ink transition-colors duration-150 hover:border-ink/25"
                 >
                   Se paket
                 </Link>
@@ -122,7 +118,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                 {service.deliverables.map((d) => (
                   <li
                     key={d}
-                    className="rounded-pill border border-line bg-canvas px-3.5 py-1.5 text-sm text-muted"
+                    className="border border-line bg-canvas px-3 py-1.5 text-sm text-muted"
                   >
                     {d}
                   </li>
@@ -141,7 +137,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                   <li key={s.slug}>
                     <Link
                       href={`/tjanster/${s.slug}`}
-                      className="flex h-full flex-col rounded-2xl border border-line bg-surface p-5 shadow-card transition-all duration-200 hover:-translate-y-1 hover:border-brand/40 hover:shadow-lift"
+                      className="flex h-full flex-col rounded-lg border border-line bg-surface p-5 transition-[border-color] duration-150 hover:border-ink/20"
                     >
                       <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-tint text-brand">
                         {serviceIcons[s.slug]}

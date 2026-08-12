@@ -49,9 +49,9 @@ export const services: Service[] = [
     slug: "landningssidor",
     title: "Landningssidor",
     description:
-      "En sida med ett enda jobb: få besökaren att höra av sig, boka eller köpa. Snabb, mätbar och byggd runt din faktiska målgrupp.",
+      "En sida med ett jobb: få besökaren att höra av sig, boka eller köpa. Byggd runt ditt erbjudande och din målgrupp.",
     intro:
-      "En landningssida ska inte berätta allt om företaget — den ska få rätt person att ta nästa steg. Jag bygger sidor med tydlig hierarki, skarp copy-struktur och formulär som faktiskt går att mäta.",
+      "En landningssida ska inte berätta allt om företaget — den ska få rätt person att ta nästa steg. Jag bygger sidor med tydlig hierarki, skarp copy-struktur och formulär som går att följa upp.",
     deliverables: ["Copy-struktur", "Formulär & spårning", "Publicering"],
     benefits: [
       "Tydligt erbjudande ovanför vecket",
@@ -74,10 +74,10 @@ export const services: Service[] = [
     benefits: [
       "Tydlig informationsarkitektur",
       "Sidor som speglar ert erbjudande",
-      "Responsiv, modern design",
+      "Fungerar på mobil och desktop",
       "Redo att växa med fler sidor",
     ],
-    who: "Små och medelstora bolag som behöver en seriös webb närvaro.",
+    who: "Små och medelstora bolag som behöver en seriös webbplats.",
     timeline: "Oftast 1–3 veckor beroende på omfång.",
     price: SITE_PRICE,
   },
@@ -93,9 +93,9 @@ export const services: Service[] = [
       "Produktfokus utan onödigt brus",
       "Mobilvänligt köpflöde",
       "Integrationer mot betalning/frakt",
-      "Underlag för vidare tillväxt",
+      "Lätt att lägga till fler produkter",
     ],
-    who: "Varumärken som säljer produkter online och vill ha en butik som känns premium.",
+    who: "Varumärken som säljer produkter online och vill ha en butik som känns genomarbetad.",
     timeline: "Oftast 2–5 veckor beroende på katalog och integrationer.",
     price: { ...SITE_PRICE, open: true, note: "Pris efter scope — offert efter genomgång." },
   },
@@ -105,12 +105,12 @@ export const services: Service[] = [
     description:
       "Visuell identitet på webben: typografi, färg, layout och komponenter som känns som ert varumärke.",
     intro:
-      "Design är inte dekoration — det är hur besökaren förstår er. Jag tar fram ett uttryck som är modernt, skandinaviskt och konsekvent genom hela sajten, med fokus på läsbarhet och konvertering.",
+      "Design är hur besökaren förstår er. Jag tar fram ett uttryck som är konsekvent genom hela sajten, med fokus på läsbarhet och tydliga nästa steg.",
     deliverables: ["Designsystem", "Komponenter", "Responsiva layouts"],
     benefits: [
-      "Unikt uttryck — ingen mallkänsla",
+      "Uttryck anpassat efter er — inte en mall",
       "Tydlig typografisk hierarki",
-      "Blå/vit premiumkänsla eller ert egna varumärke",
+      "Era färger, eller ett lugnt blått/vitt system",
       "Design som går att bygga vidare på",
     ],
     who: "Bolag som vill lyfta känslan innan eller tillsammans med utveckling.",
@@ -127,7 +127,7 @@ export const services: Service[] = [
     description:
       "Har ni redan en sajt som känns långsam, trasig i mobilen eller gammal? Jag bygger om det som sitter i vägen.",
     intro:
-      "Ni behöver inte alltid börja om från noll — men ofta behöver ni det som känns som ett lyft. Jag går igenom befintlig sajt, prioriterar vad som faktiskt skaver och levererar en modern, snabb version.",
+      "Ni behöver inte alltid börja om från noll. Jag går igenom befintlig sajt, prioriterar vad som faktiskt skaver och levererar en snabbare, tydligare version.",
     deliverables: ["Genomgång", "Mobilanpassning", "Prestanda"],
     benefits: [
       "Behåll det som fungerar",
@@ -157,7 +157,7 @@ export const services: Service[] = [
       "Sitemap & robots på plats",
       "Råd kring innehåll som faktiskt rankar",
     ],
-    who: "Bolag som vill synas lokalt eller inom sin nisch utan att köpa en 'SEO-byrå'-överdrift.",
+    who: "Bolag som vill synas lokalt eller inom sin nisch utan överdrivna byrålöften.",
     timeline: "Grundsetup 2–5 dagar; löpande innehåll efter behov.",
     price: {
       from: PRICES.services.seoFrom,
@@ -170,14 +170,14 @@ export const services: Service[] = [
     slug: "prestanda",
     title: "Prestanda & optimering",
     description:
-      "Snabbare sidladdning, bättre Lighthouse-poäng och en sajt som känns premium på mobil.",
+      "Snabbare sidladdning, bättre Lighthouse-poäng och en sajt som känns lätt på mobil.",
     intro:
       "Långsamma sajter tappar både Google och kunder. Jag profilerar, komprimerar, lazy-loadar och städar bort det som tynger — med fokus på det som faktiskt påverkar upplevelsen.",
     deliverables: ["Lighthouse-genomgång", "Bild/asset-optimering", "Kodtrim"],
     benefits: [
       "Snabbare LCP och interaktion",
       "Lättare sidor på mobilnät",
-      "Mindre bounce från långsam start",
+      "Mindre avhopp från långsam start",
       "Rapport med före/efter",
     ],
     who: "Sajter som redan finns men känns tröga eller får dåliga scores.",
@@ -269,7 +269,7 @@ export const services: Service[] = [
       "Svarar på vanliga frågor dygnet runt",
       "Fångar leads när ni sover",
       "Kontroll över vad AI får säga",
-      "Mätbart värde, inte hype",
+      "Tydligt värde, inte hype",
     ],
     who: "Företag med återkommande frågor eller processer som kan automatiseras försiktigt.",
     timeline: "Oftast 1–3 veckor för en första version.",
@@ -282,15 +282,15 @@ export const services: Service[] = [
   },
   {
     slug: "skradarsydda-system",
-    title: "Skräddarsydda system",
+    title: "Egna system",
     description:
-      "Portaler, dashboards och interna verktyg när WordPress-mallar inte räcker.",
+      "Portaler, dashboards och interna verktyg när färdiga plattformar inte räcker.",
     intro:
-      "Ibland behövs mer än en marknadswebb: inloggade ytor, adminpaneler eller flöden unika för er verksamhet. Jag bygger med React/Next.js och TypeScript — skalbart och underhållbart.",
+      "Ibland behövs mer än en marknadswebb: inloggade ytor, adminpaneler eller flöden unika för er verksamhet. Jag bygger med React/Next.js och TypeScript — underhållbart och med er äganderätt till koden.",
     deliverables: ["Krav & scope", "Utveckling", "Överlämning"],
     benefits: [
       "Lösning anpassad efter er process",
-      "Modern, snabb stack",
+      "Snabb, modern stack",
       "Ni äger koden",
       "Möjlighet till löpande vidareutveckling",
     ],

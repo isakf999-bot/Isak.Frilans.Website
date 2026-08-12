@@ -7,7 +7,7 @@ const POINTS = [
     body: "Ingen account manager. Du pratar med mig — samma person som designar och kodar.",
   },
   {
-    title: "Modern stack",
+    title: "Rätt teknik",
     body: "React, TypeScript och Next.js när det lönar sig. Snabba sajter som går att bygga vidare på.",
   },
   {
@@ -23,8 +23,8 @@ const POINTS = [
     body: "Inga generiska teman. Du får något som känns som ert bolag — och som ni äger helt.",
   },
   {
-    title: "Framtidssäkrat",
-    body: "Skalbar struktur, rena komponenter och dokumentation så nästa steg inte blir en omskrivning.",
+    title: "Byggd att leva vidare",
+    body: "Ren struktur, tydliga komponenter och dokumentation så nästa steg inte blir en omskrivning.",
   },
 ];
 
@@ -35,18 +35,18 @@ export function HomeTrust() {
         <Reveal>
           <SectionLabel>Varför IsakWeb</SectionLabel>
           <h2 className="mt-4 max-w-2xl text-h2">
-            Byråkänsla. Frilansansvar.
+            Byråkvalitet. Frilanspris.
           </h2>
           <p className="mt-4 max-w-2xl text-lead text-muted">
-            Du får precisionen hos en modern produktstudio — utan lagret av
-            projektledare, fakturapåslag och mallsidor.
+            Du får en genomarbetad sajt — utan lagret av projektledare,
+            fakturapåslag och mallsidor.
           </p>
         </Reveal>
 
         <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {POINTS.map((p, i) => (
             <Reveal key={p.title} delay={i * 50}>
-              <li className="h-full rounded-2xl border border-line bg-surface p-6 shadow-card transition-all duration-300 ease-out hover:-translate-y-1 hover:border-brand/35 hover:shadow-lift">
+              <li className="h-full rounded-lg border border-line bg-surface p-6 transition-[border-color] duration-150 hover:border-ink/20">
                 <div
                   aria-hidden="true"
                   className="mb-4 h-1 w-10 rounded-pill bg-brand"

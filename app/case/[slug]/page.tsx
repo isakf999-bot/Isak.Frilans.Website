@@ -50,17 +50,12 @@ export default async function CaseDetailPage({ params }: Props) {
     <>
       <Nav />
       <main>
-        {/* Hero-header */}
-        <section className="relative overflow-hidden border-b border-line">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -top-32 right-0 h-[420px] w-[520px] rounded-full bg-brand-glow opacity-20 blur-[120px]"
-          />
-          <div className="relative z-10 mx-auto max-w-6xl px-6 pt-14 pb-10 lg:px-8 lg:pt-16 lg:pb-12">
+        <section className="border-b border-line">
+          <div className="mx-auto max-w-6xl px-6 pt-14 pb-10 lg:px-8 lg:pt-16 lg:pb-12">
             <Reveal>
               <Link
                 href="/case"
-                className="inline-flex items-center gap-2 text-sm font-medium text-muted transition-colors duration-200 hover:text-brand"
+                className="inline-flex items-center gap-2 text-sm font-medium text-muted transition-colors duration-150 hover:text-brand"
               >
                 <span aria-hidden="true">←</span>
                 Alla kundcase
@@ -76,7 +71,7 @@ export default async function CaseDetailPage({ params }: Props) {
                 {study.services.map((tag) => (
                   <li
                     key={tag}
-                    className="rounded-pill border border-line bg-surface px-3.5 py-1.5 text-sm text-muted"
+                    className="border border-line bg-surface px-3 py-1.5 text-sm text-muted"
                   >
                     {tag}
                   </li>
@@ -88,19 +83,14 @@ export default async function CaseDetailPage({ params }: Props) {
                   href={study.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="shine group inline-flex items-center gap-2.5 rounded-pill bg-brand px-6 py-3.5 font-medium text-white shadow-brand transition-all duration-200 ease-out hover:bg-brand-dark hover:shadow-lift active:scale-[0.97]"
+                  className="inline-flex items-center gap-2 rounded-md bg-brand px-6 py-3.5 font-semibold text-white transition-colors duration-150 hover:bg-brand-dark"
                 >
                   Besök sajten
-                  <span
-                    aria-hidden="true"
-                    className="transition-transform duration-200 ease-out group-hover:translate-x-1"
-                  >
-                    ↗
-                  </span>
+                  <span aria-hidden="true">↗</span>
                 </a>
                 <Link
                   href="/kontakt"
-                  className="inline-flex items-center gap-2 rounded-pill border border-line bg-surface px-6 py-3.5 font-medium text-ink transition-all duration-200 ease-out hover:border-brand/30 hover:bg-brand-tint hover:text-brand"
+                  className="inline-flex items-center gap-2 rounded-md border border-line bg-surface px-6 py-3.5 font-medium text-ink transition-colors duration-150 hover:border-ink/25"
                 >
                   Starta liknande projekt
                 </Link>
@@ -185,7 +175,7 @@ export default async function CaseDetailPage({ params }: Props) {
                   href={study.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-7 flex w-full items-center justify-center gap-2 rounded-pill border border-line bg-canvas px-4 py-3 text-sm font-semibold text-ink transition-all duration-200 hover:border-brand/30 hover:bg-brand-tint hover:text-brand"
+                  className="mt-7 flex w-full items-center justify-center gap-2 rounded-md border border-line bg-canvas px-4 py-3 text-sm font-semibold text-ink transition-colors duration-150 hover:border-ink/25"
                 >
                   Öppna {study.domain}
                   <span aria-hidden="true">↗</span>

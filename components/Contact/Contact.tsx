@@ -126,29 +126,19 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
   return (
     <section
       id="kontakt"
-      className="relative overflow-hidden border-t border-line-cool bg-mist"
+      className="border-t border-line bg-mist"
       aria-labelledby="kontakt-rubrik"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-32 right-[-10%] h-[28rem] w-[28rem] rounded-full bg-brand/10 blur-3xl"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-40 left-[-8%] h-[24rem] w-[24rem] rounded-full bg-sky-300/20 blur-3xl"
-      />
-
-      <div className="relative mx-auto max-w-6xl px-6 pt-16 pb-20 lg:px-8 lg:pt-24 lg:pb-28">
+      <div className="mx-auto max-w-6xl px-6 pt-16 pb-20 lg:px-8 lg:pt-24 lg:pb-28">
         <Reveal>
           <div className="mx-auto max-w-2xl text-center lg:mx-0 lg:max-w-xl lg:text-left">
             <SectionLabel>Starta ett projekt</SectionLabel>
             <h1 id="kontakt-rubrik" className="mt-6 text-h1 lg:text-display">
-              Berätta vad du vill{" "}
-              <em className="not-italic text-brand">bygga</em>.
+              Berätta vad du vill bygga.
             </h1>
             <p className="mt-5 text-lead text-muted">
-              Skicka en kort beskrivning — jag återkommer med nästa steg. Inget
-              säljsnack, inga förpliktelser.
+              Skicka en kort beskrivning — jag återkommer med nästa steg. Ingen
+              förpliktelse.
             </p>
           </div>
         </Reveal>
@@ -156,7 +146,7 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
         <Reveal className="mt-12 grid items-stretch gap-8 lg:mt-16 lg:grid-cols-[0.9fr_1.2fr] lg:gap-12">
           {/* Sidokolumn — samma höjd som formuläret */}
           <aside className="order-2 flex h-full flex-col lg:order-1">
-            <div className="flex h-full flex-1 flex-col rounded-2xl border border-line-cool bg-surface/80 p-6 backdrop-blur-sm sm:p-7">
+            <div className="flex h-full flex-1 flex-col rounded-lg border border-line bg-surface p-6 sm:p-7">
               <p className="text-eyebrow font-medium tracking-[0.12em] text-brand uppercase">
                 Så går det till
               </p>
@@ -165,7 +155,7 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
                   <li key={step} className="flex gap-4">
                     <span
                       aria-hidden="true"
-                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-tint text-sm font-semibold text-brand"
+                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-line bg-canvas font-mono text-sm font-semibold text-brand"
                     >
                       {i + 1}
                     </span>
@@ -176,7 +166,7 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
                 ))}
               </ol>
 
-              <div className="mt-auto rounded-xl bg-brand px-5 py-4 text-white shadow-brand">
+              <div className="mt-auto rounded-md bg-brand px-5 py-4 text-white">
                 <p className="text-sm text-white/75">Svarstid</p>
                 <p className="mt-1 text-xl font-semibold tracking-tight">
                   Inom {RESPONSE_TIME_DAYS} arbetsdagar
@@ -196,12 +186,7 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
 
           {/* Formulär — huvudfokus */}
           <div className="order-1 flex h-full lg:order-2">
-            <div className="relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-line-cool bg-surface shadow-lift">
-              <div
-                aria-hidden="true"
-                className="h-1.5 w-full bg-gradient-to-r from-brand via-sky-400 to-brand-glow"
-              />
-
+            <div className="relative flex h-full w-full flex-col overflow-hidden rounded-lg border border-line bg-surface shadow-card">
               <div className="flex flex-1 flex-col p-6 sm:p-9 lg:p-10">
                 {status === "success" ? (
                   <div
@@ -210,7 +195,7 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
                   >
                     <span
                       aria-hidden="true"
-                      className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-brand text-2xl text-white shadow-brand"
+                      className="mx-auto flex h-14 w-14 items-center justify-center rounded-md bg-brand text-2xl text-white"
                     >
                       ✓
                     </span>
@@ -227,7 +212,7 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
                     <button
                       type="button"
                       onClick={() => setStatus("idle")}
-                      className="mt-8 rounded-pill border border-line bg-canvas px-6 py-3 text-sm font-medium transition-all duration-200 ease-out hover:border-brand hover:bg-brand-tint hover:text-brand"
+                      className="mt-8 rounded-md border border-line bg-canvas px-6 py-3 text-sm font-medium transition-colors duration-150 hover:border-ink/25 hover:text-brand"
                     >
                       Skicka en till
                     </button>
@@ -267,10 +252,10 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
                               onClick={() =>
                                 setProjectType(selected ? null : type)
                               }
-                              className={`rounded-pill border px-3.5 py-2 text-sm font-medium transition-all duration-200 ease-out ${
+                              className={`rounded-md border px-3.5 py-2 text-sm font-medium transition-colors duration-150 ${
                                 selected
-                                  ? "border-brand bg-brand text-white shadow-brand"
-                                  : "border-line bg-canvas text-ink hover:border-brand-glow hover:bg-brand-tint hover:text-brand"
+                                  ? "border-brand bg-brand text-white"
+                                  : "border-line bg-canvas text-ink hover:border-ink/20 hover:bg-surface"
                               }`}
                             >
                               {type}
@@ -329,17 +314,12 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
                       <button
                         type="submit"
                         disabled={status === "submitting"}
-                        className="shine group inline-flex w-full items-center justify-center gap-2.5 rounded-pill bg-brand px-8 py-4 font-semibold text-white shadow-brand transition-all duration-200 ease-out hover:bg-brand-dark hover:shadow-lift active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-60 disabled:active:scale-100 sm:w-auto"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-brand px-8 py-3.5 font-semibold text-white transition-colors duration-150 hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-55 sm:w-auto"
                       >
                         {status === "submitting"
                           ? "Skickar…"
                           : "Skicka förfrågan"}
-                        <span
-                          aria-hidden="true"
-                          className="transition-transform duration-200 ease-out group-hover:translate-x-1"
-                        >
-                          →
-                        </span>
+                        <span aria-hidden="true">→</span>
                       </button>
                       <p className="text-center text-xs leading-relaxed text-muted sm:max-w-[14rem] sm:text-left">
                         Ingen spam. Bara ett svar från mig på{" "}
@@ -389,10 +369,10 @@ function Field({
   onChange,
 }: FieldProps) {
   const errorId = `${id}-error`;
-  const shared = `mt-2 w-full rounded-xl border bg-canvas px-4 py-3.5 text-ink placeholder:text-muted/45 shadow-[inset_0_1px_2px_rgb(11_18_32/0.03)] transition-all duration-200 ease-out focus:bg-surface focus:outline-none ${
+  const shared = `mt-2 w-full rounded-md border bg-canvas px-4 py-3.5 text-ink placeholder:text-muted/45 transition-[border-color,background-color] duration-150 ease-out focus:bg-surface focus:outline-none ${
     error
-      ? "border-danger focus:border-danger focus:shadow-[0_0_0_4px_rgba(180,35,24,0.12)]"
-      : "border-line hover:border-brand-glow focus:border-brand focus:shadow-[0_0_0_4px_color-mix(in_srgb,var(--palette-brand)_16%,transparent)]"
+      ? "border-danger focus:border-danger"
+      : "border-line hover:border-ink/20 focus:border-brand"
   }`;
 
   return (

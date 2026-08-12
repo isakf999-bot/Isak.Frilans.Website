@@ -21,12 +21,11 @@ export function Services() {
         <Reveal className="max-w-2xl">
           <SectionLabel>Vad jag bygger</SectionLabel>
           <h2 id="tjanster-rubrik" className="mt-6 text-h2">
-            Tjänster byggda för tillväxt.
+            Vad jag kan hjälpa dig med.
           </h2>
           <p className="mt-5 text-lead text-muted">
-            Från landningssida till e-handel — varje leverans är skräddarsydd,
-            mätbar och snabb. Osäker på vad du behöver? Beskriv läget så säger
-            jag rakt vad som är värt att bygga.
+            Från landningssida till e-handel. Osäker på vad du behöver? Beskriv
+            läget — så säger jag rakt vad som är värt att bygga.
           </p>
         </Reveal>
 

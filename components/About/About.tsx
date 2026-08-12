@@ -25,17 +25,11 @@ export function About() {
       className="scroll-mt-24"
       aria-labelledby="om-mig-rubrik"
     >
-      <div className="relative">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgb(29_78_216_/_0.08),transparent_55%),radial-gradient(ellipse_at_bottom_left,rgb(147_180_248_/_0.14),transparent_50%)]"
-        />
-
-        <div className="relative mx-auto max-w-6xl px-6 pt-28 pb-20 lg:px-8 lg:pt-32 lg:pb-28">
+      <div className="mx-auto max-w-6xl px-6 pt-28 pb-20 lg:px-8 lg:pt-32 lg:pb-28">
           <Reveal>
             <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
               <figure className="mx-auto w-full max-w-md self-start lg:sticky lg:top-28 lg:mx-0 lg:max-w-none">
-                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-line bg-white shadow-lift">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-lg border border-line bg-white">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={PORTRAIT_SRC}
@@ -90,7 +84,7 @@ export function About() {
                       href={PORTFOLIO_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-medium text-brand underline decoration-brand-glow decoration-2 underline-offset-4 transition-colors duration-200 hover:decoration-brand"
+                      className="font-medium text-brand underline decoration-brand/40 decoration-2 underline-offset-4 transition-colors duration-150 hover:decoration-brand"
                     >
                       min portfolio
                     </a>
@@ -111,7 +105,7 @@ export function About() {
                     {STACK.map((tool) => (
                       <li
                         key={tool}
-                        className="rounded-pill border border-line bg-surface px-3 py-1.5 text-sm text-ink shadow-card"
+                        className="border border-line bg-surface px-3 py-1.5 text-sm text-ink"
                       >
                         {tool}
                       </li>
@@ -122,19 +116,14 @@ export function About() {
                 <div className="mt-10 flex flex-wrap gap-3">
                   <Link
                     href="/kontakt"
-                    className="shine group inline-flex items-center gap-2.5 rounded-pill bg-brand px-6 py-3.5 font-medium whitespace-nowrap text-white shadow-brand transition-all duration-200 ease-out hover:bg-brand-dark hover:shadow-lift active:scale-[0.97]"
+                    className="inline-flex items-center gap-2 rounded-md bg-brand px-6 py-3.5 font-semibold whitespace-nowrap text-white transition-colors duration-150 hover:bg-brand-dark"
                   >
                     Hör av dig
-                    <span
-                      aria-hidden="true"
-                      className="transition-transform duration-200 ease-out group-hover:translate-x-1"
-                    >
-                      →
-                    </span>
+                    <span aria-hidden="true">→</span>
                   </Link>
                   <Link
                     href="/paket"
-                    className="inline-flex items-center gap-2 rounded-pill border border-line bg-surface px-6 py-3.5 font-medium text-ink shadow-card transition-all duration-200 ease-out hover:border-brand hover:text-brand"
+                    className="inline-flex items-center gap-2 rounded-md border border-line bg-surface px-6 py-3.5 font-medium text-ink transition-colors duration-150 hover:border-ink/25"
                   >
                     Se paket och priser
                   </Link>
@@ -143,7 +132,6 @@ export function About() {
             </div>
           </Reveal>
         </div>
-      </div>
     </section>
   );
 }

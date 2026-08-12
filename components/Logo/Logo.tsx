@@ -23,7 +23,7 @@ type Props = {
  * från sitt nedre vänstra hörn i stället för att glida i sidled.
  */
 export const logoLinkClass =
-  "inline-flex origin-bottom-left transition-transform duration-300 ease-out hover:-rotate-[3.5deg] hover:scale-105 active:rotate-0 active:scale-100";
+  "inline-flex transition-opacity duration-150 ease-out hover:opacity-80";
 
 export function Logo({ className = "", onDark = false }: Props) {
   return (

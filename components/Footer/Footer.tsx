@@ -97,21 +97,16 @@ function IconArrowUpRight() {
 }
 
 const contactIconClass =
-  "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-line bg-surface text-brand transition-all duration-200 ease-out group-hover:border-brand group-hover:bg-brand group-hover:text-white";
+  "flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-line bg-surface text-brand transition-colors duration-150 group-hover:border-brand group-hover:bg-brand group-hover:text-white";
 
 const linkClass =
-  "text-sm text-muted transition-colors duration-200 ease-out hover:text-brand";
+  "text-sm text-muted transition-colors duration-150 hover:text-brand";
 
 export function Footer({ hideCta = false }: { hideCta?: boolean }) {
   return (
     <>
       {!hideCta && <HomeFinalCta />}
-      <footer className="relative border-t border-line bg-mist">
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand/40 to-transparent"
-        />
-
+      <footer className="border-t border-line bg-mist">
         <div className="mx-auto max-w-6xl px-6 pt-16 pb-10 lg:px-8 lg:pt-20 lg:pb-12">
           <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-10">
             <div className="sm:col-span-2 lg:col-span-4">
@@ -123,9 +118,8 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
                 <Logo />
               </Link>
               <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted">
-                Webbplatser för svenska företag — snabba, tydliga och byggda för
-                att konvertera. Baserad i Helsingborg, tillgänglig i hela
-                Sverige.
+                Webbplatser för svenska företag — tydliga, snabba och byggda med
+                fast pris. Baserad i Helsingborg, tillgänglig i hela Sverige.
               </p>
               <p className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-ink">
                 <span className="text-brand">
@@ -221,7 +215,7 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
                       className="group inline-flex items-center gap-1.5 text-sm font-medium text-ink transition-colors duration-200 hover:text-brand"
                     >
                       {link.label}
-                      <span className="text-muted transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-brand">
+                      <span className="text-muted transition-colors duration-150 group-hover:text-brand">
                         <IconArrowUpRight />
                       </span>
                     </a>
@@ -236,7 +230,7 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.name}
-                      className="flex h-10 w-10 items-center justify-center rounded-xl border border-line bg-surface text-ink/75 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-brand hover:bg-brand hover:text-white hover:shadow-card active:translate-y-0"
+                      className="flex h-10 w-10 items-center justify-center rounded-md border border-line bg-surface text-ink/75 transition-colors duration-150 hover:border-brand hover:bg-brand hover:text-white"
                     >
                       <svg
                         viewBox="0 0 24 24"

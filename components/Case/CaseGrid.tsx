@@ -74,10 +74,10 @@ export function CaseGrid({
           type="button"
           onClick={clearFilters}
           disabled={!hasFilter}
-          className={`shine inline-flex shrink-0 items-center justify-center gap-2 rounded-pill px-6 py-3 text-sm font-medium text-white shadow-brand transition-all duration-200 ease-out sm:mb-0.5 ${
+          className={`inline-flex shrink-0 items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold text-white transition-colors duration-150 sm:mb-0.5 ${
             hasFilter
-              ? "bg-brand hover:bg-brand-dark hover:shadow-lift active:scale-[0.97]"
-              : "cursor-default bg-brand/40 shadow-none"
+              ? "bg-brand hover:bg-brand-dark"
+              : "cursor-default bg-brand/40"
           }`}
         >
           <ClearIcon />
@@ -99,10 +99,10 @@ export function CaseGrid({
               role="tab"
               aria-selected={isActive}
               onClick={() => setActive(chip)}
-              className={`rounded-pill border px-4 py-2 text-sm font-medium transition-all duration-200 ease-out ${
+              className={`rounded-md border px-3.5 py-2 text-sm font-medium transition-colors duration-150 ${
                 isActive
-                  ? "border-brand bg-brand text-white shadow-brand"
-                  : "border-line bg-surface text-muted hover:border-brand/30 hover:bg-brand-tint hover:text-brand"
+                  ? "border-brand bg-brand text-white"
+                  : "border-line bg-surface text-muted hover:border-ink/20 hover:text-ink"
               }`}
             >
               {chip}

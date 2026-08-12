@@ -28,7 +28,7 @@ const jsonLd = {
       url: SITE_URL,
       name: "IsakWeb",
       description:
-        "Frilansande fullstack-utvecklare i Helsingborg. Snabba, moderna hemsidor åt svenska företag.",
+        "Frilansande fullstack-utvecklare i Helsingborg. Hemsidor åt svenska företag.",
       inLanguage: "sv-SE",
       publisher: { "@id": `${SITE_URL}/#person` },
     },
@@ -59,7 +59,7 @@ const jsonLd = {
       url: SITE_URL,
       image: `${SITE_URL}/og.jpg`,
       description:
-        "Webbutveckling, landningssidor, e-handel och skräddarsydda system för svenska företag.",
+        "Webbutveckling, landningssidor, e-handel och egna system för svenska företag.",
       areaServed: "SE",
       priceRange: "$$",
       founder: { "@id": `${SITE_URL}/#person` },
@@ -70,11 +70,11 @@ const jsonLd = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "IsakWeb — Webbplatser som får företag att växa",
+    default: "IsakWeb — Hemsidor åt svenska företag",
     template: "%s | IsakWeb",
   },
   description:
-    "Frilansande fullstack-utvecklare i Helsingborg. Jag bygger snabba, moderna hemsidor, e-handel och system åt svenska företag — med fast pris och direktkontakt.",
+    "Frilansande webbutvecklare i Helsingborg. Landningssidor, företagssajter och e-handel — med fast pris och direktkontakt.",
   keywords: [
     "IsakWeb",
     "Isak Web",
@@ -95,14 +95,14 @@ export const metadata: Metadata = {
     siteName: "IsakWeb",
     title: "IsakWeb — Webbutvecklare i Helsingborg | Från 2 000 kr",
     description:
-      "Hemsidor som får fler kunder att hitta dig. Moderna, snabba sajter till rimligt pris — du pratar alltid med den som skriver koden.",
+      "Hemsidor med fast pris. Du pratar alltid med den som skriver koden.",
     images: [
       {
         url: "/og.jpg",
         width: 1200,
         height: 630,
         type: "image/jpeg",
-        alt: "IsakWeb — hemsidor som får fler kunder att hitta dig",
+        alt: "IsakWeb — webbutvecklare i Helsingborg",
       },
     ],
   },
@@ -110,7 +110,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "IsakWeb — Webbutvecklare i Helsingborg | Från 2 000 kr",
     description:
-      "Hemsidor som får fler kunder att hitta dig. Moderna, snabba sajter till rimligt pris.",
+      "Hemsidor med fast pris. Du pratar alltid med den som skriver koden.",
     images: ["/og.jpg"],
   },
   robots: { index: true, follow: true },
