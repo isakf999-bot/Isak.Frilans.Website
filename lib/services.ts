@@ -51,11 +51,11 @@ export const services: Service[] = [
     description:
       "En sida med ett jobb: få besökaren att höra av sig, boka eller köpa. Byggd runt ditt erbjudande och din målgrupp.",
     intro:
-      "En landningssida ska inte berätta allt om företaget — den ska få rätt person att ta nästa steg. Jag bygger sidor med tydlig hierarki, skarp copy-struktur och formulär som går att följa upp.",
-    deliverables: ["Copy-struktur", "Formulär & spårning", "Publicering"],
+      "En landningssida ska inte berätta allt om företaget — den ska få rätt person att ta nästa steg. Jag bygger sidor med tydlig hierarki, bra textstruktur och formulär som går att följa upp.",
+    deliverables: ["Textstruktur", "Formulär & spårning", "Publicering"],
     benefits: [
       "Tydligt erbjudande ovanför vecket",
-      "En primär CTA — inte tio konkurrerande",
+      "En tydlig huvudknapp — inte tio konkurrerande",
       "Snabb laddning på mobil",
       "Grundläggande SEO och analytics",
     ],
@@ -67,9 +67,9 @@ export const services: Service[] = [
     slug: "foretagssajter",
     title: "Företagssajter",
     description:
-      "Sajten som gör att någon vågar anlita er. Tydligt om vad ni gör, vilka ni är och hur man får tag på er.",
+      "Sajten som gör att någon vågar anlita er. Tydligt vad ni gör, vilka ni är och hur man får tag på er.",
     intro:
-      "En företagssajt ska bygga förtroende. Jag strukturerar innehåll så besökaren förstår erbjudandet, ser bevis och hittar kontaktvägen — utan floskler och utan stockfoton.",
+      "En företagssajt ska bygga förtroende. Jag strukturerar innehållet så besökaren förstår erbjudandet, ser bevis och hittar kontaktvägen — utan floskler och utan stockfoton.",
     deliverables: ["Struktur & innehåll", "Kontaktvägar", "Sökbarhet"],
     benefits: [
       "Tydlig informationsarkitektur",

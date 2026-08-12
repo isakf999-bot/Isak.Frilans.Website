@@ -32,7 +32,7 @@ export function Hero() {
 
           <p className="rise rise-3 mt-6 max-w-lg text-lead text-white/80">
             Landningssidor, företagssajter och e-handel — byggda snabbt, med
-            tydligt pris och dig i kontakt med den som skriver koden.
+            tydligt pris. Du pratar alltid med den som skriver koden.
           </p>
 
           <div className="rise rise-3 mt-9 flex flex-wrap items-center gap-3">

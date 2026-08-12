@@ -79,7 +79,7 @@ export function About() {
                     ordentligt, och jag bygger alltid från grunden. Inga mallar.
                   </p>
                   <p>
-                    Vill du se mer av vad jag byggt finns det på{" "}
+                    Vill du se mer av vad jag byggt? Det finns på{" "}
                     <a
                       href={PORTFOLIO_URL}
                       target="_blank"

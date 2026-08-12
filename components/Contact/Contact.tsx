@@ -14,7 +14,7 @@ const ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
 const STEPS = [
   "Du skickar en kort beskrivning.",
   `Jag svarar inom ${RESPONSE_TIME_DAYS} arbetsdagar.`,
-  "Vi tar ett samtal om det behövs — gratis och utan förpliktelse.",
+  "Vi tar ett samtal om det behövs — gratis och utan förpliktelser.",
 ];
 
 const PROJECT_TYPES = [
@@ -42,7 +42,7 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
     const email = String(data.get("email") ?? "").trim();
     const message = String(data.get("message") ?? "").trim();
 
-    if (!name) next.name = "Skriv ditt namn, så vet jag vem jag svarar.";
+    if (!name) next.name = "Skriv ditt namn, så vet jag vem jag svarar till.";
     if (!email) next.email = "Jag behöver en e-postadress för att kunna svara.";
     else if (!EMAIL_PATTERN.test(email))
       next.email = "Det där ser inte ut som en e-postadress — kolla stavningen.";
@@ -137,8 +137,8 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
               Berätta vad du vill bygga.
             </h1>
             <p className="mt-5 text-lead text-muted">
-              Skicka en kort beskrivning — jag återkommer med nästa steg. Ingen
-              förpliktelse.
+              Skicka en kort beskrivning — jag återkommer med nästa steg. Det
+              förbinder dig inte till något.
             </p>
           </div>
         </Reveal>

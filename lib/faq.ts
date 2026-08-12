@@ -14,7 +14,7 @@ export const homeFaq: FaqItem[] = [
   },
   {
     q: "Jobbar du med mallar?",
-    a: "Nej. Varje sajt byggs för ditt erbjudande och din målgrupp. Du får modern teknik (React/Next.js där det passar) utan generisk WordPress-känsla.",
+    a: "Nej. Varje sajt byggs för ditt erbjudande och din målgrupp. Jag använder React eller Next.js där det passar — utan generisk WordPress-känsla.",
   },
   {
     q: "Kan jag uppdatera innehållet själv?",

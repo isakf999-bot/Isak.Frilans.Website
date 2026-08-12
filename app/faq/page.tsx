@@ -7,7 +7,7 @@ import { absoluteUrl } from "@/lib/site";
 export const metadata: Metadata = {
   title: "FAQ — IsakWeb",
   description:
-    "Vanliga frågor om priser, leveranstid, process och vad som ingår när jag bygger webbplats.",
+    "Vanliga frågor om priser, leveranstid, process och vad som ingår när jag bygger en webbplats.",
   alternates: { canonical: absoluteUrl("/faq") },
 };
 

@@ -119,7 +119,8 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
               </Link>
               <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted">
                 Webbplatser för svenska företag — tydliga, snabba och byggda med
-                fast pris. Baserad i Helsingborg, tillgänglig i hela Sverige.
+                fast pris. Jag sitter i Helsingborg och tar uppdrag i hela
+                Sverige.
               </p>
               <p className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-ink">
                 <span className="text-brand">
@@ -202,8 +203,7 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
                 Följ mig
               </h2>
               <p className="mt-5 text-sm leading-relaxed text-muted">
-                Projekt, processer och det jag bygger — på webben och i sociala
-                medier.
+                Projekt och det jag bygger — på webben och i sociala medier.
               </p>
               <ul className="mt-5 space-y-2.5">
                 {EXTERNAL_LINKS.map((link) => (

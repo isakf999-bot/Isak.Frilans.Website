@@ -116,11 +116,11 @@ export const cases: CaseStudy[] = [
       },
       {
         title: "Teknik & leverans",
-        body: "Byggd som en snabb, modern sajt med fokus på mobilupplevelse, SEO-grunder och enkel vidareutveckling när sortimentet växer.",
+        body: "Byggd som en snabb sajt med fokus på mobilupplevelse, SEO-grunder och enkel vidareutveckling när sortimentet växer.",
       },
     ],
     results: [
-      { value: "1", label: "tydlig digital butiksyta" },
+      { value: "1", label: "live webbplats" },
       { value: "100%", label: "mobilanpassad" },
       { value: "Snabb", label: "laddningstid" },
     ],

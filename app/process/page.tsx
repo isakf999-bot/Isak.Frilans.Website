@@ -77,7 +77,7 @@ export default function ProcessPage() {
               </h1>
               <p className="mt-5 max-w-2xl text-lead text-muted">
                 Inga överraskningar. Här ser du hur vi jobbar tillsammans, hur
-                jag håller dig uppdaterad, och ungefärliga prisintervall innan
+                jag håller dig uppdaterad och ungefärliga prisintervall — innan
                 du hör av dig.
               </p>
             </Reveal>

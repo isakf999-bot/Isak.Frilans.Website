@@ -9,10 +9,11 @@ export function HomeProcess() {
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
         <Reveal>
           <SectionLabel>Process</SectionLabel>
-          <h2 className="mt-4 max-w-2xl text-h2">Från samtal till live — utan dimma.</h2>
+          <h2 className="mt-4 max-w-2xl text-h2">
+            Från samtal till live — utan krångel.
+          </h2>
           <p className="mt-4 max-w-2xl text-lead text-muted">
-            Du vet alltid vad som händer härnäst. Inga överraskningsfakturor, ingen
-            svart låda.
+            Du vet alltid vad som händer härnäst. Inga överraskningsfakturor.
           </p>
         </Reveal>
 

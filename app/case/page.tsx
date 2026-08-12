@@ -10,7 +10,7 @@ import { absoluteUrl } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Kundcase — Isak Web",
   description:
-    "Alla företag jag har byggt webbplats åt. Se uppdrag, resultat och hur sajterna blev.",
+    "Företag jag har byggt webbplatser åt. Se uppdrag, resultat och hur sajterna blev.",
   alternates: { canonical: absoluteUrl("/case") },
 };
 
@@ -28,7 +28,7 @@ export default function CasePage() {
             <Reveal>
               <SectionLabel>Kundcase</SectionLabel>
               <h1 className="mt-6 max-w-3xl text-h1">
-                Företag jag har byggt webbplats åt
+                Företag jag har byggt webbplatser åt
               </h1>
               <p className="mt-5 max-w-2xl text-lead text-muted">
                 Här samlar jag projekten jag har levererat — från uppdrag till

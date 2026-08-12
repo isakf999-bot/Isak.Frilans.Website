@@ -15,7 +15,7 @@ export function HomeFaq() {
           <SectionLabel>FAQ</SectionLabel>
           <h2 className="mt-4 text-h2">Vanliga frågor</h2>
           <p className="mt-4 text-lead text-muted">
-            Kort och rakt. Hittar du inte svaret — fråga i kontaktformuläret.
+            Kort och rakt. Hittar du inte svaret? Fråga i kontaktformuläret.
           </p>
         </Reveal>
 

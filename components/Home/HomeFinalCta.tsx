@@ -17,8 +17,8 @@ export function HomeFinalCta() {
             Berätta vad du vill bygga — så säger jag rakt vad det kräver.
           </h2>
           <p className="mt-5 max-w-2xl text-lg text-white/80">
-            Du får en tydlig rekommendation, ungefärligt pris och om jag är rätt
-            person för jobbet. Också om svaret är att vänta.
+            Du får en tydlig rekommendation och ungefärligt pris. Jag säger också
+            rakt om jag är rätt person för jobbet — även om svaret är att vänta.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <Link href="/kontakt" className={btn.onBrand}>
