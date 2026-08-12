@@ -101,6 +101,8 @@ export const cases: CaseStudy[] = [
     services: ["Webbdesign", "UX/UI", "Frontend-utveckling", "Landningssida"],
     launched: "2026",
     platform: "React + Vite",
+    challenge:
+      "En lokal biodling utan tydlig webbplats behövde en sajt som både berättar historien bakom honungen och gör det enkelt att förstå erbjudandet. Tonen skulle kännas äkta och hantverksmässig — inte corporate, inte mallig.",
     outcome:
       "En landningssida med starkt visuellt fokus, tydlig hierarki och en varm känsla som matchar produkten. Sajten laddar snabbt, fungerar lika bra i mobilen och gör det enkelt att gå vidare till kontakt eller köp.",
     work: [
