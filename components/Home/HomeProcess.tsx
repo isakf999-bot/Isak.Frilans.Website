@@ -5,7 +5,7 @@ import { processSteps } from "@/lib/process";
 
 export function HomeProcess() {
   return (
-    <section id="processen" className="border-t border-line bg-canvas">
+    <section id="processen" className="border-t border-line bg-transparent">
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
         <Reveal>
           <SectionLabel>Process</SectionLabel>
@@ -13,14 +13,15 @@ export function HomeProcess() {
             Från samtal till live — utan krångel.
           </h2>
           <p className="mt-4 max-w-2xl text-lead text-muted">
-            Du vet alltid vad som händer härnäst. Inga överraskningsfakturor.
+            Du vet alltid vad som händer härnäst, vad som ingår och när ni kan
+            förvänta er en färdig sajt. Inga överraskningsfakturor.
           </p>
         </Reveal>
 
         <ol className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {processSteps.map((step, i) => (
             <Reveal key={step.title} delay={i * 70}>
-              <li className="relative rounded-lg border border-line bg-surface p-6 transition-[border-color] duration-150 hover:border-ink/20">
+              <li className="relative rounded-lg border border-line glass p-6 transition-[border-color] duration-150 hover:border-ink/20">
                 <span className="font-mono text-sm font-semibold text-brand">
                   {step.number}
                 </span>
