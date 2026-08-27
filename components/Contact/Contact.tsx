@@ -254,7 +254,7 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
                               }
                               className={`rounded-md border px-3.5 py-2 text-sm font-medium transition-colors duration-150 ${
                                 selected
-                                  ? "border-white bg-white text-black"
+                                  ? "border-white bg-white text-black hover:border-white/40 hover:bg-white/10 hover:text-white"
                                   : "border-line bg-canvas text-ink hover:border-ink/20 hover:bg-surface"
                               }`}
                             >
@@ -314,7 +314,7 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
                       <button
                         type="submit"
                         disabled={status === "submitting"}
-                        className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-white px-8 py-3.5 font-semibold text-black transition-opacity duration-150 hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-55 sm:w-auto"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-transparent bg-white px-8 py-3.5 font-semibold text-black transition-[background-color,color,border-color] duration-150 hover:border-white/40 hover:bg-white/10 hover:text-white active:bg-white/15 disabled:cursor-not-allowed disabled:opacity-55 sm:w-auto"
                       >
                         {status === "submitting"
                           ? "Skickar…"

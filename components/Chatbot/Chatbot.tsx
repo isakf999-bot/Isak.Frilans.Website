@@ -192,7 +192,7 @@ export function Chatbot() {
               <button
                 type="submit"
                 disabled={pending || !input.trim()}
-                className="min-h-[2.75rem] shrink-0 rounded-xl bg-white px-4 py-2.5 text-sm font-medium text-black transition-opacity hover:opacity-90 disabled:opacity-40"
+                className="min-h-[2.75rem] shrink-0 rounded-xl border border-transparent bg-white px-4 py-2.5 text-sm font-medium text-black transition-[background-color,color,border-color] duration-150 hover:border-white/40 hover:bg-white/10 hover:text-white active:bg-white/15 disabled:opacity-40"
               >
                 Skicka
               </button>
@@ -213,7 +213,7 @@ export function Chatbot() {
         aria-expanded={open}
         aria-controls={panelId}
         aria-label={open ? "Stäng assistenten" : "Öppna assistenten"}
-        className={`pointer-events-auto fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-[61] flex h-14 w-14 items-center justify-center rounded-md bg-white text-black transition-opacity duration-150 hover:opacity-90 sm:right-6 sm:bottom-6 sm:h-16 sm:w-16 ${
+        className={`pointer-events-auto fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-[61] flex h-14 w-14 items-center justify-center rounded-md border border-transparent bg-white text-black transition-[background-color,color,border-color,transform] duration-150 ease-out hover:scale-105 hover:border-white/40 hover:bg-white/10 hover:text-white active:bg-white/15 sm:right-6 sm:bottom-6 sm:h-16 sm:w-16 ${
           open ? "max-sm:hidden" : ""
         }`}
       >

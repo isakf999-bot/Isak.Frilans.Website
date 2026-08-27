@@ -63,7 +63,7 @@ export function Nav() {
           ))}
           <Link
             href="/kontakt"
-            className="ml-3 inline-flex items-center rounded-md bg-white px-3.5 py-2 text-sm font-semibold text-black transition-opacity hover:opacity-85"
+            className="ml-3 inline-flex items-center rounded-md border border-transparent bg-white px-3.5 py-2 text-sm font-semibold text-black transition-[background-color,color,border-color] duration-150 hover:border-white/40 hover:bg-white/10 hover:text-white active:bg-white/15"
           >
             Starta ett projekt
           </Link>
@@ -121,7 +121,7 @@ export function Nav() {
                 href="/kontakt"
                 onClick={() => setOpen(false)}
                 tabIndex={open ? 0 : -1}
-                className="block rounded-md bg-white px-3 py-3 text-center text-lg font-semibold text-black"
+                className="block rounded-md border border-transparent bg-white px-3 py-3 text-center text-lg font-semibold text-black transition-[background-color,color,border-color] duration-150 hover:border-white/40 hover:bg-white/10 hover:text-white active:bg-white/15"
               >
                 Starta ett projekt
               </Link>

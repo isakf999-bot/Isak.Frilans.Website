@@ -239,7 +239,7 @@ export function HomePackages() {
                       aria-pressed={selected}
                       className={`inline-flex w-full items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold transition-colors duration-150 ${
                         selected
-                          ? "bg-white text-black hover:opacity-90"
+                          ? "border border-transparent bg-white text-black hover:border-white/40 hover:bg-white/10 hover:text-white active:bg-white/15"
                           : "border border-line bg-surface/80 font-medium text-ink hover:border-ink/25"
                       }`}
                     >
@@ -369,7 +369,7 @@ export function HomePackages() {
                           aria-pressed={on}
                           className={`inline-flex items-center gap-1.5 rounded-md border px-3.5 py-2 text-sm font-medium transition-colors duration-150 ${
                             on
-                              ? "border-white bg-white text-black"
+                              ? "border-white bg-white text-black hover:border-white/40 hover:bg-white/10 hover:text-white"
                               : "border-line bg-surface/80 text-ink hover:border-ink/20"
                           }`}
                         >
@@ -446,7 +446,7 @@ export function HomePackages() {
                 <div className="mt-8">
                   <Link
                     href={contactHref}
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-white px-5 py-3.5 text-sm font-semibold text-black transition-opacity duration-150 hover:opacity-90"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-transparent bg-white px-5 py-3.5 text-sm font-semibold text-black transition-[background-color,color,border-color] duration-150 hover:border-white/40 hover:bg-white/10 hover:text-white active:bg-white/15"
                   >
                     Få exakt offert
                     <span aria-hidden="true">→</span>

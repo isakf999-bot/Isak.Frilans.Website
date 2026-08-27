@@ -116,7 +116,7 @@ export function About() {
                 <div className="mt-10 flex flex-wrap gap-3">
                   <Link
                     href="/kontakt"
-                    className="inline-flex items-center gap-2 rounded-md bg-white px-6 py-3.5 font-semibold text-black transition-opacity duration-150 hover:opacity-90"
+                    className="inline-flex items-center gap-2 rounded-md border border-transparent bg-white px-6 py-3.5 font-semibold text-black transition-[background-color,color,border-color] duration-150 hover:border-white/40 hover:bg-white/10 hover:text-white active:bg-white/15"
                   >
                     Hör av dig
                     <span aria-hidden="true">→</span>

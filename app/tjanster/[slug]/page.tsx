@@ -75,7 +75,7 @@ export default async function ServiceDetailPage({ params }: Props) {
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href={`/kontakt?meddelande=${encodeURIComponent(prefill)}`}
-                  className="inline-flex items-center gap-2 rounded-md bg-white px-6 py-3.5 font-semibold text-black transition-opacity duration-150 hover:opacity-90"
+                  className="inline-flex items-center gap-2 rounded-md border border-transparent bg-white px-6 py-3.5 font-semibold text-black transition-[background-color,color,border-color] duration-150 hover:border-white/40 hover:bg-white/10 hover:text-white active:bg-white/15"
                 >
                   Hör av dig om {service.title.toLowerCase()}
                   <span aria-hidden="true">→</span>

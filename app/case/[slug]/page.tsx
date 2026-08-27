@@ -83,7 +83,7 @@ export default async function CaseDetailPage({ params }: Props) {
                   href={study.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-md bg-white px-6 py-3.5 font-semibold text-black transition-opacity duration-150 hover:opacity-90"
+                  className="inline-flex items-center gap-2 rounded-md border border-transparent bg-white px-6 py-3.5 font-semibold text-black transition-[background-color,color,border-color] duration-150 hover:border-white/40 hover:bg-white/10 hover:text-white active:bg-white/15"
                 >
                   Besök sajten
                   <span aria-hidden="true">↗</span>
@@ -99,11 +99,8 @@ export default async function CaseDetailPage({ params }: Props) {
           </div>
         </section>
 
-        {/* Hero i webbläsarram (Generation/Chrome-stil) */}
-        <section
-          className="border-b border-line"
-          style={{ background: study.accentColor ?? "#eef0fb" }}
-        >
+        {/* Hero i webbläsarram — samma svarta lampbakgrund som resten av sajten */}
+        <section className="border-b border-line bg-transparent">
           <div className="mx-auto max-w-6xl px-6 py-10 lg:px-8 lg:py-14">
             <Reveal>
               <BrowserFrame url={study.domain}>
