@@ -5,15 +5,15 @@
 
 export const PRICES = {
   packages: {
-    /** Basnivå — snabb start / landningssida */
-    starter: 2_000,
-    starterHigh: 2_500,
-    /** Mest vald / företagssida */
-    business: 4_000,
-    businessHigh: 4_500,
-    /** Full service / webbshop */
-    premium: 6_000,
-    premiumHigh: 6_500,
+    /** Bas */
+    starter: 3_795,
+    starterHigh: 3_795,
+    /** Premium (mest vald) */
+    business: 5_995,
+    businessHigh: 5_995,
+    /** Full Service */
+    premium: 10_995,
+    premiumHigh: 10_995,
   },
 
   addons: {
@@ -25,15 +25,14 @@ export const PRICES = {
     chatbot: 999,
     forms: 699,
     logo: 999,
-    gbp: 499,
     maintenanceMonthly: 499,
   },
 
   /** Fristående tjänster (visas på /process och /tjanster) */
   services: {
     /** Landning / företag — spann Bas–Full service */
-    siteFrom: 2_000,
-    siteTo: 6_000,
+    siteFrom: 3_795,
+    siteTo: 10_995,
     /** Uppdatering & redesign */
     redesignFrom: 1_500,
     redesignTo: 6_000,

@@ -1,49 +1,53 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   DESIGN TOKENS — enda källan till färg, typografi och djup i hela projektet.
-   Sajten är alltid light mode (vit/blå).
-
-   OBS: `inline` är nödvändigt. Utan det kan ett tema-värde inte referera en
-   variabel som sätts någon annanstans (next/font sätter sina font-variabler på
-   <body>), och hela kedjan tystnar till en tom sträng.
+   DESIGN TOKENS — mörk genomgående. Accent: varm brons (inte blått).
+   Signatur: site-wide interaktiva lampor.
    --------------------------------------------------------------------------- */
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 
-  /* Cool Scandinavian white + electric blue — ingen beige/cream. */
-  --palette-canvas: #f4f6fa;
-  --palette-surface: #ffffff;
-  --palette-mist: #eef1f7;
-  --palette-surface-soft: #f7f8fc;
+  --palette-canvas: #000000;
+  --palette-surface: #0a0a0a;
+  --palette-mist: #111111;
+  --palette-surface-soft: #141414;
 
-  /* Text */
-  --palette-ink: #0c1222;
-  --palette-muted: #5c6b82;
+  /* Text på mörk botten */
+  --palette-ink: #ededed;
+  --palette-muted: #888888;
 
   /* Linjer */
-  --palette-line: #e1e6ef;
-  --palette-line-cool: #d5dce8;
+  --palette-line: #1a1a1a;
+  --palette-line-cool: #262626;
 
-  /* Brand — electric blue, utan “glow”-estetik */
-  --palette-brand: #1d4ed8;
-  --palette-brand-dark: #1e3a8a;
-  --palette-brand-tint: #e8effc;
-  --palette-brand-glow: #a8c0ef;
+  /* Vit CTA via btn.primary; brand = varm bronsaccent */
+  --palette-brand: #c4a574;
+  --palette-brand-dark: #a88b5c;
+  --palette-brand-tint: #16120e;
+  --palette-brand-glow: #3d3226;
+  --palette-accent: #c4a574;
 
-  --palette-danger: #b42318;
-  --palette-danger-tint: #fdeceb;
+  /* “Paper” alias → mörkt (inga vita sektioner) */
+  --palette-paper: #0a0a0a;
+  --palette-paper-ink: #ededed;
+  --palette-paper-muted: #888888;
+  --palette-paper-line: #1a1a1a;
 
-  /* Enklare djup — ett lager, ingen blå CTA-aura */
-  --palette-shadow-card: 0 1px 2px rgb(12 18 34 / 0.04),
-    0 8px 24px rgb(12 18 34 / 0.04);
-  --palette-shadow-lift: 0 1px 3px rgb(12 18 34 / 0.06),
-    0 12px 28px rgb(12 18 34 / 0.07);
-  --palette-shadow-brand: 0 1px 2px rgb(12 18 34 / 0.06);
+  --palette-danger: #ef4444;
+  --palette-danger-tint: #2a1215;
 
-  --grain-opacity: 0.025;
-  --grain-blend: multiply;
+  --palette-shadow-card: 0 0 0 1px rgb(255 255 255 / 0.06);
+  --palette-shadow-lift: 0 0 0 1px rgb(255 255 255 / 0.1),
+    0 12px 40px rgb(0 0 0 / 0.45);
+  --palette-shadow-brand: 0 0 0 1px rgb(196 165 116 / 0.35);
+
+  --grain-opacity: 0.04;
+  --grain-blend: soft-light;
+
+  /* Frostad yta — lampor syns suddigt bakom */
+  --glass-bg: rgb(10 10 10 / 0.72);
+  --glass-blur: 14px;
 }
 
 @theme inline {
@@ -62,6 +66,12 @@
   --color-brand-dark: var(--palette-brand-dark);
   --color-brand-tint: var(--palette-brand-tint);
   --color-brand-glow: var(--palette-brand-glow);
+  --color-accent: var(--palette-accent);
+
+  --color-paper: var(--palette-paper);
+  --color-paper-ink: var(--palette-paper-ink);
+  --color-paper-muted: var(--palette-paper-muted);
+  --color-paper-line: var(--palette-paper-line);
 
   --color-danger: var(--palette-danger);
   --color-danger-tint: var(--palette-danger-tint);
@@ -77,18 +87,18 @@
   --text-body--line-height: 1.65;
   --text-lead: 1.1875rem;
   --text-lead--line-height: 1.6;
-  --text-h3: 1.625rem;
+  --text-h3: 1.5rem;
   --text-h3--line-height: 1.25;
   --text-h2: 2.5rem;
   --text-h2--line-height: 1.1;
-  --text-h1: 3rem;
-  --text-h1--line-height: 1.05;
-  --text-display: 4.75rem;
-  --text-display--line-height: 1;
+  --text-h1: 3.25rem;
+  --text-h1--line-height: 1.02;
+  --text-display: 5rem;
+  --text-display--line-height: 0.98;
 
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-xl: 20px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
   --radius-pill: 999px;
 
   --shadow-card: var(--palette-shadow-card);
@@ -115,20 +125,20 @@
   h2,
   h3 {
     font-family: var(--font-jakarta), system-ui, sans-serif;
-    font-weight: 700;
+    font-weight: 650;
     text-wrap: balance;
   }
 
   h1 {
-    letter-spacing: -0.035em;
+    letter-spacing: -0.045em;
   }
 
   h2 {
-    letter-spacing: -0.03em;
+    letter-spacing: -0.035em;
   }
 
   h3 {
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
   }
 
   ::selection {
@@ -155,29 +165,32 @@
   }
 }
 
-/* Tunn, diskret scrollbar för de scrollbara skärmdumparna i case-ramarna. */
 .scroll-shot {
   scrollbar-width: thin;
-  scrollbar-color: rgb(29 78 216 / 0.35) transparent;
+  scrollbar-color: rgb(255 255 255 / 0.25) transparent;
 }
 .scroll-shot::-webkit-scrollbar {
   width: 6px;
 }
 .scroll-shot::-webkit-scrollbar-thumb {
-  background: rgb(29 78 216 / 0.32);
+  background: rgb(255 255 255 / 0.22);
   border-radius: 999px;
 }
 .scroll-shot::-webkit-scrollbar-track {
   background: transparent;
 }
 
-/* ---------------------------------------------------------------------------
-   ENTRÉ-ANIMATION — en gång vid sidladdning, kort och lugn.
-   --------------------------------------------------------------------------- */
+/* Kort/rutor: lamporna syns suddigt bakom */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -187,22 +200,19 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .rise {
-    animation: rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards;
   }
   .rise-2 {
-    animation-delay: 0.06s;
+    animation-delay: 0.07s;
   }
   .rise-3 {
-    animation-delay: 0.12s;
+    animation-delay: 0.14s;
   }
   .rise-4 {
-    animation-delay: 0.18s;
+    animation-delay: 0.21s;
   }
 }
 
-/* ---------------------------------------------------------------------------
-   FILM-GRAIN — diskret textur, låg opacitet.
-   --------------------------------------------------------------------------- */
 .grain {
   position: fixed;
   inset: 0;
@@ -213,9 +223,6 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* ---------------------------------------------------------------------------
-   SCROLL-REVEAL — kort, utan stor translate.
-   --------------------------------------------------------------------------- */
 .reveal {
   opacity: 1;
 }
@@ -241,18 +248,225 @@
   }
 }
 
-/* Fallback when hero video can't autoplay (work PCs, blocked media, etc.). */
-@keyframes hero-poster-kenburns {
-  0% {
-    transform: scale(1) translate3d(0, 0, 0);
+/* ---- Hero-scen (lampor ligger site-wide) ---- */
+.hero-stage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-stage__fade {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgb(0 0 0 / 0.25) 0%,
+    transparent 32%,
+    rgb(0 0 0 / 0.15) 70%,
+    rgb(0 0 0 / 0.55) 100%
+  );
+}
+
+/* ---- Site-wide lampor (bakom innehåll, syns genom halvtransparens) ---- */
+.site-lamps {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.site-lamps__wash {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 70% 50% at 50% 20%,
+      rgb(196 165 116 / 0.09),
+      transparent 65%
+    ),
+    radial-gradient(
+      ellipse 50% 40% at 15% 70%,
+      rgb(255 255 255 / 0.04),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 45% 35% at 85% 55%,
+      rgb(196 165 116 / 0.055),
+      transparent 55%
+    );
+}
+
+.site-lamps__cursor-glow {
+  position: absolute;
+  width: min(42vw, 380px);
+  height: min(42vw, 380px);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgb(255 255 255 / 0.1) 0%,
+    rgb(196 165 116 / 0.08) 35%,
+    transparent 70%
+  );
+  transition: opacity 0.25s ease;
+}
+
+.site-lamp {
+  position: absolute;
+  width: var(--lamp-size, 6rem);
+  height: var(--lamp-size, 6rem);
+  transform: translate(-50%, -50%);
+  opacity: 1;
+}
+
+.site-lamp__core {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.12);
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.04);
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.site-lamp__halo {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgb(255 255 255 / 0.22) 0%,
+    rgb(196 165 116 / 0.16) 28%,
+    transparent 68%
+  );
+  opacity: 0;
+  transform: scale(0.55);
+  transition:
+    opacity 0.3s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  filter: blur(1px);
+}
+
+/* L→R blink-våg vid sidinträde / refresh / navigering */
+@media (prefers-reduced-motion: no-preference) {
+  .site-lamps.is-waving .site-lamp:not(.is-on) .site-lamp__core {
+    animation: lamp-ltr-core 0.72s ease-out both;
+    animation-delay: var(--lamp-delay, 0s);
   }
-  100% {
-    transform: scale(1.04) translate3d(-0.8%, -0.5%, 0);
+
+  .site-lamps.is-waving .site-lamp:not(.is-on) .site-lamp__halo {
+    animation: lamp-ltr-halo 0.72s ease-out both;
+    animation-delay: var(--lamp-delay, 0s);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .hero-poster-motion {
-    animation: hero-poster-kenburns 28s ease-in-out infinite alternate;
+/* Hover under vågen: cursorn vinner över blink-animationen */
+.site-lamps.is-waving .site-lamp.is-on .site-lamp__core,
+.site-lamps.is-ready.is-active .site-lamp.is-on .site-lamp__core {
+  animation: none;
+  background: #fff;
+  transform: translate(-50%, -50%) scale(calc(1 + var(--lamp-strength) * 0.6));
+  box-shadow:
+    0 0 10px rgb(255 255 255 / 0.9),
+    0 0 28px rgb(196 165 116 / calc(0.4 + var(--lamp-strength) * 0.5));
+}
+
+.site-lamps.is-waving .site-lamp.is-on .site-lamp__halo,
+.site-lamps.is-ready.is-active .site-lamp.is-on .site-lamp__halo {
+  animation: none;
+  opacity: calc(0.35 + var(--lamp-strength) * 0.65);
+  transform: scale(calc(0.7 + var(--lamp-strength) * 0.55));
+}
+
+/* Efter vågen: svagt idle tills hover — synligt bakom glass */
+.site-lamps.is-ready:not(.is-active) .site-lamp__core {
+  background: rgb(255 255 255 / 0.28);
+  box-shadow: 0 0 10px rgb(255 255 255 / 0.16);
+}
+
+.site-lamps.is-ready:not(.is-active) .site-lamp__halo {
+  opacity: 0.28;
+  transform: scale(0.78);
+}
+
+/* Hover: tänd nära musen, övriga släckta */
+.site-lamps.is-ready.is-active .site-lamp:not(.is-on) .site-lamp__core {
+  background: rgb(255 255 255 / 0.08);
+  box-shadow: none;
+}
+
+.site-lamps.is-ready.is-active .site-lamp:not(.is-on) .site-lamp__halo {
+  opacity: 0;
+  transform: scale(0.4);
+}
+
+@keyframes lamp-ltr-core {
+  0% {
+    background: rgb(255 255 255 / 0.08);
+    box-shadow: none;
+    transform: translate(-50%, -50%) scale(0.75);
+  }
+  28% {
+    background: #fff;
+    box-shadow:
+      0 0 12px rgb(255 255 255 / 0.95),
+      0 0 32px rgb(196 165 116 / 0.65);
+    transform: translate(-50%, -50%) scale(1.55);
+  }
+  55% {
+    background: #fff;
+    box-shadow:
+      0 0 10px rgb(255 255 255 / 0.85),
+      0 0 24px rgb(196 165 116 / 0.45);
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  100% {
+    background: rgb(255 255 255 / 0.14);
+    box-shadow: 0 0 6px rgb(255 255 255 / 0.08);
+    transform: translate(-50%, -50%) scale(1);
   }
 }
+
+@keyframes lamp-ltr-halo {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  28% {
+    opacity: 0.85;
+    transform: scale(1.05);
+  }
+  55% {
+    opacity: 0.5;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 0.12;
+    transform: scale(0.65);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-lamps .site-lamp__core {
+    background: rgb(255 255 255 / 0.2);
+  }
+  .site-lamps.is-ready.is-active .site-lamp.is-on .site-lamp__core {
+    background: #fff;
+  }
+  .site-lamps.is-ready.is-active .site-lamp.is-on .site-lamp__halo {
+    opacity: 0.5;
+    transform: scale(0.9);
+  }
+}
+
+

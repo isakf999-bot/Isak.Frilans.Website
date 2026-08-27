@@ -29,7 +29,7 @@ export function About() {
           <Reveal>
             <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
               <figure className="mx-auto w-full max-w-md self-start lg:sticky lg:top-28 lg:mx-0 lg:max-w-none">
-                <div className="relative aspect-[4/5] overflow-hidden rounded-lg border border-line bg-white">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-lg border border-line bg-surface">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={PORTRAIT_SRC}
@@ -116,7 +116,7 @@ export function About() {
                 <div className="mt-10 flex flex-wrap gap-3">
                   <Link
                     href="/kontakt"
-                    className="inline-flex items-center gap-2 rounded-md bg-brand px-6 py-3.5 font-semibold whitespace-nowrap text-white transition-colors duration-150 hover:bg-brand-dark"
+                    className="inline-flex items-center gap-2 rounded-md border border-transparent bg-white px-6 py-3.5 font-semibold text-black transition-[background-color,color,border-color] duration-150 hover:border-white/40 hover:bg-white/10 hover:text-white active:bg-white/15"
                   >
                     Hör av dig
                     <span aria-hidden="true">→</span>

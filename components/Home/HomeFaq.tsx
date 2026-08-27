@@ -9,7 +9,7 @@ export function HomeFaq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="bg-surface">
+    <section id="faq" className="border-t border-line bg-transparent">
       <div className="mx-auto max-w-3xl px-6 pt-28 pb-20 lg:px-8 lg:pt-32 lg:pb-28">
         <Reveal>
           <SectionLabel>FAQ</SectionLabel>
@@ -19,7 +19,7 @@ export function HomeFaq() {
           </p>
         </Reveal>
 
-        <ul className="mt-10 divide-y divide-line rounded-2xl border border-line bg-canvas shadow-card">
+        <ul className="mt-10 divide-y divide-line rounded-2xl border border-line glass shadow-card">
           {homeFaq.map((item, i) => {
             const isOpen = open === i;
             return (

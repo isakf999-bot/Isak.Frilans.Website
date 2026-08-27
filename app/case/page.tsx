@@ -44,7 +44,7 @@ export default function CasePage() {
               {publishedCases.length > 0 ? (
                 <CaseGrid cases={publishedCases} industries={industries} />
               ) : (
-                <div className="mx-auto max-w-lg rounded-lg border border-line bg-surface px-8 py-14 text-center">
+                <div className="mx-auto max-w-lg rounded-lg border border-line glass px-8 py-14 text-center">
                   <h2 className="text-h3">Casen är på väg.</h2>
                   <p className="mx-auto mt-3 max-w-sm text-muted">
                     Här visar jag snart projekten jag har levererat. Hör av dig

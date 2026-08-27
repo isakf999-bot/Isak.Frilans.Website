@@ -171,14 +171,6 @@ export const packageAddons: PackageAddon[] = [
     billing: "once",
   },
   {
-    id: "gbp",
-    name: "Google Business Profile",
-    description: "Setup och optimering för lokal synlighet.",
-    priceLabel: fromPriceLabel(PRICES.addons.gbp),
-    price: PRICES.addons.gbp,
-    billing: "once",
-  },
-  {
     id: "maintenance",
     name: "Underhållsplan",
     description: "Månadsvis uppdatering, backup och småfixar.",

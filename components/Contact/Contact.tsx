@@ -126,7 +126,7 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
   return (
     <section
       id="kontakt"
-      className="border-t border-line bg-mist"
+      className="border-t border-line"
       aria-labelledby="kontakt-rubrik"
     >
       <div className="mx-auto max-w-6xl px-6 pt-16 pb-20 lg:px-8 lg:pt-24 lg:pb-28">
@@ -146,7 +146,7 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
         <Reveal className="mt-12 grid items-stretch gap-8 lg:mt-16 lg:grid-cols-[0.9fr_1.2fr] lg:gap-12">
           {/* Sidokolumn — samma höjd som formuläret */}
           <aside className="order-2 flex h-full flex-col lg:order-1">
-            <div className="flex h-full flex-1 flex-col rounded-lg border border-line bg-surface p-6 sm:p-7">
+            <div className="flex h-full flex-1 flex-col rounded-lg border border-line glass p-6 sm:p-7">
               <p className="text-eyebrow font-medium tracking-[0.12em] text-brand uppercase">
                 Så går det till
               </p>
@@ -166,16 +166,16 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
                 ))}
               </ol>
 
-              <div className="mt-auto rounded-md bg-brand px-5 py-4 text-white">
-                <p className="text-sm text-white/75">Svarstid</p>
+              <div className="mt-auto rounded-md border border-line bg-mist px-5 py-4 text-ink">
+                <p className="text-sm text-muted">Svarstid</p>
                 <p className="mt-1 text-xl font-semibold tracking-tight">
                   Inom {RESPONSE_TIME_DAYS} arbetsdagar
                 </p>
-                <p className="mt-3 text-sm text-white/80">
+                <p className="mt-3 text-sm text-muted">
                   Hellre mejl?{" "}
                   <a
                     href="mailto:info@isakweb.se"
-                    className="font-medium text-white underline underline-offset-4 transition-opacity hover:opacity-80"
+                    className="font-medium text-brand underline underline-offset-4 transition-opacity hover:opacity-80"
                   >
                     info@isakweb.se
                   </a>
@@ -186,7 +186,7 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
 
           {/* Formulär — huvudfokus */}
           <div className="order-1 flex h-full lg:order-2">
-            <div className="relative flex h-full w-full flex-col overflow-hidden rounded-lg border border-line bg-surface shadow-card">
+            <div className="relative flex h-full w-full flex-col overflow-hidden rounded-lg border border-line glass shadow-card">
               <div className="flex flex-1 flex-col p-6 sm:p-9 lg:p-10">
                 {status === "success" ? (
                   <div
@@ -195,7 +195,7 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
                   >
                     <span
                       aria-hidden="true"
-                      className="mx-auto flex h-14 w-14 items-center justify-center rounded-md bg-brand text-2xl text-white"
+                      className="mx-auto flex h-14 w-14 items-center justify-center rounded-md bg-white text-2xl text-black"
                     >
                       ✓
                     </span>
@@ -254,7 +254,7 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
                               }
                               className={`rounded-md border px-3.5 py-2 text-sm font-medium transition-colors duration-150 ${
                                 selected
-                                  ? "border-brand bg-brand text-white"
+                                  ? "border-white bg-white text-black hover:border-white/40 hover:bg-white/10 hover:text-white"
                                   : "border-line bg-canvas text-ink hover:border-ink/20 hover:bg-surface"
                               }`}
                             >
@@ -314,7 +314,7 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
                       <button
                         type="submit"
                         disabled={status === "submitting"}
-                        className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-brand px-8 py-3.5 font-semibold text-white transition-colors duration-150 hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-55 sm:w-auto"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-transparent bg-white px-8 py-3.5 font-semibold text-black transition-[background-color,color,border-color] duration-150 hover:border-white/40 hover:bg-white/10 hover:text-white active:bg-white/15 disabled:cursor-not-allowed disabled:opacity-55 sm:w-auto"
                       >
                         {status === "submitting"
                           ? "Skickar…"

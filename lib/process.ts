@@ -67,7 +67,7 @@ export const principles: Principle[] = [
   },
   {
     title: "Du äger allt",
-    body: "Kod, designfiler och konton är dina. Inga inlåsningar, inga månadsavgifter för att behålla sajten hos mig.",
+    body: "Kod, designfiler och konton är dina. Inga inlåsningar, inga månadsavgifter för att behålla sajten hos mig — du kan byta leverantör när du vill.",
   },
 ];
 

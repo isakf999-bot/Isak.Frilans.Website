@@ -103,19 +103,19 @@ export function Chatbot() {
           aria-modal="true"
           className="pointer-events-auto fixed inset-0 z-[60] flex flex-col overflow-hidden border-0 bg-canvas sm:inset-auto sm:right-6 sm:bottom-[5.5rem] sm:h-[min(34rem,calc(100svh-7.5rem))] sm:w-[24rem] sm:rounded-2xl sm:border sm:border-line sm:shadow-lift"
         >
-          <header className="flex shrink-0 items-start justify-between gap-3 border-b border-line bg-brand px-4 py-3.5 text-white pt-[max(0.875rem,env(safe-area-inset-top))] sm:pt-3.5">
+          <header className="flex shrink-0 items-start justify-between gap-3 border-b border-line bg-mist px-4 py-3.5 text-ink pt-[max(0.875rem,env(safe-area-inset-top))] sm:pt-3.5">
             <div>
               <p className="text-sm font-semibold tracking-tight">
                 Chatta med Isak
               </p>
-              <p className="mt-0.5 text-xs text-white/75">
+              <p className="mt-0.5 text-xs text-muted">
                 Svar utifrån hemsidans innehåll
               </p>
             </div>
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-2xl leading-none text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-2xl leading-none text-muted transition-colors hover:bg-white/10 hover:text-white"
               aria-label="Stäng chatten"
             >
               ×
@@ -134,7 +134,7 @@ export function Chatbot() {
                 <div
                   className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed whitespace-pre-wrap break-words ${
                     msg.role === "user"
-                      ? "rounded-br-md bg-brand text-white"
+                      ? "rounded-br-md bg-white text-black"
                       : "rounded-bl-md border border-line bg-canvas text-ink shadow-card"
                   }`}
                 >
@@ -192,7 +192,7 @@ export function Chatbot() {
               <button
                 type="submit"
                 disabled={pending || !input.trim()}
-                className="min-h-[2.75rem] shrink-0 rounded-xl bg-brand px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-brand-dark disabled:opacity-40"
+                className="min-h-[2.75rem] shrink-0 rounded-xl border border-transparent bg-white px-4 py-2.5 text-sm font-medium text-black transition-[background-color,color,border-color] duration-150 hover:border-white/40 hover:bg-white/10 hover:text-white active:bg-white/15 disabled:opacity-40"
               >
                 Skicka
               </button>
@@ -213,7 +213,7 @@ export function Chatbot() {
         aria-expanded={open}
         aria-controls={panelId}
         aria-label={open ? "Stäng assistenten" : "Öppna assistenten"}
-        className={`pointer-events-auto fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-[61] flex h-14 w-14 items-center justify-center rounded-md bg-brand text-white transition-colors duration-150 hover:bg-brand-dark sm:right-6 sm:bottom-6 sm:h-16 sm:w-16 ${
+        className={`pointer-events-auto fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-[61] flex h-14 w-14 items-center justify-center rounded-md border border-transparent bg-white text-black transition-[background-color,color,border-color,transform] duration-150 ease-out hover:scale-105 hover:border-white/40 hover:bg-white/10 hover:text-white active:bg-white/15 sm:right-6 sm:bottom-6 sm:h-16 sm:w-16 ${
           open ? "max-sm:hidden" : ""
         }`}
       >

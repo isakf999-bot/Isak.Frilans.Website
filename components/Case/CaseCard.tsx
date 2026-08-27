@@ -18,12 +18,9 @@ export function CaseCard({
     <article className="group flex h-full flex-col">
       <Link
         href={`/case/${study.slug}`}
-        className="flex h-full flex-col overflow-hidden rounded-lg border border-line bg-surface transition-[border-color] duration-150 hover:border-ink/20"
+        className="flex h-full flex-col overflow-hidden rounded-lg border border-line glass transition-[border-color] duration-150 hover:border-ink/20"
       >
-        <div
-          className="relative p-4 sm:p-5"
-          style={{ background: study.accentColor ?? "#eef0fb" }}
-        >
+        <div className="relative bg-transparent p-4 sm:p-5">
           <BrowserFrame url={study.domain}>
             <div className="relative aspect-[16/10] overflow-hidden">
               <Image
@@ -43,11 +40,11 @@ export function CaseCard({
           <p className="text-[11px] font-medium tracking-wide text-muted uppercase">
             {study.industry}
           </p>
-          <h2 className="mt-2 text-h3 tracking-tight text-ink transition-colors duration-200 group-hover:text-brand">
+          <h2 className="mt-2 text-h3 tracking-tight text-ink transition-colors duration-200 group-hover:text-white">
             {study.domain}
           </h2>
           <p className="mt-3 flex-1 text-muted">{study.teaser}</p>
-          <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand">
+          <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white">
             Utforska caset
             <span aria-hidden="true">→</span>
           </span>
