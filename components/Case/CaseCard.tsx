@@ -20,10 +20,7 @@ export function CaseCard({
         href={`/case/${study.slug}`}
         className="flex h-full flex-col overflow-hidden rounded-lg border border-line glass transition-[border-color] duration-150 hover:border-ink/20"
       >
-        <div
-          className="relative p-4 sm:p-5"
-          style={{ background: study.accentColor ?? "#eef0fb" }}
-        >
+        <div className="relative bg-transparent p-4 sm:p-5">
           <BrowserFrame url={study.domain}>
             <div className="relative aspect-[16/10] overflow-hidden">
               <Image
