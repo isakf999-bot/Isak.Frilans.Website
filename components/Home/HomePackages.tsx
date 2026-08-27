@@ -19,7 +19,7 @@ const extraPagePrice = PRICES.addons.extraPage;
 
 function defaultPagesFor(id: PackageId): number {
   if (id === "starter") return 5;
-  if (id === "business") return 10;
+  if (id === "business") return 15;
   if (id === "premium") return 15;
   return 10;
 }
@@ -34,6 +34,7 @@ export function HomePackages() {
 
   const selectPackage = (id: PackageId) => {
     setSelectedId(id);
+    setOpenId(id);
     setPageCount(defaultPagesFor(id));
   };
 
@@ -161,7 +162,7 @@ export function HomePackages() {
         : `${extraPages} sidor utöver paketet × ${formatSek(extraPagePrice)} kr.`;
 
   return (
-    <section id="paket" className="relative bg-surface">
+    <section id="paket" className="relative border-t border-line bg-transparent">
       <div className="mx-auto max-w-6xl px-6 pt-28 pb-20 lg:px-8 lg:pt-32 lg:pb-28">
         <Reveal>
           <SectionLabel>Paket</SectionLabel>
@@ -169,8 +170,8 @@ export function HomePackages() {
             Fast pris innan vi börjar.
           </h2>
           <p className="mt-4 max-w-2xl text-lead text-muted">
-            Välj paket nedan — eller använd kalkylatorn för att se hur sidor och
-            tillägg påverkar priset.
+            Du ser vad ni får och vad det kostar — innan något arbete startar.
+            Välj paket eller använd kalkylatorn för sidor och tillägg.
           </p>
         </Reveal>
 
@@ -181,7 +182,7 @@ export function HomePackages() {
             return (
               <Reveal key={pkg.id} delay={i * 60}>
                 <article
-                  className={`group relative flex h-full flex-col overflow-hidden rounded-lg border bg-canvas p-6 transition-[border-color] duration-150 ${
+                  className={`group relative flex h-full flex-col overflow-hidden rounded-lg border glass p-6 transition-[border-color] duration-150 ${
                     selected
                       ? "border-brand"
                       : pkg.recommended
@@ -190,7 +191,7 @@ export function HomePackages() {
                   }`}
                 >
                   {pkg.recommended ? (
-                    <span className="absolute top-4 right-4 rounded-md bg-brand px-2.5 py-1 text-[10px] font-semibold tracking-wide text-white uppercase">
+                    <span className="absolute top-4 right-4 rounded-md bg-white px-2.5 py-1 text-[10px] font-semibold tracking-wide text-black uppercase">
                       Vanligast
                     </span>
                   ) : null}
@@ -218,7 +219,7 @@ export function HomePackages() {
 
                   <ul
                     className={`mt-3 space-y-2 overflow-hidden text-sm text-muted transition-all duration-300 ease-out ${
-                      open ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+                      open ? "max-h-80 opacity-100 pb-2" : "max-h-0 opacity-0"
                     }`}
                   >
                     {pkg.features.map((f) => (
@@ -231,28 +232,30 @@ export function HomePackages() {
                     ))}
                   </ul>
 
-                  <button
-                    type="button"
-                    onClick={() => selectPackage(pkg.id)}
-                    aria-pressed={selected}
-                    className={`mt-auto inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold transition-colors duration-150 ${
-                      selected
-                        ? "bg-brand text-white hover:bg-brand-dark"
-                        : "border border-line bg-surface font-medium text-ink hover:border-ink/25"
-                    }`}
-                  >
-                    {selected ? (
-                      <>
-                        Vald
-                        <span aria-hidden="true">✓</span>
-                      </>
-                    ) : (
-                      <>
-                        Välj {pkg.name}
-                        <span aria-hidden="true">→</span>
-                      </>
-                    )}
-                  </button>
+                  <div className={`mt-auto w-full ${open ? "pt-8" : "pt-5"}`}>
+                    <button
+                      type="button"
+                      onClick={() => selectPackage(pkg.id)}
+                      aria-pressed={selected}
+                      className={`inline-flex w-full items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold transition-colors duration-150 ${
+                        selected
+                          ? "bg-white text-black hover:opacity-90"
+                          : "border border-line bg-surface/80 font-medium text-ink hover:border-ink/25"
+                      }`}
+                    >
+                      {selected ? (
+                        <>
+                          Vald
+                          <span aria-hidden="true">✓</span>
+                        </>
+                      ) : (
+                        <>
+                          Välj {pkg.name}
+                          <span aria-hidden="true">→</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
                 </article>
               </Reveal>
             );
@@ -263,7 +266,7 @@ export function HomePackages() {
         <Reveal>
           <div
             id="priskalkylator"
-            className="mt-20 scroll-mt-28 overflow-hidden rounded-3xl border border-line bg-canvas shadow-card"
+            className="mt-20 scroll-mt-28 overflow-hidden rounded-3xl border border-line glass shadow-card"
           >
             <div className="border-b border-line bg-mist/60 px-6 py-8 lg:px-10">
               <p className="text-eyebrow font-semibold tracking-[0.12em] text-brand uppercase">
@@ -366,8 +369,8 @@ export function HomePackages() {
                           aria-pressed={on}
                           className={`inline-flex items-center gap-1.5 rounded-md border px-3.5 py-2 text-sm font-medium transition-colors duration-150 ${
                             on
-                              ? "border-brand bg-brand text-white"
-                              : "border-line bg-surface text-ink hover:border-ink/20"
+                              ? "border-white bg-white text-black"
+                              : "border-line bg-surface/80 text-ink hover:border-ink/20"
                           }`}
                         >
                           <span aria-hidden="true">{on ? "✓" : "+"}</span>
@@ -393,6 +396,15 @@ export function HomePackages() {
                           {summary.monthly > 0
                             ? ` + ${formatSek(summary.monthly)} kr/mån`
                             : ""}
+                        </span>
+                      ) : null}
+                    </p>
+                  ) : summary.low === summary.high ? (
+                    <p className="mt-4 text-3xl font-semibold tracking-tight text-ink lg:text-4xl">
+                      {formatSek(summary.low!)} kr
+                      {summary.monthly > 0 ? (
+                        <span className="mt-2 block text-lg font-medium text-muted">
+                          + {formatSek(summary.monthly)} kr/mån
                         </span>
                       ) : null}
                     </p>
@@ -434,7 +446,7 @@ export function HomePackages() {
                 <div className="mt-8">
                   <Link
                     href={contactHref}
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-brand px-5 py-3.5 text-sm font-semibold text-white transition-colors duration-150 hover:bg-brand-dark"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-white px-5 py-3.5 text-sm font-semibold text-black transition-opacity duration-150 hover:opacity-90"
                   >
                     Få exakt offert
                     <span aria-hidden="true">→</span>
