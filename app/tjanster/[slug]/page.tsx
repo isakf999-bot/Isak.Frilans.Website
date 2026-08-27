@@ -42,7 +42,7 @@ export default async function ServiceDetailPage({ params }: Props) {
     <>
       <Nav />
       <main>
-        <section className="border-b border-line bg-canvas">
+        <section className="border-b border-line">
           <div className="mx-auto max-w-6xl px-6 pt-28 pb-16 lg:px-8 lg:pt-32 lg:pb-20">
             <Reveal>
               <Link
@@ -75,7 +75,7 @@ export default async function ServiceDetailPage({ params }: Props) {
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href={`/kontakt?meddelande=${encodeURIComponent(prefill)}`}
-                  className="inline-flex items-center gap-2 rounded-md bg-brand px-6 py-3.5 font-semibold text-white transition-colors duration-150 hover:bg-brand-dark"
+                  className="inline-flex items-center gap-2 rounded-md bg-white px-6 py-3.5 font-semibold text-black transition-opacity duration-150 hover:opacity-90"
                 >
                   Hör av dig om {service.title.toLowerCase()}
                   <span aria-hidden="true">→</span>
@@ -91,7 +91,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           </div>
         </section>
 
-        <section className="border-b border-line bg-surface">
+        <section className="border-b border-line">
           <div className="mx-auto grid max-w-6xl gap-10 px-6 py-16 lg:grid-cols-3 lg:px-8 lg:py-20">
             <Reveal>
               <h2 className="text-h3 tracking-tight">Fördelar</h2>
@@ -128,7 +128,7 @@ export default async function ServiceDetailPage({ params }: Props) {
           </div>
         </section>
 
-        <section className="bg-canvas">
+        <section>
           <div className="mx-auto max-w-6xl px-6 py-16 lg:px-8 lg:py-20">
             <Reveal>
               <h2 className="text-h2 tracking-tight">Andra tjänster</h2>
@@ -137,7 +137,7 @@ export default async function ServiceDetailPage({ params }: Props) {
                   <li key={s.slug}>
                     <Link
                       href={`/tjanster/${s.slug}`}
-                      className="flex h-full flex-col rounded-lg border border-line bg-surface p-5 transition-[border-color] duration-150 hover:border-ink/20"
+                      className="flex h-full flex-col rounded-lg border border-line glass p-5 transition-[border-color] duration-150 hover:border-ink/20"
                     >
                       <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-tint text-brand">
                         {serviceIcons[s.slug]}

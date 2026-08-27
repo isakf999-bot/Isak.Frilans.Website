@@ -55,14 +55,14 @@ export function ProcessPageNav() {
                 href={`#${section.id}`}
                 className={`inline-flex items-center gap-2 rounded-md px-3.5 py-2 text-sm transition-colors duration-150 lg:w-full ${
                   isActive
-                    ? "bg-brand text-white"
-                    : "border border-line bg-surface text-muted hover:border-ink/20 hover:text-ink"
+                    ? "bg-white text-black"
+                    : "border border-line glass text-muted hover:border-ink/20 hover:text-ink"
                 }`}
               >
                 <span
                   aria-hidden="true"
                   className={`h-1.5 w-1.5 shrink-0 rounded-full ${
-                    isActive ? "bg-white" : "bg-brand/50"
+                    isActive ? "bg-black" : "bg-brand/50"
                   }`}
                 />
                 {section.label}

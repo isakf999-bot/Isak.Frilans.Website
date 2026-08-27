@@ -49,7 +49,7 @@ export function BeforeAfter() {
 
   return (
     <section
-      className="scroll-mt-24 border-t border-line bg-canvas"
+      className="scroll-mt-24 border-t border-line"
       aria-labelledby="forvandling-rubrik"
     >
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
@@ -85,7 +85,7 @@ export function BeforeAfter() {
             </div>
 
             {/* Etiketter — utanför klippet så båda alltid syns. */}
-            <span className="pointer-events-none absolute left-3 top-3 rounded-pill bg-brand px-2.5 py-1 text-[11px] font-semibold tracking-wide text-white uppercase shadow-brand">
+            <span className="pointer-events-none absolute left-3 top-3 rounded-pill bg-white px-2.5 py-1 text-[11px] font-semibold tracking-wide text-black uppercase shadow-brand">
               Efter
             </span>
             <span className="pointer-events-none absolute right-3 top-3 rounded-pill bg-ink/80 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-white uppercase">
@@ -186,7 +186,7 @@ function NewSiteMock() {
           </span>
           <span className="text-xs font-semibold sm:text-sm">Andersson Bygg</span>
         </div>
-        <span className="rounded-pill bg-brand px-2.5 py-1 text-[10px] font-medium text-white sm:text-xs">
+        <span className="rounded-pill bg-white px-2.5 py-1 text-[10px] font-medium text-black sm:text-xs">
           Begär offert
         </span>
       </div>
@@ -207,7 +207,7 @@ function NewSiteMock() {
       </div>
 
       <div className="mt-3 flex items-center gap-2">
-        <span className="rounded-pill bg-brand px-3 py-1.5 text-[10px] font-medium text-white shadow-brand sm:px-4 sm:py-2 sm:text-xs">
+        <span className="rounded-pill bg-white px-3 py-1.5 text-[10px] font-medium text-black shadow-brand sm:px-4 sm:py-2 sm:text-xs">
           Boka besök →
         </span>
         <span className="rounded-pill border border-line bg-surface px-3 py-1.5 text-[10px] font-medium text-ink sm:px-4 sm:py-2 sm:text-xs">

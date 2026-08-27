@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { SiteLamps } from "@/components/Atmosphere/SiteLamps";
 import { Chatbot } from "@/components/Chatbot/Chatbot";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
@@ -93,7 +94,7 @@ export const metadata: Metadata = {
     locale: "sv_SE",
     url: SITE_URL,
     siteName: "IsakWeb",
-    title: "IsakWeb — Webbutvecklare i Helsingborg | Från 2 000 kr",
+    title: "IsakWeb — Webbutvecklare i Helsingborg | Från 3 795 kr",
     description:
       "Hemsidor med fast pris. Du pratar alltid med den som skriver koden.",
     images: [
@@ -108,7 +109,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "IsakWeb — Webbutvecklare i Helsingborg | Från 2 000 kr",
+    title: "IsakWeb — Webbutvecklare i Helsingborg | Från 3 795 kr",
     description:
       "Hemsidor med fast pris. Du pratar alltid med den som skriver koden.",
     images: ["/og.jpg"],
@@ -132,7 +133,8 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        {children}
+        <SiteLamps />
+        <div className="relative z-10">{children}</div>
         <Chatbot />
         <div className="grain" aria-hidden="true" />
         <Analytics />

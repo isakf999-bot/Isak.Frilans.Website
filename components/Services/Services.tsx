@@ -3,29 +3,24 @@ import { SectionLabel } from "@/components/SectionLabel/SectionLabel";
 import { ServiceCard } from "@/components/Services/ServiceCard";
 import { services } from "@/lib/services";
 
-/**
- * Tjänsterna som kort i ett 2×2-rutnät.
- *
- * De valfria fälten i Service-typen (image, price, caseStudy) renderas redan
- * här men syns bara när data finns i lib/services.ts — att bygga ut med bild,
- * pris eller case kräver alltså ingen ändring i den här filen.
- */
 export function Services() {
   return (
     <section
       id="vad-jag-bygger"
-      className="scroll-mt-24 border-t border-line bg-canvas"
+      className="scroll-mt-24 border-t border-line bg-transparent"
       aria-labelledby="tjanster-rubrik"
     >
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
         <Reveal className="max-w-2xl">
           <SectionLabel>Vad jag bygger</SectionLabel>
-          <h2 id="tjanster-rubrik" className="mt-6 text-h2">
-            Vad jag kan hjälpa dig med.
+          <h2 id="tjanster-rubrik" className="mt-6 text-h2 text-ink">
+            Det jag bygger åt dig.
           </h2>
           <p className="mt-5 text-lead text-muted">
-            Från landningssida till e-handel. Osäker på vad du behöver? Beskriv
-            läget — så säger jag rakt vad som är värt att bygga.
+            Landningssida, företagssajt eller e-handel — alltid med fokus på vad
+            sajten ska åstadkomma för er. Osäker på vad ni behöver? Beskriv
+            läget. Jag säger rakt vad som är värt att bygga, och vad ni kan
+            skippa.
           </p>
         </Reveal>
 

@@ -101,7 +101,7 @@ export default function ProcessPage() {
           <ol className="mt-12 grid gap-5 sm:grid-cols-2">
             {processSteps.map((step, i) => (
               <Reveal key={step.number} delay={i * 40} className="h-full">
-                <li className="flex h-full flex-col rounded-2xl border border-line bg-surface p-6 shadow-card sm:p-7">
+                <li className="flex h-full flex-col rounded-2xl border border-line glass p-6 shadow-card sm:p-7">
                   <span className="font-mono text-sm font-semibold tracking-wide text-brand">
                     {step.number}
                   </span>
@@ -115,7 +115,7 @@ export default function ProcessPage() {
 
         <SectionShell
           id="kommunikation"
-          className="border-t border-line bg-mist"
+          className="border-t border-line"
         >
           <Reveal className="max-w-2xl">
             <SectionLabel>Kommunikation</SectionLabel>
@@ -128,10 +128,10 @@ export default function ProcessPage() {
 
           <ul className="mt-12 grid gap-5 sm:grid-cols-2">
             {principles.map((item, i) => (
-              <Reveal key={item.title} delay={i * 40}>
-                <li className="rounded-2xl border border-line-cool bg-surface p-6 shadow-card sm:p-7">
+              <Reveal key={item.title} delay={i * 40} className="h-full">
+                <li className="flex h-full flex-col rounded-2xl border border-line-cool glass p-6 shadow-card sm:p-7">
                   <h3 className="text-h3 text-[1.25rem]">{item.title}</h3>
-                  <p className="mt-3 text-muted">{item.body}</p>
+                  <p className="mt-3 flex-1 text-muted">{item.body}</p>
                 </li>
               </Reveal>
             ))}
@@ -153,7 +153,7 @@ export default function ProcessPage() {
           <ul className="mt-12 grid gap-5">
             {practicalTerms.map((item, i) => (
               <Reveal key={item.title} delay={i * 40}>
-                <li className="rounded-2xl border border-line bg-surface p-6 shadow-card sm:grid sm:grid-cols-[minmax(12rem,0.9fr)_1.4fr] sm:gap-8 sm:p-8">
+                <li className="rounded-2xl border border-line glass p-6 shadow-card sm:grid sm:grid-cols-[minmax(12rem,0.9fr)_1.4fr] sm:gap-8 sm:p-8">
                   <h3 className="text-h3 text-[1.25rem] sm:text-[1.375rem]">
                     {item.title}
                   </h3>
@@ -164,7 +164,7 @@ export default function ProcessPage() {
           </ul>
         </SectionShell>
 
-        <SectionShell id="pris" className="border-t border-line bg-mist">
+        <SectionShell id="pris" className="border-t border-line">
           <Reveal className="max-w-2xl">
             <SectionLabel>Priser</SectionLabel>
             <h2 className="mt-5 text-h2">Vad det brukar kosta</h2>
@@ -176,7 +176,7 @@ export default function ProcessPage() {
           </Reveal>
 
           <Reveal className="mt-12" delay={60}>
-            <div className="overflow-hidden rounded-2xl border border-line bg-surface shadow-card">
+            <div className="overflow-hidden rounded-2xl border border-line glass shadow-card">
               <ul className="divide-y divide-line">
                 {services.map((service) => {
                   const price = formatPrice(service);
@@ -217,7 +217,7 @@ export default function ProcessPage() {
 
           <div className="mt-10 grid gap-5 sm:grid-cols-2">
             <Reveal delay={40}>
-              <div className="rounded-2xl border border-line bg-surface p-6 shadow-card sm:p-7">
+              <div className="rounded-2xl border border-line glass p-6 shadow-card sm:p-7">
                 <h3 className="text-h3 text-[1.25rem]">Vad som ingår</h3>
                 <ul className="mt-5 space-y-3">
                   {priceIncludes.map((item) => (
@@ -233,7 +233,7 @@ export default function ProcessPage() {
               </div>
             </Reveal>
             <Reveal delay={80}>
-              <div className="rounded-2xl border border-line bg-surface p-6 shadow-card sm:p-7">
+              <div className="rounded-2xl border border-line glass p-6 shadow-card sm:p-7">
                 <h3 className="text-h3 text-[1.25rem]">Kan tillkomma separat</h3>
                 <ul className="mt-5 space-y-3.5">
                   {priceExtras.map((item) => (

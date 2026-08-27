@@ -97,16 +97,16 @@ function IconArrowUpRight() {
 }
 
 const contactIconClass =
-  "flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-line bg-surface text-brand transition-colors duration-150 group-hover:border-brand group-hover:bg-brand group-hover:text-white";
+  "flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-line bg-surface text-white transition-colors duration-150 group-hover:border-white group-hover:bg-white group-hover:text-black";
 
 const linkClass =
-  "text-sm text-muted transition-colors duration-150 hover:text-brand";
+  "text-sm text-muted transition-colors duration-150 hover:text-white";
 
 export function Footer({ hideCta = false }: { hideCta?: boolean }) {
   return (
     <>
       {!hideCta && <HomeFinalCta />}
-      <footer className="border-t border-line bg-mist">
+      <footer className="border-t border-line bg-transparent">
         <div className="mx-auto max-w-6xl px-6 pt-16 pb-10 lg:px-8 lg:pt-20 lg:pb-12">
           <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-10">
             <div className="sm:col-span-2 lg:col-span-4">
@@ -123,7 +123,7 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
                 Sverige.
               </p>
               <p className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-ink">
-                <span className="text-brand">
+                <span className="text-muted">
                   <IconMapPin />
                 </span>
                 Helsingborg
@@ -137,7 +137,7 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
             </div>
 
             <nav aria-label="Sidor" className="lg:col-span-2">
-              <h2 className="text-eyebrow font-semibold tracking-[0.12em] text-ink uppercase">
+              <h2 className="text-eyebrow font-semibold tracking-[0.12em] text-white uppercase">
                 Utforska
               </h2>
               <ul className="mt-5 space-y-2.5">
@@ -152,7 +152,7 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
             </nav>
 
             <div className="lg:col-span-3">
-              <h2 className="text-eyebrow font-semibold tracking-[0.12em] text-ink uppercase">
+              <h2 className="text-eyebrow font-semibold tracking-[0.12em] text-white uppercase">
                 Kontakt
               </h2>
               <address className="mt-5 space-y-3 not-italic">
@@ -165,7 +165,7 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
                   </span>
                   <span className="min-w-0">
                     <span className="block text-xs text-muted">E-post</span>
-                    <span className="block truncate text-sm font-medium text-ink transition-colors duration-200 group-hover:text-brand">
+                    <span className="block truncate text-sm font-medium text-ink transition-colors duration-200 group-hover:text-white">
                       {EMAIL}
                     </span>
                   </span>
@@ -176,7 +176,7 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
                   </span>
                   <span className="min-w-0">
                     <span className="block text-xs text-muted">Telefon</span>
-                    <span className="block text-sm font-medium text-ink transition-colors duration-200 group-hover:text-brand">
+                    <span className="block text-sm font-medium text-ink transition-colors duration-200 group-hover:text-white">
                       {PHONE_DISPLAY}
                     </span>
                   </span>
@@ -184,7 +184,7 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
               </address>
               <ul className="mt-5 space-y-2 text-sm text-muted">
                 <li className="flex items-start gap-2">
-                  <span className="mt-0.5 text-brand">
+                  <span className="mt-0.5 text-muted">
                     <IconClock />
                   </span>
                   <span>
@@ -199,7 +199,7 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
             </div>
 
             <div className="lg:col-span-3">
-              <h2 className="text-eyebrow font-semibold tracking-[0.12em] text-ink uppercase">
+              <h2 className="text-eyebrow font-semibold tracking-[0.12em] text-white uppercase">
                 Följ mig
               </h2>
               <p className="mt-5 text-sm leading-relaxed text-muted">
@@ -212,10 +212,10 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group inline-flex items-center gap-1.5 text-sm font-medium text-ink transition-colors duration-200 hover:text-brand"
+                      className="group inline-flex items-center gap-1.5 text-sm font-medium text-ink transition-colors duration-200 hover:text-white"
                     >
                       {link.label}
-                      <span className="text-muted transition-colors duration-150 group-hover:text-brand">
+                      <span className="text-muted transition-colors duration-150 group-hover:text-white">
                         <IconArrowUpRight />
                       </span>
                     </a>
@@ -230,7 +230,7 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.name}
-                      className="flex h-10 w-10 items-center justify-center rounded-md border border-line bg-surface text-ink/75 transition-colors duration-150 hover:border-brand hover:bg-brand hover:text-white"
+                      className="flex h-10 w-10 items-center justify-center rounded-md border border-line bg-surface text-ink/75 transition-colors duration-150 hover:border-white hover:bg-white hover:text-black"
                     >
                       <svg
                         viewBox="0 0 24 24"

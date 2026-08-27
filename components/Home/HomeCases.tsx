@@ -8,7 +8,7 @@ export function HomeCases() {
   const cases = publishedCases.slice(0, 2);
 
   return (
-    <section id="kundcase-hem" className="border-t border-line bg-canvas">
+    <section id="kundcase-hem" className="border-t border-line">
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
         <Reveal className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-2xl">

@@ -83,7 +83,7 @@ export default async function CaseDetailPage({ params }: Props) {
                   href={study.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-md bg-brand px-6 py-3.5 font-semibold text-white transition-colors duration-150 hover:bg-brand-dark"
+                  className="inline-flex items-center gap-2 rounded-md bg-white px-6 py-3.5 font-semibold text-black transition-opacity duration-150 hover:opacity-90"
                 >
                   Besök sajten
                   <span aria-hidden="true">↗</span>
@@ -142,7 +142,7 @@ export default async function CaseDetailPage({ params }: Props) {
             </Reveal>
 
             <Reveal delay={80}>
-              <aside className="rounded-2xl border border-line bg-surface p-6 shadow-card sm:p-7">
+              <aside className="rounded-2xl border border-line glass p-6 shadow-card sm:p-7">
                 <h3 className="text-sm font-semibold tracking-wide text-ink uppercase">
                   Projektinfo
                 </h3>
@@ -186,7 +186,7 @@ export default async function CaseDetailPage({ params }: Props) {
         </section>
 
         {/* Resultatet */}
-        <section className="border-t border-line bg-mist">
+        <section className="border-t border-line">
           <div className="mx-auto max-w-6xl px-6 py-16 lg:px-8 lg:py-24">
             <Reveal className="max-w-3xl">
               <SectionLabel>Resultatet</SectionLabel>
@@ -199,7 +199,7 @@ export default async function CaseDetailPage({ params }: Props) {
                 {study.results.map((r) => (
                   <li
                     key={r.label}
-                    className="rounded-2xl border border-line-cool bg-surface px-6 py-7 shadow-card"
+                    className="rounded-2xl border border-line-cool glass px-6 py-7 shadow-card"
                   >
                     <p className="text-3xl font-semibold tracking-tight text-brand">
                       {r.value}
@@ -212,7 +212,7 @@ export default async function CaseDetailPage({ params }: Props) {
 
             {study.quote && (
               <Reveal className="mt-12" delay={100}>
-                <blockquote className="max-w-3xl rounded-2xl border border-line-cool bg-surface px-7 py-8 shadow-card">
+                <blockquote className="max-w-3xl rounded-2xl border border-line-cool glass px-7 py-8 shadow-card">
                   <p className="text-lead text-ink">
                     &ldquo;{study.quote.text}&rdquo;
                   </p>
