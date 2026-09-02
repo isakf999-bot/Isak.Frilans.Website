@@ -5,28 +5,28 @@ import { btn } from "@/components/ui/buttonStyles";
 
 const OUTCOMES = [
   {
-    title: "En sajt som säljer åt dig",
-    body: "Inte bara “något snyggt på nätet”. Du får en struktur som gör det enkelt för besökaren att förstå vad ni gör, lita på er och ta nästa steg — boka, köpa eller höra av sig.",
+    title: "En sajt med ett tydligt jobb",
+    body: "Jag börjar inte med en mall och “något snyggt”. Jag börjar med vad besökaren ska göra: höra av sig, boka eller köpa. Sen ritar jag struktur, text och knappar så den vägen är uppenbar — på mobil först, utan brus.",
   },
   {
-    title: "Fast pris innan vi börjar",
-    body: "Du vet vad det kostar innan första raden kod. Inga timmar som tickar i det tysta, inga “vi får se”-fakturor. Scope och pris är klara — så du kan planera.",
+    title: "Fast pris innan första raden kod",
+    body: "Du får scope och pris innan jag börjar bygga. Inga timmar som tickar i bakgrunden, inga “vi får se”-fakturor. Behöver något läggas till gör vi det medvetet — du vet vad det kostar innan det händer.",
   },
   {
-    title: "Du äger allt",
-    body: "Koden, domänen, hostingen och innehållet är ert. Ingen byrå-låsning, ingen månadsavgift för att “få ut” sajten. Ni kan byta leverantör imorgon om ni vill.",
+    title: "Ni äger koden. På riktigt.",
+    body: "Sajten, koden, domänen och hostingen är ert. Jag bygger i modern teknik, inte i ett byråsystem ni fastnar i. Vill ni byta utvecklare imorgon tar ni med er allt — ingen månadsavgift för att “få ut” sajten.",
   },
   {
-    title: "Direkt med den som bygger",
-    body: "Du pratar med mig — samma person som designar, kodar och publicerar. Snabba svar, färre feltolkningar, och beslut som faktiskt landar i produkten.",
+    title: "Du pratar med den som kodar",
+    body: "Ingen projektledare som översätter. Du skriver till mig — samma person som designar, kodar och publicerar. Därför går det fort, därför blir besluten rätt, och därför landar det du sagt faktiskt i sajten.",
   },
   {
-    title: "Snabb, sökbar och byggd rätt",
-    body: "Mobilanpassning, prestanda och grundläggande SEO ingår i hur jag bygger. Sajten ska kännas snabb, synas i sök och gå att utveckla vidare när ni växer.",
+    title: "Byggd som en produkt — inte en mall",
+    body: "Från grunden i React/Next.js. Responsiv på riktigt, snabba laddtider, formulär som går att följa upp och grundläggande SEO (titlar, struktur, sitemap) ingår i hur jag bygger. Inte som tillägg. Redo att växa när ni gör det.",
   },
   {
-    title: "Leverans du kan lita på",
-    body: "Tydlig tidplan, avstämningar längs vägen och en färdig sajt som ni kan använda från dag ett — med support så ni kommer igång utan att känna er ensamma.",
+    title: "Live på utsatt tid",
+    body: "Typiskt 3–10 arbetsdagar när innehållet är på plats. Du får en tidplan, avstämningar längs vägen och en sajt som går att använda från dag ett — plus 14 dagars support efter lansering så ni inte står ensamma.",
   },
 ];
 
@@ -44,12 +44,13 @@ export function HomeValue() {
         <Reveal className="max-w-3xl">
           <SectionLabel>Vad du får</SectionLabel>
           <h2 id="vad-du-far-rubrik" className="mt-4 text-h2">
-            Det här får du när du anlitar mig.
+            Jag designar och kodar sajten. Du äger den.
           </h2>
           <p className="mt-5 text-lead text-muted">
-            Du betalar inte för möten, mellanlager eller en mall med er logga
-            på. Du betalar för en hemsida som gör jobbet — byggd åt ert företag,
-            med tydligt pris och dig i kontroll.
+            Du betalar inte för möten, mellanlager eller en WordPress-mall med
+            er logga på. Du betalar för en hemsida byggd från grunden åt ert
+            erbjudande — med fast pris, tydlig struktur och dig i kontroll från
+            dag ett.
           </p>
         </Reveal>
 
@@ -57,13 +58,7 @@ export function HomeValue() {
           {OUTCOMES.map((item, i) => (
             <Reveal key={item.title} delay={i * 45}>
               <li className="flex h-full flex-col rounded-lg border border-line glass p-6 transition-[border-color] duration-150 hover:border-ink/20">
-                <span
-                  aria-hidden="true"
-                  className="font-mono text-sm font-semibold text-brand"
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-4 text-lg font-semibold tracking-tight text-ink">
+                <h3 className="text-lg font-semibold tracking-tight text-ink">
                   {item.title}
                 </h3>
                 <p className="mt-3 grow text-sm leading-relaxed text-muted">
@@ -77,9 +72,10 @@ export function HomeValue() {
         <Reveal>
           <div className="mt-14 max-w-3xl border-t border-line pt-10">
             <p className="text-lg leading-relaxed text-ink">
-              Kort sagt: du får en partner som tar ansvar för resultatet — inte
-              bara levererar filer. Från första samtalet till live sajt vet du
-              vad som händer, vad det kostar och vad du går hem med.
+              Kort sagt: jag tar ansvar för att sajten faktiskt fungerar —
+              struktur, kod, publicering och att ni kommer igång. Från första
+              samtalet till live vet du vad som händer, vad det kostar och vad
+              du går hem med.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/kontakt" className={btn.primary}>

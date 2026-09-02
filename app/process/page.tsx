@@ -215,16 +215,19 @@ export default function ProcessPage() {
             </div>
           </Reveal>
 
-          <div className="mt-10 grid gap-5 sm:grid-cols-2">
+          <div className="mt-10 space-y-8">
             <Reveal delay={40}>
-              <div className="rounded-2xl border border-line glass p-6 shadow-card sm:p-7">
+              <div className="rounded-2xl border border-line glass p-6 shadow-card sm:p-8">
                 <h3 className="text-h3 text-[1.25rem]">Vad som ingår</h3>
-                <ul className="mt-5 space-y-3">
+                <ul className="mt-6 grid gap-x-10 gap-y-3 sm:grid-cols-2">
                   {priceIncludes.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-muted">
+                    <li
+                      key={item}
+                      className="flex items-start gap-3 text-sm leading-snug text-muted"
+                    >
                       <span
                         aria-hidden="true"
-                        className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"
+                        className="mt-[0.45em] h-1 w-1 shrink-0 rounded-full bg-brand"
                       />
                       {item}
                     </li>
@@ -232,34 +235,31 @@ export default function ProcessPage() {
                 </ul>
               </div>
             </Reveal>
-            <Reveal delay={80}>
-              <div className="rounded-2xl border border-line glass p-6 shadow-card sm:p-7">
-                <h3 className="text-h3 text-[1.25rem]">Kan tillkomma separat</h3>
-                <ul className="mt-5 space-y-3.5">
+
+            <Reveal delay={60}>
+              <div className="overflow-hidden rounded-2xl border border-line glass shadow-card">
+                <div className="border-b border-line px-6 py-5 sm:px-8">
+                  <h3 className="text-h3 text-[1.25rem]">Kan tillkomma separat</h3>
+                </div>
+                <ul className="divide-y divide-line">
                   {priceExtras.map((item) => (
                     <li
                       key={item.id}
-                      className="flex items-start justify-between gap-4 text-muted"
+                      className="flex flex-col gap-1 px-6 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:px-8 sm:py-5"
                     >
-                      <span className="flex items-start gap-3">
-                        <span
-                          aria-hidden="true"
-                          className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-muted/50"
-                        />
-                        <span>
-                          <span className="block text-ink">{item.name}</span>
-                          <span className="mt-0.5 block text-sm">
-                            {item.description}
-                          </span>
-                        </span>
-                      </span>
-                      <span className="shrink-0 text-sm font-semibold whitespace-nowrap text-brand">
+                      <div className="min-w-0">
+                        <p className="font-medium text-ink">{item.name}</p>
+                        <p className="mt-0.5 text-sm text-muted">
+                          {item.description}
+                        </p>
+                      </div>
+                      <p className="shrink-0 text-sm font-semibold whitespace-nowrap text-brand sm:text-right">
                         {item.priceLabel}
-                      </span>
+                      </p>
                     </li>
                   ))}
                 </ul>
-                <p className="mt-5 text-sm text-muted">
+                <p className="border-t border-line px-6 py-4 text-sm text-muted sm:px-8">
                   Se alla paket och tillägg på{" "}
                   <Link
                     href="/paket"
