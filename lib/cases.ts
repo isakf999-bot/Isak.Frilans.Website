@@ -42,14 +42,14 @@ export const cases: CaseStudy[] = [
   {
     slug: "mats-svensson",
     published: false,
-    domain: "matsppm.se",
+    domain: "mats-svensson.se",
     client: "Mats Svensson",
     industry: "Finans & sparande",
     teaser:
       "En befintlig sajt moderniserades från grunden — tydligare, snyggare och mer förtroendeingivande.",
     intro:
       "Mats Svensson hade redan en webbplats för sin fondbytesinformationstjänst. Den fungerade, men behövde ett lyft. Uppdraget var att modernisera den: ge tjänsten ett uttryck som matchar förtroendet Mats byggt upp, och göra det enklare att förstå erbjudandet och ta nästa steg.",
-    liveUrl: "https://mats-ppm.vercel.app/",
+    liveUrl: "https://mats-svensson.se/",
     services: [
       "Webbdesign",
       "UX/UI",
@@ -58,7 +58,7 @@ export const cases: CaseStudy[] = [
       "Konvertering",
     ],
     launched: "2026",
-    platform: "Next.js",
+    platform: "React + Vite",
     challenge:
       "Den gamla sajten bar innehållet men saknade tydlig hierarki och en övertygande väg till abonnemang. Mats ville behålla kärnan i erbjudandet — PPM, ISK och community — men få en webbplats som ser professionell ut och gör det enklare att ta nästa steg.",
     outcome:

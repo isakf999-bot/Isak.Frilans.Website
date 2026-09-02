@@ -58,7 +58,7 @@ const jsonLd = {
       "@id": `${SITE_URL}/#business`,
       name: "IsakWeb",
       url: SITE_URL,
-      image: `${SITE_URL}/og.jpg`,
+      image: `${SITE_URL}/opengraph.jpg`,
       description:
         "Webbutveckling, landningssidor, e-handel och egna system för svenska företag.",
       areaServed: "SE",
@@ -99,7 +99,7 @@ export const metadata: Metadata = {
       "Hemsidor med fast pris. Du pratar alltid med den som skriver koden.",
     images: [
       {
-        url: "/og.jpg",
+        url: "/opengraph.jpg",
         width: 1200,
         height: 630,
         type: "image/jpeg",
@@ -112,7 +112,7 @@ export const metadata: Metadata = {
     title: "IsakWeb — Webbutvecklare i Helsingborg | Från 3 795 kr",
     description:
       "Hemsidor med fast pris. Du pratar alltid med den som skriver koden.",
-    images: ["/og.jpg"],
+    images: ["/opengraph.jpg"],
   },
   robots: { index: true, follow: true },
   icons: {
