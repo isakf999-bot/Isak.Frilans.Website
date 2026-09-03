@@ -115,6 +115,9 @@ export const metadata: Metadata = {
     images: ["/opengraph.jpg"],
   },
   robots: { index: true, follow: true },
+  verification: {
+    google: "7q_x-ctym9Tssc3-uWf-sY_gLfTMtDRrEVaDGx752yM",
+  },
   icons: {
     icon: [
       { url: "/favicon-48.png", sizes: "48x48", type: "image/png" },
