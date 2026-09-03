@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { HomeFinalCta } from "@/components/Home/HomeFinalCta";
 import { Logo, logoLinkClass } from "@/components/Logo/Logo";
+import { seoLandings } from "@/lib/seoLandings";
 
 const YEAR = new Date().getFullYear();
 
@@ -255,6 +256,21 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
               Webbutveckling · Helsingborg &amp; Sverige
             </p>
           </div>
+
+          <nav
+            aria-label="Hemsidor och sök"
+            className="mt-8 flex flex-wrap gap-x-5 gap-y-2 border-t border-line/80 pt-5"
+          >
+            {seoLandings.map((landing) => (
+              <Link
+                key={landing.slug}
+                href={`/${landing.slug}`}
+                className="text-xs text-muted/80 transition-colors duration-150 hover:text-white"
+              >
+                {landing.navLabel}
+              </Link>
+            ))}
+          </nav>
         </div>
       </footer>
     </>

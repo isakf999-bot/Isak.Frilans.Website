@@ -20,6 +20,15 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
   },
+  async redirects() {
+    return [
+      {
+        source: "/webbutvecklare-helsingborg",
+        destination: "/webbutvecklare",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

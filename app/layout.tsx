@@ -75,7 +75,7 @@ export const metadata: Metadata = {
     template: "%s | IsakWeb",
   },
   description:
-    "Frilansande webbutvecklare i Helsingborg. Landningssidor, företagssajter och e-handel — med fast pris och direktkontakt.",
+    "Frilansande webbutvecklare för svenska företag. Landningssidor, företagssajter och e-handel — med fast pris och direktkontakt.",
   keywords: [
     "IsakWeb",
     "Isak Web",
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
     "e-handel",
     "landningssida",
     "företagssajt",
-    "Helsingborg",
+    "fast pris",
     "Sverige",
   ],
   authors: [{ name: "Isak Forsberg", url: "https://isakforsberg.se/" }],
@@ -94,24 +94,24 @@ export const metadata: Metadata = {
     locale: "sv_SE",
     url: SITE_URL,
     siteName: "IsakWeb",
-    title: "IsakWeb — Webbutvecklare i Helsingborg | Från 3 795 kr",
+    title: "IsakWeb — Webbutvecklare | Hemsidor till fast pris från 3 795 kr",
     description:
-      "Hemsidor med fast pris. Du pratar alltid med den som skriver koden.",
+      "Hemsidor med fast pris åt företag i hela Sverige. Du pratar alltid med den som skriver koden.",
     images: [
       {
         url: "/opengraph.jpg",
         width: 1200,
         height: 630,
         type: "image/jpeg",
-        alt: "IsakWeb — webbutvecklare i Helsingborg",
+        alt: "IsakWeb — webbutvecklare för svenska företag",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "IsakWeb — Webbutvecklare i Helsingborg | Från 3 795 kr",
+    title: "IsakWeb — Webbutvecklare | Hemsidor till fast pris från 3 795 kr",
     description:
-      "Hemsidor med fast pris. Du pratar alltid med den som skriver koden.",
+      "Hemsidor med fast pris åt företag i hela Sverige. Du pratar alltid med den som skriver koden.",
     images: ["/opengraph.jpg"],
   },
   robots: { index: true, follow: true },

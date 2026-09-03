@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { publishedCases } from "@/lib/cases";
+import { seoLandings } from "@/lib/seoLandings";
 import { services } from "@/lib/services";
 import { SITE_URL } from "@/lib/site";
 
@@ -20,6 +21,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: path === "" ? 1 : 0.8,
   }));
 
+  const landingRoutes = seoLandings.map((l) => ({
+    url: `${SITE_URL}/${l.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.85,
+  }));
+
   const serviceRoutes = services.map((s) => ({
     url: `${SITE_URL}/tjanster/${s.slug}`,
     lastModified: new Date(),
@@ -34,5 +42,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...serviceRoutes, ...caseRoutes];
+  return [...staticRoutes, ...landingRoutes, ...serviceRoutes, ...caseRoutes];
 }
