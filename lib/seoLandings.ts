@@ -29,6 +29,11 @@ const bookingFrom = formatSek(PRICES.addons.booking);
 const underhall = formatSek(PRICES.addons.maintenanceMonthly);
 const seoFrom = formatSek(PRICES.services.seoFrom);
 const designFrom = formatSek(PRICES.services.designFrom);
+const extraPage = formatSek(PRICES.addons.extraPage);
+const blog = formatSek(PRICES.addons.blog);
+const i18n = formatSek(PRICES.addons.i18n);
+const chatbot = formatSek(PRICES.addons.chatbot);
+const perfFrom = formatSek(PRICES.services.performanceFrom);
 
 export const seoLandings: SeoLanding[] = [
   {
@@ -816,6 +821,578 @@ export const seoLandings: SeoLanding[] = [
       {
         q: "Fungerar det i mobilen?",
         a: "Att redigera är enklast i dator. Sajten ni publicerar är självklart mobil.",
+      },
+    ],
+  },
+  {
+    slug: "bestall-hemsida",
+    navLabel: "Beställa hemsida",
+    title: "Beställa hemsida — fast pris från " + bas + " kr",
+    description:
+      "Beställ en hemsida utan byråcirkus. Ett samtal, ett scope, ett pris. Byggd från grunden, klar på 3–10 dagar när innehållet finns.",
+    eyebrow: "Beställning",
+    h1: "Beställa hemsida — du skickar behovet, jag bygger den",
+    lead: "Inget discovery-paket på tre veckor. Du skriver vad sajten ska göra. Jag svarar med vilket paket det är, vad som ingår och när jag kan börja.",
+    priceNote: `Beställning från ${bas} kr. Halva innan start, resten när ni godkänt.`,
+    contactPrefill: "Jag vill beställa en hemsida",
+    relatedServiceHref: "/kontakt",
+    relatedServiceLabel: "Kontakt",
+    sections: [
+      {
+        heading: "Så beställer ni hos mig",
+        body: "Ett kort mejl eller formulär räcker: vad ni säljer, ungefär hur många sidor, om ni har texter. Jag återkommer inom två arbetsdagar med paket, pris och en tid. Sen designar och kodar jag — ni ser utkast längs vägen, inte först på slutet.",
+      },
+      {
+        heading: "Vad som händer efter att ni sagt ja",
+        body: "50 procent innan jag börjar, 50 när sajten är godkänd. Jag publicerar, hjälper med domän och ger 14 dagars support. Ni äger koden. Ingen licens ni måste förnya för att sajten ska leva.",
+      },
+    ],
+    points: [
+      {
+        title: "En mening räcker för att starta",
+        body: "“Hemsida till verkstad, tre sidor, vi har bilder” är mer än tillräckligt för ett första svar.",
+      },
+      {
+        title: "Priset sitter innan koden",
+        body: `Bas ${bas} kr, Premium ${premium} kr, Full Service ${full} kr. Tillägg syns i offerten.`,
+      },
+      {
+        title: "Ni pratar med den som bygger",
+        body: "Samma person i mejlen som i koden. Ingen projektledare som översätter fel.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Kan jag beställa utan att veta vilket paket jag behöver?",
+        a: "Ja. Skriv vad sajten ska göra. Jag säger vilket paket det landar i — ni godkänner innan något faktureras.",
+      },
+      {
+        q: "Vad behöver ni av oss för att börja?",
+        a: "Texter och bilder, eller åtminstone en lista på sidor och ett par referenser. Jag kan strukturera copy, men jag kan inte gissa vad ni säljer.",
+      },
+      {
+        q: "Hur betalar vi?",
+        a: "Faktura. Halva vid start, halva vid godkännande. Företagskund, moms tillkommer.",
+      },
+      {
+        q: "Kan vi avbryta?",
+        a: "Innan jag börjat: ja, utan kostnad. När bygget är igång är första halvan för det arbetet. Andra halvan betalas bara om ni godkänner sajten.",
+      },
+    ],
+  },
+  {
+    slug: "hemsida-offert",
+    navLabel: "Hemsida offert",
+    title: "Offert på hemsida — svar inom två arbetsdagar",
+    description:
+      "Behöver ni en offert på hemsida? Jag skickar scope och fast pris, inte en timbank. Paket från " +
+      bas +
+      " kr. Hela Sverige.",
+    eyebrow: "Offert",
+    h1: "Offert på hemsida — ett pris, ett scope, inga dolda timmar",
+    lead: "Många offerter är tre sidor fluff och en siffra längst ner. Min är kort: vad jag bygger, vad det kostar, hur lång tid, vad som är tillägg.",
+    priceNote: `Typisk offert: Bas ${bas} kr eller Premium ${premium} kr. Större scope = egen siffra, fortfarande fast.`,
+    contactPrefill: "Jag vill ha en offert på hemsida",
+    relatedServiceHref: "/paket",
+    relatedServiceLabel: "Paket",
+    sections: [
+      {
+        heading: "Vad offerten innehåller",
+        body: "Antal sidor, vilka funktioner som ingår, pris exklusive moms, tidslinje och hur vi delar upp betalningen. Tillägg som bokning, blogg eller extra sidor står som egna rader — inte som “eventuellt mer”.",
+      },
+      {
+        heading: "Vad jag behöver för att kunna offerera",
+        body: "Vad ni gör, ungefär hur många sidor, om det finns shop, bokning eller flera språk. En länk till er nuvarande sajt om ni har en. Jag gissar inte ihop en siffra på tre rader mejl om uppdraget är otydligt — då frågar jag en sak till.",
+      },
+    ],
+    points: [
+      {
+        title: "Fast belopp",
+        body: "Inte “80 timmar à …”. Ni vet vad fakturan blir om scopet håller.",
+      },
+      {
+        title: "Svar inom två arbetsdagar",
+        body: "Oftast snabbare. Telefontid 10–22 om det är enklare att prata.",
+      },
+      {
+        title: "Ingen offertavgift",
+        body: "Att höra vad det skulle kosta är gratis. Ni är inte skyldiga något för att jag räknat.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Hur snabbt får vi offerten?",
+        a: "Inom två arbetsdagar när jag har tillräckligt för att säga paket och pris. En stor shop kan kräva ett kort samtal först.",
+      },
+      {
+        q: "Är offerten bindande?",
+        a: "Priset håller så länge scopet håller. Ändrar ni omfattningen säger jag till innan det kostar mer.",
+      },
+      {
+        q: "Kan ni matcha en annan byrås pris?",
+        a: "Jag sätter pris efter vad jag ska bygga, inte efter deras PDF. Ibland är jag billigare. Ibland gör de något annat än jag.",
+      },
+      {
+        q: "Måste vi ha organisationsnummer?",
+        a: "Företagskund är standard. Enskild firma går bra. Privatpersoner tar jag sällan — säg till så säger jag ja eller nej rakt.",
+      },
+    ],
+  },
+  {
+    slug: "modern-hemsida",
+    navLabel: "Modern hemsida",
+    title: "Modern hemsida — snabb, tydlig, byggd nu",
+    description:
+      "Modern hemsida i React eller Next.js. Inte ett 2014-tema med slider. Fast pris från " +
+      bas +
+      " kr, ni äger koden.",
+    eyebrow: "Uttryck & teknik",
+    h1: "Modern hemsida — ser ut som 2026, inte som ett gammalt tema",
+    lead: "Modern betyder inte animerade blobbar. Det betyder att sajten är snabb i mobilen, typografin går att läsa och ni inte skäms när någon googlar er.",
+    priceNote: `Ny modern sajt från ${bas} kr. Redesign ${redesignFrom}–${redesignTo} kr när strukturen kan behållas.`,
+    contactPrefill: "Jag vill ha en modern hemsida",
+    relatedServiceHref: "/tjanster/webbdesign",
+    relatedServiceLabel: "Webbdesign",
+    sections: [
+      {
+        heading: "Vad folk menar med modern — och vad jag bygger",
+        body: "Luft, tydlig hierarki, få typsnitt, knappar som syns, bilder som inte väger tre megabyte. Tekniken är React eller Next.js så sidan inte dör när webbläsarna går vidare. Inget jQuery-tema ni inte kan lämna.",
+      },
+      {
+        heading: "Modern utan att jaga trender",
+        body: "Glas, neon och 3D-hjältar åldras fort om de inte hör till er. Jag tar ett uttryck som håller tre–fem år och som går att utveckla. Ni ska kännas aktuella, inte som en Dribbble-klon från i fjol.",
+      },
+    ],
+    points: [
+      {
+        title: "Mobil först på riktigt",
+        body: "Layouten ritas för telefonen. Desktop är inte “den riktiga” versionen.",
+      },
+      {
+        title: "Lätt att lämna över",
+        body: "Modern kod någon annan kan läsa. Inte 40 plugins som bara en byrå förstår.",
+      },
+      {
+        title: "Samma paket",
+        body: `Modern är inte ett påslag. Det är så jag bygger — från ${bas} kr.`,
+      },
+    ],
+    faqs: [
+      {
+        q: "Kan ni modernisera vår gamla sajt utan att kasta allt?",
+        a: `Ja, det är redesign ${redesignFrom}–${redesignTo} kr när budskap och URL:er kan följa med. Är allt ändå slängt är ny sajt oftast renare.`,
+      },
+      {
+        q: "Måste det vara mörkt och “techigt”?",
+        a: "Nej. Modernt kan vara ljust, varmt eller stramt. Det styrs av er, inte av min startsida.",
+      },
+      {
+        q: "Fungerar det mot äldre webbläsare?",
+        a: "De webbläsare era kunder faktiskt använder. Jag jagar inte Internet Explorer.",
+      },
+      {
+        q: "Hur länge känns den modern?",
+        a: "Längre än ett tema. Typografi och struktur åldras långsammare än effekter. Underhåll håller innehållet vid liv.",
+      },
+    ],
+  },
+  {
+    slug: "onepage-hemsida",
+    navLabel: "Onepage-hemsida",
+    title: "Onepage-hemsida — allt på en sida, från " + bas + " kr",
+    description:
+      "En one-page-hemsida med ett flöde: erbjudande, bevis, kontakt. Inga onödiga undersidor. Fast pris, byggd från grunden.",
+    eyebrow: "En sida",
+    h1: "Onepage-hemsida — ett scroll, ett jobb, en knapp",
+    lead: "Alla behöver inte en meny med åtta poster. En sida som berättar vad ni gör och hur man hör av sig räcker för många. Jag bygger den så den inte känns som en evig landning utan luft.",
+    priceNote: `Ofta Bas ${bas} kr. Extra sektioner är inte extra sidor — vi tar det i scopet.`,
+    contactPrefill: "Jag vill ha en onepage-hemsida",
+    relatedServiceHref: "/tjanster/landningssidor",
+    relatedServiceLabel: "Landningssidor",
+    sections: [
+      {
+        heading: "När onepage är rätt",
+        body: "Ett erbjudande, en stad, en person. Konsult, hantverk, liten butik, event. Besökaren ska inte välja mellan fem avdelningar — de ska förstå er och skriva.",
+      },
+      {
+        heading: "När onepage är fel",
+        body: "Olika tjänster som behöver egna sökord, en shop, eller en blogg. Då bygger vi undersidor från början. En one-page som låtsas vara en hel sajt blir bara lång och jobbig att uppdatera.",
+      },
+    ],
+    points: [
+      {
+        title: "Sektioner, inte en vägg",
+        body: "Erbjudande, bevis, hur det funkar, kontakt. Ankare om ni vill — inte en enda 8 000 pixlars klump.",
+      },
+      {
+        title: "Fortfarande sökbar",
+        body: "Title, H1, sitemap. En sida kan ranka om den har ett tydligt sökord.",
+      },
+      {
+        title: "Går att växa",
+        body: `Behöver ni /om eller /priser sen är extra sidor ${extraPage} kr. Vi kastar inte om allt.`,
+      },
+    ],
+    faqs: [
+      {
+        q: "Är onepage samma sak som landningssida?",
+        a: "Nästan. Landningssidan är ofta för en kampanj. Onepage är ofta hela närvaron — samma teknik, lite mer “det här är vi”.",
+      },
+      {
+        q: "Kan vi ha en meny som hoppar i sidan?",
+        a: "Ja. Start, tjänster, kontakt. Det är fortfarande en URL.",
+      },
+      {
+        q: "Blir den långsam av alla bilder?",
+        a: "Inte om vi komprimerar och inte lastar allt på en gång. En lång sida som är lat-laddad är ofta snabbare än ett tungt tema med 12 plugins.",
+      },
+      {
+        q: "Vad kostar en onepage?",
+        a: `Oftast Bas ${bas} kr. Behöver ni bokning eller chatt lägger vi det som tillägg.`,
+      },
+    ],
+  },
+  {
+    slug: "frilansande-webbutvecklare",
+    navLabel: "Frilansande webbutvecklare",
+    title: "Frilansande webbutvecklare — hemsidor till fast pris",
+    description:
+      "Anlita en frilansande webbutvecklare, inte en byråkedja. Hemsidor, landningar och system. Du pratar med den som kodar. Hela Sverige.",
+    eyebrow: "Frilans",
+    h1: "Frilansande webbutvecklare — ett namn, en kodbas, ett pris",
+    lead: "Jag tar uppdrag som frilansare: design och utveckling i samma hand. Ni betalar för sajten, inte för ett kontor med tre lager möten.",
+    priceNote: `Hemsidor från ${bas} kr. Större system efter offert.`,
+    contactPrefill: "Jag vill anlita en frilansande webbutvecklare",
+    relatedServiceHref: "/om",
+    relatedServiceLabel: "Om mig",
+    sections: [
+      {
+        heading: "Vad frilans betyder i praktiken",
+        body: "Ni mejlar Isak. Jag ritar, kodar, publicerar och svarar när något strular de första två veckorna. Inget “vi återkommer när utvecklaren är ledig” — det är jag.",
+      },
+      {
+        heading: "När ni ska ta en byrå istället",
+        body: "Tjugo personer i projektet, varumärkesfilm och en account manager på heltid. Då är jag fel. En företagssajt, en landning, en shop i rimlig storlek — då är jag rätt.",
+      },
+    ],
+    points: [
+      {
+        title: "React, Next.js, integrationer",
+        body: "Hemsidor är vanligast. API:er och enklare system finns. Jag säger nej när det inte är mitt bord.",
+      },
+      {
+        title: "Fast pris på sajter",
+        body: "Frilans är inte samma sak som löpande räkning. Paketen är fasta.",
+      },
+      {
+        title: "Hela Sverige",
+        body: "Digitalt som standard. Samma leverans oavsett ort.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Har du tid just nu?",
+        a: "Det ändras. Skicka vad ni behöver — jag säger ja, kö, eller nej. Jag tar inte in mer än jag kan leverera.",
+      },
+      {
+        q: "Kan du sitta i vårt team en månad?",
+        a: "Sällan. Jag tar avgränsade uppdrag med leverans, inte anställning light. Fråga ändå om det är kort och tydligt.",
+      },
+      {
+        q: "Fakturerar du via bolag?",
+        a: "Ja. Ni får en vanlig faktura med moms.",
+      },
+      {
+        q: "Vad skiljer det här från sidan Webbutvecklare?",
+        a: "Samma person. Den här sidan är för er som konkret söker en frilansare — den andra för er som söker någon som bygger sajten.",
+      },
+    ],
+  },
+  {
+    slug: "hemsida-med-blogg",
+    navLabel: "Hemsida med blogg",
+    title: "Hemsida med blogg — från " + blog + " kr extra",
+    description:
+      "Hemsida med blogg för nyheter och SEO. Inlägg ni kan publicera själva, eller som jag tar. Tillägg ovanpå fast paketpris.",
+    eyebrow: "Innehåll",
+    h1: "Hemsida med blogg — sidor som går att fylla över tid",
+    lead: "En blogg är inte ett tema med sidofält. Det är en lista, ett inlägg, en RSS-väg Google kan följa. Jag sätter det som tillägg när ni faktiskt ska skriva — inte för att “alla har en blogg”.",
+    priceNote: `Sajt från ${bas} kr. Blogg ${blog} kr som tillägg.`,
+    contactPrefill: "Jag vill ha en hemsida med blogg",
+    relatedServiceHref: "/tjanster/seo",
+    relatedServiceLabel: "SEO",
+    sections: [
+      {
+        heading: "Vad bloggen gör på er sajt",
+        body: "Egna URL:er per inlägg, titlar, datum, intern länkning tillbaka till tjänsterna. Det är så innehåll faktiskt hjälper sök — inte en nyhetssida som ingen uppdaterar sen mars 2022.",
+      },
+      {
+        heading: "Vem som skriver",
+        body: "Bäst är ni, om ni kan ämnet. Jag kan strukturera och publicera. Löpande texter är ett separat åtagande, inte gömt i bloggtillägget.",
+      },
+    ],
+    points: [
+      {
+        title: "Admin för inlägg",
+        body: "I Premium och uppåt kan ni publicera själva. Annars skickar ni utkast, jag lägger upp.",
+      },
+      {
+        title: "Inte ett WordPress-arkiv",
+        body: "Inga kategorier ni aldrig använder. En ren lista och en inläggsmall som matchar sajten.",
+      },
+      {
+        title: "Tillägg ni ser",
+        body: `${blog} kr. Extra sidor utanför bloggen är ${extraPage} kr styck.`,
+      },
+    ],
+    faqs: [
+      {
+        q: "Måste vi ha blogg för att synas?",
+        a: "Nej. Tydliga tjänstesidor räcker långt. Blogg lönar sig när ni har något att säga mer än en gång i halvåret.",
+      },
+      {
+        q: "Kan vi flytta gamla inlägg från WordPress?",
+        a: "Ja, de som är värda att behålla. Redirects från gamla URL:er så Google inte tappar dem.",
+      },
+      {
+        q: "Ingår skrivande?",
+        a: "Nej, inte i tillägget. Tillägget är tekniken och mallen. Texter offert eller era egna.",
+      },
+      {
+        q: "Kan bloggen ligga på /blogg eller /nyheter?",
+        a: "Ja. Vi tar den URL ni vill stå för. En väg, inte tre som konkurrerar.",
+      },
+    ],
+  },
+  {
+    slug: "flersprakig-hemsida",
+    navLabel: "Flerspråkig hemsida",
+    title: "Flerspråkig hemsida — svenska plus fler språk",
+    description:
+      "Hemsida på flera språk med egna URL:er, inte en Google-översätt-knapp. Tillägg från " +
+      i18n +
+      " kr ovanpå paketet.",
+    eyebrow: "Språk",
+    h1: "Flerspråkig hemsida — ett språk i taget, samma sajt",
+    lead: "Svenska plus engelska, tyska eller mer. Jag sätter språkval, egna sökvägar och metadata per språk. Ni översätter — eller tar in någon som kan — jag ser till att tekniken inte blandar ihop dem.",
+    priceNote: `Sajt från ${bas} kr. Flerspråk från ${i18n} kr beroende på antal språk och sidor.`,
+    contactPrefill: "Jag vill ha en flerspråkig hemsida",
+    relatedServiceHref: "/paket",
+    relatedServiceLabel: "Paket och tillägg",
+    sections: [
+      {
+        heading: "Så gör vi språk utan att dubbla kaoset",
+        body: "Varje språk får egna URL:er, titles och H1. En språkväxel som inte tappar sidan ni står på. Sitemap för båda. Inget automatiskt översätt-lager som gör er till åtlöje på tyska.",
+      },
+      {
+        heading: "Vad ni måste leverera",
+        body: "Färdiga texter på varje språk, eller en översättare. Jag gissar inte juridiska eller säljtexter på ett språk jag inte ska stå för. Strukturen speglas — antalet sidor ska stämma.",
+      },
+    ],
+    points: [
+      {
+        title: "Hreflang och canonical",
+        body: "Så Google förstår att /en/services är syskon till /tjanster, inte dubbletter.",
+      },
+      {
+        title: "Samma design, rätt copy",
+        body: "Layouten håller. Meningarna får vara olika långa — vi bygger så det inte spricker.",
+      },
+      {
+        title: "Prisat som tillägg",
+        body: `Från ${i18n} kr. Fler språk eller mycket admin är mer — det står i offerten.`,
+      },
+    ],
+    faqs: [
+      {
+        q: "Räcker det inte med en översätt-widget?",
+        a: "För en intern sida kanske. För kunder ni vill övertyga: nej. Då ska texterna vara skrivna, inte maskin-gissade live.",
+      },
+      {
+        q: "Kan vi börja på svenska och lägga engelska sen?",
+        a: "Ja. Jag bygger så språklagret går att koppla på. Billigare att säga till från start om ni vet att det kommer.",
+      },
+      {
+        q: "SEO på flera språk?",
+        a: "Ja, varje språk är egna sidor. De rankar i sina marknader om innehållet är på riktigt.",
+      },
+      {
+        q: "Hur många språk klarar ni?",
+        a: "Tekniskt fler än ni behöver. Kostnaden sitter i sidor × språk, inte i en magisk gräns.",
+      },
+    ],
+  },
+  {
+    slug: "responsiv-hemsida",
+    navLabel: "Responsiv hemsida",
+    title: "Responsiv hemsida — byggd för mobilen, inte skalad ner",
+    description:
+      "Responsiv hemsida som fungerar i telefon, läsplatta och desktop. Inte ett desktop-tema som kläms ihop. Fast pris från " +
+      bas +
+      " kr.",
+    eyebrow: "Mobil",
+    h1: "Responsiv hemsida — först telefonen, sen den stora skärmen",
+    lead: "De flesta av era besökare är i mobilen. Jag ritar och kodar så knappar går att träffa, text går att läsa och inget horisontellt scroll dyker upp.",
+    priceNote: `Ingår i varje paket från ${bas} kr. Prestandajobb på en sajt ni redan har från ${perfFrom} kr.`,
+    contactPrefill: "Jag vill ha en responsiv hemsida",
+    relatedServiceHref: "/tjanster/prestanda",
+    relatedServiceLabel: "Prestanda",
+    sections: [
+      {
+        heading: "Responsiv är inte en bock i en kravlista",
+        body: "Det är beslut: vad som stackas, vad som döljs, hur menyn beter sig, hur stora bilderna är. Jag bygger breakpoints efter innehållet — inte efter att “det finns ett mobiltema”.",
+      },
+      {
+        heading: "Gammal sajt som bara är ful i telefonen",
+        body: "Då är det oftast redesign eller ny sajt, inte en CSS-lapp. En WordPress-mall som “är responsiv” kan ändå vara oanvändbar. Jag säger vad som är lapp och vad som är släng.",
+      },
+    ],
+    points: [
+      {
+        title: "Pekytor och typ",
+        body: "Knappar ni träffar med tummen. Brödtext som inte är 11 pixlar.",
+      },
+      {
+        title: "Inga överraskningar i iPhone",
+        body: "Vi kollar de bredder era kunder har. Inte bara Chrome på en 27-tummare.",
+      },
+      {
+        title: "Snabba bilder",
+        body: "Rätt storlek till rätt skärm. Responsivt inkluderar vikt, inte bara layout.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Ingår responsiv design i paketet?",
+        a: "Ja. Det är inte ett tillägg. En sajt som inte funkar i mobilen är inte levererad.",
+      },
+      {
+        q: "Kan du bara göra vår nuvarande sajt responsiv?",
+        a: `Ibland, som prestanda/fix från ${perfFrom} kr. Ofta är det billigare att bygga om än att slåss mot ett tema.`,
+      },
+      {
+        q: "Gör du appar också?",
+        a: "En responsiv sajt räcker för de flesta. En native-app är ett annat uppdrag — säg vad ni faktiskt behöver.",
+      },
+      {
+        q: "Testar du Android och iPhone?",
+        a: "Ja, de vanliga bredderna. Exotiska webbläsare jagar jag inte om era kunder inte sitter där.",
+      },
+    ],
+  },
+  {
+    slug: "hemsida-konsult",
+    navLabel: "Hemsida till konsult",
+    title: "Hemsida till konsult — förtroende innan första mötet",
+    description:
+      "Hemsida för konsulter och rådgivare. Tydligt erbjudande, case och en väg till samtal. Fast pris från " +
+      bas +
+      " kr.",
+    eyebrow: "Konsult",
+    h1: "Hemsida till konsult — så någon bokar ett samtal, inte bara läser CV:t",
+    lead: "Er sajt ska inte vara en LinkedIn-kopia. Den ska säga vem ni tar, vad uppdraget kostar att påbörja, och varför det är ni. Jag bygger den runt det — inte runt en tidslinje från 2011.",
+    priceNote: `De flesta konsulter: Bas ${bas} kr eller Premium ${premium} kr med case-sidor.`,
+    contactPrefill: "Jag vill ha en hemsida till min konsultverksamhet",
+    relatedServiceHref: "/tjanster/foretagssajter",
+    relatedServiceLabel: "Företagssajter",
+    sections: [
+      {
+        heading: "Vad en konsultwebb faktiskt säljer",
+        body: "Förtroende. Metod i korthet, vilka ni inte tar, ett par uppdrag, en kalender eller ett formulär. Jag stoppar “välkommen till min hemsida” och sätter erbjudandet först.",
+      },
+      {
+        heading: "Case utan att skvallra",
+        body: "Många får inte namnge kunden. Då skriver vi problemet och resultatet ändå. En sida per typ av uppdrag slår en lång lista med loggor ni inte får visa.",
+      },
+    ],
+    points: [
+      {
+        title: "Ett erbjudande, inte tio tjänster",
+        body: "Välj den ni vill bli hittade på. Resten kan stå längre ner eller på egna sidor.",
+      },
+      {
+        title: "Bokning eller formulär",
+        body: `Kalender som tillägg från ${bookingFrom} kr, eller ett formulär som landar i er mejl.`,
+      },
+      {
+        title: "Seriös utan byråton",
+        body: "Ni ska låta som er. Inte som en pitch-deck-generator.",
+      },
+    ],
+    faqs: [
+      {
+        q: "Jag är ensam — behöver jag Premium?",
+        a: `Inte om tre–fem sidor räcker. Premium ${premium} kr när ni vill ha fler case, admin och mer SEO-sidor.`,
+      },
+      {
+        q: "Kan sajten peka mot Calendly eller liknande?",
+        a: "Ja. Eller så bygger vi bokningen som tillägg. Det billigaste som funkar vinner.",
+      },
+      {
+        q: "Får jag synas på “konsult + min nisch”?",
+        a: "Ja, det är just sådana sidor vi kan lägga till. En nisch per sida, inte en startsida som ska vinna allt.",
+      },
+      {
+        q: "Jobbar du med konsulter i hela Sverige?",
+        a: "Ja. Digitalt. Samma pris i Stockholm som i en mindre stad.",
+      },
+    ],
+  },
+  {
+    slug: "hemsida-med-chatt",
+    navLabel: "Hemsida med chatt",
+    title: "Hemsida med chatt — svar när ni inte sitter i mejlen",
+    description:
+      "Hemsida med chattbot eller live-ruta. Vanliga frågor, väg till kontakt. Tillägg från " +
+      chatbot +
+      " kr ovanpå paketet.",
+    eyebrow: "Chatt",
+    h1: "Hemsida med chatt — en ruta som faktiskt kan svaret",
+    lead: "En chatt som bara säger “hej, hur kan jag hjälpa dig?” är dekoration. Jag kopplar en ruta till det ni faktiskt erbjuder — priser, paket, nästa steg — eller en väg rakt till er.",
+    priceNote: `Sajt från ${bas} kr. AI-chattbot från ${chatbot} kr som tillägg.`,
+    contactPrefill: "Jag vill ha en hemsida med chatt",
+    relatedServiceHref: "/tjanster/ai-integrationer",
+    relatedServiceLabel: "AI-integrationer",
+    sections: [
+      {
+        heading: "När chatten tjänar in sig",
+        body: "Ni får samma fem frågor varje vecka. Då kan rutan svara och skicka vidare till formulär när det blir skarpt. Ni slutar copy-pasta paketlistan klockan 21.",
+      },
+      {
+        heading: "När ni ska skippa den",
+        body: "Ingen trafik, inget innehåll att svara från, eller en bransch där folk måste prata med en människa direkt. Då är ett synligt telefonnummer mer ärligt.",
+      },
+    ],
+    points: [
+      {
+        title: "Kunskap från er sajt",
+        body: "Boten ska hålla sig till priser och tjänster ni godkänt. Inte hitta på leveranstider.",
+      },
+      {
+        title: "Escape till människa",
+        body: "En tydlig väg till mejl eller formulär. Chatten får inte bli en återvändsgränd.",
+      },
+      {
+        title: "Synligt tillägg",
+        body: `${chatbot} kr för boten. Avancerade formulär är ett annat tillägg om ni behöver mer än mejl.`,
+      },
+    ],
+    faqs: [
+      {
+        q: "Är det AI eller en vanlig chat-widget?",
+        a: "Jag sätter det ni behöver. En AI-ruta mot er kunskapsbas, eller en enklare widget till mejl/Slack. Vi väljer efter volym och risk.",
+      },
+      {
+        q: "Kan den boka tider?",
+        a: "Ibland, om bokningen redan finns. Annars pekar den dit. Jag lovar inte en full receptionist i första tillägget.",
+      },
+      {
+        q: "Lagrar ni chatten?",
+        a: "Det styrs av hur vi sätter upp den. Cookie-banner och vad som sparas tar vi innan live — särskilt om ni har kunder i EU.",
+      },
+      {
+        q: "Måste vi ha chatt för att sajten ska kännas modern?",
+        a: "Nej. Många sajter blir bättre av en tydlig knapp. Chatt är ett verktyg, inte ett statusmärke.",
       },
     ],
   },
