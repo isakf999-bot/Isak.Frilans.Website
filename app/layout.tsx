@@ -116,7 +116,10 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   verification: {
-    google: "7q_x-ctym9Tssc3-uWf-sY_gLfTMtDRrEVaDGx752yM",
+    google: [
+      "BeCLFyN4Lk4XR7Jxdfz8H1v-wR2wEDKpEDSMMzTm-Tg",
+      "7q_x-ctym9Tssc3-uWf-sY_gLfTMtDRrEVaDGx752yM",
+    ],
   },
   icons: {
     icon: [
