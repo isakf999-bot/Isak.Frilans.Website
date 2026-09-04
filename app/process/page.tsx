@@ -78,7 +78,14 @@ export default function ProcessPage() {
               <p className="mt-5 max-w-2xl text-lead text-muted">
                 Inga överraskningar. Här ser du hur vi jobbar tillsammans, hur
                 jag håller dig uppdaterad och ungefärliga prisintervall — innan
-                du hör av dig.
+                du hör av dig. Vill du veta vad en sajt kostar i paket:{" "}
+                <Link
+                  href="/hemsida-fast-pris"
+                  className="font-medium text-brand underline-offset-2 hover:underline"
+                >
+                  hemsida till fast pris
+                </Link>
+                .
               </p>
             </Reveal>
 
@@ -282,6 +289,13 @@ export default function ProcessPage() {
               >
                 Hör av dig
               </Link>{" "}
+              eller be om en{" "}
+              <Link
+                href="/hemsida-offert"
+                className="font-medium text-brand underline-offset-2 hover:underline"
+              >
+                offert
+              </Link>
               — jag säger rakt vad jag hade gjort, även om svaret är att du inte
               behöver mig. Du kan också kolla{" "}
               <Link
@@ -289,6 +303,13 @@ export default function ProcessPage() {
                 className="font-medium text-brand underline-offset-2 hover:underline"
               >
                 vad jag bygger
+              </Link>
+              ,{" "}
+              <Link
+                href="/bestall-hemsida"
+                className="font-medium text-brand underline-offset-2 hover:underline"
+              >
+                hur du beställer
               </Link>{" "}
               eller se{" "}
               <Link

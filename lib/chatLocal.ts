@@ -2,6 +2,7 @@ import { formatSek, PRICES } from "@/lib/pricing";
 import { packages, packageAddons } from "@/lib/packages";
 import { homeFaq } from "@/lib/faq";
 import { services } from "@/lib/services";
+import { seoLandings } from "@/lib/seoLandings";
 import type { ChatMessage } from "@/lib/chatKnowledge";
 
 type Fact = { id: string; text: string; terms: string[] };
@@ -42,7 +43,7 @@ function detectIntent(question: string): Intent {
   ) {
     return "includes";
   }
-  if (/(kostar|pris|kostnad|hur mycket|billig|kalkylator|offert)/.test(q)) {
+  if (/(kostar|pris|kostnad|hur mycket|billig|kalkylator|offert|bestall)/.test(q)) {
     return "price";
   }
   if (
@@ -99,7 +100,7 @@ function buildFacts(): Fact[] {
         "bygger i",
         "anvander",
       ],
-      text: `Nej — jag bygger inte i WordPress eller färdiga mallteman. Jag skräddarsyr sajter med modern teknik (bland annat React/Next.js), så resultatet inte känns generiskt. Har du redan en WordPress-sajt kan jag modernisera den via Uppdatering & redesign (${formatSek(PRICES.services.redesignFrom)}–${formatSek(PRICES.services.redesignTo)} kr) — då blir det en ny, snabb sajt snarare än ännu en mall.`,
+      text: `Nej — jag bygger inte i WordPress eller färdiga mallteman. Jag skräddarsyr sajter med modern teknik (bland annat React/Next.js), så resultatet inte känns generiskt. Har du redan en WordPress-sajt kan jag modernisera den via Uppdatering & redesign (${formatSek(PRICES.services.redesignFrom)}–${formatSek(PRICES.services.redesignTo)} kr) — mer på /byta-wordpress.`,
     },
     {
       id: "redesign",
@@ -114,7 +115,7 @@ function buildFacts(): Fact[] {
         "ute i tiden",
         "langsam sajt",
       ],
-      text: `Ja, det är ett av mina vanligaste uppdrag. Via Uppdatering & redesign (ca ${formatSek(PRICES.services.redesignFrom)}–${formatSek(PRICES.services.redesignTo)} kr) tar jag din befintliga sajt och lyfter det som skaver — mobil, prestanda, uttryck och väg till kontakt — utan att du alltid måste börja från noll. Mer på /tjanster/redesign.`,
+      text: `Ja, det är ett av mina vanligaste uppdrag. Via Uppdatering & redesign (ca ${formatSek(PRICES.services.redesignFrom)}–${formatSek(PRICES.services.redesignTo)} kr) tar jag din befintliga sajt och lyfter det som skaver — mobil, prestanda, uttryck och väg till kontakt. Mer på /ny-hemsida och /tjanster/redesign.`,
     },
     {
       id: "price",
@@ -127,7 +128,7 @@ function buildFacts(): Fact[] {
         "kalkylator",
         "vad kostar",
       ],
-      text: `Mina paket ligger så här: Bas ${formatSek(PRICES.packages.starter)} kr, Premium ${formatSek(PRICES.packages.business)} kr, Full Service ${formatSek(PRICES.packages.premium)} kr. Enterprise är offert. Beroende på antal sidor och tillägg kan det landa runt ${formatSek(PRICES.packages.starter)}–${formatSek(PRICES.packages.starterHigh)}, ${formatSek(PRICES.packages.business)}–${formatSek(PRICES.packages.businessHigh)} respektive ${formatSek(PRICES.packages.premium)}–${formatSek(PRICES.packages.premiumHigh)} kr. På /paket kan du räkna fram ett snabbare estimat — eller fråga mig vad som ingår.`,
+      text: `Mina paket ligger så här: Bas ${formatSek(PRICES.packages.starter)} kr, Premium ${formatSek(PRICES.packages.business)} kr, Full Service ${formatSek(PRICES.packages.premium)} kr. Enterprise är offert. Mer om fast pris på /hemsida-fast-pris, hur en offert ser ut på /hemsida-offert, eller /paket om du vill räkna själv.`,
     },
     {
       id: "contact",
@@ -194,6 +195,21 @@ function buildFacts(): Fact[] {
       id: `faq-${item.q.slice(0, 24)}`,
       terms: item.q.split(" ").filter((w) => w.length > 3),
       text: item.a,
+    });
+  }
+
+  for (const landing of seoLandings) {
+    facts.push({
+      id: `land-${landing.slug}`,
+      terms: [
+        landing.navLabel,
+        landing.slug.replace(/-/g, " "),
+        ...landing.h1
+          .split(/[—,\s]+/)
+          .filter((w) => w.length > 4)
+          .slice(0, 6),
+      ],
+      text: `${landing.lead} Mer på /${landing.slug}. ${landing.priceNote}`,
     });
   }
 

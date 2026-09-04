@@ -1405,3 +1405,8 @@ export function getSeoLanding(slug: string): SeoLanding | undefined {
 export function otherSeoLandings(slug: string): SeoLanding[] {
   return seoLandings.filter((l) => l.slug !== slug);
 }
+
+/** Landningar som pekar tillbaka mot en tjänst, /paket, /om m.m. */
+export function seoLandingsForRelatedHref(href: string): SeoLanding[] {
+  return seoLandings.filter((l) => l.relatedServiceHref === href);
+}

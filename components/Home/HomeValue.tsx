@@ -47,10 +47,28 @@ export function HomeValue() {
             Jag designar och kodar sajten. Du äger den.
           </h2>
           <p className="mt-5 text-lead text-muted">
-            Du betalar inte för möten, mellanlager eller en WordPress-mall med
-            er logga på. Du betalar för en hemsida byggd från grunden åt ert
-            erbjudande — med fast pris, tydlig struktur och dig i kontroll från
-            dag ett.
+            Du betalar inte för möten, mellanlager eller en{" "}
+            <Link
+              href="/byta-wordpress"
+              className="font-medium text-brand hover:opacity-70"
+            >
+              WordPress-mall
+            </Link>{" "}
+            med er logga på. Du betalar för en{" "}
+            <Link
+              href="/hemsida-foretag"
+              className="font-medium text-brand hover:opacity-70"
+            >
+              hemsida till företaget
+            </Link>{" "}
+            byggd från grunden — med{" "}
+            <Link
+              href="/hemsida-fast-pris"
+              className="font-medium text-brand hover:opacity-70"
+            >
+              fast pris
+            </Link>
+            , tydlig struktur och dig i kontroll från dag ett.
           </p>
         </Reveal>
 

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Reveal } from "@/components/Reveal/Reveal";
 import { SectionLabel } from "@/components/SectionLabel/SectionLabel";
 import { ServiceCard } from "@/components/Services/ServiceCard";
@@ -17,10 +18,29 @@ export function Services() {
             Det jag bygger åt dig.
           </h2>
           <p className="mt-5 text-lead text-muted">
-            Landningssida, företagssajt eller e-handel — alltid med fokus på vad
-            sajten ska åstadkomma för er. Osäker på vad ni behöver? Beskriv
-            läget. Jag säger rakt vad som är värt att bygga, och vad ni kan
-            skippa.
+            <Link
+              href="/landningssida"
+              className="font-medium text-brand hover:opacity-70"
+            >
+              Landningssida
+            </Link>
+            ,{" "}
+            <Link
+              href="/hemsida-foretag"
+              className="font-medium text-brand hover:opacity-70"
+            >
+              företagssajt
+            </Link>{" "}
+            eller{" "}
+            <Link
+              href="/webbshop"
+              className="font-medium text-brand hover:opacity-70"
+            >
+              e-handel
+            </Link>{" "}
+            — alltid med fokus på vad sajten ska åstadkomma för er. Osäker på
+            vad ni behöver? Beskriv läget. Jag säger rakt vad som är värt att
+            bygga, och vad ni kan skippa.
           </p>
         </Reveal>
 

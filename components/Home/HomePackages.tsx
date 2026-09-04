@@ -171,7 +171,28 @@ export function HomePackages() {
           </h2>
           <p className="mt-4 max-w-2xl text-lead text-muted">
             Du ser vad ni får och vad det kostar — innan något arbete startar.
-            Välj paket eller använd kalkylatorn för sidor och tillägg.
+            Läs mer om{" "}
+            <Link
+              href="/hemsida-fast-pris"
+              className="font-medium text-brand hover:opacity-70"
+            >
+              hemsida till fast pris
+            </Link>
+            , hur du{" "}
+            <Link
+              href="/bestall-hemsida"
+              className="font-medium text-brand hover:opacity-70"
+            >
+              beställer
+            </Link>{" "}
+            eller hur en{" "}
+            <Link
+              href="/hemsida-offert"
+              className="font-medium text-brand hover:opacity-70"
+            >
+              offert
+            </Link>{" "}
+            ser ut. Välj paket eller använd kalkylatorn för sidor och tillägg.
           </p>
         </Reveal>
 

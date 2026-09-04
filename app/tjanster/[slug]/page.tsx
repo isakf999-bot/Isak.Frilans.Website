@@ -11,6 +11,7 @@ import {
   getServiceBySlug,
   services,
 } from "@/lib/services";
+import { seoLandingsForRelatedHref } from "@/lib/seoLandings";
 import { absoluteUrl } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -37,6 +38,9 @@ export default async function ServiceDetailPage({ params }: Props) {
 
   const prefill = `Jag är intresserad av ${service.title.toLowerCase()}`;
   const related = services.filter((s) => s.slug !== service.slug).slice(0, 3);
+  const relatedLandings = seoLandingsForRelatedHref(
+    `/tjanster/${service.slug}`,
+  ).slice(0, 3);
 
   return (
     <>
@@ -62,6 +66,21 @@ export default async function ServiceDetailPage({ params }: Props) {
               </div>
               <h1 className="mt-4 text-h1 tracking-tight">{service.title}</h1>
               <p className="mt-5 max-w-2xl text-lead text-muted">{service.intro}</p>
+              {relatedLandings.length > 0 ? (
+                <p className="mt-4 max-w-2xl text-sm text-muted">
+                  {relatedLandings.map((landing, i) => (
+                    <span key={landing.slug}>
+                      {i > 0 ? " · " : null}
+                      <Link
+                        href={`/${landing.slug}`}
+                        className="font-medium text-brand hover:opacity-70"
+                      >
+                        {landing.navLabel}
+                      </Link>
+                    </span>
+                  ))}
+                </p>
+              ) : null}
 
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <p className="text-lg font-semibold text-ink">
