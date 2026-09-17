@@ -14,29 +14,7 @@ export function HomeCases() {
   const cases = publishedCases.slice(0, 2);
 
   return (
-    <section
-      id="kundcase-hem"
-      className="relative isolate overflow-hidden bg-ink text-white"
-    >
-      {/* Egen atmosfär — INTE Bravos zigzag. Två diskreta brons-glows
-          i motsatta hörn ger djup utan att skrika. */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-        <div
-          className="absolute -top-40 -left-40 h-[36rem] w-[36rem] rounded-full opacity-25 blur-3xl"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(196,165,116,0.55) 0%, rgba(28,25,23,0) 65%)",
-          }}
-        />
-        <div
-          className="absolute -right-52 -bottom-40 h-[38rem] w-[38rem] rounded-full opacity-20 blur-3xl"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(196,165,116,0.6) 0%, rgba(28,25,23,0) 65%)",
-          }}
-        />
-      </div>
-
+    <section id="kundcase-hem" className="bg-ink text-white">
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
         <Reveal className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-2xl">
