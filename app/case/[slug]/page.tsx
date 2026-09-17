@@ -83,7 +83,7 @@ export default async function CaseDetailPage({ params }: Props) {
                   href={study.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-md border border-transparent bg-white px-6 py-3.5 font-semibold text-black transition-[background-color,color,border-color] duration-150 hover:border-white/40 hover:bg-white/10 hover:text-white active:bg-white/15"
+                  className="inline-flex items-center gap-2 rounded-pill border border-transparent bg-ink px-6 py-3.5 font-semibold text-white transition-colors duration-150 hover:bg-ink/85"
                 >
                   Besök sajten
                   <span aria-hidden="true">↗</span>

@@ -10,7 +10,7 @@ export function HomeFaq() {
 
   return (
     <section id="faq" className="border-t border-line bg-transparent">
-      <div className="mx-auto max-w-3xl px-6 pt-28 pb-20 lg:px-8 lg:pt-32 lg:pb-28">
+      <div className="mx-auto max-w-3xl px-6 py-16 lg:px-8 lg:py-24">
         <Reveal>
           <SectionLabel>FAQ</SectionLabel>
           <h2 className="mt-4 text-h2">Vanliga frågor</h2>

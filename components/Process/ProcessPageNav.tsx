@@ -6,11 +6,10 @@ export const PROCESS_SECTIONS = [
   { id: "processen", label: "Processen" },
   { id: "kommunikation", label: "Kommunikation" },
   { id: "praktiskt", label: "Betalning & överlämning" },
-  { id: "pris", label: "Priser" },
 ] as const;
 
 /**
- * Mini-navigation för Pris & process-sidan.
+ * Mini-navigation för process-sidan.
  * Visar att det finns mer under och låter dig hoppa till rätt sektion.
  */
 export function ProcessPageNav() {
@@ -55,7 +54,7 @@ export function ProcessPageNav() {
                 href={`#${section.id}`}
                 className={`inline-flex items-center gap-2 rounded-md px-3.5 py-2 text-sm transition-colors duration-150 lg:w-full ${
                   isActive
-                    ? "border border-transparent bg-white text-black hover:border-white/40 hover:bg-white/10 hover:text-white"
+                    ? "border border-transparent bg-ink text-white"
                     : "border border-line glass text-muted hover:border-ink/20 hover:text-ink"
                 }`}
               >

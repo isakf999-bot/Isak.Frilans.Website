@@ -76,8 +76,8 @@ export function CaseGrid({
           disabled={!hasFilter}
           className={`inline-flex shrink-0 items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold transition-colors duration-150 sm:mb-0.5 ${
             hasFilter
-              ? "border border-transparent bg-white text-black transition-[background-color,color,border-color] hover:border-white/40 hover:bg-white/10 hover:text-white"
-              : "cursor-default bg-white/25 text-white/50"
+              ? "border border-transparent bg-ink text-white"
+              : "cursor-default border border-line bg-mist text-muted"
           }`}
         >
           <ClearIcon />
@@ -101,7 +101,7 @@ export function CaseGrid({
               onClick={() => setActive(chip)}
               className={`rounded-md border px-3.5 py-2 text-sm font-medium transition-colors duration-150 ${
                 isActive
-                  ? "border-white bg-white text-black hover:border-white/40 hover:bg-white/10 hover:text-white"
+                  ? "border-ink bg-ink text-white"
                   : "border-line bg-surface text-muted hover:border-ink/20 hover:text-ink"
               }`}
             >

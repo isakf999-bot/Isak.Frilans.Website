@@ -4,14 +4,14 @@
 
 type Props = {
   className?: string;
-  /** Ljusare text på mörk botten (default). */
+  /** Vit text på mörk botten. Default är mörk text på ljus yta. */
   onDark?: boolean;
 };
 
 export const logoLinkClass =
   "inline-flex transition-opacity duration-150 ease-out hover:opacity-70";
 
-export function Logo({ className = "", onDark = true }: Props) {
+export function Logo({ className = "", onDark = false }: Props) {
   return (
     <span
       className={`text-[15px] leading-none font-semibold tracking-[-0.02em] ${

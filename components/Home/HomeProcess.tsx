@@ -39,7 +39,7 @@ export function HomeProcess() {
             href="/process"
             className="mt-10 inline-flex items-center gap-2 text-sm font-semibold text-brand transition-opacity hover:opacity-70"
           >
-            Full process & prisdetaljer
+            Läs hela processen
             <span aria-hidden="true">→</span>
           </Link>
         </Reveal>

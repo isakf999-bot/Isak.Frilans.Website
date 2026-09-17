@@ -25,7 +25,7 @@ export function About() {
       className="scroll-mt-24"
       aria-labelledby="om-mig-rubrik"
     >
-      <div className="mx-auto max-w-6xl px-6 pt-28 pb-20 lg:px-8 lg:pt-32 lg:pb-28">
+      <div className="mx-auto max-w-6xl px-6 py-16 lg:px-8 lg:py-24">
           <Reveal>
             <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
               <figure className="mx-auto w-full max-w-md self-start lg:sticky lg:top-28 lg:mx-0 lg:max-w-none">
@@ -116,16 +116,16 @@ export function About() {
                 <div className="mt-10 flex flex-wrap gap-3">
                   <Link
                     href="/kontakt"
-                    className="inline-flex items-center gap-2 rounded-md border border-transparent bg-white px-6 py-3.5 font-semibold text-black transition-[background-color,color,border-color] duration-150 hover:border-white/40 hover:bg-white/10 hover:text-white active:bg-white/15"
+                    className="inline-flex items-center gap-2 rounded-pill border border-transparent bg-ink px-6 py-3.5 font-semibold text-white transition-colors duration-150 hover:bg-ink/85"
                   >
                     Hör av dig
                     <span aria-hidden="true">→</span>
                   </Link>
                   <Link
-                    href="/paket"
+                    href="/process"
                     className="inline-flex items-center gap-2 rounded-md border border-line bg-surface px-6 py-3.5 font-medium text-ink transition-colors duration-150 hover:border-ink/25"
                   >
-                    Se paket och priser
+                    Så går det till
                   </Link>
                 </div>
               </div>

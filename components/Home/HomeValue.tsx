@@ -100,8 +100,8 @@ export function HomeValue() {
                 Berätta om ditt projekt
                 <span aria-hidden="true">→</span>
               </Link>
-              <Link href="/paket" className={btn.ghostOnDark}>
-                Se vad det kostar
+              <Link href="/process" className={btn.ghost}>
+                Så går det till
               </Link>
             </div>
           </div>

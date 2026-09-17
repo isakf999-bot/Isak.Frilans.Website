@@ -1,9 +1,6 @@
 /**
- * Innehåll för sidan "Pris & process" — hur samarbetet går till,
- * hur jag kommunicerar, och vad som ingår.
- *
- * Tjänstepriser och tilläggspriser bor i lib/pricing.ts
- * (paket/tillägg via lib/packages.ts, tjänster via lib/services.ts).
+ * Innehåll för process-sidan — hur samarbetet går till
+ * och hur jag kommunicerar.
  */
 
 export type ProcessStep = {

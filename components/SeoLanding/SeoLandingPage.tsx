@@ -43,19 +43,18 @@ export function SeoLandingPage({ landing }: { landing: SeoLanding }) {
       <Nav />
       <main>
         <section className="border-b border-line">
-          <div className="mx-auto max-w-6xl px-6 pt-28 pb-16 lg:px-8 lg:pt-32 lg:pb-20">
+          <div className="mx-auto max-w-6xl px-6 pt-16 pb-16 lg:px-8 lg:pt-20 lg:pb-20">
             <Reveal className="max-w-3xl">
               <SectionLabel>{landing.eyebrow}</SectionLabel>
               <h1 className="mt-4 text-h1 tracking-tight">{landing.h1}</h1>
               <p className="mt-5 text-lead text-muted">{landing.lead}</p>
-              <p className="mt-4 text-sm font-medium text-brand">{landing.priceNote}</p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link href={contactHref} className={btn.primary}>
                   Berätta om projektet
                   <span aria-hidden="true">→</span>
                 </Link>
-                <Link href="/paket" className={btn.ghostOnDark}>
-                  Se paket och priser
+                <Link href="/process" className={btn.ghost}>
+                  Så går det till
                 </Link>
               </div>
             </Reveal>
@@ -117,18 +116,20 @@ export function SeoLandingPage({ landing }: { landing: SeoLanding }) {
               <h2 className="text-h2 tracking-tight">Mer i samma riktning</h2>
               <p className="mt-3 max-w-2xl text-muted">
                 <Link
-                  href={landing.relatedServiceHref}
+                  href={
+                    landing.relatedServiceHref === "/paket"
+                      ? "/kontakt"
+                      : landing.relatedServiceHref
+                  }
                   className="font-medium text-brand hover:opacity-70"
                 >
-                  {landing.relatedServiceLabel}
+                  {landing.relatedServiceHref === "/paket"
+                    ? "Hör av dig"
+                    : landing.relatedServiceLabel}
                 </Link>
                 {" · "}
                 <Link href="/process" className="font-medium text-brand hover:opacity-70">
                   Process
-                </Link>
-                {" · "}
-                <Link href="/paket" className="font-medium text-brand hover:opacity-70">
-                  Paket
                 </Link>
               </p>
               <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

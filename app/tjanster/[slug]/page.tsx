@@ -6,11 +6,7 @@ import { Nav } from "@/components/Nav/Nav";
 import { Reveal } from "@/components/Reveal/Reveal";
 import { SectionLabel } from "@/components/SectionLabel/SectionLabel";
 import { serviceIcons } from "@/components/Services/serviceIcons";
-import {
-  formatServicePrice,
-  getServiceBySlug,
-  services,
-} from "@/lib/services";
+import { getServiceBySlug, services } from "@/lib/services";
 import { seoLandingsForRelatedHref } from "@/lib/seoLandings";
 import { absoluteUrl } from "@/lib/site";
 
@@ -47,14 +43,14 @@ export default async function ServiceDetailPage({ params }: Props) {
       <Nav />
       <main>
         <section className="border-b border-line">
-          <div className="mx-auto max-w-6xl px-6 pt-28 pb-16 lg:px-8 lg:pt-32 lg:pb-20">
+          <div className="mx-auto max-w-6xl px-6 pt-16 pb-16 lg:px-8 lg:pt-20 lg:pb-20">
             <Reveal>
               <Link
-                href="/tjanster"
+                href="/"
                 className="inline-flex items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-brand"
               >
                 <span aria-hidden="true">←</span>
-                Alla tjänster
+                Till startsidan
               </Link>
 
               <div className="mt-8 flex h-12 w-12 items-center justify-center rounded-md border border-line bg-surface text-brand">
@@ -82,28 +78,19 @@ export default async function ServiceDetailPage({ params }: Props) {
                 </p>
               ) : null}
 
-              <div className="mt-8 flex flex-wrap items-center gap-4">
-                <p className="text-lg font-semibold text-ink">
-                  {formatServicePrice(service)}
-                </p>
-                {service.price?.note ? (
-                  <p className="text-sm text-muted">{service.price.note}</p>
-                ) : null}
-              </div>
-
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href={`/kontakt?meddelande=${encodeURIComponent(prefill)}`}
-                  className="inline-flex items-center gap-2 rounded-md border border-transparent bg-white px-6 py-3.5 font-semibold text-black transition-[background-color,color,border-color] duration-150 hover:border-white/40 hover:bg-white/10 hover:text-white active:bg-white/15"
+                  className="inline-flex items-center gap-2 rounded-pill border border-transparent bg-ink px-6 py-3.5 font-semibold text-white transition-colors duration-150 hover:bg-ink/85"
                 >
                   Hör av dig om {service.title.toLowerCase()}
                   <span aria-hidden="true">→</span>
                 </Link>
                 <Link
-                  href="/paket"
+                  href="/process"
                   className="inline-flex items-center gap-2 rounded-md border border-line bg-surface px-6 py-3.5 font-medium text-ink transition-colors duration-150 hover:border-ink/25"
                 >
-                  Se paket
+                  Så går det till
                 </Link>
               </div>
             </Reveal>

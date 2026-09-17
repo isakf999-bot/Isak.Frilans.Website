@@ -6,7 +6,7 @@ import { serviceIcons } from "@/components/Services/serviceIcons";
 
 export function ServiceCard({ service }: { service: Service }) {
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-line glass p-7 transition-[border-color,background-color] duration-150 ease-out hover:border-white/20 hover:bg-mist/90 has-[a:focus-visible]:outline has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-white">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white p-7 transition-[border-color,background-color] duration-150 ease-out hover:border-ink/20 has-[a:focus-visible]:outline has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-brand">
       <div className="flex items-start justify-between gap-4">
         <span className="flex h-11 w-11 items-center justify-center rounded-md border border-line bg-canvas text-brand">
           {serviceIcons[service.slug]}

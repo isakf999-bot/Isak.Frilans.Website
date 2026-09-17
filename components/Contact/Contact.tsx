@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useId, useRef, useState } from "react";
 import { Reveal } from "@/components/Reveal/Reveal";
 import { SectionLabel } from "@/components/SectionLabel/SectionLabel";
@@ -27,7 +28,13 @@ const PROJECT_TYPES = [
 
 type ProjectType = (typeof PROJECT_TYPES)[number];
 
-export function Contact({ initialMessage }: { initialMessage?: string }) {
+export function Contact({
+  initialMessage,
+  asSection = false,
+}: {
+  initialMessage?: string;
+  asSection?: boolean;
+}) {
   const formId = useId();
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -126,17 +133,40 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
   return (
     <section
       id="kontakt"
-      className="border-t border-line"
+      className="relative isolate overflow-hidden bg-ink text-white"
       aria-labelledby="kontakt-rubrik"
     >
-      <div className="mx-auto max-w-6xl px-6 pt-16 pb-20 lg:px-8 lg:pt-24 lg:pb-28">
+      {/*
+        Bravo-mönstret: dov naturbild bakom mörkret — deras skog blir vår
+        skog. Läser som atmosfär, aldrig som huvudmotiv. Overlayen är
+        kraftig så bilden bara antyds; du märker den när du tittar, inte
+        annars.
+      */}
+      <div aria-hidden="true" className="absolute inset-0 -z-10">
+        <Image
+          src="/media/contact-forest-bg.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-center opacity-[0.18]"
+        />
+        <div className="absolute inset-0 bg-ink/70" />
+      </div>
+
+      <div className="relative mx-auto max-w-6xl px-6 pt-16 pb-20 lg:px-8 lg:pt-24 lg:pb-28">
         <Reveal>
           <div className="mx-auto max-w-2xl text-center lg:mx-0 lg:max-w-xl lg:text-left">
-            <SectionLabel>Starta ett projekt</SectionLabel>
-            <h1 id="kontakt-rubrik" className="mt-6 text-h1 lg:text-display">
-              Berätta vad du vill bygga.
-            </h1>
-            <p className="mt-5 text-lead text-muted">
+            <SectionLabel tone="dark">{asSection ? "Hör av dig" : "Starta ett projekt"}</SectionLabel>
+            {asSection ? (
+              <h2 id="kontakt-rubrik" className="mt-6 text-h1 text-white lg:text-display">
+                Hur kan jag hjälpa dig?
+              </h2>
+            ) : (
+              <h1 id="kontakt-rubrik" className="mt-6 text-h1 text-white lg:text-display">
+                Berätta vad du vill bygga.
+              </h1>
+            )}
+            <p className="mt-5 text-lead text-white/70">
               Skicka en kort beskrivning — jag återkommer med nästa steg. Det
               förbinder dig inte till något.
             </p>
@@ -254,7 +284,7 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
                               }
                               className={`rounded-md border px-3.5 py-2 text-sm font-medium transition-colors duration-150 ${
                                 selected
-                                  ? "border-white bg-white text-black hover:border-white/40 hover:bg-white/10 hover:text-white"
+                                  ? "border-ink bg-ink text-white"
                                   : "border-line bg-canvas text-ink hover:border-ink/20 hover:bg-surface"
                               }`}
                             >
@@ -314,7 +344,7 @@ export function Contact({ initialMessage }: { initialMessage?: string }) {
                       <button
                         type="submit"
                         disabled={status === "submitting"}
-                        className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-transparent bg-white px-8 py-3.5 font-semibold text-black transition-[background-color,color,border-color] duration-150 hover:border-white/40 hover:bg-white/10 hover:text-white active:bg-white/15 disabled:cursor-not-allowed disabled:opacity-55 sm:w-auto"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-pill border border-transparent bg-ink px-8 py-3.5 font-semibold text-white transition-colors duration-150 hover:bg-ink/85 disabled:cursor-not-allowed disabled:opacity-55 sm:w-auto"
                       >
                         {status === "submitting"
                           ? "Skickar…"

@@ -9,7 +9,7 @@ export const homeFaq: FaqItem[] = [
     a: "En landningssida eller mindre företagssajt tar oftast 3–10 arbetsdagar när innehållet är på plats. Större sajter och e-handel planeras i milstolpar så du alltid vet var vi är.",
   },
   {
-    q: "Vad ingår i priset?",
+    q: "Vad ingår i ett projekt?",
     a: "Design, utveckling, responsivitet, grundläggande SEO, formulär, publicering och 14 dagars support efter lansering. Hosting och domän kan jag hjälpa dig sätta upp — eller koppla till det du redan har.",
   },
   {

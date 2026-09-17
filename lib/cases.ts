@@ -41,7 +41,7 @@ export type CaseStudy = {
 export const cases: CaseStudy[] = [
   {
     slug: "mats-svensson",
-    published: false,
+    published: true,
     domain: "mats-svensson.se",
     client: "Mats Svensson",
     industry: "Finans & sparande",

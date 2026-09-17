@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { HomeFinalCta } from "@/components/Home/HomeFinalCta";
 import { Logo, logoLinkClass } from "@/components/Logo/Logo";
+import { serviceNavGroups } from "@/lib/nav";
 import { seoLandings } from "@/lib/seoLandings";
 
 const YEAR = new Date().getFullYear();
@@ -11,8 +12,6 @@ const PHONE_DISPLAY = "076-251 41 21";
 const PHONE_HREF = "tel:+46762514121";
 
 const NAV_LINKS = [
-  { label: "Paket", href: "/paket" },
-  { label: "Tjänster", href: "/tjanster" },
   { label: "Process", href: "/process" },
   { label: "Kundcase", href: "/case" },
   { label: "FAQ", href: "/faq" },
@@ -97,63 +96,98 @@ function IconArrowUpRight() {
   );
 }
 
+// Mörk footer — kontakt-ikonerna sitter i lätta glass-boxar mot mörka ytan.
 const contactIconClass =
-  "flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-line bg-surface text-white transition-colors duration-150 group-hover:border-white group-hover:bg-white group-hover:text-black";
+  "flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-white/12 bg-white/5 text-white transition-colors duration-150 group-hover:border-brand group-hover:bg-brand group-hover:text-ink";
 
 const linkClass =
-  "text-sm text-muted transition-colors duration-150 hover:text-white";
+  "group inline-flex items-baseline gap-2 text-sm text-white/60 transition-colors duration-150 hover:text-white";
+
+/**
+ * Liten chevron som ligger som "bullet" framför varje länk — Bravo-mönstret
+ * som ger footer-listorna visuell rytm och en accent-punkt i bronsen.
+ */
+function FooterLinkChevron() {
+  return (
+    <span
+      aria-hidden="true"
+      className="translate-y-[1px] text-[0.7em] text-brand-glow transition-transform duration-150 group-hover:translate-x-0.5"
+    >
+      ›
+    </span>
+  );
+}
 
 export function Footer({ hideCta = false }: { hideCta?: boolean }) {
   return (
     <>
       {!hideCta && <HomeFinalCta />}
-      <footer className="border-t border-line bg-transparent">
+      <footer className="border-t border-white/10 bg-ink text-white">
         <div className="mx-auto max-w-6xl px-6 pt-16 pb-10 lg:px-8 lg:pt-20 lg:pb-12">
           <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-10">
-            <div className="sm:col-span-2 lg:col-span-4">
+            <div className="sm:col-span-2 lg:col-span-3">
               <Link
                 href="/#top"
                 aria-label="Isak Web — till startsidan"
-                className={logoLinkClass}
+                className={`${logoLinkClass} text-white`}
               >
-                <Logo />
+                <Logo onDark />
               </Link>
-              <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted">
-                Webbplatser för svenska företag — tydliga, snabba och byggda med
-                fast pris. Jag sitter i Helsingborg och tar uppdrag i hela
-                Sverige.
+              <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">
+                Webbplatser för svenska företag — tydliga, snabba och byggda
+                tillsammans med den som skriver koden. Jag sitter i Helsingborg
+                och tar uppdrag i hela Sverige.
               </p>
-              <p className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-ink">
-                <span className="text-muted">
+              <p className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-white">
+                <span className="text-white/60">
                   <IconMapPin />
                 </span>
                 Helsingborg
               </p>
-              <p className="mt-3 text-xs text-muted">
+              <p className="mt-3 text-xs text-white/45">
                 Org.nr{" "}
-                <span className="font-medium tracking-wide text-ink/70">
+                <span className="font-medium tracking-wide text-white/70">
                   050704-XXXX
                 </span>
               </p>
             </div>
 
+            <nav aria-label="Tjänster" className="lg:col-span-3">
+              <h2 className="text-eyebrow font-semibold tracking-[0.12em] text-white/85 uppercase">
+                Tjänster
+              </h2>
+              <ul className="mt-5 columns-2 gap-x-6 space-y-2.5">
+                {serviceNavGroups.flatMap((group) =>
+                  group.items.map((link) => (
+                    <li key={link.href} className="break-inside-avoid">
+                      <Link href={link.href} className={linkClass}>
+                        <FooterLinkChevron />
+                        <span>{link.label}</span>
+                      </Link>
+                    </li>
+                  )),
+                )}
+              </ul>
+            </nav>
+
             <nav aria-label="Sidor" className="lg:col-span-2">
-              <h2 className="text-eyebrow font-semibold tracking-[0.12em] text-white uppercase">
+              <h2 className="text-eyebrow font-semibold tracking-[0.12em] text-white/85 uppercase">
                 Utforska
               </h2>
               <ul className="mt-5 space-y-2.5">
                 {NAV_LINKS.map((link) => (
                   <li key={link.href}>
                     <Link href={link.href} className={linkClass}>
-                      {link.label}
+                      <FooterLinkChevron />
+                      <span>{link.label}</span>
                     </Link>
                   </li>
                 ))}
               </ul>
             </nav>
 
-            <div className="lg:col-span-3">
-              <h2 className="text-eyebrow font-semibold tracking-[0.12em] text-white uppercase">
+            <div className="lg:col-span-2">
+              <h2 className="text-eyebrow font-semibold tracking-[0.12em] text-white/85 uppercase">
                 Kontakt
               </h2>
               <address className="mt-5 space-y-3 not-italic">
@@ -165,8 +199,8 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
                     <IconMail />
                   </span>
                   <span className="min-w-0">
-                    <span className="block text-xs text-muted">E-post</span>
-                    <span className="block truncate text-sm font-medium text-ink transition-colors duration-200 group-hover:text-white">
+                    <span className="block text-xs text-white/55">E-post</span>
+                    <span className="block truncate text-sm font-medium text-white transition-colors duration-200 group-hover:text-brand-glow">
                       {EMAIL}
                     </span>
                   </span>
@@ -176,21 +210,21 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
                     <IconPhone />
                   </span>
                   <span className="min-w-0">
-                    <span className="block text-xs text-muted">Telefon</span>
-                    <span className="block text-sm font-medium text-ink transition-colors duration-200 group-hover:text-white">
+                    <span className="block text-xs text-white/55">Telefon</span>
+                    <span className="block text-sm font-medium text-white transition-colors duration-200 group-hover:text-brand-glow">
                       {PHONE_DISPLAY}
                     </span>
                   </span>
                 </a>
               </address>
-              <ul className="mt-5 space-y-2 text-sm text-muted">
+              <ul className="mt-5 space-y-2 text-sm text-white/60">
                 <li className="flex items-start gap-2">
-                  <span className="mt-0.5 text-muted">
+                  <span className="mt-0.5 text-white/50">
                     <IconClock />
                   </span>
                   <span>
                     Svarar inom{" "}
-                    <span className="font-medium text-ink">2 arbetsdagar</span>
+                    <span className="font-medium text-white">2 arbetsdagar</span>
                   </span>
                 </li>
                 <li className="flex items-start gap-2 pl-6">
@@ -199,11 +233,11 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
               </ul>
             </div>
 
-            <div className="lg:col-span-3">
-              <h2 className="text-eyebrow font-semibold tracking-[0.12em] text-white uppercase">
+            <div className="lg:col-span-2">
+              <h2 className="text-eyebrow font-semibold tracking-[0.12em] text-white/85 uppercase">
                 Följ mig
               </h2>
-              <p className="mt-5 text-sm leading-relaxed text-muted">
+              <p className="mt-5 text-sm leading-relaxed text-white/70">
                 Projekt och det jag bygger — på webben och i sociala medier.
               </p>
               <ul className="mt-5 space-y-2.5">
@@ -213,10 +247,10 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group inline-flex items-center gap-1.5 text-sm font-medium text-ink transition-colors duration-200 hover:text-white"
+                      className="group inline-flex items-center gap-1.5 text-sm font-medium text-white transition-colors duration-200 hover:text-brand-glow"
                     >
                       {link.label}
-                      <span className="text-muted transition-colors duration-150 group-hover:text-white">
+                      <span className="text-white/50 transition-colors duration-150 group-hover:text-brand-glow">
                         <IconArrowUpRight />
                       </span>
                     </a>
@@ -231,7 +265,7 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.name}
-                      className="flex h-10 w-10 items-center justify-center rounded-md border border-line bg-surface text-ink/75 transition-colors duration-150 hover:border-white hover:bg-white hover:text-black"
+                      className="flex h-10 w-10 items-center justify-center rounded-md border border-white/12 bg-white/5 text-white/80 transition-colors duration-150 hover:border-brand hover:bg-brand hover:text-ink"
                     >
                       <svg
                         viewBox="0 0 24 24"
@@ -248,24 +282,29 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
             </div>
           </div>
 
-          <div className="mt-14 flex flex-col gap-3 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-muted">
+          <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-white/60">
               © {YEAR} Isak Web · Isak Forsberg
             </p>
-            <p className="text-sm text-muted">
+            <p className="text-sm text-white/60">
               Webbutveckling · Helsingborg &amp; Sverige
             </p>
           </div>
 
+          {/*
+            SEO-landningar — medvetet mycket nedtonade. Behövs för att söket
+            ska hitta orten/tjänsten, men ska inte konkurrera med den riktiga
+            navigationen ovanför. Mindre text, låg kontrast, tightare rad.
+          */}
           <nav
             aria-label="Hemsidor och sök"
-            className="mt-8 flex flex-wrap gap-x-5 gap-y-2 border-t border-line/80 pt-5"
+            className="mt-6 flex flex-wrap gap-x-4 gap-y-1 border-t border-white/8 pt-4"
           >
             {seoLandings.map((landing) => (
               <Link
                 key={landing.slug}
                 href={`/${landing.slug}`}
-                className="text-xs text-muted/80 transition-colors duration-150 hover:text-white"
+                className="text-[0.7rem] text-white/35 transition-colors duration-150 hover:text-white/75"
               >
                 {landing.navLabel}
               </Link>

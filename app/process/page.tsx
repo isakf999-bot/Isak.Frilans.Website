@@ -6,32 +6,16 @@ import { Nav } from "@/components/Nav/Nav";
 import { ProcessPageNav } from "@/components/Process/ProcessPageNav";
 import { Reveal } from "@/components/Reveal/Reveal";
 import { SectionLabel } from "@/components/SectionLabel/SectionLabel";
-import {
-  practicalTerms,
-  priceExtras,
-  priceIncludes,
-  principles,
-  processSteps,
-} from "@/lib/process";
-import { formatServicePrice, services } from "@/lib/services";
+import { practicalTerms, principles, processSteps } from "@/lib/process";
 import { absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Pris & process — Isak Web",
+  title: "Process — Isak Web",
   description:
-    "Så går ett projekt till, hur jag kommunicerar och vad en hemsida brukar kosta — tydliga prisintervall utan dolda tillägg.",
+    "Så går ett projekt till, hur jag kommunicerar och vad som händer efter lansering.",
   alternates: { canonical: absoluteUrl("/process") },
 };
 
-function formatPrice(service: (typeof services)[number]) {
-  if (!service.price) return null;
-  return {
-    range: formatServicePrice(service),
-    note: service.price.note ?? null,
-  };
-}
-
-/** Gemensam innehållsbredd — texten får mer yta; nav sitter ute till höger. */
 function SectionShell({
   children,
   className = "",
@@ -50,16 +34,11 @@ function SectionShell({
   );
 }
 
-/**
- * Sidan mellan "Vad jag bygger" och "Kundcase":
- * hur samarbetet fungerar, hur jag kommunicerar, och prisintervall.
- */
 export default function ProcessPage() {
   return (
     <>
       <Nav />
       <main className="relative">
-        {/* Desktop: sticky sidonav längst till höger i viewporten */}
         <div className="pointer-events-none absolute inset-0 z-20 hidden lg:block">
           <div className="sticky top-28 ml-auto mr-5 w-[200px] pt-[7.5rem] xl:mr-10 xl:w-[220px]">
             <div className="pointer-events-auto">
@@ -71,21 +50,12 @@ export default function ProcessPage() {
         <section>
           <div className="mx-auto max-w-6xl px-6 pt-16 pb-12 lg:px-8 lg:pt-20 lg:pb-14 lg:pr-72 xl:pr-80">
             <Reveal>
-              <SectionLabel>Pris & process</SectionLabel>
-              <h1 className="mt-6 max-w-3xl text-h1">
-                Så går det till — och vad det brukar kosta
-              </h1>
+              <SectionLabel>Process</SectionLabel>
+              <h1 className="mt-6 max-w-3xl text-h1">Så går det till</h1>
               <p className="mt-5 max-w-2xl text-lead text-muted">
                 Inga överraskningar. Här ser du hur vi jobbar tillsammans, hur
-                jag håller dig uppdaterad och ungefärliga prisintervall — innan
-                du hör av dig. Vill du veta vad en sajt kostar i paket:{" "}
-                <Link
-                  href="/hemsida-fast-pris"
-                  className="font-medium text-brand underline-offset-2 hover:underline"
-                >
-                  hemsida till fast pris
-                </Link>
-                .
+                jag håller dig uppdaterad och vad som händer efter lansering —
+                innan du hör av dig.
               </p>
             </Reveal>
 
@@ -120,10 +90,7 @@ export default function ProcessPage() {
           </ol>
         </SectionShell>
 
-        <SectionShell
-          id="kommunikation"
-          className="border-t border-line"
-        >
+        <SectionShell id="kommunikation" className="border-t border-line">
           <Reveal className="max-w-2xl">
             <SectionLabel>Kommunikation</SectionLabel>
             <h2 className="mt-5 text-h2">Hur jag jobbar med dig</h2>
@@ -169,149 +136,18 @@ export default function ProcessPage() {
               </Reveal>
             ))}
           </ul>
-        </SectionShell>
-
-        <SectionShell id="pris" className="border-t border-line">
-          <Reveal className="max-w-2xl">
-            <SectionLabel>Priser</SectionLabel>
-            <h2 className="mt-5 text-h2">Vad det brukar kosta</h2>
-            <p className="mt-4 text-lead text-muted">
-              Intervallen är utgångspunkter — det slutgiltiga priset får du i
-              offerten efter att vi pratat om omfattningen. Alla priser är exkl.
-              moms om annat inte anges.
-            </p>
-          </Reveal>
-
-          <Reveal className="mt-12" delay={60}>
-            <div className="overflow-hidden rounded-2xl border border-line glass shadow-card">
-              <ul className="divide-y divide-line">
-                {services.map((service) => {
-                  const price = formatPrice(service);
-                  return (
-                    <li
-                      key={service.slug}
-                      className="flex flex-col gap-2 px-6 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:px-8"
-                    >
-                      <div className="min-w-0">
-                        <Link
-                          href={`/tjanster/${service.slug}`}
-                          className="font-semibold text-ink transition-colors hover:text-brand"
-                        >
-                          {service.title}
-                        </Link>
-                        <p className="mt-1 text-sm text-muted sm:max-w-xl">
-                          {service.description}
-                        </p>
-                      </div>
-                      {price && (
-                        <div className="shrink-0 sm:text-right">
-                          <p className="font-semibold whitespace-nowrap text-brand">
-                            {price.range}
-                          </p>
-                          {price.note && (
-                            <p className="mt-1 text-sm font-medium text-muted sm:max-w-[16rem] sm:ml-auto">
-                              {price.note}
-                            </p>
-                          )}
-                        </div>
-                      )}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          </Reveal>
-
-          <div className="mt-10 space-y-8">
-            <Reveal delay={40}>
-              <div className="rounded-2xl border border-line glass p-6 shadow-card sm:p-8">
-                <h3 className="text-h3 text-[1.25rem]">Vad som ingår</h3>
-                <ul className="mt-6 grid gap-x-10 gap-y-3 sm:grid-cols-2">
-                  {priceIncludes.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-3 text-sm leading-snug text-muted"
-                    >
-                      <span
-                        aria-hidden="true"
-                        className="mt-[0.45em] h-1 w-1 shrink-0 rounded-full bg-brand"
-                      />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-
-            <Reveal delay={60}>
-              <div className="overflow-hidden rounded-2xl border border-line glass shadow-card">
-                <div className="border-b border-line px-6 py-5 sm:px-8">
-                  <h3 className="text-h3 text-[1.25rem]">Kan tillkomma separat</h3>
-                </div>
-                <ul className="divide-y divide-line">
-                  {priceExtras.map((item) => (
-                    <li
-                      key={item.id}
-                      className="flex flex-col gap-1 px-6 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:px-8 sm:py-5"
-                    >
-                      <div className="min-w-0">
-                        <p className="font-medium text-ink">{item.name}</p>
-                        <p className="mt-0.5 text-sm text-muted">
-                          {item.description}
-                        </p>
-                      </div>
-                      <p className="shrink-0 text-sm font-semibold whitespace-nowrap text-brand sm:text-right">
-                        {item.priceLabel}
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-                <p className="border-t border-line px-6 py-4 text-sm text-muted sm:px-8">
-                  Se alla paket och tillägg på{" "}
-                  <Link
-                    href="/paket"
-                    className="font-medium text-brand underline-offset-2 hover:underline"
-                  >
-                    paket-sidan
-                  </Link>
-                  .
-                </p>
-              </div>
-            </Reveal>
-          </div>
 
           <Reveal className="mt-10" delay={60}>
             <p className="max-w-2xl text-sm text-muted">
-              Osäker på vilket spann som passar dig?{" "}
+              Osäker på om jag är rätt för jobbet?{" "}
               <Link
                 href="/kontakt"
                 className="font-medium text-brand underline-offset-2 hover:underline"
               >
                 Hör av dig
-              </Link>{" "}
-              eller be om en{" "}
-              <Link
-                href="/hemsida-offert"
-                className="font-medium text-brand underline-offset-2 hover:underline"
-              >
-                offert
               </Link>
               — jag säger rakt vad jag hade gjort, även om svaret är att du inte
-              behöver mig. Du kan också kolla{" "}
-              <Link
-                href="/tjanster"
-                className="font-medium text-brand underline-offset-2 hover:underline"
-              >
-                vad jag bygger
-              </Link>
-              ,{" "}
-              <Link
-                href="/bestall-hemsida"
-                className="font-medium text-brand underline-offset-2 hover:underline"
-              >
-                hur du beställer
-              </Link>{" "}
-              eller se{" "}
+              behöver mig. Du kan också se{" "}
               <Link
                 href="/case"
                 className="font-medium text-brand underline-offset-2 hover:underline"

@@ -1,5 +1,3 @@
-import { formatSek, PRICES } from "@/lib/pricing";
-import { packages, packageAddons } from "@/lib/packages";
 import { homeFaq } from "@/lib/faq";
 import { services } from "@/lib/services";
 import { seoLandings } from "@/lib/seoLandings";
@@ -36,14 +34,13 @@ function detectIntent(question: string): Intent {
     return "wordpress";
   }
   if (
-    /(ingar|innehall|vad far jag|vad far man|vad innehaller|features|feature)/.test(q) ||
-    (/(paket|bas|premium|full service|enterprise)/.test(q) &&
-      /(ingar|innehall|vad|vilka|vilket)/.test(q) &&
-      !/(kostar|pris|kostnad|hur mycket|billig)/.test(q))
+    /(ingar|innehall|vad far jag|vad far man|vad innehaller|features|feature|vad bygger)/.test(
+      q,
+    )
   ) {
     return "includes";
   }
-  if (/(kostar|pris|kostnad|hur mycket|billig|kalkylator|offert|bestall)/.test(q)) {
+  if (/(kostar|pris|kostnad|hur mycket|billig|kalkylator|offert|bestall|paket)/.test(q)) {
     return "price";
   }
   if (
@@ -60,13 +57,11 @@ function detectIntent(question: string): Intent {
   return null;
 }
 
-function packagesIncludesAnswer(): string {
-  const lines = packages.map((pkg) => {
-    const price =
-      pkg.priceFrom != null ? `${formatSek(pkg.priceFrom)} kr` : "offert";
-    return `${pkg.name} (${price}): ${pkg.pages}. Ingår bland annat ${pkg.features.join(", ")}.`;
-  });
-  return `Så här ser paketen ut hos mig:\n\n${lines.join("\n\n")}\n\nVill du bygga ut något finns tillägg på /paket — säg till om du vill höra mer om något paket.`;
+function servicesAnswer(): string {
+  const lines = services
+    .slice(0, 8)
+    .map((s) => `${s.title}: ${s.description}`);
+  return `Jag bygger bland annat:\n\n${lines.join("\n")}\n\nTjänsterna ligger i hamburgermenyn. Vill du veta vad som passar er: skriv till mig via /kontakt.`;
 }
 
 function buildFacts(): Fact[] {
@@ -79,12 +74,12 @@ function buildFacts(): Fact[] {
         "innehåll",
         "innehaller",
         "vad ingår",
-        "vad ingår i",
-        "paketen",
-        "paket",
+        "vad bygger",
+        "tjanster",
+        "tjänster",
         "features",
       ],
-      text: packagesIncludesAnswer(),
+      text: servicesAnswer(),
     },
     {
       id: "wordpress",
@@ -100,7 +95,7 @@ function buildFacts(): Fact[] {
         "bygger i",
         "anvander",
       ],
-      text: `Nej — jag bygger inte i WordPress eller färdiga mallteman. Jag skräddarsyr sajter med modern teknik (bland annat React/Next.js), så resultatet inte känns generiskt. Har du redan en WordPress-sajt kan jag modernisera den via Uppdatering & redesign (${formatSek(PRICES.services.redesignFrom)}–${formatSek(PRICES.services.redesignTo)} kr) — mer på /byta-wordpress.`,
+      text: "Nej — jag bygger inte i WordPress eller färdiga mallteman. Jag skräddarsyr sajter med modern teknik (bland annat React/Next.js), så resultatet inte känns generiskt. Har du redan en WordPress-sajt kan jag modernisera den via Uppdatering & redesign — mer på /byta-wordpress.",
     },
     {
       id: "redesign",
@@ -115,7 +110,7 @@ function buildFacts(): Fact[] {
         "ute i tiden",
         "langsam sajt",
       ],
-      text: `Ja, det är ett av mina vanligaste uppdrag. Via Uppdatering & redesign (ca ${formatSek(PRICES.services.redesignFrom)}–${formatSek(PRICES.services.redesignTo)} kr) tar jag din befintliga sajt och lyfter det som skaver — mobil, prestanda, uttryck och väg till kontakt. Mer på /ny-hemsida och /tjanster/redesign.`,
+      text: "Ja, det är ett av mina vanligaste uppdrag. Via Uppdatering & redesign tar jag din befintliga sajt och lyfter det som skaver — mobil, prestanda, uttryck och väg till kontakt. Mer på /ny-hemsida och /tjanster/redesign.",
     },
     {
       id: "price",
@@ -127,13 +122,14 @@ function buildFacts(): Fact[] {
         "billigt",
         "kalkylator",
         "vad kostar",
+        "paket",
       ],
-      text: `Mina paket ligger så här: Bas ${formatSek(PRICES.packages.starter)} kr, Premium ${formatSek(PRICES.packages.business)} kr, Full Service ${formatSek(PRICES.packages.premium)} kr. Enterprise är offert. Mer om fast pris på /hemsida-fast-pris, hur en offert ser ut på /hemsida-offert, eller /paket om du vill räkna själv.`,
+      text: "Jag visar inte paketpriser på sajten. Berätta kort vad ni behöver via /kontakt så återkommer jag med en tydlig offert efter omfattningen — utan dolda poster.",
     },
     {
       id: "contact",
       terms: ["kontakt", "mejla", "maila", "ringa", "telefon", "boka samtal", "hor av dig"],
-      text: `Enklast är /kontakt, annars mejlar du info@isakweb.se eller ringer 076-251 41 21 (alla dagar 10–22). Jag brukar svara inom två arbetsdagar.`,
+      text: "Enklast är /kontakt, annars mejlar du info@isakweb.se eller ringer 076-251 41 21 (alla dagar 10–22). Jag brukar svara inom två arbetsdagar.",
     },
     {
       id: "time",
@@ -153,27 +149,6 @@ function buildFacts(): Fact[] {
       text: "Ja — när projektet är klart äger du kod, design och konton. Inga inlåsningar.",
     },
   ];
-
-  for (const pkg of packages) {
-    facts.push({
-      id: `pkg-${pkg.id}`,
-      terms: [
-        pkg.name,
-        `paket ${pkg.name}`,
-        ...pkg.features.slice(0, 4),
-        pkg.pages,
-      ],
-      text: `${pkg.name} kostar ${pkg.priceLabel}. ${pkg.tagline}. ${pkg.pages}. Ingår bland annat: ${pkg.features.join(", ")}.`,
-    });
-  }
-
-  for (const addon of packageAddons) {
-    facts.push({
-      id: `addon-${addon.id}`,
-      terms: [addon.name, ...addon.description.split(" ").filter((w) => w.length > 5)],
-      text: `Tillägget ${addon.name} kostar ${addon.priceLabel}. ${addon.description}`,
-    });
-  }
 
   for (const service of services) {
     facts.push({
@@ -209,7 +184,7 @@ function buildFacts(): Fact[] {
           .filter((w) => w.length > 4)
           .slice(0, 6),
       ],
-      text: `${landing.lead} Mer på /${landing.slug}. ${landing.priceNote}`,
+      text: `${landing.lead} Mer på /${landing.slug}.`,
     });
   }
 
@@ -226,11 +201,11 @@ export function answerFromSiteKnowledge(
 ): string {
   const q = question.trim();
   if (!q) {
-    return "Skriv gärna din fråga — till exempel om priser, vad som ingår i paketen, teknik eller om jag kan hjälpa med just din sajt.";
+    return "Skriv gärna din fråga — till exempel om tjänster, redesign, teknik eller hur du tar kontakt.";
   }
 
   const intent = detectIntent(q);
-  if (intent === "includes") return packagesIncludesAnswer();
+  if (intent === "includes") return servicesAnswer();
   if (intent === "price") {
     return buildFacts().find((f) => f.id === "price")!.text;
   }
@@ -254,19 +229,14 @@ export function answerFromSiteKnowledge(
     .sort((a, b) => b.score - a.score);
 
   if (ranked.length === 0) {
-    return `Bra fråga — utifrån hemsidan kan jag främst hjälpa kring priser, vad som ingår i paketen, teknik, redesign och kontakt. Omformulera gärna lite, eller skriv till mig via /kontakt så tar jag det personligen.`;
+    return "Bra fråga — utifrån hemsidan kan jag främst hjälpa kring tjänster, teknik, redesign och kontakt. Omformulera gärna lite, eller skriv till mig via /kontakt så tar jag det personligen.";
   }
 
   const top = ranked[0]!;
   const second = ranked[1];
 
   let answer = top.fact.text;
-  if (
-    second &&
-    second.score >= 4 &&
-    second.fact.id !== top.fact.id &&
-    !top.fact.id.startsWith("pkg-")
-  ) {
+  if (second && second.score >= 4 && second.fact.id !== top.fact.id) {
     answer += ` ${second.fact.text}`;
   }
 

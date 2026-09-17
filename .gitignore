@@ -23,6 +23,7 @@ yarn-error.log*
 
 # referensbilder på andra sajter (inspiration, ej egna verk)
 DesignPictures/
+references/inspiration/
 
 # strökvarv från portfolio-sajten, hör inte hemma i det här projektet
 bundle.js

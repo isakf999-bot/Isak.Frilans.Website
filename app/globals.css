@@ -1,53 +1,51 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   DESIGN TOKENS — mörk genomgående. Accent: varm brons (inte blått).
-   Signatur: site-wide interaktiva lampor.
+   DESIGN TOKENS — ljus byråkänsla. Accent: varm brons (inte Bravo-rosa/turkos).
    --------------------------------------------------------------------------- */
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  --palette-canvas: #000000;
-  --palette-surface: #0a0a0a;
-  --palette-mist: #111111;
-  --palette-surface-soft: #141414;
+  --palette-canvas: #f7f5f2;
+  --palette-surface: #ffffff;
+  --palette-mist: #f1eee9;
+  --palette-surface-soft: #ece8e2;
 
-  /* Text på mörk botten */
-  --palette-ink: #ededed;
-  --palette-muted: #888888;
+  /* Text på ljus botten */
+  --palette-ink: #1c1917;
+  --palette-muted: #5e5a56;
 
   /* Linjer */
-  --palette-line: #1a1a1a;
-  --palette-line-cool: #262626;
+  --palette-line: #e6e1da;
+  --palette-line-cool: #d9d3cb;
 
-  /* Vit CTA via btn.primary; brand = varm bronsaccent */
-  --palette-brand: #c4a574;
-  --palette-brand-dark: #a88b5c;
-  --palette-brand-tint: #16120e;
-  --palette-brand-glow: #3d3226;
-  --palette-accent: #c4a574;
+  /* Brand = varm brons (inte Bravo-rosa/turkos) */
+  --palette-brand: #b0894f;
+  --palette-brand-dark: #8f6c3c;
+  --palette-brand-tint: #f4ebe0;
+  --palette-brand-glow: #e8d7c0;
+  --palette-accent: #b0894f;
 
-  /* “Paper” alias → mörkt (inga vita sektioner) */
-  --palette-paper: #0a0a0a;
-  --palette-paper-ink: #ededed;
-  --palette-paper-muted: #888888;
-  --palette-paper-line: #1a1a1a;
+  --palette-paper: #ffffff;
+  --palette-paper-ink: #1c1917;
+  --palette-paper-muted: #5e5a56;
+  --palette-paper-line: #e6e1da;
 
-  --palette-danger: #ef4444;
-  --palette-danger-tint: #2a1215;
+  --palette-danger: #b42318;
+  --palette-danger-tint: #fde8e6;
 
-  --palette-shadow-card: 0 0 0 1px rgb(255 255 255 / 0.06);
-  --palette-shadow-lift: 0 0 0 1px rgb(255 255 255 / 0.1),
-    0 12px 40px rgb(0 0 0 / 0.45);
-  --palette-shadow-brand: 0 0 0 1px rgb(196 165 116 / 0.35);
+  --palette-shadow-card: 0 1px 2px rgb(28 25 23 / 0.04),
+    0 0 0 1px rgb(28 25 23 / 0.06);
+  --palette-shadow-lift: 0 12px 32px rgb(28 25 23 / 0.08),
+    0 0 0 1px rgb(28 25 23 / 0.08);
+  --palette-shadow-brand: 0 0 0 1px rgb(176 137 79 / 0.4);
 
-  --grain-opacity: 0.04;
-  --grain-blend: soft-light;
+  --grain-opacity: 0.03;
+  --grain-blend: multiply;
 
-  /* Frostad yta — lampor syns suddigt bakom */
-  --glass-bg: rgb(10 10 10 / 0.72);
-  --glass-blur: 14px;
+  --glass-bg: rgb(255 255 255 / 0.92);
+  --glass-blur: 10px;
 }
 
 @theme inline {
@@ -91,10 +89,10 @@
   --text-h3--line-height: 1.25;
   --text-h2: 2.5rem;
   --text-h2--line-height: 1.1;
-  --text-h1: 3.25rem;
-  --text-h1--line-height: 1.02;
-  --text-display: 5rem;
-  --text-display--line-height: 0.98;
+  --text-h1: 3rem;
+  --text-h1--line-height: 1.08;
+  --text-display: 4.25rem;
+  --text-display--line-height: 1.02;
 
   --radius-md: 8px;
   --radius-lg: 12px;
@@ -142,8 +140,8 @@
   }
 
   ::selection {
-    background-color: var(--color-brand);
-    color: #fff;
+    background-color: var(--color-brand-tint);
+    color: var(--color-ink);
   }
 
   :focus-visible {
@@ -228,15 +226,11 @@
 }
 
 .js .reveal {
-  opacity: 0;
-  transform: translateY(12px);
-  transition:
-    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(10px);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .js .reveal.reveal-in {
-  opacity: 1;
   transform: none;
 }
 
@@ -262,13 +256,13 @@
   z-index: 3;
   pointer-events: none;
   background: linear-gradient(
-    to bottom,
-    rgb(0 0 0 / 0.25) 0%,
-    transparent 32%,
-    rgb(0 0 0 / 0.15) 70%,
-    rgb(0 0 0 / 0.55) 100%
+    to right,
+    rgb(12 14 16 / 0.58) 0%,
+    rgb(12 14 16 / 0.32) 52%,
+    rgb(12 14 16 / 0.18) 100%
   );
 }
+
 
 /* ---- Site-wide lampor (bakom innehåll, syns genom halvtransparens) ---- */
 .site-lamps {

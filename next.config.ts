@@ -27,6 +27,16 @@ const nextConfig: NextConfig = {
         destination: "/webbutvecklare",
         permanent: true,
       },
+      {
+        source: "/paket",
+        destination: "/kontakt",
+        permanent: true,
+      },
+      {
+        source: "/tjanster",
+        destination: "/",
+        permanent: true,
+      },
     ];
   },
   async headers() {
