@@ -1,17 +1,18 @@
 import Link from "next/link";
-import { HeroDeviceLoop } from "@/components/Hero/HeroDeviceLoop";
 
 const PHONE_HREF = "tel:+46762514121";
 
 /**
- * Hero med två kolumner på desktop: copy vänster + live device-loop höger.
- * Devicen skriver JSX, cross-fadear till renderad preview, morphar från
- * laptop → telefon och tillbaka. Det är själva pitchen — "jag skriver
- * koden och bygger både desktop- och mobil-versionen" — utan att stavas ut.
+ * Hero med två kolumner på desktop: copy vänster + cinematic drone-video
+ * höger. Videon är en riktig HTML5 <video> — cinematic top-down drone-shot
+ * över svensk skog + väg + sjö. Autoplayar tyst, loopar seamlessly.
  *
- * På mobil visas bara copyn. Device-loopen skulle konkurrera med den
- * riktiga mobil-vyn av sajten som besökaren redan tittar på, så den är
- * medvetet gömd där.
+ * På mobil ligger videon under copyn (stacked) så vertikalflödet fungerar
+ * utan att videon konkurrerar med rubriken.
+ *
+ * Videon är hostad lokalt i /public/media/hero-drone.mp4 (Pexels 2711134,
+ * royalty-free). Poster laddas som LCP-fallback så första paint blir snabb
+ * även om nätverket är segt.
  */
 export function Hero() {
   return (
@@ -20,19 +21,19 @@ export function Hero() {
       className="relative isolate overflow-hidden bg-ink text-white"
     >
       {/* Enda dekorationen: en dov, varm radial i höger topphörnet så
-          mörkret får djup utan att skrika. Devicen är fokus, inte glowet. */}
+          mörkret får djup utan att skrika. */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
         <div
-          className="absolute -top-40 right-[-14rem] h-[38rem] w-[38rem] rounded-full opacity-55 blur-3xl"
+          className="absolute -top-40 right-[-14rem] h-[38rem] w-[38rem] rounded-full opacity-45 blur-3xl"
           style={{
             background:
-              "radial-gradient(circle, rgba(196,165,116,0.35) 0%, rgba(28,25,23,0) 65%)",
+              "radial-gradient(circle, rgba(196,165,116,0.32) 0%, rgba(28,25,23,0) 65%)",
           }}
         />
       </div>
 
       <div className="mx-auto max-w-6xl px-6 pt-16 pb-20 lg:px-8 lg:pt-24 lg:pb-28">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.08fr)] lg:items-center lg:gap-14">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.08fr)] lg:items-center lg:gap-14">
           {/* Copy-kolumnen */}
           <div className="max-w-xl">
             <p className="text-eyebrow font-medium tracking-[0.14em] text-white/70 uppercase">
@@ -65,9 +66,46 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Device-loopen — bara desktop */}
-          <div className="hidden justify-center lg:flex">
-            <HeroDeviceLoop />
+          {/* Drone-video-kolumnen. En riktig HTML5-video, ingen animation. */}
+          <div className="relative">
+            {/* Subtil brons-glow bakom framen — läser som atmosfär, inte
+                dekoration. Ligger bara på desktop där det ger effekt. */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -inset-6 -z-10 hidden rounded-[1.5rem] opacity-40 blur-3xl lg:block"
+              style={{
+                background:
+                  "radial-gradient(60% 55% at 50% 50%, rgba(196,165,116,0.28) 0%, rgba(28,25,23,0) 70%)",
+              }}
+            />
+
+            <div className="relative overflow-hidden rounded-xl border border-white/10 bg-black/40 shadow-[0_28px_80px_-30px_rgba(0,0,0,0.75)]">
+              <video
+                className="block h-full w-full object-cover"
+                style={{ aspectRatio: "16 / 9" }}
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                poster="/media/hero-drone-poster-v2.jpg"
+                aria-hidden="true"
+              >
+                <source src="/media/hero-drone-v2.mp4" type="video/mp4" />
+              </video>
+
+              {/* Vinjett-overlay som mörkar hörnen svagt så videon smälter
+                  in i den mörka heron i stället för att sitta som en
+                  fyrkantig affisch. */}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  background:
+                    "radial-gradient(120% 120% at 50% 50%, rgba(0,0,0,0) 55%, rgba(28,25,23,0.5) 100%)",
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>
