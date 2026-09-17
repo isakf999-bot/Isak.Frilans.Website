@@ -1,55 +1,63 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BrowserFrame } from "@/components/Case/BrowserFrame";
+import { LaptopFrame } from "@/components/Case/LaptopFrame";
 import type { CaseStudy } from "@/lib/cases";
 
 /**
- * Kundcase-kort i Generation-stil: webbläsarram med domän, hero-bild,
- * kort teaser och "Utforska caset".
+ * Case-kort — laptop-mockup som visar sajten, med titel och länk under
+ * (samma textmönster som Bravo: kortnamn + "Ta en närmare titt »").
+ *
+ * Laptop-framen är alltid MacBook-stilad. Bakgrunden är sektionens ansvar,
+ * inte kortets, så samma kort ligger snyggt på både ljus och mörk botten.
  */
 export function CaseCard({
   study,
   priority = false,
+  tone = "light",
 }: {
   study: CaseStudy;
   priority?: boolean;
+  /** "dark" = case-korten står på mörk bakgrund (HomeCases), "light" = ljus (case-listan, default) */
+  tone?: "dark" | "light";
 }) {
+  const titleColor = tone === "dark" ? "text-white" : "text-ink";
+  const linkColor =
+    tone === "dark"
+      ? "text-brand-glow hover:text-white"
+      : "text-brand hover:opacity-80";
+  const focusRingOffset =
+    tone === "dark" ? "focus-visible:ring-offset-ink" : "focus-visible:ring-offset-surface";
+
   return (
-    <article className="group flex h-full flex-col">
+    <article className="group flex flex-col">
       <Link
         href={`/case/${study.slug}`}
-        className="flex h-full flex-col overflow-hidden rounded-lg border border-line glass transition-[border-color] duration-150 hover:border-ink/20"
+        aria-label={`${study.client} — utforska caset`}
+        className={`block outline-none focus-visible:ring-2 focus-visible:ring-brand/60 focus-visible:ring-offset-4 ${focusRingOffset}`}
       >
-        <div className="relative bg-transparent p-4 sm:p-5">
-          <BrowserFrame url={study.domain}>
-            <div className="relative aspect-[16/10] overflow-hidden">
-              <Image
-                src={study.heroImage}
-                alt={study.heroAlt}
-                fill
-                priority={priority}
-                quality={90}
-                sizes="(max-width: 768px) 100vw, 800px"
-                className="object-cover object-top transition-opacity duration-300 group-hover:opacity-95"
-              />
-            </div>
-          </BrowserFrame>
-        </div>
-
-        <div className="flex flex-1 flex-col px-6 py-6 sm:px-7 sm:py-7">
-          <p className="text-[11px] font-medium tracking-wide text-muted uppercase">
-            {study.industry}
-          </p>
-          <h2 className="mt-2 text-h3 tracking-tight text-ink transition-colors duration-200 group-hover:text-brand">
-            {study.domain}
-          </h2>
-          <p className="mt-3 flex-1 text-muted">{study.teaser}</p>
-          <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand">
-            Utforska caset
-            <span aria-hidden="true">→</span>
-          </span>
-        </div>
+        <LaptopFrame className="transition-transform duration-500 group-hover:-translate-y-1">
+          <Image
+            src={study.heroImage}
+            alt={study.heroAlt}
+            fill
+            priority={priority}
+            sizes="(max-width: 768px) 100vw, 720px"
+            className="object-cover object-top"
+          />
+        </LaptopFrame>
       </Link>
+
+      <div className="mt-6 text-center">
+        <h3 className={`text-h3 tracking-tight ${titleColor}`}>
+          {study.client}
+        </h3>
+        <Link
+          href={`/case/${study.slug}`}
+          className={`mt-2 inline-flex items-center gap-1 text-sm font-semibold underline-offset-4 transition-colors hover:underline ${linkColor}`}
+        >
+          Ta en närmare titt <span aria-hidden="true">»</span>
+        </Link>
+      </div>
     </article>
   );
 }
