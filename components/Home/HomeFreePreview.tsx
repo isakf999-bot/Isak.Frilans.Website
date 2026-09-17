@@ -3,32 +3,32 @@ import { Reveal } from "@/components/Reveal/Reveal";
 import { SectionLabel } from "@/components/SectionLabel/SectionLabel";
 
 /**
- * "Se din hemsida innan du bestämmer dig" — det unika säljargumentet.
+ * "Se din hemsida innan du bestämmer dig" — unika säljargumentet.
  *
- * Ligger direkt efter Hero så det syns tidigt, i vår varma brand-tint
- * så den bryter övergången mellan mörka heron och vita HomeHelp och
- * omedelbart drar ögat till sig. Tre numrerade steg gör erbjudandet
- * konkret istället för en luddig "kontakta mig".
+ * Ligger mellan HomeHelp och HomeCases. Bakgrunden är vår mörka ink så
+ * sektionen ansluter till hero + cases-mörkret istället för att sitta som
+ * en gul kub i mitten av sidan.
  *
- * CTA:n går till /kontakt med ett förvalt meddelande så besökaren inte
- * behöver formulera sin första mening själv.
+ * Stegen är medvetet BARA typografi — nummer i eyebrow-format, rubrik,
+ * kort mening. Inga glasskort, inga cirklar, inga hover-lyft. Redaktionellt
+ * istället för "AI-slop 3-column feature grid".
  */
 
 const STEPS = [
   {
-    n: "1",
+    n: "01",
     title: "Du skickar logga + kort brief",
-    body: "Ett mejl med logga, färger om ni har dem, och en mening om vad sajten ska göra. Tar två minuter.",
+    body: "Ett mejl med logga, färger om ni har dem, och en mening om vad sajten ska göra.",
   },
   {
-    n: "2",
+    n: "02",
     title: "Jag gör ett första utkast",
     body: "Ni får ett riktigt förslag på hero, färger och typografi — inte en mall. Klart inom en vecka.",
   },
   {
-    n: "3",
+    n: "03",
     title: "Du bestämmer om vi går vidare",
-    body: "Gillar du det? Då tar vi det till skarp sajt. Vill du inte? Då kostar det ingenting — utkastet är ert att behålla.",
+    body: "Gillar ni det tar vi det till skarp sajt. Vill ni inte kostar det ingenting.",
   },
 ];
 
@@ -41,50 +41,41 @@ export function HomeFreePreview() {
   return (
     <section
       id="gratis-forslag"
-      className="relative isolate overflow-hidden"
-      style={{ backgroundColor: "var(--color-brand-tint)" }}
+      className="bg-ink text-white"
       aria-labelledby="gratis-forslag-rubrik"
     >
-      {/* Diskret bronsdiagonal så sektionen får djup utan textur-brus. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          background:
-            "radial-gradient(80% 60% at 100% 0%, rgba(176,137,79,0.12) 0%, rgba(244,235,224,0) 60%)",
-        }}
-      />
-
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-24">
-        {/* HEADER — rubrik, brief, CTA */}
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-end lg:gap-16">
+        {/* HEADER — rubrik vänster, brief + CTA höger (matchar HomeHelp-mönstret) */}
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] lg:gap-16">
           <Reveal>
-            <SectionLabel>Gratis förhandsvisning</SectionLabel>
+            <SectionLabel tone="dark">Gratis förhandsvisning</SectionLabel>
             <h2
               id="gratis-forslag-rubrik"
-              className="mt-4 text-h2 text-ink"
+              className="mt-4 text-h2 text-white"
             >
-              Se din nya hemsida — innan du bestämmer dig.
+              Se din nya hemsida
+              <br className="hidden sm:inline" />
+              — innan du bestämmer dig.
             </h2>
           </Reveal>
 
           <Reveal delay={80}>
-            <p className="border-l-[3px] border-brand pl-5 text-lead text-ink/80">
-              Skicka mig din logga och en kort beskrivning av företaget. Jag
-              gör ett första utkast — färger, typografi, hero — helt
-              kostnadsfritt. Först då bestämmer du om vi ska gå vidare.
+            <p className="border-l-[3px] border-brand-glow pl-5 text-lead text-white/75">
+              Skicka din logga och en kort beskrivning. Jag gör ett första
+              utkast — färger, typografi, hero — helt kostnadsfritt. Först
+              då bestämmer du om vi ska gå vidare.
             </p>
-            <div className="mt-7 flex flex-wrap items-center gap-3">
+            <div className="mt-7 flex flex-wrap items-center gap-5">
               <Link
                 href={CONTACT_HREF}
-                className="inline-flex items-center justify-center rounded-md bg-ink px-5 py-3 text-[0.9375rem] font-semibold text-white transition-colors hover:bg-ink/90"
+                className="inline-flex items-center justify-center rounded-md bg-white px-5 py-3 text-[0.9375rem] font-semibold text-ink transition-colors hover:bg-white/90"
               >
                 Få mitt gratis utkast
                 <span aria-hidden="true" className="ml-2">→</span>
               </Link>
               <Link
                 href="/process"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink underline-offset-4 hover:underline"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-glow underline-offset-4 hover:underline"
               >
                 Så jobbar jag
                 <span aria-hidden="true">→</span>
@@ -93,34 +84,28 @@ export function HomeFreePreview() {
           </Reveal>
         </div>
 
-        {/* 3 STEG */}
-        <ol className="mt-14 grid gap-6 sm:grid-cols-3 lg:mt-16 lg:gap-8">
+        {/* STEG — ren typografi, tunn topplinje per kolumn, ingen box */}
+        <ol className="mt-16 grid gap-10 sm:grid-cols-3 sm:gap-8 lg:mt-20 lg:gap-14">
           {STEPS.map((step, i) => (
-            <li key={step.n}>
-              <Reveal delay={i * 100}>
-                <article className="relative flex h-full flex-col rounded-xl border border-ink/10 bg-white/70 p-6 backdrop-blur-[2px] transition-colors duration-150 hover:border-brand/50">
-                  <span
-                    aria-hidden="true"
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-ink text-sm font-semibold text-white"
-                  >
-                    {step.n}
-                  </span>
-                  <h3 className="mt-4 text-lg font-semibold text-ink">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-[0.95rem] leading-relaxed text-ink/75">
-                    {step.body}
-                  </p>
-                </article>
+            <li key={step.n} className="border-t border-white/15 pt-5">
+              <Reveal delay={i * 80}>
+                <p className="text-eyebrow font-medium tracking-[0.18em] text-brand-glow">
+                  {step.n}
+                </p>
+                <h3 className="mt-3 text-lg font-semibold text-white">
+                  {step.title}
+                </h3>
+                <p className="mt-2 text-[0.95rem] leading-relaxed text-white/65">
+                  {step.body}
+                </p>
               </Reveal>
             </li>
           ))}
         </ol>
 
-        {/* Diskret tillit-rad under */}
-        <p className="mt-10 text-center text-sm text-ink/60">
+        <p className="mt-14 text-sm text-white/50">
           Ingen bindning · Inga dolda kostnader · Utkastet är ert att
-          behålla oavsett
+          behålla oavsett.
         </p>
       </div>
     </section>
