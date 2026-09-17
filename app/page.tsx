@@ -17,14 +17,14 @@ export default function Home() {
     <>
       <Nav />
       {/*
-        Startsidan: Hero → Gratis förslag (unikt säljargument) → Vad jag
-        hjälper till med → Case → Kontakt. Process och FAQ har egna sidor
-        (`/process`, `/faq`) och ingångar via footern och menyn.
+        Startsidan: Hero → Vad jag hjälper till med → Gratis förslag
+        (unikt säljargument) → Case → Kontakt. Process och FAQ har egna
+        sidor (`/process`, `/faq`) och ingångar via footern och menyn.
       */}
       <main>
         <Hero />
-        <HomeFreePreview />
         <HomeHelp />
+        <HomeFreePreview />
         <HomeCases />
         <Contact asSection />
       </main>
