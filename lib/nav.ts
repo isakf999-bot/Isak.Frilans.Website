@@ -9,6 +9,8 @@ export type NavGroup = {
 export const primaryNav: NavLink[] = [
   { href: "/case", label: "Kundcase" },
   { href: "/om", label: "Om mig" },
+  { href: "/process", label: "Process" },
+  { href: "/faq", label: "FAQ" },
 ];
 
 /** Tjänster — nås via hamburgermenyn, inte via en list-sida. */

@@ -67,7 +67,7 @@ export function Nav() {
         </Link>
 
         <div className="flex items-center gap-1">
-          <nav aria-label="Huvudmeny" className="hidden items-center gap-0.5 md:flex">
+          <nav aria-label="Huvudmeny" className="hidden items-center gap-0.5 lg:flex">
             {primaryNav.map((link) => (
               <Link key={link.href} href={link.href} className={linkClass(link.href)}>
                 {link.label}
@@ -79,13 +79,18 @@ export function Nav() {
             </Link>
           </nav>
 
+          {/*
+            Hamburger är bara för mobil/tablet (< lg). På desktop har vi alla
+            länkar i den vita listen — Process, FAQ, Kundcase, Om mig och
+            Tjänster ▾ — så en hamburger bredvid "Hör av dig" blir bara brus.
+          */}
           <button
             ref={closeRef}
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-controls={menuId}
-            className="ml-2 flex h-10 w-10 items-center justify-center rounded-md border border-line text-ink"
+            className="ml-2 flex h-10 w-10 items-center justify-center rounded-md border border-line text-ink lg:hidden"
           >
             <span className="sr-only">{open ? "Stäng meny" : "Öppna meny"}</span>
             {open ? (
