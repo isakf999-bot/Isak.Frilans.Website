@@ -30,7 +30,7 @@ const POINTS = [
 
 export function HomeTrust() {
   return (
-    <section id="varfor" className="border-t border-line bg-transparent">
+    <section id="varfor" className="border-t border-line">
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
         <Reveal>
           <SectionLabel>Varför Isak Web</SectionLabel>
@@ -44,14 +44,10 @@ export function HomeTrust() {
           </p>
         </Reveal>
 
-        <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-14 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
           {POINTS.map((p, i) => (
             <Reveal key={p.title} delay={i * 50}>
-              <li className="h-full rounded-lg border border-line glass p-6 transition-[border-color] duration-150 hover:border-ink/20">
-                <div
-                  aria-hidden="true"
-                  className="mb-4 h-1 w-10 rounded-pill bg-brand"
-                />
+              <li className="h-full border-t border-ink pt-6">
                 <h3 className="text-lg font-semibold tracking-tight">{p.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{p.body}</p>
               </li>

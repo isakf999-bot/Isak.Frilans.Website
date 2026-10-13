@@ -1,6 +1,9 @@
+import Image from "next/image";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/Reveal/Reveal";
 import { SectionLabel } from "@/components/SectionLabel/SectionLabel";
+import { btn } from "@/components/ui/buttonStyles";
 
 const PORTFOLIO_URL = "https://isakforsberg.se/";
 
@@ -18,6 +21,24 @@ const STACK = [
   "GitHub",
 ];
 
+const STORY = [
+  {
+    title: "Varför frilans",
+    body: "Jag har länge velat starta något där man slipper webbyråpriser för en helt vanlig hemsida. Alla ska kunna få en riktig sajt till ett rimligt pris, utan att behöva gå via en stor byrå. Därför jobbar jag som frilansare.",
+  },
+  {
+    title: "Bakgrund",
+    body: "Jag har utbildat mig till fullstackutvecklare. Det som driver mig mest är att hjälpa andra, både i projekten och i hur jag vill jobba. Rakt, enkelt och utan krångel.",
+  },
+  {
+    title: "Vid sidan av koden",
+    body: "Vid sidan av koden har jag spelat hockey i 14 år. Jag är en glad och ödmjuk kille som älskar att träna. Det syns nog i hur jag tar mig an jobb också. Jag gillar att göra klart saker ordentligt, och jag bygger alltid från grunden. Inga mallar.",
+  },
+];
+
+const ROW =
+  "grid gap-3 border-t border-ink py-8 lg:grid-cols-12 lg:gap-16 lg:py-10";
+
 export function About() {
   return (
     <section
@@ -25,113 +46,116 @@ export function About() {
       className="scroll-mt-24"
       aria-labelledby="om-mig-rubrik"
     >
-      <div className="mx-auto max-w-6xl px-6 py-16 lg:px-8 lg:py-24">
-          <Reveal>
-            <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
-              <figure className="mx-auto w-full max-w-md self-start lg:sticky lg:top-28 lg:mx-0 lg:max-w-none">
-                <div className="relative aspect-[4/5] overflow-hidden rounded-lg border border-line bg-surface">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+      {/* Öppning: vem jag är + porträttet */}
+      <div className="mx-auto grid max-w-6xl gap-12 px-6 pt-16 pb-20 lg:grid-cols-12 lg:items-end lg:gap-16 lg:px-8 lg:pt-24 lg:pb-28">
+        <Reveal className="lg:col-span-7">
+          <SectionLabel>Om mig</SectionLabel>
+          <h1 id="om-mig-rubrik" className="mt-6 text-h1">
+            Hej, jag heter Isak Forsberg.
+          </h1>
+          <p className="mt-6 font-mono text-sm text-muted">
+            21 år · Fullstackutvecklare · Helsingborg
+          </p>
+          <p className="mt-8 max-w-xl text-lead text-ink">
+            Jag älskar att bygga hemsidor. Inte bara sätta ihop något som ser
+            okej ut, utan designa och bygga från grunden. Responsiva sidor,
+            tydlig struktur och SEO som faktiskt hjälper dig att synas.
+          </p>
+        </Reveal>
+
+        {/* Porträttet är en friläggning. Den står på sajtens blå gradient och
+            beskärs vid midjan, så att den ser placerad ut och inte inklistrad.
+            Ligger utanför <Reveal> eftersom gradienten inte tål transform. */}
+        <figure className="mx-auto w-full max-w-md lg:col-span-5 lg:max-w-none">
+          <div className="overflow-hidden rounded-xl bg-night">
+            <div className="aura-stage">
+              <div className="aura-stage__layer-1" aria-hidden="true" />
+              <div className="aura-stage__layer-2" aria-hidden="true" />
+              <div className="aura-stage__layer-3" aria-hidden="true" />
+              <div className="aura-stage__layer-4" aria-hidden="true" />
+              <div className="aura-stage__content aspect-[4/5]">
+                <div className="absolute top-[-30%] left-1/2 aspect-[472/1024] w-[115%] -translate-x-1/2">
+                  <Image
                     src={PORTRAIT_SRC}
-                    alt="Isak Forsberg"
-                    width={800}
-                    height={1000}
-                    className="absolute left-1/2 top-[62%] h-[200%] w-auto max-w-none -translate-x-1/2 -translate-y-1/2"
+                    alt="Isak Forsberg ler och gör tummen upp med båda händerna"
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) min(115vw, 515px), 520px"
+                    className="object-contain"
                   />
                 </div>
-                <figcaption className="mt-4 text-sm text-muted">
-                  Isak Forsberg, Helsingborg
-                </figcaption>
-              </figure>
-
-              <div>
-                <SectionLabel>Om mig</SectionLabel>
-                <h1 id="om-mig-rubrik" className="mt-6 text-h2">
-                  Hej, jag heter Isak Forsberg.
-                </h1>
-                <p className="mt-3 text-lead text-muted">
-                  21 år · Fullstackutvecklare · Helsingborg
-                </p>
-
-                <div className="mt-8 space-y-5 text-lead text-muted">
-                  <p>
-                    Jag älskar att bygga hemsidor. Inte bara sätta ihop något som
-                    ser okej ut, utan designa och bygga från grunden. Responsiva
-                    sidor, tydlig struktur och SEO som faktiskt hjälper dig att
-                    synas.
-                  </p>
-                  <p>
-                    Jag har länge velat starta något där man slipper webbyråpriser
-                    för en helt vanlig hemsida. Alla ska kunna få en riktig sajt
-                    till ett rimligt pris, utan att behöva gå via en stor byrå.
-                    Därför jobbar jag som frilansare. Du pratar med mig, och jag
-                    är den som skriver koden.
-                  </p>
-                  <p>
-                    Jag har utbildat mig till fullstackutvecklare. Det som driver
-                    mig mest är att hjälpa andra, både i projekten och i hur jag
-                    vill jobba. Rakt, enkelt och utan krångel.
-                  </p>
-                  <p>
-                    Vid sidan av koden har jag spelat hockey i 14 år. Jag är en
-                    glad och ödmjuk kille som älskar att träna. Det syns nog i hur
-                    jag tar mig an jobb också. Jag gillar att göra klart saker
-                    ordentligt, och jag bygger alltid från grunden. Inga mallar.
-                  </p>
-                  <p>
-                    Vill du se mer av vad jag byggt? Det finns på{" "}
-                    <a
-                      href={PORTFOLIO_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-medium text-brand underline decoration-brand/40 decoration-2 underline-offset-4 transition-colors duration-150 hover:decoration-brand"
-                    >
-                      min portfolio
-                    </a>
-                    .
-                  </p>
-                </div>
               </div>
             </div>
+          </div>
+          <figcaption className="mt-4 flex flex-wrap justify-between gap-x-6 gap-y-1 font-mono text-sm text-muted">
+            <span>Isak Forsberg</span>
+            <span>Helsingborg</span>
+          </figcaption>
+        </figure>
+      </div>
 
-            <div className="mt-10 grid gap-10 lg:mt-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
-              <div className="hidden lg:block" aria-hidden="true" />
-              <div>
-                <div>
-                  <p className="text-eyebrow font-medium text-muted uppercase">
-                    Bygger med
-                  </p>
-                  <ul className="mt-3 flex flex-wrap gap-2">
-                    {STACK.map((tool) => (
-                      <li
-                        key={tool}
-                        className="border border-line bg-surface px-3 py-1.5 text-sm text-ink"
-                      >
-                        {tool}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+      {/* Berättelsen */}
+      <div className="bg-mist">
+        <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
+          <Reveal>
+            <h2 className="max-w-4xl text-h2">
+              Du pratar med mig, och jag är den som skriver koden.
+            </h2>
+          </Reveal>
 
-                <div className="mt-10 flex flex-wrap gap-3">
-                  <Link
-                    href="/kontakt"
-                    className="inline-flex items-center gap-2 rounded-pill border border-transparent bg-ink px-6 py-3.5 font-semibold text-white transition-colors duration-150 hover:bg-ink/85"
-                  >
-                    Hör av dig
-                    <span aria-hidden="true">→</span>
-                  </Link>
-                  <Link
-                    href="/process"
-                    className="inline-flex items-center gap-2 rounded-md border border-line bg-surface px-6 py-3.5 font-medium text-ink transition-colors duration-150 hover:border-ink/25"
-                  >
-                    Så går det till
-                  </Link>
-                </div>
+          <Reveal className="mt-12 lg:mt-16">
+            {STORY.map((part) => (
+              <div key={part.title} className={ROW}>
+                <h3 className="text-h3 lg:col-span-4">{part.title}</h3>
+                <p className="max-w-[62ch] text-muted lg:col-span-8">
+                  {part.body}
+                </p>
               </div>
+            ))}
+
+            <div className={ROW}>
+              <h3 className="text-h3 lg:col-span-4">Bygger med</h3>
+              <ul className="flex flex-wrap gap-2 lg:col-span-8">
+                {STACK.map((tool) => (
+                  <li
+                    key={tool}
+                    className="rounded-md border border-line-cool bg-surface px-3 py-1.5 font-mono text-xs text-ink"
+                  >
+                    {tool}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className={`${ROW} border-b`}>
+              <h3 className="text-h3 lg:col-span-4">Mer av det jag byggt</h3>
+              <p className="max-w-[62ch] text-muted lg:col-span-8">
+                Vill du se mer av vad jag byggt? Det finns på{" "}
+                <a
+                  href={PORTFOLIO_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link inline-flex items-center gap-1"
+                >
+                  min portfolio
+                  <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+                  <span className="sr-only">(öppnas i ny flik)</span>
+                </a>
+                .
+              </p>
             </div>
           </Reveal>
+
+          <div className="mt-12 flex flex-wrap items-center gap-x-7 gap-y-4">
+            <Link href="/kontakt" className={btn.primary}>
+              Hör av dig
+            </Link>
+            <Link href="/process" className={btn.ghost}>
+              Så går det till
+            </Link>
+          </div>
         </div>
+      </div>
     </section>
   );
 }

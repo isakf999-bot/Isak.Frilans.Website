@@ -16,7 +16,11 @@ import type { CSSProperties, ReactNode } from "react";
  *   6) Hinge — mörk skarv under skärmen med skugga uppåt.
  *   7) Base — silverkropp som sticker ut lite bredare på båda sidorna,
  *      touchpad-notch upptill i mitten, botten-skugga runt om.
- *   8) Floor shadow — organisk ellips-blur som får laptopen att svaeva.
+ *   8) Floor shadow — en tät kontaktskugga + ett sandfärgat sken, så att
+ *      laptopen står på den mörkblå scenen i stället för att sväva i svart.
+ *
+ * Aluminiumets gråskala är materialfärger för själva mockupen (kall, neutral
+ * metall) och ligger därför här och inte bland sajtens tokens.
  */
 export function LaptopFrame({
   children,
@@ -28,25 +32,25 @@ export function LaptopFrame({
   // Bryter ut styles så komponenten inte drunknar i inline-CSS.
   const chassisTop: CSSProperties = {
     background:
-      "linear-gradient(180deg,#e6e9ec 0%,#d5d8dc 30%,#c1c4c9 65%,#b0b3b8 100%)",
+      "linear-gradient(180deg,#e6e9ee 0%,#d5d9df 30%,#c1c5cc 65%,#b0b4bc 100%)",
     boxShadow: [
       "inset 0 1px 0 rgba(255,255,255,0.9)", // top highlight (aluminium beveled edge)
       "inset 1px 0 0 rgba(255,255,255,0.45)", // left edge
-      "inset -1px 0 0 rgba(0,0,0,0.18)", // right edge
-      "inset 0 -1px 0 rgba(0,0,0,0.15)", // faint bottom seam
+      "inset -1px 0 0 rgba(2,6,23,0.18)", // right edge
+      "inset 0 -1px 0 rgba(2,6,23,0.15)", // faint bottom seam
     ].join(","),
   };
 
   const displayBezel: CSSProperties = {
-    background: "#0a0a0b",
+    background: "#07090d",
     boxShadow: [
       "inset 0 0 0 1px rgba(255,255,255,0.04)", // subtile inner ring
-      "0 1px 2px rgba(0,0,0,0.6)",
+      "0 1px 2px rgba(2,6,23,0.6)",
     ].join(","),
   };
 
   const lightSensor: CSSProperties = {
-    background: "radial-gradient(circle,#1a1c1f 30%,#050506 100%)",
+    background: "radial-gradient(circle,#1a1c21 30%,#050507 100%)",
     boxShadow: "0 0 0 0.5px rgba(255,255,255,0.08)",
   };
 
@@ -68,24 +72,24 @@ export function LaptopFrame({
   };
 
   const chassisBottomEdge: CSSProperties = {
-    background: "linear-gradient(180deg,#a4a8ad 0%,#7d8186 100%)",
-    boxShadow: "inset 0 -1px 0 rgba(0,0,0,0.35)",
+    background: "linear-gradient(180deg,#a4a9b1 0%,#7d828b 100%)",
+    boxShadow: "inset 0 -1px 0 rgba(2,6,23,0.35)",
   };
 
   const hinge: CSSProperties = {
     background:
-      "linear-gradient(180deg,#26292d 0%,#3d4147 45%,#26292d 100%)",
+      "linear-gradient(180deg,#24272e 0%,#3b4049 45%,#24272e 100%)",
     boxShadow:
-      "0 2px 3px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05), inset 0 -1px 0 rgba(0,0,0,0.55)",
+      "0 2px 3px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.05), inset 0 -1px 0 rgba(2,6,23,0.55)",
   };
 
   const base: CSSProperties = {
     background:
-      "linear-gradient(180deg,#d0d3d7 0%,#b3b7bc 40%,#8b8f94 82%,#70747a 100%)",
+      "linear-gradient(180deg,#d0d4da 0%,#b3b8c0 40%,#8b9099 82%,#70757f 100%)",
     boxShadow: [
-      "0 8px 16px -4px rgba(0,0,0,0.55)",
+      "0 8px 16px -4px rgba(2,6,23,0.6)",
       "inset 0 1px 0 rgba(255,255,255,0.75)",
-      "inset 0 -2px 3px rgba(0,0,0,0.28)",
+      "inset 0 -2px 3px rgba(2,6,23,0.28)",
     ].join(","),
   };
 
@@ -95,12 +99,10 @@ export function LaptopFrame({
   };
 
   const touchpadNotch: CSSProperties = {
-    background: "linear-gradient(180deg,#3d4046 0%,#2c2f33 100%)",
+    background: "linear-gradient(180deg,#3b4049 0%,#2a2e35 100%)",
     boxShadow:
-      "inset 0 1px 2px rgba(0,0,0,0.7), 0 1px 0 rgba(255,255,255,0.15)",
+      "inset 0 1px 2px rgba(2,6,23,0.7), 0 1px 0 rgba(255,255,255,0.15)",
   };
-
-  const floorShadow: CSSProperties = { background: "rgba(0,0,0,0.6)" };
 
   return (
     <div className={`relative w-full ${className}`}>
@@ -128,12 +130,12 @@ export function LaptopFrame({
               style={cameraLens}
             >
               {/* Mikroskopisk lens-highlight */}
-              <span className="absolute top-[1px] left-[1px] block h-[1px] w-[1px] rounded-full bg-sky-200/50" />
+              <span className="absolute top-[1px] left-[1px] block h-[1px] w-[1px] rounded-full bg-brand-glow/50" />
             </span>
           </div>
 
           {/* LCD-panel — själva skärm-innehållet */}
-          <div className="relative aspect-[16/10] overflow-hidden rounded-[3px] bg-black">
+          <div className="relative aspect-[16/10] overflow-hidden rounded-[3px] bg-night">
             {children}
 
             {/* Diagonal glossy glare (subtil) */}
@@ -168,8 +170,8 @@ export function LaptopFrame({
 
       {/* === BASE — aluminium-kropp, sticker ut på båda sidor === */}
       <div
-        className="relative mx-auto w-[108%] -translate-x-[4%] rounded-b-[14px]"
-        style={{ height: "18px", ...base }}
+        className="relative mx-auto h-[18px] w-[108%] -translate-x-[4%] rounded-b-[14px]"
+        style={base}
       >
         {/* Touchpad-notch — indent upptill i mitten */}
         <div
@@ -185,12 +187,11 @@ export function LaptopFrame({
         />
       </div>
 
-      {/* === FLOOR SHADOW === */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none mx-auto mt-5 h-8 w-[80%] rounded-[50%] opacity-65 blur-2xl"
-        style={floorShadow}
-      />
+      {/* === FLOOR SHADOW — kontaktskugga + sandsken === */}
+      <div aria-hidden="true" className="pointer-events-none relative h-12">
+        <div className="absolute inset-x-[6%] top-0 h-3 rounded-[50%] bg-night opacity-80 blur-md" />
+        <div className="absolute inset-x-[12%] top-3 h-8 rounded-[50%] bg-brand opacity-45 blur-2xl" />
+      </div>
     </div>
   );
 }

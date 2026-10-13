@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { serviceNavGroups } from "@/lib/nav";
 
 /**
@@ -10,18 +11,22 @@ import { serviceNavGroups } from "@/lib/nav";
  *
  * Öppnas på hover, focus eller klick. Stängs på Escape, klick utanför,
  * focus utanför eller när route ändras. Mobile använder hamburgermenyn i
- * `Nav.tsx` — den här komponenten renderas bara på `md`-uppåt.
+ * `Nav.tsx` — den här komponenten renderas bara på `lg`-uppåt.
  *
- * Design-mässigt: kort öppnings-animation, ingen bakgrunds-overlay,
- * återanvänder projektets tokens (`bg-surface`, `border-line`, `text-ink`).
+ * Panelen är lika bred som själva listen: den positioneras mot närmaste
+ * `relative`-förälder (listen i `Nav.tsx`), inte mot knappen, så att den
+ * aldrig hamnar utanför skärmen på smalare desktop-bredder.
  */
-export function NavServicesMenu() {
+export function NavServicesMenu({ triggerClass }: { triggerClass: (active: boolean) => string }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const menuId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
   const openTimer = useRef<number | null>(null);
   const closeTimer = useRef<number | null>(null);
+  // När focus just öppnade menyn ska klicket som följer inte stänga den igen
+  // (touch och tangentbord: focus kommer före click).
+  const focusOpenedAt = useRef(0);
 
   const isServiceActive = pathname.startsWith("/tjanster");
 
@@ -86,10 +91,13 @@ export function NavServicesMenu() {
   return (
     <div
       ref={rootRef}
-      className="relative"
+      className="flex items-center self-stretch"
       onMouseEnter={scheduleOpen}
       onMouseLeave={scheduleClose}
-      onFocusCapture={openNow}
+      onFocusCapture={() => {
+        if (!open) focusOpenedAt.current = performance.now();
+        openNow();
+      }}
       onBlurCapture={(e) => {
         const next = e.relatedTarget as Node | null;
         if (!next || !rootRef.current?.contains(next)) scheduleClose();
@@ -100,46 +108,42 @@ export function NavServicesMenu() {
         aria-expanded={open}
         aria-haspopup="true"
         aria-controls={menuId}
-        onClick={() => (open ? closeNow() : openNow())}
-        className={`inline-flex items-center gap-1.5 rounded-md px-3 py-2 text-sm transition-colors duration-150 ${
-          isServiceActive || open
-            ? "text-ink"
-            : "text-muted hover:text-ink"
-        }`}
+        onClick={() => {
+          const justOpenedByFocus = performance.now() - focusOpenedAt.current < 400;
+          if (open && !justOpenedByFocus) closeNow();
+          else openNow();
+        }}
+        className={`inline-flex items-center gap-1.5 ${triggerClass(isServiceActive || open)}`}
       >
         Tjänster
-        <svg
+        <ChevronDown
           aria-hidden="true"
-          viewBox="0 0 12 12"
-          className={`h-2.5 w-2.5 transition-transform duration-200 ${
+          className={`h-4 w-4 transition-transform duration-200 ease-out ${
             open ? "rotate-180" : ""
           }`}
-        >
-          <path
-            d="M2 4.5 6 8.5 10 4.5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        />
       </button>
 
+      {/* Alltid i DOM:en så att öppningen kan animeras; `inert` + `invisible`
+          håller den stängda panelen borta från tabbordning och skärmläsare.
+          before-elementet är en osynlig brygga över glipan mellan list och
+          panel, så att menyn inte stängs när pekaren är på väg ner. */}
       <div
         id={menuId}
         role="menu"
         aria-label="Tjänster"
-        hidden={!open}
-        className="absolute top-full left-1/2 z-40 mt-2 w-[min(52rem,90vw)] -translate-x-1/2 rounded-xl border border-line bg-surface p-6 shadow-[0_24px_60px_rgba(28,25,23,0.12)]"
+        inert={!open}
+        className={`absolute inset-x-0 top-full z-40 mt-2 rounded-lg border border-line bg-surface p-2 shadow-lift transition-[opacity,transform,visibility] duration-200 ease-out before:absolute before:inset-x-0 before:-top-4 before:h-4 ${
+          open ? "visible translate-y-0 opacity-100" : "invisible -translate-y-1 opacity-0"
+        }`}
       >
-        <div className="grid gap-6 sm:grid-cols-3">
+        <div className="grid grid-cols-[1.15fr_1.15fr_1fr_1.3fr]">
           {serviceNavGroups.map((group) => (
-            <div key={group.heading}>
-              <p className="text-eyebrow font-semibold tracking-[0.12em] text-ink/70 uppercase">
+            <div key={group.heading} className="px-4 py-5">
+              <p className="border-b border-line pb-3 text-eyebrow font-semibold text-muted uppercase">
                 {group.heading}
               </p>
-              <ul className="mt-3 space-y-0.5">
+              <ul className="mt-3">
                 {group.items.map((item) => {
                   const active = pathname === item.href;
                   return (
@@ -148,19 +152,18 @@ export function NavServicesMenu() {
                         role="menuitem"
                         href={item.href}
                         onClick={closeNow}
-                        className={`group -mx-2 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors ${
+                        aria-current={active ? "page" : undefined}
+                        className={`group relative -mx-2 flex items-center justify-between gap-3 rounded-md px-2 py-2 text-[0.9375rem] transition-colors duration-150 ease-out hover:bg-mist hover:text-ink ${
                           active
-                            ? "font-medium text-ink"
-                            : "text-muted hover:bg-mist hover:text-ink"
+                            ? "pl-4 font-semibold text-ink before:absolute before:top-2 before:bottom-2 before:left-1.5 before:w-0.5 before:rounded-full before:bg-brand"
+                            : "font-medium text-ink/80"
                         }`}
                       >
-                        <span
-                          aria-hidden="true"
-                          className="text-brand transition-transform duration-150 group-hover:translate-x-0.5"
-                        >
-                          →
-                        </span>
                         {item.label}
+                        <ArrowRight
+                          aria-hidden="true"
+                          className="h-4 w-4 shrink-0 -translate-x-1 text-brand opacity-0 transition-[opacity,transform] duration-150 ease-out group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100"
+                        />
                       </Link>
                     </li>
                   );
@@ -168,6 +171,29 @@ export function NavServicesMenu() {
               </ul>
             </div>
           ))}
+
+          <div className="flex flex-col justify-between rounded-md bg-night p-5 text-white">
+            <div>
+              <p className="text-lg leading-snug font-semibold tracking-[-0.02em]">
+                Osäker på vad som passar?
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-white/75">
+                Beskriv läget, så föreslår jag ett upplägg.
+              </p>
+            </div>
+            <Link
+              role="menuitem"
+              href="/kontakt"
+              onClick={closeNow}
+              className="group link-on-dark mt-6 inline-flex items-center gap-2 self-start text-sm"
+            >
+              Hör av dig
+              <ArrowRight
+                aria-hidden="true"
+                className="h-4 w-4 transition-transform duration-150 ease-out group-hover:translate-x-0.5"
+              />
+            </Link>
+          </div>
         </div>
       </div>
     </div>

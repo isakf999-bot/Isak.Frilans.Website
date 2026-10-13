@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
-import { useId, useRef, useState } from "react";
-import { Reveal } from "@/components/Reveal/Reveal";
+import { ArrowRight, Check, CircleAlert, LoaderCircle } from "lucide-react";
+import { useEffect, useId, useRef, useState } from "react";
 import { SectionLabel } from "@/components/SectionLabel/SectionLabel";
+import { btn } from "@/components/ui/buttonStyles";
 import { buildEmailBody, RESPONSE_TIME_DAYS } from "@/lib/contactEmail";
 
 type FieldErrors = Partial<Record<"name" | "email" | "message", string>>;
@@ -11,6 +11,7 @@ type Status = "idle" | "submitting" | "success" | "error";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+const EMAIL = "info@isakweb.se";
 
 const STEPS = [
   "Du skickar en kort beskrivning.",
@@ -42,6 +43,14 @@ export function Contact({
   const [message, setMessage] = useState(initialMessage ?? "");
   const [projectType, setProjectType] = useState<ProjectType | null>(null);
   const alertRef = useRef<HTMLParagraphElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
+
+  // Flytta fokus till resultatet först när det faktiskt har renderats, så
+  // att skärmläsare och tangentbord hamnar på felet eller bekräftelsen.
+  useEffect(() => {
+    if (status === "error") alertRef.current?.focus();
+    if (status === "success") successRef.current?.focus();
+  }, [status]);
 
   const validate = (data: FormData): FieldErrors => {
     const next: FieldErrors = {};
@@ -123,248 +132,259 @@ export function Contact({
       setProjectType(null);
     } catch {
       setStatus("error");
+      // Adressen läggs till som en riktig mailto-länk där felet visas.
       setFormError(
-        "Något gick fel när förfrågan skulle skickas. Försök igen, eller mejla mig direkt på info@isakweb.se.",
+        "Något gick fel när förfrågan skulle skickas. Försök igen, eller mejla mig direkt på",
       );
-      alertRef.current?.focus();
     }
   };
+
+  // En h1 på /kontakt, en h2 när blocket ligger som sektion på startsidan —
+  // bekräftelsens rubrik hamnar då en nivå under.
+  const Heading = asSection ? "h2" : "h1";
+  const SubHeading = asSection ? "h3" : "h2";
+  const submitting = status === "submitting";
 
   return (
     <section
       id="kontakt"
-      className="relative isolate overflow-hidden bg-ink text-white"
+      className="bg-night text-white"
       aria-labelledby="kontakt-rubrik"
     >
-      {/*
-        Bravo-mönstret: dov naturbild bakom mörkret — deras skog blir vår
-        skog. Läser som atmosfär, aldrig som huvudmotiv. Overlayen är
-        kraftig så bilden bara antyds; du märker den när du tittar, inte
-        annars.
-      */}
-      <div aria-hidden="true" className="absolute inset-0 -z-10">
-        <Image
-          src="/media/contact-forest-bg.jpg"
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover object-center opacity-[0.18]"
-        />
-        <div className="absolute inset-0 bg-ink/70" />
-      </div>
+      {/* Copper Shadow: behållaren får ingen egen bakgrund, se globals.css. */}
+      <div className="aura-stage aura-stage--drift">
+        <div className="aura-stage__layer-1" aria-hidden="true" />
+        <div className="aura-stage__layer-2" aria-hidden="true" />
+        <div className="aura-stage__layer-3" aria-hidden="true" />
+        <div className="aura-stage__layer-4" aria-hidden="true" />
 
-      <div className="relative mx-auto max-w-6xl px-6 pt-16 pb-20 lg:px-8 lg:pt-24 lg:pb-28">
-        <Reveal>
-          <div className="mx-auto max-w-2xl text-center lg:mx-0 lg:max-w-xl lg:text-left">
-            <SectionLabel tone="dark">{asSection ? "Hör av dig" : "Starta ett projekt"}</SectionLabel>
-            {asSection ? (
-              <h2 id="kontakt-rubrik" className="mt-6 text-h1 text-white lg:text-display">
-                Hur kan jag hjälpa dig?
-              </h2>
-            ) : (
-              <h1 id="kontakt-rubrik" className="mt-6 text-h1 text-white lg:text-display">
-                Berätta vad du vill bygga.
-              </h1>
-            )}
-            <p className="mt-5 text-lead text-white/70">
+        <div className="aura-stage__content mx-auto grid max-w-6xl gap-x-16 gap-y-12 px-6 py-20 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:grid-rows-[auto_1fr] lg:px-8 lg:py-28">
+          <div className="lg:col-start-1 lg:row-start-1">
+            <SectionLabel tone="dark">
+              {asSection ? "Hör av dig" : "Starta ett projekt"}
+            </SectionLabel>
+            <Heading id="kontakt-rubrik" className="mt-6 text-h1 text-white">
+              {asSection ? "Hur kan jag hjälpa dig?" : "Berätta vad du vill bygga."}
+            </Heading>
+            <p className="mt-6 max-w-md text-lead text-white/80">
               Skicka en kort beskrivning — jag återkommer med nästa steg. Det
               förbinder dig inte till något.
             </p>
           </div>
-        </Reveal>
 
-        <Reveal className="mt-12 grid items-stretch gap-8 lg:mt-16 lg:grid-cols-[0.9fr_1.2fr] lg:gap-12">
-          {/* Sidokolumn — samma höjd som formuläret */}
-          <aside className="order-2 flex h-full flex-col lg:order-1">
-            <div className="flex h-full flex-1 flex-col rounded-lg border border-line glass p-6 sm:p-7">
-              <p className="text-eyebrow font-medium tracking-[0.12em] text-brand uppercase">
-                Så går det till
-              </p>
-              <ol className="mt-5 flex flex-1 flex-col justify-evenly gap-5">
-                {STEPS.map((step, i) => (
-                  <li key={step} className="flex gap-4">
-                    <span
-                      aria-hidden="true"
-                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-line bg-canvas font-mono text-sm font-semibold text-brand"
-                    >
-                      {i + 1}
-                    </span>
-                    <span className="pt-1.5 text-sm leading-relaxed text-muted sm:text-base">
-                      {step}
-                    </span>
-                  </li>
-                ))}
-              </ol>
-
-              <div className="mt-auto rounded-md border border-line bg-mist px-5 py-4 text-ink">
-                <p className="text-sm text-muted">Svarstid</p>
-                <p className="mt-1 text-xl font-semibold tracking-tight">
-                  Inom {RESPONSE_TIME_DAYS} arbetsdagar
-                </p>
-                <p className="mt-3 text-sm text-muted">
-                  Hellre mejl?{" "}
-                  <a
-                    href="mailto:info@isakweb.se"
-                    className="font-medium text-brand underline underline-offset-4 transition-opacity hover:opacity-80"
+          {/* Formuläret — huvudfokus, direkt efter rubriken på mobil */}
+          <div className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
+            <div className="flex h-full flex-col rounded-xl bg-surface p-6 text-ink shadow-window sm:p-8 lg:p-10">
+              {status === "success" ? (
+                <div
+                  ref={successRef}
+                  tabIndex={-1}
+                  role="status"
+                  className="flex flex-1 flex-col justify-center py-10 focus:outline-none"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="flex h-12 w-12 items-center justify-center rounded-md bg-brand text-white"
                   >
-                    info@isakweb.se
-                  </a>
-                </p>
-              </div>
-            </div>
-          </aside>
-
-          {/* Formulär — huvudfokus */}
-          <div className="order-1 flex h-full lg:order-2">
-            <div className="relative flex h-full w-full flex-col overflow-hidden rounded-lg border border-line glass shadow-card">
-              <div className="flex flex-1 flex-col p-6 sm:p-9 lg:p-10">
-                {status === "success" ? (
-                  <div
-                    role="status"
-                    className="flex flex-1 flex-col items-center justify-center py-8 text-center sm:py-12"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="mx-auto flex h-14 w-14 items-center justify-center rounded-md bg-white text-2xl text-black"
-                    >
-                      ✓
-                    </span>
-                    <h2 className="mt-7 text-h3">
-                      Tack — jag har fått din förfrågan.
-                    </h2>
-                    <p className="mx-auto mt-4 max-w-sm text-muted">
-                      Jag läser igenom den och återkommer inom{" "}
-                      <strong className="font-medium text-ink">
-                        {RESPONSE_TIME_DAYS} arbetsdagar
-                      </strong>
-                      .
-                    </p>
+                    <Check className="h-5 w-5" strokeWidth={2.5} />
+                  </span>
+                  <SubHeading className="mt-8 text-h3">
+                    Tack — jag har fått din förfrågan.
+                  </SubHeading>
+                  <p className="mt-4 max-w-sm text-muted">
+                    Jag läser igenom den och återkommer inom{" "}
+                    <strong className="font-semibold text-ink">
+                      {RESPONSE_TIME_DAYS} arbetsdagar
+                    </strong>
+                    .
+                  </p>
+                  <div className="mt-8">
                     <button
                       type="button"
                       onClick={() => setStatus("idle")}
-                      className="mt-8 rounded-md border border-line bg-canvas px-6 py-3 text-sm font-medium transition-colors duration-150 hover:border-ink/25 hover:text-brand"
+                      className={btn.secondary}
                     >
                       Skicka en till
                     </button>
                   </div>
-                ) : (
-                  <form
-                    onSubmit={handleSubmit}
-                    noValidate
-                    className="relative flex flex-1 flex-col"
-                  >
-                    <div aria-hidden="true" className="absolute -left-[9999px]">
-                      <label htmlFor={`${formId}-company`}>Företag</label>
-                      <input
-                        id={`${formId}-company`}
-                        name="company"
-                        type="text"
-                        tabIndex={-1}
-                        autoComplete="off"
-                      />
+                </div>
+              ) : (
+                <form
+                  onSubmit={handleSubmit}
+                  noValidate
+                  aria-busy={submitting}
+                  className="relative flex flex-1 flex-col"
+                >
+                  <div aria-hidden="true" className="absolute -left-[9999px]">
+                    <label htmlFor={`${formId}-company`}>Företag</label>
+                    <input
+                      id={`${formId}-company`}
+                      name="company"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
+
+                  <fieldset className="min-w-0">
+                    <legend className="text-sm font-semibold text-ink">
+                      Vad vill du bygga?
+                      <span className="ml-1.5 font-normal text-muted">
+                        (valfritt)
+                      </span>
+                    </legend>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {PROJECT_TYPES.map((type) => {
+                        const selected = projectType === type;
+                        return (
+                          <button
+                            key={type}
+                            type="button"
+                            aria-pressed={selected}
+                            onClick={() =>
+                              setProjectType(selected ? null : type)
+                            }
+                            className={`${btn.chip} ${
+                              selected ? btn.chipActive : btn.chipIdle
+                            }`}
+                          >
+                            {type}
+                          </button>
+                        );
+                      })}
                     </div>
+                  </fieldset>
 
-                    <fieldset className="min-w-0">
-                      <legend className="text-sm font-medium text-ink">
-                        Vad vill du bygga?
-                        <span className="ml-1.5 font-normal text-muted">
-                          (valfritt)
-                        </span>
-                      </legend>
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        {PROJECT_TYPES.map((type) => {
-                          const selected = projectType === type;
-                          return (
-                            <button
-                              key={type}
-                              type="button"
-                              aria-pressed={selected}
-                              onClick={() =>
-                                setProjectType(selected ? null : type)
-                              }
-                              className={`rounded-md border px-3.5 py-2 text-sm font-medium transition-colors duration-150 ${
-                                selected
-                                  ? "border-ink bg-ink text-white"
-                                  : "border-line bg-canvas text-ink hover:border-ink/20 hover:bg-surface"
-                              }`}
-                            >
-                              {type}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </fieldset>
+                  <div className="mt-8 grid gap-6 sm:grid-cols-2">
+                    <Field
+                      id={`${formId}-name`}
+                      name="name"
+                      label="Namn"
+                      autoComplete="name"
+                      placeholder="Anna Andersson"
+                      error={errors.name}
+                    />
+                    <Field
+                      id={`${formId}-email`}
+                      name="email"
+                      type="email"
+                      label="E-post"
+                      autoComplete="email"
+                      placeholder="anna@foretaget.se"
+                      error={errors.email}
+                    />
+                  </div>
 
-                    <div className="mt-7 grid gap-5 sm:grid-cols-2">
-                      <Field
-                        id={`${formId}-name`}
-                        name="name"
-                        label="Namn"
-                        autoComplete="name"
-                        placeholder="Anna Andersson"
-                        error={errors.name}
+                  <div className="mt-6 flex flex-1 flex-col">
+                    <Field
+                      id={`${formId}-message`}
+                      name="message"
+                      label="Vad behöver du hjälp med?"
+                      multiline
+                      fill
+                      placeholder="Vi driver ett café och har en sajt från 2016 som inte fungerar i mobilen…"
+                      error={errors.message}
+                      value={message}
+                      onChange={setMessage}
+                    />
+                  </div>
+
+                  {formError && (
+                    <p
+                      ref={alertRef}
+                      tabIndex={-1}
+                      role="alert"
+                      className="mt-6 flex gap-3 rounded-md border border-danger/30 bg-danger-tint p-4 text-sm text-danger focus:outline-none"
+                    >
+                      <CircleAlert
+                        aria-hidden="true"
+                        className="mt-0.5 h-4 w-4 shrink-0"
                       />
-                      <Field
-                        id={`${formId}-email`}
-                        name="email"
-                        type="email"
-                        label="E-post"
-                        autoComplete="email"
-                        placeholder="anna@foretaget.se"
-                        error={errors.email}
-                      />
-                    </div>
-
-                    <div className="mt-5 flex flex-1 flex-col">
-                      <Field
-                        id={`${formId}-message`}
-                        name="message"
-                        label="Vad behöver du hjälp med?"
-                        multiline
-                        fill
-                        placeholder="Vi driver ett café och har en sajt från 2016 som inte fungerar i mobilen…"
-                        error={errors.message}
-                        value={message}
-                        onChange={setMessage}
-                      />
-                    </div>
-
-                    {formError && (
-                      <p
-                        ref={alertRef}
-                        tabIndex={-1}
-                        role="alert"
-                        className="mt-6 rounded-xl border border-danger/30 bg-danger-tint p-4 text-sm text-danger"
-                      >
-                        {formError}
-                      </p>
-                    )}
-
-                    <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                      <button
-                        type="submit"
-                        disabled={status === "submitting"}
-                        className="inline-flex w-full items-center justify-center gap-2 rounded-pill border border-transparent bg-ink px-8 py-3.5 font-semibold text-white transition-colors duration-150 hover:bg-ink/85 disabled:cursor-not-allowed disabled:opacity-55 sm:w-auto"
-                      >
-                        {status === "submitting"
-                          ? "Skickar…"
-                          : "Skicka förfrågan"}
-                        <span aria-hidden="true">→</span>
-                      </button>
-                      <p className="text-center text-xs leading-relaxed text-muted sm:max-w-[14rem] sm:text-left">
-                        Ingen spam. Bara ett svar från mig på{" "}
-                        <span className="font-medium text-ink">
-                          info@isakweb.se
-                        </span>
+                      <span>
+                        {formError}{" "}
+                        <a
+                          href={`mailto:${EMAIL}`}
+                          className="font-semibold underline decoration-danger/40 decoration-2 underline-offset-4 transition-[text-decoration-color] duration-150 ease-out hover:decoration-danger"
+                        >
+                          {EMAIL}
+                        </a>
                         .
-                      </p>
-                    </div>
-                  </form>
-                )}
-              </div>
+                      </span>
+                    </p>
+                  )}
+
+                  <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-6">
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className={`group shrink-0 ${btn.primary}`}
+                    >
+                      {submitting ? (
+                        <>
+                          <LoaderCircle
+                            aria-hidden="true"
+                            className="h-4 w-4 motion-safe:animate-spin"
+                          />
+                          Skickar…
+                        </>
+                      ) : (
+                        <>
+                          Skicka förfrågan
+                          <ArrowRight
+                            aria-hidden="true"
+                            className="h-4 w-4 transition-transform duration-150 ease-out group-hover:translate-x-0.5"
+                          />
+                        </>
+                      )}
+                    </button>
+                    <p className="text-sm leading-relaxed text-muted">
+                      Ingen spam. Bara ett svar från mig på{" "}
+                      <span className="font-medium text-ink">{EMAIL}</span>.
+                    </p>
+                  </div>
+                </form>
+              )}
             </div>
           </div>
-        </Reveal>
+
+          {/* Vad som händer sen — en riktig sekvens, därför numrerad */}
+          <aside className="lg:col-start-1 lg:row-start-2">
+            <p className="text-sm font-medium text-brand-glow">Så går det till</p>
+            <ol className="mt-4">
+              {STEPS.map((step, i) => (
+                <li
+                  key={step}
+                  className="flex gap-5 border-t border-white/15 py-5"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="pt-0.5 font-mono text-sm text-brand-glow"
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-white/85">{step}</span>
+                </li>
+              ))}
+            </ol>
+
+            <dl className="grid gap-x-8 gap-y-6 border-t border-white/15 pt-6 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+              <div>
+                <dt className="text-sm text-white/70">Svarstid</dt>
+                <dd className="mt-1 text-xl font-semibold tracking-tight text-white">
+                  Inom {RESPONSE_TIME_DAYS} arbetsdagar
+                </dd>
+              </div>
+              <div>
+                <dt className="text-sm text-white/70">Hellre mejl?</dt>
+                <dd className="mt-1 text-xl tracking-tight">
+                  <a href={`mailto:${EMAIL}`} className="link-on-dark">
+                    {EMAIL}
+                  </a>
+                </dd>
+              </div>
+            </dl>
+          </aside>
+        </div>
       </div>
     </section>
   );
@@ -399,10 +419,10 @@ function Field({
   onChange,
 }: FieldProps) {
   const errorId = `${id}-error`;
-  const shared = `mt-2 w-full rounded-md border bg-canvas px-4 py-3.5 text-ink placeholder:text-muted/45 transition-[border-color,background-color] duration-150 ease-out focus:bg-surface focus:outline-none ${
+  const shared = `mt-2 w-full rounded-md border bg-canvas px-4 py-3 text-ink placeholder:text-muted/70 transition-[border-color,box-shadow,background-color] duration-150 ease-out focus:bg-surface focus:outline-none focus:ring-3 ${
     error
-      ? "border-danger focus:border-danger"
-      : "border-line hover:border-ink/20 focus:border-brand"
+      ? "border-danger focus:ring-danger/20"
+      : "border-line-cool hover:border-brand/40 focus:border-brand focus:ring-brand/20"
   }`;
 
   return (
@@ -438,7 +458,8 @@ function Field({
       )}
 
       {error && (
-        <p id={errorId} className="mt-2 text-sm text-danger">
+        <p id={errorId} className="mt-2 flex gap-2 text-sm text-danger">
+          <CircleAlert aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0" />
           {error}
         </p>
       )}

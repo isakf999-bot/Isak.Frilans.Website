@@ -1,29 +1,38 @@
 "use client";
 
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import SpotlightCard from "@/components/reactbits/SpotlightCard";
 import type { Service } from "@/lib/services";
 import { serviceIcons } from "@/components/Services/serviceIcons";
 
+/** Kort för en tjänst — används där tjänsten visas som ett eget objekt. */
 export function ServiceCard({ service }: { service: Service }) {
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-line bg-white p-7 transition-[border-color,background-color] duration-150 ease-out hover:border-ink/20 has-[a:focus-visible]:outline has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-brand">
+    // SpotlightCard (React Bits): ett sandfärgat ljus följer pekaren över
+    // kortet och fångar kanten. Färg och styrka sätts med props.
+    <SpotlightCard
+      theme="light"
+      spotlightColor="var(--color-brand)"
+      intensity={0.16}
+      spotlightSize={280}
+      borderGlow={1}
+      className="group flex h-full flex-col !rounded-lg !p-6 has-[a:focus-visible]:outline has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-brand"
+    >
       <div className="flex items-start justify-between gap-4">
-        <span className="flex h-11 w-11 items-center justify-center rounded-md border border-line bg-canvas text-brand">
+        <span className="flex h-11 w-11 items-center justify-center rounded-md bg-brand-tint text-brand">
           {serviceIcons[service.slug]}
         </span>
-        <span
+        <ArrowRight
           aria-hidden="true"
-          className="mt-1 text-muted opacity-0 transition-opacity duration-150 group-hover:opacity-100"
-        >
-          →
-        </span>
+          className="mt-1 h-4 w-4 text-muted transition-[color,transform] duration-200 ease-out group-hover:translate-x-1 group-hover:text-brand"
+        />
       </div>
 
-      <h3 className="mt-5 text-h3">
+      <h3 className="mt-6 text-h3 break-words hyphens-auto text-ink">
         <Link
           href={`/tjanster/${service.slug}`}
-          aria-label={`${service.title} — läs mer`}
-          className="after:absolute after:inset-0 after:content-[''] focus:outline-none"
+          className="after:absolute after:inset-0 after:z-[2] after:content-[''] focus:outline-none"
         >
           {service.title}
         </Link>
@@ -31,26 +40,11 @@ export function ServiceCard({ service }: { service: Service }) {
 
       <p className="mt-3 grow text-muted">{service.description}</p>
 
-      <ul className="mt-6 flex flex-wrap gap-2 border-t border-line pt-5">
-        {service.deliverables.map((item) => (
-          <li
-            key={item}
-            className="inline-flex items-center gap-1.5 border border-line bg-canvas/80 px-2.5 py-1 text-sm text-muted"
-          >
-            {item}
-          </li>
-        ))}
-      </ul>
-
       {service.caseStudy && (
-        <a
-          href={service.caseStudy.href}
-          className="relative z-10 mt-5 inline-flex w-fit items-center gap-1.5 font-medium text-brand transition-opacity duration-150 hover:opacity-70"
-        >
+        <a href={service.caseStudy.href} className="link relative z-10 mt-5 w-fit">
           {service.caseStudy.label}
-          <span aria-hidden="true">→</span>
         </a>
       )}
-    </article>
+    </SpotlightCard>
   );
 }
