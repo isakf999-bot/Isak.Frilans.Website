@@ -11,6 +11,7 @@ export const PROCESS_SECTIONS = [
 /**
  * Mini-navigation för process-sidan.
  * Visar att det finns mer under och låter dig hoppa till rätt sektion.
+ * Rad som bryter på mobil, lodrät lista med markör i kanten från lg.
  */
 export function ProcessPageNav() {
   const [active, setActive] = useState<string>(PROCESS_SECTIONS[0].id);
@@ -44,26 +45,21 @@ export function ProcessPageNav() {
 
   return (
     <nav aria-label="På den här sidan">
-      <p className="text-eyebrow font-medium text-muted uppercase">På sidan</p>
-      <ul className="mt-3 flex flex-wrap gap-2 lg:flex-col lg:gap-1">
+      <p className="text-sm font-medium text-muted">På sidan</p>
+      <ul className="mt-3 flex flex-wrap gap-x-6 gap-y-1 lg:flex-col lg:gap-0 lg:border-l lg:border-line-cool">
         {PROCESS_SECTIONS.map((section) => {
           const isActive = active === section.id;
           return (
             <li key={section.id}>
               <a
                 href={`#${section.id}`}
-                className={`inline-flex items-center gap-2 rounded-md px-3.5 py-2 text-sm transition-colors duration-150 lg:w-full ${
+                aria-current={isActive ? "location" : undefined}
+                className={`block border-b-2 py-2 text-sm font-medium transition-colors duration-150 ease-out lg:-ml-px lg:border-b-0 lg:border-l-2 lg:py-2.5 lg:pl-4 ${
                   isActive
-                    ? "border border-transparent bg-ink text-white"
-                    : "border border-line glass text-muted hover:border-ink/20 hover:text-ink"
+                    ? "border-brand text-ink"
+                    : "border-transparent text-muted hover:border-line-cool hover:text-ink"
                 }`}
               >
-                <span
-                  aria-hidden="true"
-                  className={`h-1.5 w-1.5 shrink-0 rounded-full ${
-                    isActive ? "bg-black" : "bg-brand/50"
-                  }`}
-                />
                 {section.label}
               </a>
             </li>

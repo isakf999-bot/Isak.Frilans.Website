@@ -16,7 +16,7 @@ export default function FaqPage() {
     <>
       <Nav />
       <main>
-        <HomeFaq />
+        <HomeFaq asPage />
       </main>
       <Footer />
     </>

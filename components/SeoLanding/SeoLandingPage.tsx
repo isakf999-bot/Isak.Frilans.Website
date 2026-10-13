@@ -1,17 +1,24 @@
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { Footer } from "@/components/Footer/Footer";
 import { Nav } from "@/components/Nav/Nav";
 import { Reveal } from "@/components/Reveal/Reveal";
 import { SectionLabel } from "@/components/SectionLabel/SectionLabel";
 import { SeoLandingFaq } from "@/components/SeoLanding/SeoLandingFaq";
+import { ServiceCard } from "@/components/Services/ServiceCard";
 import { btn } from "@/components/ui/buttonStyles";
 import { otherSeoLandings, type SeoLanding } from "@/lib/seoLandings";
+import { getServiceBySlug } from "@/lib/services";
 import { SITE_URL } from "@/lib/site";
 
 export function SeoLandingPage({ landing }: { landing: SeoLanding }) {
   const related = otherSeoLandings(landing.slug);
   const contactHref = `/kontakt?meddelande=${encodeURIComponent(landing.contactPrefill)}`;
   const pageUrl = `${SITE_URL}/${landing.slug}`;
+  // Pekar sidan på en tjänst visas tjänsten som kort, annars som textlänk.
+  const relatedService = landing.relatedServiceHref.startsWith("/tjanster/")
+    ? getServiceBySlug(landing.relatedServiceHref.replace("/tjanster/", ""))
+    : undefined;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -42,112 +49,151 @@ export function SeoLandingPage({ landing }: { landing: SeoLanding }) {
       />
       <Nav />
       <main>
-        <section className="border-b border-line">
-          <div className="mx-auto max-w-6xl px-6 pt-16 pb-16 lg:px-8 lg:pt-20 lg:pb-20">
-            <Reveal className="max-w-3xl">
-              <SectionLabel>{landing.eyebrow}</SectionLabel>
-              <h1 className="mt-4 text-h1 tracking-tight">{landing.h1}</h1>
-              <p className="mt-5 text-lead text-muted">{landing.lead}</p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link href={contactHref} className={btn.primary}>
-                  Berätta om projektet
-                  <span aria-hidden="true">→</span>
-                </Link>
-                <Link href="/process" className={btn.ghost}>
-                  Så går det till
-                </Link>
+        {/* Copper Shadow: behållaren får ingen egen bakgrund och ligger inte i <Reveal>. */}
+        <section className="bg-night text-white">
+          <div className="aura-stage">
+            <div className="aura-stage__layer-1" aria-hidden="true" />
+            <div className="aura-stage__layer-2" aria-hidden="true" />
+            <div className="aura-stage__layer-3" aria-hidden="true" />
+            <div className="aura-stage__layer-4" aria-hidden="true" />
+            <div className="aura-stage__content mx-auto max-w-6xl px-6 pt-20 pb-20 lg:px-8 lg:pt-28 lg:pb-28">
+              <div className="max-w-4xl">
+                <SectionLabel tone="dark">{landing.eyebrow}</SectionLabel>
+                <h1 className="mt-6 text-h1 break-words hyphens-auto text-white">
+                  {landing.h1}
+                </h1>
+                <p className="mt-6 max-w-2xl text-lead text-white/80">{landing.lead}</p>
+                <div className="mt-10 flex flex-wrap items-center gap-x-7 gap-y-5">
+                  <Link href={contactHref} className={`group ${btn.onBrand}`}>
+                    Berätta om projektet
+                    <ArrowRight
+                      aria-hidden="true"
+                      className="h-4 w-4 transition-transform duration-150 ease-out group-hover:translate-x-0.5"
+                    />
+                  </Link>
+                  <Link href="/process" className={btn.ghostOnDark}>
+                    Så går det till
+                  </Link>
+                </div>
               </div>
-            </Reveal>
+            </div>
           </div>
         </section>
 
-        <section className="border-b border-line">
-          <div className="mx-auto max-w-6xl px-6 py-16 lg:px-8 lg:py-20">
-            <div className="grid gap-10 lg:grid-cols-2">
+        <section className="bg-surface">
+          <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
+            <div className="grid gap-x-12 gap-y-12 lg:grid-cols-2">
               {landing.sections.map((section, i) => (
-                <Reveal key={section.heading} delay={i * 50}>
-                  <h2 className="text-h3 tracking-tight">{section.heading}</h2>
-                  <p className="mt-4 leading-relaxed text-muted">{section.body}</p>
+                <Reveal
+                  key={section.heading}
+                  delay={i * 50}
+                  className="border-t border-ink pt-6"
+                >
+                  <h2 className="text-h3 text-ink">{section.heading}</h2>
+                  <p className="mt-4 max-w-xl text-muted">{section.body}</p>
                 </Reveal>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="border-b border-line">
-          <div className="mx-auto max-w-6xl px-6 py-16 lg:px-8 lg:py-20">
-            <Reveal>
-              <h2 className="text-h2 tracking-tight">Så tar jag det</h2>
+        <section className="bg-surface">
+          <div className="mx-auto max-w-6xl px-6 pb-20 lg:px-8 lg:pb-28">
+            <Reveal className="rounded-xl bg-night px-6 py-10 text-white sm:px-10 lg:px-12 lg:py-14">
+              <div className="grid gap-x-12 gap-y-8 lg:grid-cols-12">
+                <h2 className="text-h2 text-white lg:col-span-4">Så tar jag det</h2>
+                <ul className="border-b border-white/15 lg:col-span-8">
+                  {landing.points.map((point) => (
+                    <li
+                      key={point.title}
+                      className="grid gap-x-8 gap-y-2 border-t border-white/15 py-6 sm:grid-cols-[13rem_1fr]"
+                    >
+                      <h3 className="text-lg leading-snug font-semibold tracking-tight break-words hyphens-auto text-white">
+                        {point.title}
+                      </h3>
+                      <p className="text-white/75">{point.body}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </Reveal>
-            <ul className="mt-10 grid gap-5 sm:grid-cols-3">
-              {landing.points.map((point, i) => (
-                <Reveal key={point.title} delay={i * 40}>
-                  <li className="h-full rounded-lg border border-line glass p-6">
-                    <h3 className="text-lg font-semibold tracking-tight text-ink">
-                      {point.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-muted">{point.body}</p>
-                  </li>
-                </Reveal>
-              ))}
-            </ul>
           </div>
         </section>
 
-        <section className="border-b border-line">
-          <div className="mx-auto max-w-3xl px-6 py-16 lg:px-8 lg:py-20">
-            <Reveal>
-              <h2 className="text-h2 tracking-tight">Vanliga frågor</h2>
-              <p className="mt-4 text-muted">
+        <section className="border-t border-line bg-canvas">
+          <div className="mx-auto grid max-w-6xl gap-x-12 gap-y-10 px-6 py-20 lg:grid-cols-12 lg:px-8 lg:py-28">
+            <Reveal className="lg:col-span-4">
+              <h2 className="text-h2 text-ink">Vanliga frågor</h2>
+              <p className="mt-5 text-muted">
                 Kort och rakt. Annars{" "}
-                <Link href="/kontakt" className="font-medium text-brand hover:opacity-70">
+                <Link href="/kontakt" className="link">
                   hör av dig
                 </Link>
                 .
               </p>
             </Reveal>
-            <SeoLandingFaq items={landing.faqs} />
+            <div className="lg:col-span-8">
+              <SeoLandingFaq items={landing.faqs} />
+            </div>
           </div>
         </section>
 
-        <section>
-          <div className="mx-auto max-w-6xl px-6 py-16 lg:px-8 lg:py-20">
+        <section className="border-t border-line bg-mist">
+          <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
             <Reveal>
-              <h2 className="text-h2 tracking-tight">Mer i samma riktning</h2>
-              <p className="mt-3 max-w-2xl text-muted">
-                <Link
-                  href={
-                    landing.relatedServiceHref === "/paket"
-                      ? "/kontakt"
-                      : landing.relatedServiceHref
-                  }
-                  className="font-medium text-brand hover:opacity-70"
-                >
-                  {landing.relatedServiceHref === "/paket"
-                    ? "Hör av dig"
-                    : landing.relatedServiceLabel}
-                </Link>
-                {" · "}
-                <Link href="/process" className="font-medium text-brand hover:opacity-70">
-                  Process
-                </Link>
-              </p>
-              <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              <h2 className="text-h2 text-ink">Mer i samma riktning</h2>
+            </Reveal>
+            <div className="mt-10 grid gap-x-12 gap-y-10 lg:grid-cols-12">
+              <Reveal className="self-start lg:col-span-4">
+                {relatedService ? (
+                  <>
+                    <ServiceCard service={relatedService} />
+                    <p className="mt-6">
+                      <Link href="/process" className="link">
+                        Process
+                      </Link>
+                    </p>
+                  </>
+                ) : (
+                  <p className="flex flex-wrap gap-x-6 gap-y-2">
+                    <Link
+                      href={
+                        landing.relatedServiceHref === "/paket"
+                          ? "/kontakt"
+                          : landing.relatedServiceHref
+                      }
+                      className="link"
+                    >
+                      {landing.relatedServiceHref === "/paket"
+                        ? "Hör av dig"
+                        : landing.relatedServiceLabel}
+                    </Link>
+                    <Link href="/process" className="link">
+                      Process
+                    </Link>
+                  </p>
+                )}
+              </Reveal>
+
+              <ul className="border-t border-ink sm:columns-2 sm:gap-x-12 lg:col-span-8">
                 {related.map((item) => (
-                  <li key={item.slug}>
+                  <li
+                    key={item.slug}
+                    className="break-inside-avoid border-b border-line-cool"
+                  >
                     <Link
                       href={`/${item.slug}`}
-                      className="flex h-full flex-col rounded-lg border border-line glass p-5 transition-[border-color] duration-150 hover:border-ink/20"
+                      className="group flex items-baseline justify-between gap-4 py-3"
                     >
-                      <span className="text-xs font-medium tracking-wide text-muted uppercase">
-                        {item.eyebrow}
+                      <span className="min-w-0 font-medium break-words text-ink underline decoration-transparent decoration-2 underline-offset-4 transition-colors duration-150 group-hover:text-brand group-hover:decoration-brand">
+                        {item.navLabel}
                       </span>
-                      <span className="mt-2 font-semibold text-ink">{item.navLabel}</span>
+                      <span className="shrink-0 text-sm text-muted">{item.eyebrow}</span>
                     </Link>
                   </li>
                 ))}
               </ul>
-            </Reveal>
+            </div>
           </div>
         </section>
       </main>

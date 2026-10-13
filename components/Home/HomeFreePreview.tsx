@@ -1,16 +1,18 @@
 import Link from "next/link";
+import { ArrowRight, Check } from "lucide-react";
+import { FreePreviewBackdrop } from "@/components/Home/FreePreviewBackdrop";
+import Magnet from "@/components/reactbits/Magnet";
 import { Reveal } from "@/components/Reveal/Reveal";
 import { SectionLabel } from "@/components/SectionLabel/SectionLabel";
+import { btn } from "@/components/ui/buttonStyles";
 
 /**
  * "Se din hemsida innan du bestämmer dig" — unika säljargumentet.
  *
- * Kort, redaktionell sektion mellan HomeHelp och HomeCases. Bakgrunden är
- * en varm mörk ton — snäppet ljusare än vår bg-ink så den lyfter en aning
- * mot hero + cases utan att bryta det mörka temat.
- *
- * Enbart rubrik + brief + CTA + trust-rad. Inga stegs-boxar, inga
- * numrerade cirklar — säljbudskapet är enkelt nog att bäras av copyn.
+ * Mörk sektion mellan HomeHelp och HomeCases, med en höjdkarta i blått
+ * bakom (FreePreviewBackdrop). Vänster: löftet och handlingen. Höger: de tre
+ * stegen i erbjudandet — de är numrerade eftersom de faktiskt sker i den
+ * ordningen.
  */
 
 const PREFILL_MESSAGE =
@@ -18,54 +20,101 @@ const PREFILL_MESSAGE =
 
 const CONTACT_HREF = `/kontakt?meddelande=${encodeURIComponent(PREFILL_MESSAGE)}`;
 
+const STEPS = [
+  {
+    title: "Du skickar logga och en kort beskrivning",
+    body: "Skriv några rader i formuläret och skicka loggan på mejl.",
+  },
+  {
+    title: "Jag gör ett första utkast",
+    body: "Färger, typografi och hero — den första vyn på startsidan. Ett utkast, inte en färdig sajt, och helt kostnadsfritt.",
+  },
+  {
+    title: "Du bestämmer",
+    body: "Först när du har sett utkastet avgör du om vi går vidare.",
+  },
+];
+
+const TERMS = [
+  "Ingen bindning",
+  "Inga dolda kostnader",
+  "Utkastet är ert att behålla oavsett",
+];
+
 export function HomeFreePreview() {
   return (
     <section
       id="gratis-forslag"
-      className="text-white"
-      style={{ backgroundColor: "#26221f" }}
+      className="relative bg-night text-white"
       aria-labelledby="gratis-forslag-rubrik"
     >
-      <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-24">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] lg:gap-16">
+      <FreePreviewBackdrop />
+
+      <div className="relative mx-auto max-w-6xl px-6 py-24 lg:px-8 lg:py-32">
+        <div className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-14">
           <Reveal>
             <SectionLabel tone="dark">Gratis förhandsvisning</SectionLabel>
-            <h2
-              id="gratis-forslag-rubrik"
-              className="mt-4 text-h2 text-white"
-            >
-              Se din nya hemsida
-              <br className="hidden sm:inline" />
-              — innan du bestämmer dig.
+            <h2 id="gratis-forslag-rubrik" className="mt-4 text-h2 text-white">
+              Se din nya hemsida{" "}
+              <span className="text-brand-glow">
+                — innan du bestämmer dig.
+              </span>
             </h2>
+            <p className="mt-6 max-w-lg text-lead text-white/80">
+              Skicka din logga och en kort beskrivning. Jag gör ett första
+              utkast — färger, typografi, hero — helt kostnadsfritt. Först då
+              bestämmer du om vi ska gå vidare.
+            </p>
+            <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-5">
+              {/* Magnet (React Bits): knappen dras en aning mot pekaren. */}
+              <Magnet padding={48} magnetStrength={5}>
+                <Link href={CONTACT_HREF} className={`group ${btn.onBrand}`}>
+                  Få mitt gratis utkast
+                  <ArrowRight
+                    aria-hidden="true"
+                    className="h-4 w-4 transition-transform duration-150 ease-out group-hover:translate-x-0.5"
+                  />
+                </Link>
+              </Magnet>
+              <Link href="/process" className={btn.ghostOnDark}>
+                Så jobbar jag
+              </Link>
+            </div>
           </Reveal>
 
           <Reveal delay={80}>
-            <p className="border-l-[3px] border-brand-glow pl-5 text-lead text-white/80">
-              Skicka din logga och en kort beskrivning. Jag gör ett första
-              utkast — färger, typografi, hero — helt kostnadsfritt. Först
-              då bestämmer du om vi ska gå vidare.
-            </p>
-            <div className="mt-7 flex flex-wrap items-center gap-5">
-              <Link
-                href={CONTACT_HREF}
-                className="inline-flex items-center justify-center rounded-md bg-white px-5 py-3 text-[0.9375rem] font-semibold text-ink transition-colors hover:bg-white/90"
-              >
-                Få mitt gratis utkast
-                <span aria-hidden="true" className="ml-2">→</span>
-              </Link>
-              <Link
-                href="/process"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-glow underline-offset-4 hover:underline"
-              >
-                Så jobbar jag
-                <span aria-hidden="true">→</span>
-              </Link>
-            </div>
-            <p className="mt-8 text-sm text-white/55">
-              Ingen bindning · Inga dolda kostnader · Utkastet är ert att
-              behålla oavsett.
-            </p>
+            <ol>
+              {STEPS.map((step, i) => (
+                <li
+                  key={step.title}
+                  className="grid grid-cols-[2.5rem_minmax(0,1fr)] gap-x-4 border-t border-white/15 py-6 sm:grid-cols-[3.5rem_minmax(0,1fr)]"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="pt-1 font-mono text-sm text-brand-glow"
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h3 className="text-xl font-semibold tracking-tight text-white">
+                      {step.title}
+                    </h3>
+                    <p className="mt-2 text-white/75">{step.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <ul className="flex flex-wrap gap-x-6 gap-y-2 border-t border-white/15 pt-6 text-sm text-white/80">
+              {TERMS.map((term) => (
+                <li key={term} className="flex items-center gap-2">
+                  <Check
+                    aria-hidden="true"
+                    className="h-4 w-4 shrink-0 text-brand-glow"
+                  />
+                  {term}
+                </li>
+              ))}
+            </ul>
           </Reveal>
         </div>
       </div>

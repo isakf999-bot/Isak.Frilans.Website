@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal/Reveal";
 import { SectionLabel } from "@/components/SectionLabel/SectionLabel";
@@ -37,7 +38,7 @@ export function HomeValue() {
   return (
     <section
       id="vad-du-far"
-      className="border-t border-line bg-transparent"
+      className="border-t border-line"
       aria-labelledby="vad-du-far-rubrik"
     >
       <div className="mx-auto max-w-6xl px-6 py-20 lg:px-8 lg:py-28">
@@ -50,21 +51,21 @@ export function HomeValue() {
             Du betalar inte för möten, mellanlager eller en{" "}
             <Link
               href="/byta-wordpress"
-              className="font-medium text-brand hover:opacity-70"
+              className="link"
             >
               WordPress-mall
             </Link>{" "}
             med er logga på. Du betalar för en{" "}
             <Link
               href="/hemsida-foretag"
-              className="font-medium text-brand hover:opacity-70"
+              className="link"
             >
               hemsida till företaget
             </Link>{" "}
             byggd från grunden — med{" "}
             <Link
               href="/hemsida-fast-pris"
-              className="font-medium text-brand hover:opacity-70"
+              className="link"
             >
               fast pris
             </Link>
@@ -72,10 +73,10 @@ export function HomeValue() {
           </p>
         </Reveal>
 
-        <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-14 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
           {OUTCOMES.map((item, i) => (
             <Reveal key={item.title} delay={i * 45}>
-              <li className="flex h-full flex-col rounded-lg border border-line glass p-6 transition-[border-color] duration-150 hover:border-ink/20">
+              <li className="flex h-full flex-col border-t border-ink pt-6">
                 <h3 className="text-lg font-semibold tracking-tight text-ink">
                   {item.title}
                 </h3>
@@ -98,7 +99,7 @@ export function HomeValue() {
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/kontakt" className={btn.primary}>
                 Berätta om ditt projekt
-                <span aria-hidden="true">→</span>
+                <ArrowRight aria-hidden="true" className="h-4 w-4" />
               </Link>
               <Link href="/process" className={btn.ghost}>
                 Så går det till

@@ -1,10 +1,8 @@
-"use client";
-
 import type { ReactNode } from "react";
 
 /**
- * Diskret sektionsmarkör. `tone="dark"` när sektionen har mörk botten så
- * att texten hålls läslig och pricken lyser tydligare mot dunklet.
+ * Sektionsetikett: ett kort streck i varumärkesblått + sektionens namn.
+ * `tone="dark"` när sektionen har mörk botten.
  */
 export function SectionLabel({
   children,
@@ -13,19 +11,18 @@ export function SectionLabel({
   children: ReactNode;
   tone?: "light" | "dark";
 }) {
-  const wrapperClass =
-    tone === "dark"
-      ? "text-eyebrow font-medium tracking-[0.14em] text-white/65 uppercase"
-      : "text-eyebrow font-medium tracking-[0.14em] text-muted uppercase";
-
-  const dotClass =
-    tone === "dark"
-      ? "h-1 w-1 shrink-0 rounded-full bg-brand-glow"
-      : "h-1 w-1 shrink-0 rounded-full bg-brand";
-
   return (
-    <p className={`inline-flex items-center gap-2 ${wrapperClass}`}>
-      <span aria-hidden="true" className={dotClass} />
+    <p
+      className={`flex items-center gap-3 text-sm font-medium ${
+        tone === "dark" ? "text-brand-glow" : "text-brand"
+      }`}
+    >
+      <span
+        aria-hidden="true"
+        className={`h-px w-8 shrink-0 ${
+          tone === "dark" ? "bg-brand-glow" : "bg-brand"
+        }`}
+      />
       {children}
     </p>
   );

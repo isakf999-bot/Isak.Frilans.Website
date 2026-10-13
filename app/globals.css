@@ -1,45 +1,61 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   DESIGN TOKENS — ljus byråkänsla. Accent: varm brons (inte Bravo-rosa/turkos).
+   DESIGN TOKENS — loggans färger: svart, benvitt och sand. Varmt ljust
+   papper, nattsvarta sektioner och sand som enda varumärkesfärg.
    --------------------------------------------------------------------------- */
 
 :root {
   color-scheme: light;
 
-  --palette-canvas: #f7f5f2;
-  --palette-surface: #ffffff;
-  --palette-mist: #f1eee9;
-  --palette-surface-soft: #ece8e2;
+  /* Paletten kommer ur loggan (app/icon.svg): svart botten, benvit stapel
+     (#ededed) och ett sandfärgat W (#c4a574). */
 
-  /* Text på ljus botten */
-  --palette-ink: #1c1917;
-  --palette-muted: #5e5a56;
+  /* Ljusa ytor — varmt papper, aldrig ren grå */
+  --palette-canvas: #f6f4ef;
+  --palette-surface: #ffffff;
+  --palette-mist: #efebe2;
+  --palette-surface-soft: #e5dfd3;
+
+  /* Mörka ytor. night är exakt basfärgen i Aura-gradienten "Copper Shadow",
+     så att gradientens lager blandas mot rätt färg. */
+  --palette-night: #0a0705;
+  --palette-night-raised: #17120d;
+
+  /* Text */
+  --palette-ink: #0f0d0b;
+  --palette-muted: #5d574f;
 
   /* Linjer */
-  --palette-line: #e6e1da;
-  --palette-line-cool: #d9d3cb;
+  --palette-line: #e5dfd5;
+  --palette-line-cool: #d2cabc;
 
-  /* Brand = varm brons (inte Bravo-rosa/turkos) */
-  --palette-brand: #b0894f;
-  --palette-brand-dark: #8f6c3c;
-  --palette-brand-tint: #f4ebe0;
-  --palette-brand-glow: #e8d7c0;
-  --palette-accent: #b0894f;
+  /* Brand. glow är loggans sand (#c4a574) och används på mörk botten och som
+     kant på knappar. brand är samma ton mörkad till brons så att text, linjer
+     och ikoner i varumärkesfärgen klarar AA-kontrast på ljus botten. */
+  --palette-brand: #7a5c2c;
+  --palette-brand-dark: #5c4520;
+  --palette-brand-tint: #f3ebdc;
+  --palette-brand-glow: #c4a574;
+  --palette-accent: #e3cfa6;
 
   --palette-paper: #ffffff;
-  --palette-paper-ink: #1c1917;
-  --palette-paper-muted: #5e5a56;
-  --palette-paper-line: #e6e1da;
+  --palette-paper-ink: #0f0d0b;
+  --palette-paper-muted: #5d574f;
+  --palette-paper-line: #e5dfd5;
 
   --palette-danger: #b42318;
   --palette-danger-tint: #fde8e6;
 
-  --palette-shadow-card: 0 1px 2px rgb(28 25 23 / 0.04),
-    0 0 0 1px rgb(28 25 23 / 0.06);
-  --palette-shadow-lift: 0 12px 32px rgb(28 25 23 / 0.08),
-    0 0 0 1px rgb(28 25 23 / 0.08);
-  --palette-shadow-brand: 0 0 0 1px rgb(176 137 79 / 0.4);
+  --palette-shadow-card: 0 1px 2px rgb(15 13 11 / 0.04),
+    0 0 0 1px rgb(15 13 11 / 0.06);
+  --palette-shadow-lift: 0 14px 34px -10px rgb(15 13 11 / 0.16),
+    0 0 0 1px rgb(15 13 11 / 0.07);
+  --palette-shadow-brand: 0 0 0 1px rgb(196 165 116 / 0.5);
+  /* Fönster och skärmdumpar som står på en mörk yta */
+  --palette-shadow-window: 0 1px 2px rgb(0 0 0 / 0.4),
+    0 24px 60px -18px rgb(196 165 116 / 0.22),
+    0 50px 100px -40px rgb(0 0 0 / 0.8);
 
   --grain-opacity: 0.03;
   --grain-blend: multiply;
@@ -53,6 +69,9 @@
   --color-surface: var(--palette-surface);
   --color-mist: var(--palette-mist);
   --color-surface-soft: var(--palette-surface-soft);
+
+  --color-night: var(--palette-night);
+  --color-night-raised: var(--palette-night-raised);
 
   --color-ink: var(--palette-ink);
   --color-muted: var(--palette-muted);
@@ -74,8 +93,8 @@
   --color-danger: var(--palette-danger);
   --color-danger-tint: var(--palette-danger-tint);
 
-  --font-sans: var(--font-jakarta), system-ui, sans-serif;
-  --font-display: var(--font-jakarta), system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-display: var(--font-geist-sans), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
   --text-eyebrow: 0.75rem;
@@ -87,12 +106,13 @@
   --text-lead--line-height: 1.6;
   --text-h3: 1.5rem;
   --text-h3--line-height: 1.25;
-  --text-h2: 2.5rem;
-  --text-h2--line-height: 1.1;
-  --text-h1: 3rem;
-  --text-h1--line-height: 1.08;
-  --text-display: 4.25rem;
-  --text-display--line-height: 1.02;
+  /* Rubrikerna är flytande: ett golv som ryms på 360px, ett tak för breda skärmar. */
+  --text-h2: clamp(2rem, 1.35rem + 2.6vw, 3.25rem);
+  --text-h2--line-height: 1.05;
+  --text-h1: clamp(2.5rem, 1.6rem + 3.8vw, 4.25rem);
+  --text-h1--line-height: 1;
+  --text-display: clamp(2.75rem, 1.2rem + 6.6vw, 6rem);
+  --text-display--line-height: 0.95;
 
   --radius-md: 8px;
   --radius-lg: 12px;
@@ -102,6 +122,7 @@
   --shadow-card: var(--palette-shadow-card);
   --shadow-lift: var(--palette-shadow-lift);
   --shadow-brand: var(--palette-shadow-brand);
+  --shadow-window: var(--palette-shadow-window);
 }
 
 @layer base {
@@ -113,7 +134,7 @@
   body {
     background-color: var(--color-canvas);
     color: var(--color-ink);
-    font-family: var(--font-jakarta), system-ui, sans-serif;
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
     font-size: var(--text-body);
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
@@ -122,8 +143,8 @@
   h1,
   h2,
   h3 {
-    font-family: var(--font-jakarta), system-ui, sans-serif;
-    font-weight: 650;
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
+    font-weight: 600;
     text-wrap: balance;
   }
 
@@ -258,9 +279,9 @@
   pointer-events: none;
   background: linear-gradient(
     to right,
-    rgb(12 14 16 / 0.58) 0%,
-    rgb(12 14 16 / 0.32) 52%,
-    rgb(12 14 16 / 0.18) 100%
+    rgb(2 6 23 / 0.58) 0%,
+    rgb(2 6 23 / 0.32) 52%,
+    rgb(2 6 23 / 0.18) 100%
   );
 }
 
@@ -465,3 +486,153 @@
 }
 
 
+
+/* ---------------------------------------------------------------------------
+   COPPER SHADOW — Aura-gradient (auragradients.vercel.app, id
+   "copper-shadow"), mörkt tema. Sajtens signaturbakgrund: ett dämpat
+   kopparljus mot svart, med skenet uppe till höger precis som i loggan.
+   Lagren är kopierade exakt ur Auras källdata: samma bakgrund, blend mode,
+   opacitet och blur (mobil / desktop), plus Auras kornlager.
+
+   Lagren blandas mot det som ligger BAKOM dem — sektionens bg-night, som är
+   gradientens egen basfärg. Därför får behållaren .aura-stage ingen egen
+   bakgrund, opacitet, mask, transform eller z-index: vilket som helst av dem
+   isolerar gruppen och ändrar färgerna synligt. Innehåll läggs ovanpå med
+   .aura-stage__content.
+
+   Användning:
+     <section class="bg-night text-white">
+       <div class="aura-stage">
+         <div class="aura-stage__layer-1" aria-hidden="true"></div> … (1–3)
+         <div class="aura-stage__content"> innehåll </div>
+       </div>
+     </section>
+   (Ett fjärde lager-element får finnas kvar i markupen; det har ingen stil.)
+   --------------------------------------------------------------------------- */
+.aura-stage {
+  position: relative;
+  overflow: hidden;
+}
+
+.aura-stage__layer-1,
+.aura-stage__layer-2,
+.aura-stage__layer-3 {
+  position: absolute;
+  inset: 0;
+  transform: translateZ(0);
+  will-change: transform;
+  pointer-events: none;
+}
+
+.aura-stage__layer-1 {
+  background: radial-gradient(
+    58% 62% at 72% 64%,
+    rgba(127, 72, 39, 0.32) 0%,
+    rgba(74, 43, 26, 0.16) 42%,
+    transparent 80%
+  );
+  mix-blend-mode: screen;
+  filter: blur(145px);
+}
+
+.aura-stage__layer-2 {
+  background: linear-gradient(
+    135deg,
+    transparent 35%,
+    rgba(160, 91, 45, 0.2) 52%,
+    transparent 70%
+  );
+  mix-blend-mode: screen;
+  filter: blur(113px);
+  opacity: 0.8;
+}
+
+.aura-stage__layer-3 {
+  background: radial-gradient(
+    28% 30% at 84% 22%,
+    rgba(194, 119, 69, 0.13) 0%,
+    transparent 78%
+  );
+  mix-blend-mode: soft-light;
+  filter: blur(88px);
+  opacity: 0.8;
+}
+
+@media (min-width: 768px) {
+  .aura-stage__layer-1 {
+    filter: blur(209px);
+  }
+  .aura-stage__layer-2 {
+    filter: blur(162px);
+  }
+  .aura-stage__layer-3 {
+    filter: blur(126px);
+  }
+}
+
+/* Auras kornlager (SVG feTurbulence, overlay, opacitet 0.85) — samma filter
+   som i Auras export, här som bakgrundsbild så att det inte behöver upprepas
+   i varje komponent. */
+.aura-stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: overlay;
+  opacity: 0.85;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0.181 0.608 0.061 0 0.075 0.181 0.608 0.061 0 0.075 0.181 0.608 0.061 0 0.075 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+.aura-stage__content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Vårt eget tillägg, inte en del av Aura-gradienten: lagren driver långsamt.
+   Bara transform animeras (aldrig filter eller background-position). */
+@keyframes aura-drift-a {
+  50% {
+    transform: translate3d(3%, -2%, 0) scale(1.06);
+  }
+}
+@keyframes aura-drift-b {
+  50% {
+    transform: translate3d(-4%, 3%, 0) scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .aura-stage--drift .aura-stage__layer-1,
+  .aura-stage--drift .aura-stage__layer-3 {
+    animation: aura-drift-a 26s ease-in-out infinite;
+  }
+  .aura-stage--drift .aura-stage__layer-2 {
+    animation: aura-drift-b 32s ease-in-out infinite;
+  }
+}
+
+/* Textlänk: understrykningen finns alltid och tätnar vid hover. */
+.link {
+  font-weight: 500;
+  color: var(--color-brand);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--color-brand) 35%, transparent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 160ms ease-out;
+}
+.link:hover {
+  text-decoration-color: var(--color-brand);
+}
+.link-on-dark {
+  font-weight: 500;
+  color: #fff;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--color-brand-glow) 55%, transparent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 160ms ease-out;
+}
+.link-on-dark:hover {
+  text-decoration-color: #fff;
+}

@@ -1,40 +1,49 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
+import { Plus } from "lucide-react";
 import type { SeoFaq } from "@/lib/seoLandings";
 
+/** Frågor som linjerade rader. Svaren ligger alltid kvar i HTML:en. */
 export function SeoLandingFaq({ items }: { items: SeoFaq[] }) {
   const [open, setOpen] = useState<number | null>(0);
+  const id = useId();
 
   return (
-    <ul className="mt-8 divide-y divide-line rounded-lg border border-line glass">
+    <ul className="border-b border-ink">
       {items.map((item, i) => {
         const isOpen = open === i;
         return (
-          <li key={item.q}>
-            <button
-              type="button"
-              onClick={() => setOpen(isOpen ? null : i)}
-              className="flex w-full items-start justify-between gap-4 px-5 py-5 text-left transition-colors duration-200 hover:bg-white/[0.03]"
-              aria-expanded={isOpen}
-            >
-              <span className="font-semibold tracking-tight text-ink">{item.q}</span>
-              <span
-                aria-hidden="true"
-                className={`mt-0.5 text-brand transition-transform duration-200 ${
-                  isOpen ? "rotate-45" : ""
-                }`}
+          <li key={item.q} className="border-t border-ink">
+            <h3 className="text-lg leading-snug tracking-tight">
+              <button
+                type="button"
+                id={`${id}-q-${i}`}
+                onClick={() => setOpen(isOpen ? null : i)}
+                className="group flex w-full items-start justify-between gap-6 py-5 text-left font-semibold text-ink transition-colors duration-150 ease-out hover:text-brand"
+                aria-expanded={isOpen}
+                aria-controls={`${id}-a-${i}`}
               >
-                +
-              </span>
-            </button>
+                <span className="min-w-0 break-words hyphens-auto">{item.q}</span>
+                <Plus
+                  aria-hidden="true"
+                  className={`mt-1 h-5 w-5 shrink-0 text-brand transition-transform duration-200 ease-out ${
+                    isOpen ? "rotate-45" : ""
+                  }`}
+                />
+              </button>
+            </h3>
             <div
-              className={`grid transition-all duration-300 ease-out ${
-                isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+              id={`${id}-a-${i}`}
+              role="region"
+              aria-labelledby={`${id}-q-${i}`}
+              aria-hidden={!isOpen}
+              className={`grid transition-[grid-template-rows] duration-300 ease-out ${
+                isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
               }`}
             >
               <div className="overflow-hidden">
-                <p className="px-5 pb-5 text-sm leading-relaxed text-muted">{item.a}</p>
+                <p className="max-w-2xl pr-10 pb-6 text-muted">{item.a}</p>
               </div>
             </div>
           </li>

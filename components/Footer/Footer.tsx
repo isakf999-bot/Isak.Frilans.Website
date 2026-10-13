@@ -1,5 +1,7 @@
+import { FooterWordmark } from "@/components/Footer/FooterWordmark";
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { ArrowUpRight, Clock, Mail, MapPin, Phone } from "lucide-react";
 import { HomeFinalCta } from "@/components/Home/HomeFinalCta";
 import { Logo, logoLinkClass } from "@/components/Logo/Logo";
 import { serviceNavGroups } from "@/lib/nav";
@@ -52,212 +54,158 @@ const SOCIALS: Social[] = [
   },
 ];
 
-function IconMail() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden className="h-5 w-5">
-      <rect x="3" y="5" width="18" height="14" rx="2" />
-      <path d="m3 7 9 6 9-6" />
-    </svg>
-  );
-}
+// Länk i en footerlista: understrykningen finns där hela tiden men är
+// genomskinlig, och tänds i sand vid hover (samma idé som .link-on-dark).
+const linkBase =
+  "underline decoration-transparent decoration-2 underline-offset-4 transition-[color,text-decoration-color] duration-150 ease-out hover:text-white hover:decoration-brand-glow";
+const linkClass = `${linkBase} text-[0.9375rem] text-white/70`;
 
-function IconPhone() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden className="h-5 w-5">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-    </svg>
-  );
-}
+const headingClass = "text-eyebrow font-semibold text-brand-glow uppercase";
 
-function IconMapPin() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden className="h-[18px] w-[18px]">
-      <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
-      <circle cx="12" cy="10" r="3" />
-    </svg>
-  );
-}
+// En rad i kontaktlistan: etikett till vänster, värdet stort, hård linje över.
+const contactRowClass =
+  "grid grid-cols-[1.25rem_1fr_auto] items-center gap-x-4 border-t border-white/15 py-5 sm:grid-cols-[1.25rem_6rem_1fr_auto]";
 
-function IconClock() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden className="h-[18px] w-[18px] shrink-0">
-      <circle cx="12" cy="12" r="10" />
-      <path d="M12 6v6l4 2" />
-    </svg>
-  );
-}
+const contactLabelClass =
+  "text-eyebrow font-semibold text-white/60 uppercase max-sm:hidden";
 
-function IconArrowUpRight() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden className="h-3.5 w-3.5">
-      <path d="M7 17 17 7" />
-      <path d="M7 7h10v10" />
-    </svg>
-  );
-}
+const contactValueClass =
+  "underline decoration-transparent decoration-2 underline-offset-[6px] transition-[text-decoration-color] duration-150 ease-out group-hover:decoration-brand-glow";
 
-// Mörk footer — kontakt-ikonerna sitter i lätta glass-boxar mot mörka ytan.
-const contactIconClass =
-  "flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-white/12 bg-white/5 text-white transition-colors duration-150 group-hover:border-brand group-hover:bg-brand group-hover:text-ink";
-
-const linkClass =
-  "group inline-flex items-baseline gap-2 text-sm text-white/60 transition-colors duration-150 hover:text-white";
-
-/**
- * Liten chevron som ligger som "bullet" framför varje länk — Bravo-mönstret
- * som ger footer-listorna visuell rytm och en accent-punkt i bronsen.
- */
-function FooterLinkChevron() {
-  return (
-    <span
-      aria-hidden="true"
-      className="translate-y-[1px] text-[0.7em] text-brand-glow transition-transform duration-150 group-hover:translate-x-0.5"
-    >
-      ›
-    </span>
-  );
-}
+const contactArrowClass =
+  "h-5 w-5 text-white/50 transition-[color,transform] duration-150 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-brand-glow";
 
 export function Footer({ hideCta = false }: { hideCta?: boolean }) {
   return (
     <>
       {!hideCta && <HomeFinalCta />}
-      <footer className="border-t border-white/10 bg-ink text-white">
-        <div className="mx-auto max-w-6xl px-6 pt-16 pb-10 lg:px-8 lg:pt-20 lg:pb-12">
-          <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-10">
-            <div className="sm:col-span-2 lg:col-span-3">
+      <footer className="border-t border-white/10 bg-night text-white">
+        <div className="mx-auto max-w-6xl px-6 pt-20 pb-8 lg:px-8 lg:pt-28">
+          {/* Avsändare + kontakt. Kontaktraderna är footerns tyngdpunkt. */}
+          <div className="grid gap-x-16 gap-y-12 lg:grid-cols-12">
+            <div className="lg:col-span-4">
               <Link
                 href="/#top"
                 aria-label="Isak Web — till startsidan"
-                className={`${logoLinkClass} text-white`}
+                className={logoLinkClass}
               >
                 <Logo onDark />
               </Link>
-              <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">
+              <p className="mt-6 max-w-sm text-[0.9375rem] leading-relaxed text-white/70">
                 Webbplatser för svenska företag — tydliga, snabba och byggda
                 tillsammans med den som skriver koden. Jag sitter i Helsingborg
                 och tar uppdrag i hela Sverige.
               </p>
-              <p className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-white">
-                <span className="text-white/60">
-                  <IconMapPin />
-                </span>
+              <p className="mt-6 flex items-center gap-2 text-sm font-medium text-white">
+                <MapPin aria-hidden="true" className="h-4 w-4 text-brand-glow" />
                 Helsingborg
               </p>
-              <p className="mt-3 text-xs text-white/45">
+              <p className="mt-2 text-sm text-white/60">
                 Org.nr{" "}
-                <span className="font-medium tracking-wide text-white/70">
-                  050704-XXXX
-                </span>
+                <span className="font-mono text-white/80">050704-XXXX</span>
               </p>
             </div>
 
-            <nav aria-label="Tjänster" className="lg:col-span-3">
-              <h2 className="text-eyebrow font-semibold tracking-[0.12em] text-white/85 uppercase">
-                Tjänster
-              </h2>
-              <ul className="mt-5 columns-2 gap-x-6 space-y-2.5">
-                {serviceNavGroups.flatMap((group) =>
-                  group.items.map((link) => (
-                    <li key={link.href} className="break-inside-avoid">
-                      <Link href={link.href} className={linkClass}>
-                        <FooterLinkChevron />
-                        <span>{link.label}</span>
-                      </Link>
-                    </li>
-                  )),
-                )}
-              </ul>
+            <div className="lg:col-span-8">
+              <h2 className={headingClass}>Kontakt</h2>
+              <address className="mt-5 border-b border-white/15 not-italic">
+                <a href={`mailto:${EMAIL}`} className={`group ${contactRowClass}`}>
+                  <Mail aria-hidden="true" className="h-5 w-5 text-brand-glow" />
+                  <span className={contactLabelClass}>E-post</span>
+                  <span
+                    className={`min-w-0 text-[clamp(1.375rem,0.9rem+2.2vw,2.25rem)] leading-tight font-semibold tracking-[-0.03em] break-words text-white ${contactValueClass}`}
+                  >
+                    {EMAIL}
+                  </span>
+                  <ArrowUpRight aria-hidden="true" className={contactArrowClass} />
+                </a>
+                <a href={PHONE_HREF} className={`group ${contactRowClass}`}>
+                  <Phone aria-hidden="true" className="h-5 w-5 text-brand-glow" />
+                  <span className={contactLabelClass}>Telefon</span>
+                  <span className="min-w-0">
+                    <span
+                      className={`block font-mono text-[clamp(1.25rem,0.9rem+1.6vw,1.75rem)] leading-tight font-medium text-white ${contactValueClass}`}
+                    >
+                      {PHONE_DISPLAY}
+                    </span>
+                    <span className="mt-1 block text-sm text-white/60">
+                      Telefontid alla dagar 10–22
+                    </span>
+                  </span>
+                  <ArrowUpRight aria-hidden="true" className={contactArrowClass} />
+                </a>
+                <p className={contactRowClass}>
+                  <Clock aria-hidden="true" className="h-5 w-5 text-brand-glow" />
+                  <span className={contactLabelClass}>Svarstid</span>
+                  <span className="text-[0.9375rem] text-white/70">
+                    Svarar inom{" "}
+                    <span className="font-semibold text-white">2 arbetsdagar</span>
+                  </span>
+                </p>
+              </address>
+            </div>
+          </div>
+
+          {/* Länkar: tjänsterna i sina tre grupper, sidorna och det som ligger
+              utanför sajten. */}
+          <div className="mt-16 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:mt-20 lg:grid-cols-12">
+            <nav
+              aria-label="Tjänster"
+              className="grid grid-cols-2 gap-x-8 gap-y-10 sm:col-span-2 lg:col-span-6"
+            >
+              <h2 className="sr-only">Tjänster</h2>
+              <FooterGroup
+                heading={serviceNavGroups[0].heading}
+                links={serviceNavGroups[0].items}
+              />
+              <div className="space-y-10">
+                {serviceNavGroups.slice(1).map((group) => (
+                  <FooterGroup
+                    key={group.heading}
+                    heading={group.heading}
+                    links={group.items}
+                  />
+                ))}
+              </div>
             </nav>
 
-            <nav aria-label="Sidor" className="lg:col-span-2">
-              <h2 className="text-eyebrow font-semibold tracking-[0.12em] text-white/85 uppercase">
-                Utforska
-              </h2>
-              <ul className="mt-5 space-y-2.5">
+            <nav aria-label="Sidor" className="lg:col-span-3">
+              <h2 className={headingClass}>Utforska</h2>
+              <ul className="mt-4 space-y-2.5">
                 {NAV_LINKS.map((link) => (
                   <li key={link.href}>
                     <Link href={link.href} className={linkClass}>
-                      <FooterLinkChevron />
-                      <span>{link.label}</span>
+                      {link.label}
                     </Link>
                   </li>
                 ))}
               </ul>
             </nav>
 
-            <div className="lg:col-span-2">
-              <h2 className="text-eyebrow font-semibold tracking-[0.12em] text-white/85 uppercase">
-                Kontakt
-              </h2>
-              <address className="mt-5 space-y-3 not-italic">
-                <a
-                  href={`mailto:${EMAIL}`}
-                  className="group flex items-center gap-3"
-                >
-                  <span className={contactIconClass}>
-                    <IconMail />
-                  </span>
-                  <span className="min-w-0">
-                    <span className="block text-xs text-white/55">E-post</span>
-                    <span className="block truncate text-sm font-medium text-white transition-colors duration-200 group-hover:text-brand-glow">
-                      {EMAIL}
-                    </span>
-                  </span>
-                </a>
-                <a href={PHONE_HREF} className="group flex items-center gap-3">
-                  <span className={contactIconClass}>
-                    <IconPhone />
-                  </span>
-                  <span className="min-w-0">
-                    <span className="block text-xs text-white/55">Telefon</span>
-                    <span className="block text-sm font-medium text-white transition-colors duration-200 group-hover:text-brand-glow">
-                      {PHONE_DISPLAY}
-                    </span>
-                  </span>
-                </a>
-              </address>
-              <ul className="mt-5 space-y-2 text-sm text-white/60">
-                <li className="flex items-start gap-2">
-                  <span className="mt-0.5 text-white/50">
-                    <IconClock />
-                  </span>
-                  <span>
-                    Svarar inom{" "}
-                    <span className="font-medium text-white">2 arbetsdagar</span>
-                  </span>
-                </li>
-                <li className="flex items-start gap-2 pl-6">
-                  Telefontid alla dagar 10–22
-                </li>
-              </ul>
-            </div>
-
-            <div className="lg:col-span-2">
-              <h2 className="text-eyebrow font-semibold tracking-[0.12em] text-white/85 uppercase">
-                Följ mig
-              </h2>
-              <p className="mt-5 text-sm leading-relaxed text-white/70">
+            <div className="lg:col-span-3">
+              <h2 className={headingClass}>Följ mig</h2>
+              <p className="mt-4 text-[0.9375rem] leading-relaxed text-white/70">
                 Projekt och det jag bygger — på webben och i sociala medier.
               </p>
-              <ul className="mt-5 space-y-2.5">
+              <ul className="mt-4 space-y-2.5">
                 {EXTERNAL_LINKS.map((link) => (
                   <li key={link.href}>
                     <a
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group inline-flex items-center gap-1.5 text-sm font-medium text-white transition-colors duration-200 hover:text-brand-glow"
+                      className="group link-on-dark inline-flex items-center gap-1.5 text-[0.9375rem]"
                     >
                       {link.label}
-                      <span className="text-white/50 transition-colors duration-150 group-hover:text-brand-glow">
-                        <IconArrowUpRight />
-                      </span>
+                      <ArrowUpRight
+                        aria-hidden="true"
+                        className="h-4 w-4 text-brand-glow transition-transform duration-150 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      />
                     </a>
                   </li>
                 ))}
               </ul>
-              <ul className="mt-6 flex items-center gap-2.5">
+              <ul className="mt-6 flex items-center gap-2">
                 {SOCIALS.map((social) => (
                   <li key={social.name}>
                     <a
@@ -265,13 +213,14 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.name}
-                      className="flex h-10 w-10 items-center justify-center rounded-md border border-white/12 bg-white/5 text-white/80 transition-colors duration-150 hover:border-brand hover:bg-brand hover:text-ink"
+                      className="flex h-10 w-10 items-center justify-center rounded-md border border-white/15 text-white/75 transition-[background-color,border-color,color,transform] duration-150 ease-out hover:-translate-y-px hover:border-brand-glow hover:bg-night-raised hover:text-white active:translate-y-px"
                     >
+                      {/* Varumärkesikoner finns inte i Lucide — egna paths. */}
                       <svg
                         viewBox="0 0 24 24"
                         fill="currentColor"
-                        aria-hidden
-                        className="h-5 w-5"
+                        aria-hidden="true"
+                        className="h-4 w-4"
                       >
                         {social.icon}
                       </svg>
@@ -282,36 +231,62 @@ export function Footer({ hideCta = false }: { hideCta?: boolean }) {
             </div>
           </div>
 
-          <div className="mt-14 flex flex-col gap-3 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-sm text-white/60">
-              © {YEAR} Isak Web · Isak Forsberg
-            </p>
-            <p className="text-sm text-white/60">
-              Webbutveckling · Helsingborg &amp; Sverige
-            </p>
-          </div>
-
           {/*
-            SEO-landningar — medvetet mycket nedtonade. Behövs för att söket
-            ska hitta orten/tjänsten, men ska inte konkurrera med den riktiga
-            navigationen ovanför. Mindre text, låg kontrast, tightare rad.
+            SEO-landningar. Behövs för att söket ska hitta orten/tjänsten, men
+            ska inte konkurrera med den riktiga navigationen ovanför — därför
+            en egen, lugn spaltlista i stället för en rad nyckelord.
           */}
           <nav
             aria-label="Hemsidor och sök"
-            className="mt-6 flex flex-wrap gap-x-4 gap-y-1 border-t border-white/8 pt-4"
+            className="mt-16 grid gap-x-8 gap-y-5 border-t border-white/15 pt-8 lg:mt-20 lg:grid-cols-12"
           >
-            {seoLandings.map((landing) => (
-              <Link
-                key={landing.slug}
-                href={`/${landing.slug}`}
-                className="text-[0.7rem] text-white/35 transition-colors duration-150 hover:text-white/75"
-              >
-                {landing.navLabel}
-              </Link>
-            ))}
+            <h2 className={`lg:col-span-3 ${headingClass}`}>Fler ingångar</h2>
+            <ul className="columns-2 gap-x-8 sm:columns-3 lg:col-span-9">
+              {seoLandings.map((landing) => (
+                <li key={landing.slug} className="break-inside-avoid py-1">
+                  <Link
+                    href={`/${landing.slug}`}
+                    className={`${linkBase} text-sm text-white/60`}
+                  >
+                    {landing.navLabel}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </nav>
+
+          {/* Avslutet: ordbilden, animerad med EchoText (se FooterWordmark). */}
+          <FooterWordmark />
+
+          <div className="mt-8 flex flex-col gap-2 border-t border-white/15 pt-6 text-sm text-white/60 sm:flex-row sm:items-center sm:justify-between">
+            <p>© {YEAR} Isak Web · Isak Forsberg</p>
+            <p>Webbutveckling · Helsingborg &amp; Sverige</p>
+          </div>
         </div>
       </footer>
     </>
+  );
+}
+
+function FooterGroup({
+  heading,
+  links,
+}: {
+  heading: string;
+  links: { href: string; label: string }[];
+}) {
+  return (
+    <div>
+      <h3 className={headingClass}>{heading}</h3>
+      <ul className="mt-4 space-y-2.5">
+        {links.map((link) => (
+          <li key={link.href}>
+            <Link href={link.href} className={linkClass}>
+              {link.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
